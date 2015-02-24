@@ -105,5 +105,7 @@ public class UserInputManager : MonoBehaviour {
 		leftInput = new Vector2 (inputDevice.LeftStickX, inputDevice.LeftStickY);
 		rightInput = new Vector2 (inputDevice.RightStickX, inputDevice.RightStickY);
 
+//		Debug.Log ("User Input:")
+
 	}
 }

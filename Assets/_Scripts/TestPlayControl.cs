@@ -95,13 +95,16 @@ public class TestPlayControl : MonoBehaviour {
 
 	void move(Vector2 input)
 	{
-		// move target object with left stick.
-		float ratio = 7.0f;
-		transform.LookAt (transform.position + new Vector3(input.x,0.0f, input.y));
-		transform.Translate( Vector3.right * ratio * Time.deltaTime * input.x, Space.World );
-		//		transform.Rotate( Vector3.right, 500.0f * Time.deltaTime * inputDevice.Direction.Y, Space.World );
-		transform.Translate( Vector3.forward *  ratio * Time.deltaTime * input.y, Space.World );
-		//		transform.Rotate( Vector3.right, 500.0f * Time.deltaTime * inputDevice.RightStickY, Space.World );
+		if(Mathf.Abs(input.x + input.y) > 0)
+		{
+			// move target object with left stick.
+			float ratio = 7.0f;
+			transform.LookAt (transform.position + new Vector3(input.x,0.0f, input.y));
+			transform.Translate( Vector3.right * ratio * Time.deltaTime * input.x, Space.World );
+			//		transform.Rotate( Vector3.right, 500.0f * Time.deltaTime * inputDevice.Direction.Y, Space.World );
+			transform.Translate( Vector3.forward *  ratio * Time.deltaTime * input.y, Space.World );
+			//		transform.Rotate( Vector3.right, 500.0f * Time.deltaTime * inputDevice.RightStickY, Space.World );
+		}
 	}
 	void rotate(Vector2 input)
 	{
