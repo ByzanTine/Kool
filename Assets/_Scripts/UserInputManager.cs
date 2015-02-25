@@ -110,7 +110,7 @@ public class UserInputManager : MonoBehaviour {
 		{
 			Vector3 mousePos2D = Input.mousePosition;
 			// Convert the mouse position to 3D world coordinates
-			mousePos2D.z = -Camera.main.transform.position.z;
+//			mousePos2D.z = -Camera.main.transform.position.z;
 			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint( mousePos2D );
 
 //			Debug.Log ("input posision" + mousePos2D.ToString());
