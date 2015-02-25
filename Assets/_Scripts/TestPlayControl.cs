@@ -108,8 +108,9 @@ public class TestPlayControl : MonoBehaviour {
 	}
 	void rotate(Vector2 input)
 	{
+
 		// rotate target with right stick.
-		transform.LookAt (transform.position + new Vector3(input.x,0.0f, input.y));
+		transform.LookAt (transform.position + new Vector3(input.x, 0.0f, input.y));
 	}
 
 
