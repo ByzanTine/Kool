@@ -98,22 +98,22 @@ namespace CustomProfile
 					Target = InputControlType.LeftStickY,
 					Source = KeyCodeAxis( KeyCode.DownArrow, KeyCode.UpArrow )
 				},
-				new InputControlMapping
-				{
-					Handle = "Look X",
-					Target = InputControlType.RightStickX,
-					Source = MouseXAxis,
-					Raw    = true,
-					Scale  = 0.1f
-				},
-				new InputControlMapping
-				{
-					Handle = "Look Y",
-					Target = InputControlType.RightStickY,
-					Source = MouseYAxis,
-					Raw    = true,
-					Scale  = 0.1f
-				},
+//				new InputControlMapping
+//				{
+//					Handle = "Look X",
+//					Target = InputControlType.RightStickX,
+//					Source = m,
+//					Raw    = true,
+//					Scale  = 0.1f
+//				},
+//				new InputControlMapping
+//				{
+//					Handle = "Look Y",
+//					Target = InputControlType.RightStickY,
+//					Source = MouseYAxis,
+//					Raw    = true,
+//					Scale  = 0.1f
+//				},
 				new InputControlMapping
 				{
 					Handle = "Look Z",
