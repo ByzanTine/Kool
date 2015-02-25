@@ -39,7 +39,7 @@ public class TestPlayControl : MonoBehaviour {
 	{
 		print("cast firball");
 		print ("input mouse " + inputManager.rightInput);
-		StartCoroutine (attackMeans.Attack (SpellDB.AttackID.fireball, inputManager.leftInput));
+		StartCoroutine (attackMeans.Attack (SpellDB.AttackID.fireball, inputManager.rightInput));
 
 		// cast one fireball
 	}
