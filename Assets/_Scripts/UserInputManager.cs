@@ -108,10 +108,7 @@ public class UserInputManager : MonoBehaviour {
 
 		if(inputDevice.Name == "Keyboard/Mouse")
 		{
-			Vector3 mousePos2D = Input.mousePosition;
-			// Convert the mouse position to 3D world coordinates
-			mousePos2D.z = -Camera.main.transform.position.z;
-			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint( mousePos2D );
+			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint( Input.mousePosition );
 
 //			Debug.Log ("input posision" + mousePos2D.ToString());
 			rightInput = new Vector2(mousePos3D.x - transform.position.x,

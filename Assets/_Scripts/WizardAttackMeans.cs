@@ -10,6 +10,7 @@ public class WizardAttackMeans : MonoBehaviour {
 	private MagicSpell magicSpell;
 	private List<MagicSpell> magicPool;
 	public GameObject muzzle;
+	public float scale = 100;
 	void Start () {
 		int enumSize = System.Enum.GetValues (typeof(SpellDB.AttackID)).Length;
 		Debug.Log ("INIT: Number of Spells a wizard can use: " + enumSize);
@@ -24,11 +25,10 @@ public class WizardAttackMeans : MonoBehaviour {
 
 		magicSpell = magicPool[(int)id];
 		Vector3 newTo = Vector3.zero;
-		newTo.x = to.x + transform.position.x;
-		newTo.z = to.y + transform.position.y;
+		newTo.x = to.x*scale + transform.position.x;
+		newTo.z = to.y*scale + transform.position.z;
 		newTo.y = 3;
-		newTo = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-
+	
 		StartCoroutine (magicSpell.castMagic (muzzle, newTo));
 
 		Debug.Log ("Attack using " + SpellDB.attackIDnames[(int)id]);
