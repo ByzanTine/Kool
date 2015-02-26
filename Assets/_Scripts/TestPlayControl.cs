@@ -11,7 +11,6 @@ public class TestPlayControl : MonoBehaviour {
 
 	// local status
 	private int magicID = 1;
-	private WizardAttackMeans attackMeans;
 
 	private UserInputManager inputManager;
 	void Start()
@@ -21,7 +20,6 @@ public class TestPlayControl : MonoBehaviour {
 		inputManager.OnPressLBumper += HandleLBumper;
 		inputManager.OnPressRBumper += HandleRBumper;
 		inputManager.OnPressButton += HandleButton;
-		attackMeans = GetComponent<WizardAttackMeans> ();
 	}
 
 	void HandleLBumper()
@@ -37,10 +35,6 @@ public class TestPlayControl : MonoBehaviour {
 
 	void castFireball()
 	{
-		print("cast firball");
-		print ("input mouse " + inputManager.rightInput);
-		StartCoroutine (attackMeans.Attack (SpellDB.AttackID.fireball, inputManager.leftInput));
-
 		// cast one fireball
 	}
 
