@@ -8,11 +8,14 @@ public class TestPlayControl : MonoBehaviour {
 
 	// is casting (fireball or special spell) or not, sync with animator in child model
 	public bool isCasting = false;
-
+	// CurSpeed, as the absolute value, currently only 1 or 0 is used
+	public int Speed = 0;
 	// local status
 	private int magicID = 1;
 
 	private UserInputManager inputManager;
+	private Animator animator;
+
 	void Start()
 	{
 		// mapping input events
@@ -20,6 +23,7 @@ public class TestPlayControl : MonoBehaviour {
 		inputManager.OnPressLBumper += HandleLBumper;
 		inputManager.OnPressRBumper += HandleRBumper;
 		inputManager.OnPressButton += HandleButton;
+		animator = GetComponentInChildren<Animator> ();
 	}
 
 	void HandleLBumper()
@@ -41,11 +45,14 @@ public class TestPlayControl : MonoBehaviour {
 	void HandleRBumper()
 	{
 		Debug.Log ("try casting spell");
-		if(!isCasting)
+		if(!animator.GetBool("isCasting") && 
+		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting"))
 		{
 			Debug.Log ("casting spell" + magicID);
 			StartCoroutine(castCoolDown());
+
 			castMagic(magicID);
+
 		}
 	}
 
@@ -56,9 +63,9 @@ public class TestPlayControl : MonoBehaviour {
 
 	IEnumerator castCoolDown()
 	{
-		isCasting = true;
+		animator.SetBool("isCasting", true);
 		yield return new WaitForSeconds (Constants.minCastCoolDown);
-		isCasting = false;
+		animator.SetBool("isCasting", false);
 	}
 
 	void HandleButton()
@@ -95,23 +102,37 @@ public class TestPlayControl : MonoBehaviour {
 
 	void move(Vector2 input)
 	{
-		if(Mathf.Abs(input.x + input.y) > 0)
+		Speed = Mathf.Abs (input.x + input.y) > 0 ? 1 : 0;
+		if(!animator.GetBool("isCasting") && 
+		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting") &&
+			Mathf.Abs(input.x + input.y) > 0 )
 		{
 			// move target object with left stick.
 			float ratio = 7.0f;
-			transform.LookAt (transform.position + new Vector3(input.x,0.0f, input.y));
+			Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
+			smoothRotate (newForward);
+
 			transform.Translate( Vector3.right * ratio * Time.deltaTime * input.x, Space.World );
 			//		transform.Rotate( Vector3.right, 500.0f * Time.deltaTime * inputDevice.Direction.Y, Space.World );
 			transform.Translate( Vector3.forward *  ratio * Time.deltaTime * input.y, Space.World );
 			//		transform.Rotate( Vector3.right, 500.0f * Time.deltaTime * inputDevice.RightStickY, Space.World );
 		}
 	}
+
 	void rotate(Vector2 input)
 	{
-
+		Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
+		smoothRotate (newForward);
 		// rotate target with right stick.
-		transform.LookAt (transform.position + new Vector3(input.x, 0.0f, input.y));
 	}
 
+	void smoothRotate(Vector3 vec_to)
+	{
+		//	transform.LookAt (transform.position + newForward);
+		Vector3 vec_from = this.transform.forward.normalized;
+		float torqueFactor = 25f;
+		rigidbody.AddTorque (torqueFactor * Vector3.Cross (vec_from, vec_to));
+
+	}
 
 }
