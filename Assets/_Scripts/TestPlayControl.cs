@@ -64,7 +64,7 @@ public class TestPlayControl : MonoBehaviour {
 	IEnumerator castCoolDown()
 	{
 		animator.SetBool("isCasting", true);
-		yield return new WaitForSeconds (Constants.minCastCoolDown);
+		yield return new WaitForSeconds (Constants.MinCastCoolDown);
 		animator.SetBool("isCasting", false);
 	}
 
@@ -110,8 +110,8 @@ public class TestPlayControl : MonoBehaviour {
 			// move target object with left stick.
 			float ratio = 7.0f;
 			Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
-			smoothRotate (newForward);
-
+			if(inputManager.rightInput.magnitude == 0)
+				smoothRotate (newForward);
 			transform.Translate( Vector3.right * ratio * Time.deltaTime * input.x, Space.World );
 			//		transform.Rotate( Vector3.right, 500.0f * Time.deltaTime * inputDevice.Direction.Y, Space.World );
 			transform.Translate( Vector3.forward *  ratio * Time.deltaTime * input.y, Space.World );
@@ -129,9 +129,17 @@ public class TestPlayControl : MonoBehaviour {
 	void smoothRotate(Vector3 vec_to)
 	{
 		//	transform.LookAt (transform.position + newForward);
-		Vector3 vec_from = this.transform.forward.normalized;
-		float torqueFactor = 25f;
-		rigidbody.AddTorque (torqueFactor * Vector3.Cross (vec_from, vec_to));
+		Vector3 vec_from = transform.forward;
+		float minDeltaAngle = Constants.BasicPlayerAngularSpeed;
+
+		// calculate new direction by
+		Vector3 newDir = Vector3.RotateTowards(vec_from, vec_to, minDeltaAngle, 0.0F);
+
+//		Debug.DrawRay(transform.position, newDir, Color.red);
+
+		transform.rotation = Quaternion.LookRotation(newDir);
+
+		//		rigidbody.AddTorque (torqueFactor * Vector3.Cross (vec_from, vec_to));
 
 	}
 
