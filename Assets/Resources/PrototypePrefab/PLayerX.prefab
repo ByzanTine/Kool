@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11434508}
   - 114: {fileID: 11434506}
   - 54: {fileID: 5434510}
-  - 143: {fileID: 14334510}
+  - 136: {fileID: 13634892}
   m_Layer: 0
   m_Name: PLayerX
   m_TagString: Untagged
@@ -699,7 +699,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5.40999985}
+  m_LocalPosition: {x: 0, y: 1.86000001, z: -5.40999985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 434496}
@@ -1289,7 +1289,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!95 &9534510
 Animator:
@@ -1344,6 +1344,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01048f2af36b4794907f068f06263ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &13634892
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134422}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!137 &13734490
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1729,20 +1742,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -.0483080745, y: .141934544, z: -.777413607}
     m_Extent: {x: .224557012, y: .254961163, z: .266128272}
   m_DirtyAABB: 0
---- !u!143 &14334510
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134422}
-  serializedVersion: 2
-  m_Height: 3
-  m_Radius: 1
-  m_SlopeLimit: 45
-  m_StepOffset: .300000012
-  m_SkinWidth: .0799999982
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
