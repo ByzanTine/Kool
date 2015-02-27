@@ -15,6 +15,7 @@ public class TestPlayControl : MonoBehaviour {
 
 	private UserInputManager inputManager;
 	private Animator animator;
+	private WizardAttackMeans attackMeans;
 
 	void Start()
 	{
@@ -24,15 +25,18 @@ public class TestPlayControl : MonoBehaviour {
 		inputManager.OnPressRBumper += HandleRBumper;
 		inputManager.OnPressButton += HandleButton;
 		animator = GetComponentInChildren<Animator> ();
+		attackMeans = GetComponent<WizardAttackMeans> ();
 	}
 
 	void HandleLBumper()
 	{
 		Debug.Log ("try casting fireball");
-		if(!isCasting)
-		{
+		if(!animator.GetBool("isCasting") && 
+		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting")) {
+			Debug.Log ("casting spell" + magicID);
+
 			Debug.Log ("casting fireball");
-			StartCoroutine(castCoolDown());
+			// StartCoroutine(castCoolDown());
 			castFireball();
 		}
 	}
@@ -40,6 +44,7 @@ public class TestPlayControl : MonoBehaviour {
 	void castFireball()
 	{
 		// cast one fireball
+		StartCoroutine (attackMeans.Attack (SpellDB.AttackID.fireball));
 	}
 
 	void HandleRBumper()
