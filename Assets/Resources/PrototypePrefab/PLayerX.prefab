@@ -1303,7 +1303,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 719115e0a790d904bb700a458e57ee56, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11434506
@@ -1333,6 +1333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCasting: 0
+  Speed: 0
 --- !u!114 &11434510
 MonoBehaviour:
   m_ObjectHideFlags: 1
