@@ -18,7 +18,7 @@ public class WizardAttackMeans : MonoBehaviour {
 		wizardAnimator = gameObject.GetComponentInChildren<Animator> ();
 	}
 
-	public IEnumerator Attack(SpellDB.AttackID id, Vector3 to = default(Vector3)){
+	private IEnumerator AttackByPosition(SpellDB.AttackID id, Vector3 to = default(Vector3)){
 		wizardAnimator.SetBool ("isCasting", true);
 		yield return new WaitForSeconds (Constants.minCastCoolDown);
 
@@ -32,4 +32,12 @@ public class WizardAttackMeans : MonoBehaviour {
 		wizardAnimator.SetBool ("isCasting", false);
 	}
 
+	public void AttackToPosition(SpellDB.AttackID id, Vector3 to = default(Vector3)) {
+		StartCoroutine (AttackByPosition(id, to));
+	}
+	public void AttackByDiretion(SpellDB.AttackID id, Vector3 diretion, 
+	                                    float distance = Constants.DEFAULT_ATTACK_RADIUS) {
+
+		StartCoroutine (AttackByPosition (id, gameObject.transform.position + distance * diretion.normalized));
+	}
 }

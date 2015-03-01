@@ -44,7 +44,8 @@ public class TestPlayControl : MonoBehaviour {
 	void castFireball()
 	{
 		// cast one fireball
-		StartCoroutine (attackMeans.Attack (SpellDB.AttackID.fireball));
+		Vector3 direction = transform.forward;
+		attackMeans.AttackByDiretion (SpellDB.AttackID.fireball, direction);
 	}
 
 	void HandleRBumper()
