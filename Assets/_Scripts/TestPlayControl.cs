@@ -8,11 +8,15 @@ public class TestPlayControl : MonoBehaviour {
 
 	// is casting (fireball or special spell) or not, sync with animator in child model
 	public bool isCasting = false;
-
+	// CurSpeed, as the absolute value, currently only 1 or 0 is used
+	public int Speed = 0;
 	// local status
 	private int magicID = 1;
 
 	private UserInputManager inputManager;
+	private Animator animator;
+	private WizardAttackMeans attackMeans;
+
 	void Start()
 	{
 		// mapping input events
@@ -20,15 +24,19 @@ public class TestPlayControl : MonoBehaviour {
 		inputManager.OnPressLBumper += HandleLBumper;
 		inputManager.OnPressRBumper += HandleRBumper;
 		inputManager.OnPressButton += HandleButton;
+		animator = GetComponentInChildren<Animator> ();
+		attackMeans = GetComponent<WizardAttackMeans> ();
 	}
 
 	void HandleLBumper()
 	{
 		Debug.Log ("try casting fireball");
-		if(!isCasting)
-		{
+		if(!animator.GetBool("isCasting") && 
+		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting")) {
+			Debug.Log ("casting spell" + magicID);
+
 			Debug.Log ("casting fireball");
-			StartCoroutine(castCoolDown());
+			// StartCoroutine(castCoolDown());
 			castFireball();
 		}
 	}
@@ -36,29 +44,36 @@ public class TestPlayControl : MonoBehaviour {
 	void castFireball()
 	{
 		// cast one fireball
+		Vector3 direction = transform.forward;
+		attackMeans.AttackByDiretion (SpellDB.AttackID.fireball, direction);
 	}
 
 	void HandleRBumper()
 	{
 		Debug.Log ("try casting spell");
-		if(!isCasting)
+		if(!animator.GetBool("isCasting") && 
+		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting"))
 		{
 			Debug.Log ("casting spell" + magicID);
 			StartCoroutine(castCoolDown());
+
 			castMagic(magicID);
+
 		}
 	}
 
 	void castMagic(int magicID)
 	{
 		// cast a special spell by magic ID
+		Vector3 direction = transform.forward;
+		attackMeans.AttackByDiretion (SpellDB.AttackID.iceball, direction);
 	}
 
 	IEnumerator castCoolDown()
 	{
-		isCasting = true;
+		animator.SetBool("isCasting", true);
 		yield return new WaitForSeconds (Constants.minCastCoolDown);
-		isCasting = false;
+		animator.SetBool("isCasting", false);
 	}
 
 	void HandleButton()
@@ -95,7 +110,10 @@ public class TestPlayControl : MonoBehaviour {
 
 	void move(Vector2 input)
 	{
-		if(Mathf.Abs(input.x + input.y) > 0)
+		Speed = Mathf.Abs (input.x + input.y) > 0 ? 1 : 0;
+		if(!animator.GetBool("isCasting") && 
+		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting") &&
+			Mathf.Abs(input.x + input.y) > 0 )
 		{
 			// move target object with left stick.
 			float ratio = 7.0f;
