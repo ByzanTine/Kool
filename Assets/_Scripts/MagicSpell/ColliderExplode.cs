@@ -9,7 +9,7 @@ public class ColliderExplode : MonoBehaviour {
 		
 		
 		Instantiate (ExplodeEffect, transform.position, Quaternion.identity);;
-		Collider[] co = Physics.OverlapSphere(transform.position, 3.0f, overlapLayer);
+		Collider[] co = Physics.OverlapSphere(transform.position, 1.0f, overlapLayer);
 
 		// TODO Identify if the collider is pushable(namely only players)
 		int MeetPlayer = 0;
