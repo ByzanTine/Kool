@@ -976,7 +976,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 84.5999985, y: -22.7000008}
-  m_SizeDelta: {x: 160, y: 31}
+  m_SizeDelta: {x: 160, y: 36}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &504382361
 MonoBehaviour:
@@ -998,7 +998,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 3
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -3503,7 +3503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireball_: {fileID: 163726, guid: c9f42a03db0231746a55c4aa07ac2071, type: 2}
   iceball_: {fileID: 187744, guid: eb8d734536e8ebe47bb331484e74c4f9, type: 2}
-  meteor_: {fileID: 0}
+  meteor_: {fileID: 100000, guid: 30e1d7e0e32a36f4fa9db1a948758764, type: 2}
   reflector_: {fileID: 131938, guid: c55327597694be44a8245edcd2fe0111, type: 2}
 --- !u!1 &1512352989
 GameObject:

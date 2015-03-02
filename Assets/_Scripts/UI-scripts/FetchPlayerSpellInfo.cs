@@ -16,6 +16,6 @@ public class FetchPlayerSpellInfo : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		text.text = label;
-		text.text += Player[0].GetComponent<PlayerControl> ().magicID;
+		text.text += SpellDB.attackIDnames[Player[0].GetComponent<PlayerControl> ().magicID];
 	}
 }
