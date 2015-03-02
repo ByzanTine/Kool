@@ -30,12 +30,12 @@ public class TestPlayControl : MonoBehaviour {
 
 	void HandleLBumper()
 	{
-		Debug.Log ("try casting fireball");
+		// Debug.Log ("try casting fireball");
 		if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting")) {
-			Debug.Log ("casting spell" + magicID);
+			// Debug.Log ("casting spell" + magicID);
 
-			Debug.Log ("casting fireball");
+			Debug.Log ("[SPELL]: casting fireball");
 			// StartCoroutine(castCoolDown());
 			castFireball();
 		}
@@ -50,11 +50,11 @@ public class TestPlayControl : MonoBehaviour {
 
 	void HandleRBumper()
 	{
-		Debug.Log ("try casting spell");
+		// Debug.Log ("try casting spell");
 		if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting"))
 		{
-			Debug.Log ("casting spell" + magicID);
+			Debug.Log ("[SPELL]: casting spell" + magicID);
 			StartCoroutine(castCoolDown());
 
 			castMagic(magicID);

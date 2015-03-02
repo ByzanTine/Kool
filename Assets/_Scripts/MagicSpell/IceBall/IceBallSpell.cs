@@ -7,7 +7,7 @@ public class IceBallSpell : MagicSpell {
 	public IceBallSpell()
 	{
 		iceball = SpellDB.iceball;
-		Debug.Log("Constructor Loaded");
+		// Debug.Log("Constructor Loaded");
 	}
 	public override IEnumerator castMagic (GameObject caster, Vector3 hitpoint = default(Vector3)) 
 	{

@@ -46,7 +46,7 @@ public class MovableUnit : MonoBehaviour {
 		    || other.gameObject.tag == TagList.Fireball){
 			isMoving = false;
 			// Cause Explosion Here
-			Debug.Log ("Knocked On other, explode now");
+			// Debug.Log ("Knocked On other, explode now");
 			Debug.DrawLine (transform.position,
 			                new Vector3(transform.position.x, 30.0f, transform.position.z),Color.red,10.0f);
 			Instantiate(explosion, transform.position, Quaternion.identity);
