@@ -1631,6 +1631,7 @@ GameObject:
   - 114: {fileID: 1605989973}
   - 54: {fileID: 1605989974}
   - 136: {fileID: 1605989975}
+  - 114: {fileID: 1605989976}
   m_Layer: 0
   m_Name: PLayerX
   m_TagString: Untagged
@@ -1711,6 +1712,18 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1605989976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11476922, guid: 46d7e0dc98cba0a4eb9dab7e24e457b9,
+    type: 2}
+  m_PrefabInternal: {fileID: 603134892}
+  m_GameObject: {fileID: 1605989970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cbd62526131fd84f8651f5ce7d20f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1726934717
 GameObject:
   m_ObjectHideFlags: 0

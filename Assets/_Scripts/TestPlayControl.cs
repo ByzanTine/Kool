@@ -65,6 +65,8 @@ public class TestPlayControl : MonoBehaviour {
 	void castMagic(int magicID)
 	{
 		// cast a special spell by magic ID
+		Vector3 direction = transform.forward;
+		attackMeans.AttackByDiretion (SpellDB.AttackID.iceball, direction);
 	}
 
 	IEnumerator castCoolDown()

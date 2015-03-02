@@ -1577,7 +1577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireball_: {fileID: 163726, guid: c9f42a03db0231746a55c4aa07ac2071, type: 2}
-  iceball_: {fileID: 0}
+  iceball_: {fileID: 187744, guid: eb8d734536e8ebe47bb331484e74c4f9, type: 2}
   meteor_: {fileID: 0}
   reflector_: {fileID: 0}
 --- !u!1 &1514818954
@@ -2204,7 +2204,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 3
   m_Type: 2
-  m_Color: {r: .797540545, g: .992647052, b: .576611161, a: 1}
+  m_Color: {r: .992647052, g: .992647052, b: .992647052, a: 1}
   m_Intensity: 1
   m_Range: 20
   m_SpotAngle: 30
