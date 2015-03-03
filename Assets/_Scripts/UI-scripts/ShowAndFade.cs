@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class ShowAndFade : MonoBehaviour {
 	public Image image;
-	private float alpha = 1.0f;
+	// private float alpha = 1.0f;
 	private float fadeRate = 0.1f;
 	public Color curColor;
 	// Use this for initialization

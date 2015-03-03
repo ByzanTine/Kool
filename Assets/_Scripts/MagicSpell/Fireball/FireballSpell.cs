@@ -22,6 +22,6 @@ public class FireballSpell : MagicSpell {
 
 		MovableUnit movUnit = gb.GetComponent<MovableUnit> ();
 		movUnit.MoveTo (hitpoint);
-		yield return new WaitForSeconds(0.1f);
+		yield return null;
 	}
 }
