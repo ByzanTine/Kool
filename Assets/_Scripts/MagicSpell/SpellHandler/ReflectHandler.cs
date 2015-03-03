@@ -10,7 +10,7 @@ public class ReflectHandler : MonoBehaviour {
 	public void onReflectHandler(Vector3 normal) {
 		if (Time.time - timer > reflectCoolDown) { 
 			timer = Time.time;
-			rigidbody.velocity = Vector3.Reflect (rigidbody.velocity, normal);
+			GetComponent<Rigidbody>().velocity = Vector3.Reflect (GetComponent<Rigidbody>().velocity, normal);
 		}
 	}
 }
