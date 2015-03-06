@@ -5,7 +5,7 @@ public abstract class MagicSpell{
 	float cooldown;
 	// cast a magic 
 	// make it a coroutine to delay if neccessary
-	public abstract IEnumerator castMagic(GameObject caster, Vector3 direction = default(Vector3));
+	public abstract IEnumerator castMagic(GameObject caster, Vector3 hitpoint = default(Vector3));
 
 
 }

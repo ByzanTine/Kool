@@ -14,6 +14,8 @@ GameObject:
   - 114: {fileID: 11463724}
   - 54: {fileID: 5443894}
   - 114: {fileID: 11460838}
+  - 114: {fileID: 11489330}
+  - 114: {fileID: 11450852}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Fireball
@@ -48,6 +50,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &11450852
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11a1a60dbff46c349b4a937dfb317f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  livingTime: 4
 --- !u!114 &11460838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85,6 +99,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 592cc00e4d1879648bb20a93196a666e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11489330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f560fbaaa3865604d94193537276c309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &13561348

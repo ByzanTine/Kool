@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overlapLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   ExplodeEffect: {fileID: 165708, guid: 19b52379472b97743aaec4764e066755, type: 2}
 --- !u!114 &11414318
 MonoBehaviour:

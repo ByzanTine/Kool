@@ -3,7 +3,7 @@ using System.Collections;
 using InControl;
 
 
-public class TestPlayControl : MonoBehaviour {
+public class PlayerControl : MonoBehaviour {
 	// for testing
 
 	// is casting (fireball or special spell) or not, sync with animator in child model
@@ -11,7 +11,7 @@ public class TestPlayControl : MonoBehaviour {
 	// CurSpeed, as the absolute value, currently only 1 or 0 is used
 	public int Speed = 0;
 	// local status
-	private int magicID = 1;
+	public int magicID = 1;
 
 	private UserInputManager inputManager;
 	private Animator animator;
@@ -30,12 +30,12 @@ public class TestPlayControl : MonoBehaviour {
 
 	void HandleLBumper()
 	{
-		Debug.Log ("try casting fireball");
+		// Debug.Log ("try casting fireball");
 		if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting")) {
-			Debug.Log ("casting spell" + magicID);
+			// Debug.Log ("casting spell" + magicID);
 
-			Debug.Log ("casting fireball");
+			Debug.Log ("[SPELL]: casting fireball");
 			// StartCoroutine(castCoolDown());
 			castFireball();
 		}
@@ -50,11 +50,11 @@ public class TestPlayControl : MonoBehaviour {
 
 	void HandleRBumper()
 	{
-		Debug.Log ("try casting spell");
+		// Debug.Log ("try casting spell");
 		if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting"))
 		{
-			Debug.Log ("casting spell" + magicID);
+			Debug.Log ("[SPELL]: casting spell " + magicID);
 			StartCoroutine(castCoolDown());
 
 			castMagic(magicID);
@@ -66,7 +66,8 @@ public class TestPlayControl : MonoBehaviour {
 	{
 		// cast a special spell by magic ID
 		Vector3 direction = transform.forward;
-		attackMeans.AttackByDiretion (SpellDB.AttackID.iceball, direction);
+		// NOT SAFE
+		attackMeans.AttackByDiretion ((SpellDB.AttackID)magicID, direction);
 	}
 
 	IEnumerator castCoolDown()

@@ -12,7 +12,7 @@ public class ColliderDelay : MonoBehaviour {
 		{
 			col.enabled = false;
 		}
-		Invoke ("EnableCollider", 0.1f);//enable afte a second
+		Invoke ("EnableCollider", Constants.COLLIDER_DELAY_SECONDS);//enable afte a second
 	}
 	
 	// Update is called once per frame

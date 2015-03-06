@@ -7,7 +7,7 @@ public class FireballSpell : MagicSpell {
 	public FireballSpell()
 	{
 		fireball = SpellDB.fireball;
-		Debug.Log("Constructor Loaded");
+		// Debug.Log("Constructor Loaded");
 	}
 	public override IEnumerator castMagic (GameObject caster, Vector3 hitpoint = default(Vector3)) 
 	{
@@ -22,6 +22,6 @@ public class FireballSpell : MagicSpell {
 
 		MovableUnit movUnit = gb.GetComponent<MovableUnit> ();
 		movUnit.MoveTo (hitpoint);
-		yield return new WaitForSeconds(0.1f);
+		yield return null;
 	}
 }

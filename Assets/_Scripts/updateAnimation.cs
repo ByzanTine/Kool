@@ -4,11 +4,11 @@ using System.Collections;
 public class updateAnimation : MonoBehaviour {
 
 
-	private TestPlayControl playControl;
+	private PlayerControl playControl;
 	private Animator animator;
 	// Use this for initialization
 	void Start () {
-		playControl = transform.parent.GetComponent<TestPlayControl>();
+		playControl = transform.parent.GetComponent<PlayerControl>();
 		animator = GetComponent<Animator> ();
 	}
 	

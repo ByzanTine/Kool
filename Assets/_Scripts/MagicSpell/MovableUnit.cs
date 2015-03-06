@@ -24,16 +24,16 @@ public class MovableUnit : MonoBehaviour {
 
 		// Reflect if speed change 
 		// change the orientation for effect glitches
-		if ((rigidbody.velocity - curSpeed).magnitude > 0.1f)
+		if ((GetComponent<Rigidbody>().velocity - curSpeed).magnitude > 0.1f)
 		{
 			// Debug.Log("Rotate Angle: " + Vector3.Angle(curSpeed, rigidbody.velocity));
-			float angle = Vector3.Angle(curSpeed, rigidbody.velocity);
-			Vector3 cross = Vector3.Cross(curSpeed, rigidbody.velocity);
+			float angle = Vector3.Angle(curSpeed, GetComponent<Rigidbody>().velocity);
+			Vector3 cross = Vector3.Cross(curSpeed, GetComponent<Rigidbody>().velocity);
 			if (cross.y < 0) angle = -angle;
 			transform.Rotate(new Vector3 (0, angle, 0));
 
-			rigidbody.velocity = rigidbody.velocity.normalized * speed; // enfore a constant speed 
-			curSpeed = rigidbody.velocity;  
+			GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * speed; // enfore a constant speed 
+			curSpeed = GetComponent<Rigidbody>().velocity;  
 
 
 		}
@@ -46,7 +46,7 @@ public class MovableUnit : MonoBehaviour {
 		    || other.gameObject.tag == TagList.Fireball){
 			isMoving = false;
 			// Cause Explosion Here
-			Debug.Log ("Knocked On other, explode now");
+			// Debug.Log ("Knocked On other, explode now");
 			Debug.DrawLine (transform.position,
 			                new Vector3(transform.position.x, 30.0f, transform.position.z),Color.red,10.0f);
 			Instantiate(explosion, transform.position, Quaternion.identity);
@@ -61,8 +61,8 @@ public class MovableUnit : MonoBehaviour {
 		// destination.y = transform.position.y;
 		destination.y = 0.5f; // should be a little bit higher to separate from ground
 		Vector3 moveDirection = (destination - transform.position).normalized;
-		rigidbody.velocity = speed * moveDirection;
-		curSpeed = rigidbody.velocity;
+		GetComponent<Rigidbody>().velocity = speed * moveDirection;
+		curSpeed = GetComponent<Rigidbody>().velocity;
 
 	}
 }
