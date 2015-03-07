@@ -127,7 +127,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100004}
   m_IsPrefabParent: 1
-  m_IsExploded: 1
 --- !u!1002 &100100001
 EditorExtensionImpl:
   serializedVersion: 6
