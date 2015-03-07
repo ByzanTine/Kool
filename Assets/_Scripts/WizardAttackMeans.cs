@@ -9,6 +9,8 @@ public class WizardAttackMeans : MonoBehaviour {
 	private Animator wizardAnimator;
 	private MagicSpell magicSpell;
 	private List<MagicSpell> magicPool;
+	public GameObject ManaBar;
+	private barControl manaBarControl;
 
 	void Start () {
 		int enumSize = System.Enum.GetValues (typeof(SpellDB.AttackID)).Length;
@@ -22,23 +24,27 @@ public class WizardAttackMeans : MonoBehaviour {
 			new SwapSpell()
 		};
 
-
+		manaBarControl = ManaBar.GetComponent<barControl> ();
 
 		wizardAnimator = gameObject.GetComponentInChildren<Animator> ();
 	}
 
 	private IEnumerator AttackByPosition(SpellDB.AttackID id, Vector3 to = default(Vector3)){
-		wizardAnimator.SetBool ("isCasting", true);
-		yield return new WaitForSeconds (Constants.minCastCoolDown);
-
 		magicSpell = magicPool[(int)id];
+		if (manaBarControl.decreaseMana (Constants.minCastCoolDown)) {// TODO Mana cost is constant now
+			wizardAnimator.SetBool ("isCasting", true);
+			//yield return new WaitForSeconds (Constants.minCastCoolDown);
 
-		StartCoroutine (magicSpell.castMagic (gameObject, to));
+			StartCoroutine (magicSpell.castMagic (gameObject, to));
 
-		Debug.Log ("Attack using " + SpellDB.attackIDnames[(int)id]);
+			Debug.Log ("Attack using " + SpellDB.attackIDnames [(int)id]);
 
 
-		wizardAnimator.SetBool ("isCasting", false);
+			wizardAnimator.SetBool ("isCasting", false);
+		} else {
+			print ("not enough mana!");
+		}
+		yield return new WaitForSeconds (0.5f);
 	}
 
 	public void AttackToPosition(SpellDB.AttackID id, Vector3 to = default(Vector3)) {
