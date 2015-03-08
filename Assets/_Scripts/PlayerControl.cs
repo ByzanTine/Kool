@@ -114,7 +114,7 @@ public class PlayerControl : MonoBehaviour {
 		Speed = Mathf.Abs (input.x + input.y) > 0 ? 1 : 0;
 		if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting") &&
-			Mathf.Abs(input.x + input.y) > 0 )
+			input.magnitude > 0 )
 		{
 			// move target object with left stick.
 			float ratio = 7.0f;
@@ -132,7 +132,7 @@ public class PlayerControl : MonoBehaviour {
 	{
 		if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting") &&
-		   Mathf.Abs(input.x + input.y) > 0 )
+		   input.magnitude > 0 )
 		{
 			Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
 			smoothRotate (newForward);

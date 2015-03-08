@@ -16,6 +16,7 @@ GameObject:
   - 65: {fileID: 6563630}
   - 114: {fileID: 11462314}
   - 114: {fileID: 11464388}
+  - 114: {fileID: 11485400}
   m_Layer: 0
   m_Name: PLayerX
   m_TagString: Player
@@ -702,8 +703,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134422}
-  m_LocalRotation: {x: 0, y: -.778073609, z: 0, w: .628173113}
-  m_LocalPosition: {x: 0, y: .699999809, z: -5.4000001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.86076415, y: .699999988, z: 12.3074999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 434496}
@@ -1335,7 +1336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af2e4bc4503b40a9b739cc8e595e2ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 0
+  playerNum: 1
   leftInput: {x: 0, y: 0}
   rightInput: {x: 0, y: 0}
   magicID_in: 1
@@ -1397,6 +1398,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cbd62526131fd84f8651f5ce7d20f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11485400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3839565d5e9f40a68cf906b508d465f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trajectoryPrefab: {fileID: 107756, guid: a6c9b083bc5c14ee1beaf1aef27e4f36, type: 2}
 --- !u!136 &13663630
 CapsuleCollider:
   m_ObjectHideFlags: 1

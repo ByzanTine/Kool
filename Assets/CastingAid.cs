@@ -27,7 +27,7 @@ public class CastingAid : MonoBehaviour {
 
 	void showTrajAtAiming ()
 	{
-		if(Mathf.Abs(inputManager.rightInput.x + inputManager.rightInput.y) > 0
+		if(inputManager.rightInput.magnitude > 0
 		   && !animator.GetBool("isCasting")
 		   && !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting")
 		   && !isInitiated)
