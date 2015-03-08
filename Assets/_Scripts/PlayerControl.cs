@@ -73,7 +73,7 @@ public class PlayerControl : MonoBehaviour {
 	IEnumerator castCoolDown()
 	{
 		animator.SetBool("isCasting", true);
-		yield return new WaitForSeconds (Constants.minCastCoolDown);
+		yield return new WaitForSeconds (Constants.MIN_CAST_COOL_DOWN);
 		animator.SetBool("isCasting", false);
 	}
 
@@ -114,23 +114,47 @@ public class PlayerControl : MonoBehaviour {
 		Speed = Mathf.Abs (input.x + input.y) > 0 ? 1 : 0;
 		if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting") &&
-			Mathf.Abs(input.x + input.y) > 0 )
+			input.magnitude > 0 )
 		{
 			// move target object with left stick.
 			float ratio = 7.0f;
-			transform.LookAt (transform.position + new Vector3(input.x,0.0f, input.y));
+			Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
+			if(inputManager.rightInput.magnitude == 0)
+				smoothRotate (newForward);
 			transform.Translate( Vector3.right * ratio * Time.deltaTime * input.x, Space.World );
 			//		transform.Rotate( Vector3.right, 500.0f * Time.deltaTime * inputDevice.Direction.Y, Space.World );
 			transform.Translate( Vector3.forward *  ratio * Time.deltaTime * input.y, Space.World );
 			//		transform.Rotate( Vector3.right, 500.0f * Time.deltaTime * inputDevice.RightStickY, Space.World );
 		}
 	}
+
 	void rotate(Vector2 input)
 	{
-
+		if(!animator.GetBool("isCasting") && 
+		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting") &&
+		   input.magnitude > 0 )
+		{
+			Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
+			smoothRotate (newForward);
+		}
 		// rotate target with right stick.
-		transform.LookAt (transform.position + new Vector3(input.x, 0.0f, input.y));
 	}
 
+	void smoothRotate(Vector3 vec_to)
+	{
+		//	transform.LookAt (transform.position + newForward);
+		Vector3 vec_from = transform.forward;
+		float minDeltaAngle = Constants.PLAYER_ANGULAR_SPEED;
+
+		// calculate new direction by
+		Vector3 newDir = Vector3.RotateTowards(vec_from, vec_to, minDeltaAngle, 0.0F);
+
+//		Debug.DrawRay(transform.position, newDir, Color.red);
+
+		transform.rotation = Quaternion.LookRotation(newDir);
+
+		//		rigidbody.AddTorque (torqueFactor * Vector3.Cross (vec_from, vec_to));
+
+	}
 
 }
