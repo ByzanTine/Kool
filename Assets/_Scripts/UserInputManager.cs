@@ -34,7 +34,7 @@ public class UserInputManager : MonoBehaviour {
 		{
 			// If no controller exists for this cube, just make it translucent.
 			// renderer.material.color = new Color( 1.0f, 1.0f, 1.0f, 0.2f );
-			Debug.Log ("No devide detected for player:" + playerNum);
+//			Debug.Log ("No devide detected for player:" + playerNum);
 		}
 		else
 		{

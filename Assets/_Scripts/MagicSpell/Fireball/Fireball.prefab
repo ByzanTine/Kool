@@ -90,6 +90,7 @@ MonoBehaviour:
   isMoving: 0
   speed: 15
   curSpeed: {x: 0, y: 0, z: 0}
+  damage: .300000012
 --- !u!114 &11463726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,4 +148,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 163726}
   m_IsPrefabParent: 1
-  m_IsExploded: 1
