@@ -29,7 +29,7 @@ public class WizardAttackMeans : MonoBehaviour {
 
 	private IEnumerator AttackByPosition(SpellDB.AttackID id, Vector3 to = default(Vector3)){
 		wizardAnimator.SetBool ("isCasting", true);
-		yield return new WaitForSeconds (Constants.minCastCoolDown);
+		yield return new WaitForSeconds (Constants.MinCastCoolDown);
 
 		magicSpell = magicPool[(int)id];
 
