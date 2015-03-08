@@ -130,8 +130,13 @@ public class PlayerControl : MonoBehaviour {
 
 	void rotate(Vector2 input)
 	{
-		Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
-		smoothRotate (newForward);
+		if(!animator.GetBool("isCasting") && 
+		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting") &&
+		   Mathf.Abs(input.x + input.y) > 0 )
+		{
+			Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
+			smoothRotate (newForward);
+		}
 		// rotate target with right stick.
 	}
 

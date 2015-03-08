@@ -24,6 +24,10 @@ public class UserInputManager : MonoBehaviour {
 	public event OnInput OnPressLBumper;
 	public event OnInput OnPressButton;
 
+
+	// input lock of each stick
+	private bool lockLeft = false;
+	private bool lockRight = false;
 	void Start()
 	{}
 	
@@ -118,5 +122,27 @@ public class UserInputManager : MonoBehaviour {
 			                         mousePos3D.z - transform.position.z);
 		}
 
+		if(lockLeft) leftInput *= 0.0f;
+		if(lockRight) rightInput *= 0.0f;
+
+	}
+
+	IEnumerator lockParameter(bool variable, float period)
+	{
+		variable = true;
+		yield return new WaitForSeconds (period);
+		variable = false;
+	}
+
+	public void lockLeftInput(float period)
+	{
+		if(!lockLeft)
+			StartCoroutine (lockParameter (lockLeft, period));
+	}
+
+	public void lockRightInput(float period)
+	{
+		if(!lockRight)
+			StartCoroutine (lockParameter (lockRight, period));
 	}
 }
