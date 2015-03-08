@@ -11,5 +11,7 @@ public class Constants : MonoBehaviour {
 
 	public const float COLLIDER_DELAY_SECONDS = 0.3f;
 
+	public const float FIREBALL_DAMAGE = 0.3f;
 
+	static public float[] SPELL_DAMAGE = {0.3f, 0.2f};
 }

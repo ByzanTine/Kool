@@ -2,11 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class barControl : MonoBehaviour {
+public class BarControl : MonoBehaviour {
 	
-	private Vector3 startPos;
-	private Vector3 endPos;
-	private float progress = 0;
+	public Vector3 startPos;
+	public Vector3 endPos;
+	public float progress = 0;
 	private RectTransform castTransform;
 	public float increment = 0.05f;
 	
@@ -14,6 +14,8 @@ public class barControl : MonoBehaviour {
 	void Start () {
 		castTransform = GetComponent<RectTransform> ();
 		endPos = castTransform.position;
+//		print ("x"+castTransform.position.x);
+//		print ("w"+castTransform.rect.width);
 		startPos = new Vector3 (castTransform.position.x - castTransform.rect.width,castTransform.position.y, castTransform.position.z);
 		castTransform.position = startPos;
 	}
@@ -22,11 +24,11 @@ public class barControl : MonoBehaviour {
 	void Update () {
 		if (progress <= 1.0){
 			castTransform.position = Vector3.Lerp(startPos, endPos, progress);
-			autoIncrement();
+			AutoIncrement();
 		}
 	}
 
-	public bool decreaseMana(float mana){
+	public bool DecreaseMana(float mana){
 		if (mana < progress) {
 			progress -= mana;
 			return true;
@@ -34,15 +36,15 @@ public class barControl : MonoBehaviour {
 		return false;
 	}
 
-	public void setBar (float newProgress){
+	public void SetBar (float newProgress){
 		progress = newProgress;
 	}
 
-	public float getBar(){
+	public float GetBar(){
 		return progress;
 	}
 
-	private void autoIncrement(){
+	private void AutoIncrement(){
 		progress += increment * Time.deltaTime;
 	}
 }
