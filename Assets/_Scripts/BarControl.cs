@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class BarControl : MonoBehaviour {
-	
+
+
 	public Vector3 startPos;
 	public Vector3 endPos;
 	public float progress = 0;
