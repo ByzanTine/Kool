@@ -90,6 +90,7 @@ MonoBehaviour:
   isMoving: 0
   speed: 15
   curSpeed: {x: 0, y: 0, z: 0}
+  damage: .300000012
 --- !u!114 &11463726
 MonoBehaviour:
   m_ObjectHideFlags: 1

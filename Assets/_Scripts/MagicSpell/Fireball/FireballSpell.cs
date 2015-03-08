@@ -17,6 +17,7 @@ public class FireballSpell : MagicSpell {
 //
 //		Debug.Log ("Angle: " + transformed_angle);
 		Quaternion lookedQua = Quaternion.LookRotation (hitpoint - caster.transform.position);
+
 		GameObject gb = GameObject.Instantiate (fireball, caster.transform.position, lookedQua) as GameObject;
 
 

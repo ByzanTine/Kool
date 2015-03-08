@@ -11,7 +11,8 @@ public class GamePlayControl : MonoBehaviour {
 	}
 
 	void InitPlayers () {
-		
+		// get num of players 
+		// instaniate them 
 	}
 
 	void InitTerrian () {

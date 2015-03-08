@@ -105,6 +105,7 @@ GameObject:
   - 114: {fileID: 11484794}
   - 65: {fileID: 6556660}
   - 54: {fileID: 5417744}
+  - 114: {fileID: 11495816}
   m_Layer: 0
   m_Name: PLayer1
   m_TagString: Untagged
@@ -482,6 +483,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCasting: 0
+  Speed: 0
+  magicID: 1
+--- !u!114 &11495816
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 170870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3839565d5e9f40a68cf906b508d465f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trajectoryPrefab: {fileID: 107756, guid: a6c9b083bc5c14ee1beaf1aef27e4f36, type: 2}
 --- !u!137 &13770858
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

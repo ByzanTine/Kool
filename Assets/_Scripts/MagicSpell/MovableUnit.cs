@@ -7,6 +7,7 @@ public class MovableUnit : MonoBehaviour {
 	public bool isMoving = false;
 	public float speed;
 	public Vector3 curSpeed;
+	public float damage = 0.1f;
 	// Use this for initialization
 	void Start () {
 	

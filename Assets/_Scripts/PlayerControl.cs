@@ -73,7 +73,7 @@ public class PlayerControl : MonoBehaviour {
 	IEnumerator castCoolDown()
 	{
 		animator.SetBool("isCasting", true);
-		yield return new WaitForSeconds (Constants.MinCastCoolDown);
+		yield return new WaitForSeconds (Constants.MIN_CAST_COOL_DOWN);
 		animator.SetBool("isCasting", false);
 	}
 
@@ -144,7 +144,7 @@ public class PlayerControl : MonoBehaviour {
 	{
 		//	transform.LookAt (transform.position + newForward);
 		Vector3 vec_from = transform.forward;
-		float minDeltaAngle = Constants.BasicPlayerAngularSpeed;
+		float minDeltaAngle = Constants.PLAYER_ANGULAR_SPEED;
 
 		// calculate new direction by
 		Vector3 newDir = Vector3.RotateTowards(vec_from, vec_to, minDeltaAngle, 0.0F);

@@ -38,7 +38,7 @@ public class UserInputManager : MonoBehaviour {
 		{
 			// If no controller exists for this cube, just make it translucent.
 			// renderer.material.color = new Color( 1.0f, 1.0f, 1.0f, 0.2f );
-			Debug.Log ("No devide detected for player:" + playerNum);
+//			Debug.Log ("No devide detected for player:" + playerNum);
 		}
 		else
 		{
@@ -114,10 +114,12 @@ public class UserInputManager : MonoBehaviour {
 		{
 			Vector3 mousePos2D = Input.mousePosition;
 			// Convert the mouse position to 3D world coordinates
-//			mousePos2D.z = -Camera.main.transform.position.z;
-			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint( mousePos2D );
+//			mousePos2D.z = mousePos2D.y;
+//			mousePos2D.y = -Camera.main.transform.position.y;
+//			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint( mousePos2D );
+			Vector3 mousePos3D = GetWorldPositionOnPlane(mousePos2D, 0);
 
-//			Debug.Log ("input posision" + mousePos2D.ToString());
+			Debug.Log ("input posision" + mousePos2D.ToString() + "\t\n" + mousePos3D.ToString());
 			rightInput = new Vector2(mousePos3D.x - transform.position.x,
 			                         mousePos3D.z - transform.position.z);
 		}
@@ -125,6 +127,14 @@ public class UserInputManager : MonoBehaviour {
 		if(lockLeft) leftInput *= 0.0f;
 		if(lockRight) rightInput *= 0.0f;
 
+	}
+
+	Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float y) {
+		Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+		Plane xy = new Plane(Vector3.up, new Vector3(0, y, 0));
+		float distance;
+		xy.Raycast(ray, out distance);
+		return ray.GetPoint(distance);
 	}
 
 	IEnumerator lockParameter(bool variable, float period)
