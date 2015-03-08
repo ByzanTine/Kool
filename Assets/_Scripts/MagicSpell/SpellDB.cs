@@ -14,11 +14,9 @@ public class SpellDB : MonoBehaviour {
 
 	static public string[] attackIDnames = {"fireball", "iceball", "meteor", "reflect", "swap"};
 
-	public GameObject fireball_;
-	public GameObject iceball_;
-	public GameObject meteor_;
-	public GameObject reflector_;
-	public GameObject swap_;
+
+	// public GameObject meteor_;
+
 
 
 	static public GameObject fireball;
@@ -30,11 +28,18 @@ public class SpellDB : MonoBehaviour {
 	void Awake()
 	{
 		Debug.Log("INIT: Create Reference to Spells");
-		fireball = fireball_;
-		iceball = iceball_;
-		meteor = meteor_;
-		reflector = reflector_;
-		swap = swap_;
 
+		InitSpells ();
+
+
+	}
+	// May take some time
+	void InitSpells () {
+
+		fireball = Resources.Load ("MagicSpells/Fireball") as GameObject;
+		meteor = Resources.Load ("MagicSpells/meteor") as GameObject;
+		iceball = Resources.Load ("MagicSpells/Iceball") as GameObject;
+		reflector = Resources.Load ("MagicSpells/Reflector") as GameObject;
+		swap = Resources.Load ("MagicSpells/Swapper") as GameObject;
 	}
 }
