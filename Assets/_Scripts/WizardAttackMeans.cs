@@ -9,8 +9,6 @@ public class WizardAttackMeans : MonoBehaviour {
 	private Animator wizardAnimator;
 	private MagicSpell magicSpell;
 	private List<MagicSpell> magicPool;
-	public GameObject ManaBar;
-	private BarControl manaBarControl;
 
 	void Start () {
 		int enumSize = System.Enum.GetValues (typeof(SpellDB.AttackID)).Length;
@@ -24,14 +22,13 @@ public class WizardAttackMeans : MonoBehaviour {
 			new SwapSpell()
 		};
 
-		manaBarControl = ManaBar.GetComponent<BarControl> ();
-
 		wizardAnimator = gameObject.GetComponentInChildren<Animator> ();
 	}
 
 	private IEnumerator AttackByPosition(SpellDB.AttackID id, Vector3 to = default(Vector3)){
 		magicSpell = magicPool[(int)id];
-		if (manaBarControl.DecreaseMana (Constants.MIN_CAST_COOL_DOWN)) {// TODO Mana cost is constant now
+		PlayerData pD = GetComponent<PlayerData>();
+		if (pD.DecreaseMana (Constants.MIN_CAST_COOL_DOWN)) {// TODO Mana cost is constant now
 			wizardAnimator.SetBool ("isCasting", true);
 			//yield return new WaitForSeconds (Constants.minCastCoolDown);
 

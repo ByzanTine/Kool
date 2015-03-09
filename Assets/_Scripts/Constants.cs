@@ -12,7 +12,7 @@ public class Constants : MonoBehaviour {
 
 	public const float DEFAULT_ATTACK_RADIUS = 30.0f;
 
-	public const float COLLIDER_DELAY_SECONDS = 0.3f;
+	public const float COLLIDER_DELAY_SECONDS = 0.15f;
 
 	public const float FIREBALL_DAMAGE = 0.3f;
 

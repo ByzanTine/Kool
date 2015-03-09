@@ -87,7 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0, z: 0}
   explosion: {fileID: 100004, guid: 364ce50fb529e4443abce10e4889840b, type: 2}
-  isMoving: 0
+  isMoving: 1
   speed: 15
   curSpeed: {x: 0, y: 0, z: 0}
   damage: .300000012

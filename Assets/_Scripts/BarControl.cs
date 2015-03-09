@@ -9,7 +9,7 @@ public class BarControl : MonoBehaviour {
 	public Vector3 endPos;
 	public float progress = 0;
 	private RectTransform castTransform;
-	public float increment = 0.05f;
+
 	
 	// Use this for initialization
 	void Start () {
@@ -23,18 +23,7 @@ public class BarControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (progress <= 1.0){
-			castTransform.position = Vector3.Lerp(startPos, endPos, progress);
-			AutoIncrement();
-		}
-	}
-
-	public bool DecreaseMana(float mana){
-		if (mana < progress) {
-			progress -= mana;
-			return true;
-		} 
-		return false;
+		castTransform.position = Vector3.Lerp(startPos, endPos, progress);
 	}
 
 	public void SetBar (float newProgress){
@@ -45,7 +34,5 @@ public class BarControl : MonoBehaviour {
 		return progress;
 	}
 
-	private void AutoIncrement(){
-		progress += increment * Time.deltaTime;
-	}
+
 }

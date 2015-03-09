@@ -4,7 +4,7 @@ using System.Collections;
 public class MovableUnit : MonoBehaviour {
 	public Vector3 destination;
 	public GameObject explosion;
-	public bool isMoving = false;
+	public bool isMoving = true;
 	public float speed;
 	public Vector3 curSpeed;
 	public float damage = 0.1f;
@@ -16,7 +16,7 @@ public class MovableUnit : MonoBehaviour {
 	void FixedUpdate (){
 
 		// If the object is already there, explode
-		if ((transform.position - destination).magnitude < 1.0f){
+		if ((transform.position - destination).magnitude < 1.0f && isMoving){
 			isMoving = false;
 			// Cause Explosion Here
 			Instantiate(explosion, destination, Quaternion.identity);
@@ -35,16 +35,12 @@ public class MovableUnit : MonoBehaviour {
 
 			GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * speed; // enfore a constant speed 
 			curSpeed = GetComponent<Rigidbody>().velocity;  
-
-
 		}
-
-
-
 	}
+
 	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.tag == TagList.Player
-		    || other.gameObject.tag == TagList.Fireball){
+		if ((other.gameObject.tag == TagList.Player
+		    || other.gameObject.tag == TagList.Fireball) && isMoving){
 			isMoving = false;
 			// Cause Explosion Here
 			// Debug.Log ("Knocked On other, explode now");
@@ -55,6 +51,7 @@ public class MovableUnit : MonoBehaviour {
 		}
 		
 	}
+
 	public void MoveTo(Vector3 destination) {
 		// TODO HARD CODE
 		transform.Rotate (new Vector3 (0, 180, 0));
