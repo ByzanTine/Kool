@@ -119,7 +119,7 @@ public class UserInputManager : MonoBehaviour {
 //			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint( mousePos2D );
 			Vector3 mousePos3D = GetWorldPositionOnPlane(mousePos2D, 0);
 
-			Debug.Log ("input posision" + mousePos2D.ToString() + "\t\n" + mousePos3D.ToString());
+			// Debug.Log ("input posision" + mousePos2D.ToString() + "\t\n" + mousePos3D.ToString());
 			rightInput = new Vector2(mousePos3D.x - transform.position.x,
 			                         mousePos3D.z - transform.position.z);
 		}
