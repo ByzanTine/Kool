@@ -19,8 +19,8 @@ GameObject:
   - 114: {fileID: 11416410}
   - 114: {fileID: 11429208}
   - 114: {fileID: 11476454}
-  - 114: {fileID: 11419596}
   - 114: {fileID: 11419160}
+  - 114: {fileID: 11456452}
   m_Layer: 0
   m_Name: PLayerX
   m_TagString: Player
@@ -1428,21 +1428,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trajectoryPrefab: {fileID: 107756, guid: a6c9b083bc5c14ee1beaf1aef27e4f36, type: 2}
---- !u!114 &11419596
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 040be2a7ee6bc49e996893d668607609, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 1
-  mana: 1
-  frozen: 0
-  HPBar: {fileID: 0}
 --- !u!114 &11429208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1494,6 +1479,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01048f2af36b4794907f068f06263ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11456452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040be2a7ee6bc49e996893d668607609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
+  mana: 1
+  frozen: 0
+  HPBar: {fileID: 0}
+  ManaBar: {fileID: 0}
+  increment: .0500000007
 --- !u!114 &11462314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1538,7 +1540,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cbd62526131fd84f8651f5ce7d20f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ManaBar: {fileID: 0}
 --- !u!136 &13663630
 CapsuleCollider:
   m_ObjectHideFlags: 1
