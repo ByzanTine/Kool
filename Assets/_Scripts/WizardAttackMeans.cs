@@ -34,12 +34,12 @@ public class WizardAttackMeans : MonoBehaviour {
 
 			StartCoroutine (magicSpell.castMagic (gameObject, to));
 
-			Debug.Log ("Attack using " + SpellDB.attackIDnames [(int)id]);
+			Debug.Log ("[Spell] Attack using " + SpellDB.attackIDnames [(int)id]);
 
 
 			wizardAnimator.SetBool ("isCasting", false);
 		} else {
-			print ("not enough mana!");
+			Debug.Log ("[Spell] not enough mana!");
 		}
 		yield return new WaitForSeconds (0.5f);
 	}

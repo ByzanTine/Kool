@@ -14,23 +14,19 @@ public class ColliderExplode : MonoBehaviour {
 		Collider[] co = Physics.OverlapSphere(transform.position, 1.0f, overlapLayer);
 
 		// TODO Identify if the collider is pushable(namely only players)
-		print ("start explositon");
+		Debug.Log ("[Spell] start explositon");
 		HashSet<string> hashtable = new HashSet<string>();// TODO Each player should have a different name
 
 		foreach (Collider collider in co){
-			print (collider.gameObject.tag + "  " + collider.name);
+			Debug.Log ("[Spell] " + collider.gameObject.tag + "  " + collider.name);
 			if (!hashtable.Contains(collider.name)){
 				hashtable.Add(collider.name);
-				if (collider.gameObject.tag == TagList.Player){
-//					Vector3 direction = collider.transform.position - transform.position;
-//					Vector3 appliedForce = direction.normalized * Globals.FORCE_MULTIPLIER;
-//					StartCoroutine(addTimeDecayForce(collider.attachedRigidbody, appliedForce, 0.5f));
-					// collider.attachedRigidbody.AddExplosionForce(100.0f, transform.position, 0);
-					PlayerSpellHandler PSH = collider.GetComponent<PlayerSpellHandler>();
+
+
+				PlayerSpellHandler PSH = collider.GetComponent<PlayerSpellHandler>();
+				if (PSH) {
 					PSH.onSpellTrigger(gameObject.transform.position, spellID);
-					PlayerData pD = collider.GetComponent<PlayerData>();
-					pD.DamageHP(Constants.SPELL_DAMAGE[spellID]);
-					print ("hit " + collider.name);
+
 				}
 			}
 		}
