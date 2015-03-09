@@ -24,6 +24,10 @@ public class UserInputManager : MonoBehaviour {
 	public event OnInput OnPressLBumper;
 	public event OnInput OnPressButton;
 
+
+	// input lock of each stick
+	private bool lockLeft = false;
+	private bool lockRight = false;
 	void Start()
 	{}
 	
@@ -46,11 +50,11 @@ public class UserInputManager : MonoBehaviour {
 	
 	void UpdateWithInputDevice( InputDevice inputDevice )
 	{
-		buttonInput (inputDevice);
-		directionInput (inputDevice);
+		GetButtonInput (inputDevice);
+		GetDirectionInput (inputDevice);
 	}
 	
-	void buttonInput(InputDevice inputDevice)
+	void GetButtonInput(InputDevice inputDevice)
 	{
 		// if any buttons in X,Y,A,B is pressed down (one shot)
 		if (inputDevice.AnyButton) 
@@ -100,7 +104,7 @@ public class UserInputManager : MonoBehaviour {
 		}
 	}
 	
-	void directionInput(InputDevice inputDevice )
+	void GetDirectionInput(InputDevice inputDevice )
 	{
 		leftInput = new Vector2 (inputDevice.LeftStickX, inputDevice.LeftStickY);
 
@@ -110,13 +114,45 @@ public class UserInputManager : MonoBehaviour {
 		{
 			Vector3 mousePos2D = Input.mousePosition;
 			// Convert the mouse position to 3D world coordinates
-			mousePos2D.z = -Camera.main.transform.position.z;
-			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint( mousePos2D );
+//			mousePos2D.z = mousePos2D.y;
+//			mousePos2D.y = -Camera.main.transform.position.y;
+//			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint( mousePos2D );
+			Vector3 mousePos3D = GetWorldPositionOnPlane(mousePos2D, 0);
 
-//			Debug.Log ("input posision" + mousePos2D.ToString());
+			Debug.Log ("input posision" + mousePos2D.ToString() + "\t\n" + mousePos3D.ToString());
 			rightInput = new Vector2(mousePos3D.x - transform.position.x,
 			                         mousePos3D.z - transform.position.z);
 		}
 
+		if(lockLeft) leftInput *= 0.0f;
+		if(lockRight) rightInput *= 0.0f;
+
+	}
+
+	Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float y) {
+		Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+		Plane xy = new Plane(Vector3.up, new Vector3(0, y, 0));
+		float distance;
+		xy.Raycast(ray, out distance);
+		return ray.GetPoint(distance);
+	}
+
+	IEnumerator LockParameter(bool variable, float period)
+	{
+		variable = true;
+		yield return new WaitForSeconds (period);
+		variable = false;
+	}
+
+	public void LockLeftInput(float period)
+	{
+		if(!lockLeft)
+			StartCoroutine (LockParameter (lockLeft, period));
+	}
+
+	public void LockRightInput(float period)
+	{
+		if(!lockRight)
+			StartCoroutine (LockParameter (lockRight, period));
 	}
 }
