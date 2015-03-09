@@ -50,11 +50,11 @@ public class UserInputManager : MonoBehaviour {
 	
 	void UpdateWithInputDevice( InputDevice inputDevice )
 	{
-		buttonInput (inputDevice);
-		directionInput (inputDevice);
+		GetButtonInput (inputDevice);
+		GetDirectionInput (inputDevice);
 	}
 	
-	void buttonInput(InputDevice inputDevice)
+	void GetButtonInput(InputDevice inputDevice)
 	{
 		// if any buttons in X,Y,A,B is pressed down (one shot)
 		if (inputDevice.AnyButton) 
@@ -104,7 +104,7 @@ public class UserInputManager : MonoBehaviour {
 		}
 	}
 	
-	void directionInput(InputDevice inputDevice )
+	void GetDirectionInput(InputDevice inputDevice )
 	{
 		leftInput = new Vector2 (inputDevice.LeftStickX, inputDevice.LeftStickY);
 
@@ -137,22 +137,22 @@ public class UserInputManager : MonoBehaviour {
 		return ray.GetPoint(distance);
 	}
 
-	IEnumerator lockParameter(bool variable, float period)
+	IEnumerator LockParameter(bool variable, float period)
 	{
 		variable = true;
 		yield return new WaitForSeconds (period);
 		variable = false;
 	}
 
-	public void lockLeftInput(float period)
+	public void LockLeftInput(float period)
 	{
 		if(!lockLeft)
-			StartCoroutine (lockParameter (lockLeft, period));
+			StartCoroutine (LockParameter (lockLeft, period));
 	}
 
-	public void lockRightInput(float period)
+	public void LockRightInput(float period)
 	{
 		if(!lockRight)
-			StartCoroutine (lockParameter (lockRight, period));
+			StartCoroutine (LockParameter (lockRight, period));
 	}
 }

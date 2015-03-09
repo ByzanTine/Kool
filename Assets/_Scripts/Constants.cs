@@ -10,7 +10,7 @@ public class Constants : MonoBehaviour {
 	public const float PLAYER_ANGULAR_SPEED = 0.15f;
 
 
-	public const float DEFAULT_ATTACK_RADIUS = 10.0f;
+	public const float DEFAULT_ATTACK_RADIUS = 30.0f;
 
 	public const float COLLIDER_DELAY_SECONDS = 0.3f;
 

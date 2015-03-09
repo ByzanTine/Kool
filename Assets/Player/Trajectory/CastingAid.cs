@@ -22,10 +22,10 @@ public class CastingAid : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		showTrajAtAiming ();
+		ShowTrajAtAiming ();
 	}
 
-	void showTrajAtAiming ()
+	void ShowTrajAtAiming ()
 	{
 		if(inputManager.rightInput.magnitude > 0
 		   && !animator.GetBool("isCasting")
@@ -35,14 +35,14 @@ public class CastingAid : MonoBehaviour {
 			GameObject trajectory = 
 				Instantiate(trajectoryPrefab,this.transform.position,transform.rotation) 
 					as GameObject;
-			StartCoroutine(innerCoolDown());
+			StartCoroutine(InnerCoolDown());
 			trajectory.transform.Translate(new Vector3(0.0f, 0.0f, trajectory.transform.localScale.y));
 			trajectory.transform.Rotate(new Vector3(1.0f, 0.0f, 0.0f), 90.0f);
 			trajectory.transform.parent = this.gameObject.transform;
 		}
 	}
 
-	IEnumerator innerCoolDown()
+	IEnumerator InnerCoolDown()
 	{
 		isInitiated = true;
 		yield return new WaitForSeconds (0.5f);
