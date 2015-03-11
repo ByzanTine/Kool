@@ -5,7 +5,7 @@ public class Constants : MonoBehaviour {
 	// DEBUG
 	// =============================================================
 	// the minimun cool donw time for casting. protect the animation
-	public const float MIN_CAST_COOL_DOWN = 0.4f;
+	public const float MIN_CAST_COOL_DOWN = 0.3f;
 
 	public const float PLAYER_ANGULAR_SPEED = 0.15f;
 
@@ -16,5 +16,5 @@ public class Constants : MonoBehaviour {
 
 	public const float FIREBALL_DAMAGE = 0.3f;
 
-	static public float[] SPELL_DAMAGE = {0.3f, 0.2f};
+	static public float[] SPELL_DAMAGE = {0.1f, 0.2f};
 }
