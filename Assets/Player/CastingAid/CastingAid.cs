@@ -49,4 +49,49 @@ public class CastingAid : MonoBehaviour {
 		isInitiated = false;
 	}
 
+	bool isPosAiming = false;
+	public GameObject castingCirclePrefab;
+	GameObject castingCircle;
+	float castingEnergy;
+	public void StartAiming()
+	{
+		isPosAiming = true;
+		StartCoroutine (ReleaseCastingCircle ());
+	}
+
+	IEnumerator ReleaseCastingCircle()
+	{
+		castingCircle = 
+			Instantiate(castingCirclePrefab,this.transform.position,transform.rotation) 
+				as GameObject;
+		castingCircle.transform.parent = this.gameObject.transform;
+		castingEnergy = 0;
+		for(int i = 0; i < 50; ++i)
+		{
+			yield return new WaitForSeconds (0.1f);
+			castingCircle.transform.localScale += new Vector3(1.0f, 0.0f, 1.0f);
+			castingEnergy += 0.5f;
+		}
+
+		// End aiming if player does not give the second input in time
+		isPosAiming = false;
+		Destroy (castingCircle);
+
+	}
+
+	public Vector3 EndAiming()
+	{
+		if(!isPosAiming)
+		{
+
+			return new Vector3 ();
+		}
+		else
+		{
+			isPosAiming = false;
+			return transform.position + castingEnergy * transform.forward;
+		}
+
+	}
+
 }

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c3839565d5e9f40a68cf906b508d465f
+timeCreated: 1426047318
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - trajectoryPrefab: {fileID: 107756, guid: a6c9b083bc5c14ee1beaf1aef27e4f36, type: 2}
+  - castingCirclePrefab: {fileID: 181572, guid: d2a786f0cd78049ccb03578d6470370f,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

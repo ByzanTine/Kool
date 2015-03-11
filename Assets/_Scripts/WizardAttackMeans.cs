@@ -50,7 +50,7 @@ public class WizardAttackMeans : MonoBehaviour {
 		StartCoroutine (AttackByPosition(id, to));
 	}
 	public void AttackByDiretion(SpellDB.AttackID id, Vector3 diretion, 
-	                                    float distance = 10.0f) {
+	                                    float distance = Constants.DEFAULT_ATTACK_RADIUS) {
 
 		StartCoroutine (AttackByPosition (id, gameObject.transform.position + distance * diretion.normalized));
 	}

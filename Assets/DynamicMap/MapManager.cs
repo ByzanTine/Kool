@@ -10,7 +10,7 @@ public class MapManager : MonoBehaviour {
 	// tile_space changes the space between each tile
 	const float tile_space = 0.2f;
 	// tile_height is the height of each tile
-	const float tile_height = 0.01f;
+	const float tile_height = 0.1f;
 	// the size of whole map is map_size * map_size
 	const int map_size = 20;
 	public GameObject tile_prefab;

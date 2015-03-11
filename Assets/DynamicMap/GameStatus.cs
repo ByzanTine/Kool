@@ -18,7 +18,7 @@ public class GameStatus : MonoBehaviour {
 			if(playerCollection.Length == 1 && !isGameOver)
 			{
 				isGameOver = true;
-				GameObject winEffPrefab = Resources.Load ("WinParEff") as GameObject;
+				GameObject winEffPrefab = Resources.Load ("ArenaEffects/WinParEff") as GameObject;
 				GameObject winEff = GameObject.Instantiate (winEffPrefab, 
 						 	playerCollection[0].transform.position, Quaternion.identity)
 							as GameObject;

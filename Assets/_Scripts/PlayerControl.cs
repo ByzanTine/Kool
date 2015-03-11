@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour {
 	private UserInputManager inputManager;
 	private Animator animator;
 	private WizardAttackMeans attackMeans;
+	private CastingAid castingAid;
 
 	void Start()
 	{
@@ -26,6 +27,8 @@ public class PlayerControl : MonoBehaviour {
 		inputManager.OnPressButton += HandleButton;
 		animator = GetComponentInChildren<Animator> ();
 		attackMeans = GetComponent<WizardAttackMeans> ();
+
+		castingAid = GetComponent<CastingAid> ();
 	}
 
 	void HandleLBumper()
@@ -55,19 +58,48 @@ public class PlayerControl : MonoBehaviour {
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting"))
 		{
 			Debug.Log ("[SPELL]: casting spell " + magicID);
-			StartCoroutine(CastCoolDown());
+
 
 			CastMagic(magicID);
 
 		}
 	}
 
+	bool isPosAiming = false;
 	void CastMagic(int magicID)
 	{
 		// cast a special spell by magic ID
 		Vector3 direction = transform.forward;
-		// NOT SAFE
-		attackMeans.AttackByDiretion ((SpellDB.AttackID)magicID, direction);
+
+		// For metero/Aerolite skill
+		if(magicID == 2)
+		{
+			if(isPosAiming == false)
+			{
+				// start Aiming
+				isPosAiming = true;
+				StartCoroutine(AimingDecending());
+				castingAid.StartAiming();
+			}
+			else
+			{
+				isPosAiming = false;
+				StartCoroutine(CastCoolDown());
+				Vector3 targetPos = castingAid.EndAiming();
+				attackMeans.AttackToPosition ((SpellDB.AttackID)magicID, targetPos);
+			}
+		}
+		else
+		{
+			StartCoroutine(CastCoolDown());
+			attackMeans.AttackByDiretion ((SpellDB.AttackID)magicID, direction);
+		}
+	}
+
+	IEnumerator AimingDecending()
+	{
+		yield return new WaitForSeconds (3.0f);
+		isPosAiming = false;
 	}
 
 	IEnumerator CastCoolDown()
