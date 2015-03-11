@@ -11,6 +11,7 @@ public class PlayerData : MonoBehaviour {
 	private BarControl ManabarControl;
 	public float increment = 0.05f;
 
+	public bool isAlive = true;
 	void Start () {
 		HPbarControl = HPBar.GetComponent<BarControl> ();
 		ManabarControl = ManaBar.GetComponent<BarControl> ();
@@ -19,6 +20,13 @@ public class PlayerData : MonoBehaviour {
 	public void DamageHP (float damage){
 		health -= damage;
 		HPbarControl.SetBar (health);
+
+		// update player status
+		if(health <= 0)
+		{
+			isAlive = false;
+			Destroy(this.gameObject);
+		}
 	}
 
 	public bool DecreaseMana(float Dmana){
