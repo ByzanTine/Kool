@@ -167,7 +167,7 @@ public class MapManager : MonoBehaviour {
 		while(true)
 		{
 			removeRandomBorder();
-			yield return new WaitForSeconds(0.2f);
+			yield return new WaitForSeconds(0.1f);
 		}
 	}
 	// Update is called once per frame

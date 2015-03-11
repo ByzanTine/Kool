@@ -25,6 +25,7 @@ public class PlayerData : MonoBehaviour {
 		if(health <= 0)
 		{
 			isAlive = false;
+			DecreaseMana(mana);
 			Destroy(this.gameObject);
 		}
 	}

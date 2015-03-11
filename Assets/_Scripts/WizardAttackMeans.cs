@@ -17,9 +17,11 @@ public class WizardAttackMeans : MonoBehaviour {
 		{
 			new FireballSpell(), 
 			new IceBallSpell(),
-			new MeteorSpell(), 
+//			new MeteorSpell()
+			new AeroSpell(), 
 			new ReflectSpell(),
-			new SwapSpell()
+			new SwapSpell(),
+
 		};
 
 		wizardAnimator = gameObject.GetComponentInChildren<Animator> ();
@@ -48,7 +50,7 @@ public class WizardAttackMeans : MonoBehaviour {
 		StartCoroutine (AttackByPosition(id, to));
 	}
 	public void AttackByDiretion(SpellDB.AttackID id, Vector3 diretion, 
-	                                    float distance = Constants.DEFAULT_ATTACK_RADIUS) {
+	                                    float distance = 10.0f) {
 
 		StartCoroutine (AttackByPosition (id, gameObject.transform.position + distance * diretion.normalized));
 	}

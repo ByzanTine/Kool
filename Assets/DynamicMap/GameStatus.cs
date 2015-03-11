@@ -4,6 +4,7 @@ using System.Collections;
 public class GameStatus : MonoBehaviour {
 
 	private int playerNum;
+	private bool isGameOver = false;
 	// Use this for initialization
 	void Start () {
 		playerNum = GameObject.FindGameObjectsWithTag (TagList.Player).Length;
@@ -14,8 +15,9 @@ public class GameStatus : MonoBehaviour {
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 		if(playerCollection.Length <= 1)
 		{
-			if(playerCollection.Length == 1)
+			if(playerCollection.Length == 1 && !isGameOver)
 			{
+				isGameOver = true;
 				GameObject winEffPrefab = Resources.Load ("WinParEff") as GameObject;
 				GameObject winEff = GameObject.Instantiate (winEffPrefab, 
 						 	playerCollection[0].transform.position, Quaternion.identity)

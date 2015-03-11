@@ -25,6 +25,8 @@ public class SpellDB : MonoBehaviour {
 	static public GameObject reflector;
 	static public GameObject swap;
 
+	static public GameObject aerolite;
+
 	void Awake()
 	{
 		Debug.Log("INIT: Create Reference to Spells");
@@ -40,6 +42,8 @@ public class SpellDB : MonoBehaviour {
 		meteor = Resources.Load ("MagicSpells/meteor") as GameObject;
 		iceball = Resources.Load ("MagicSpells/Iceball") as GameObject;
 		reflector = Resources.Load ("MagicSpells/Reflector") as GameObject;
+		aerolite = Resources.Load ("MagicSpells/Aerolite") as GameObject;
+
 		swap = Resources.Load ("MagicSpells/Swapper") as GameObject;
 	}
 }
