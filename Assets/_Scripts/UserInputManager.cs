@@ -124,8 +124,15 @@ public class UserInputManager : MonoBehaviour {
 			                         mousePos3D.z - transform.position.z);
 		}
 
-		if(lockLeft) leftInput *= 0.0f;
-		if(lockRight) rightInput *= 0.0f;
+		if(lockLeft) 
+		{
+			leftInput *= 0.0f;
+			Debug.Log ("Moving control locked");
+		}
+		if(lockRight)
+		{
+			rightInput *= 0.0f;
+		}
 
 	}
 
@@ -137,22 +144,38 @@ public class UserInputManager : MonoBehaviour {
 		return ray.GetPoint(distance);
 	}
 
-	IEnumerator LockParameter(bool variable, float period)
+	IEnumerator LockParameter(bool isLeft, float period)
 	{
-		variable = true;
+		if(isLeft)
+		{
+			lockLeft = true;
+		}
+		else
+			lockRight = true;
+
 		yield return new WaitForSeconds (period);
-		variable = false;
+
+		if(isLeft)
+		{
+			lockLeft = false;
+		}
+		else
+			lockRight = false;
 	}
 
 	public void LockLeftInput(float period)
 	{
 		if(!lockLeft)
-			StartCoroutine (LockParameter (lockLeft, period));
+		{
+			StartCoroutine (LockParameter (true, period));
+		}
 	}
 
 	public void LockRightInput(float period)
 	{
 		if(!lockRight)
-			StartCoroutine (LockParameter (lockRight, period));
+		{
+			StartCoroutine (LockParameter (false, period));
+		}
 	}
 }

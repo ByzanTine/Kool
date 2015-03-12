@@ -17,9 +17,11 @@ public class WizardAttackMeans : MonoBehaviour {
 		{
 			new FireballSpell(), 
 			new IceBallSpell(),
-			new MeteorSpell(), 
+//			new MeteorSpell()
+			new AeroSpell(), 
 			new ReflectSpell(),
-			new SwapSpell()
+			new SwapSpell(),
+
 		};
 
 		wizardAnimator = gameObject.GetComponentInChildren<Animator> ();

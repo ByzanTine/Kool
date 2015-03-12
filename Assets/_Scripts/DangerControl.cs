@@ -4,7 +4,9 @@ using System.Collections;
 // deduct the health if on fire
 public class DangerControl : MonoBehaviour {
 
-	public int health;
+//	public int health;
+
+	private PlayerData playerData;
 
 	public enum STAND_STATE
 	{
@@ -23,6 +25,9 @@ public class DangerControl : MonoBehaviour {
 		// DamagingEffect = GameObject.FindGameObjectWithTag (TagList.DamagingEffect);
 		DamagingEffect = transform.FindChild ("DamagingFlame").gameObject;
 		standState = STAND_STATE.OnSafe;
+
+		playerData = GetComponent<PlayerData> ();
+
 	}
 	// Trigger Control
 	void OnTriggerStay(Collider coll) {
@@ -55,7 +60,7 @@ public class DangerControl : MonoBehaviour {
 	IEnumerator DangerDamage(){
 		yield return new WaitForSeconds(1.0f);
 		if (standState == STAND_STATE.OnDanger) {
-			health--;
+			playerData.DamageHP(0.05f);
 		}
 		damaging = false;
 	}
