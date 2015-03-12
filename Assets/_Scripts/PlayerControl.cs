@@ -35,7 +35,7 @@ public class PlayerControl : MonoBehaviour {
 	{
 		// Debug.Log ("try casting fireball");
 		if(!animator.GetBool("isCasting") && 
-		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting")) {
+		   !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1")) {
 			// Debug.Log ("casting spell" + magicID);
 
 			Debug.Log ("[SPELL]: casting fireball");
@@ -55,7 +55,7 @@ public class PlayerControl : MonoBehaviour {
 	{
 		// Debug.Log ("try casting spell");
 		if(!animator.GetBool("isCasting") && 
-		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting"))
+		   !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
 		{
 			Debug.Log ("[SPELL]: casting spell " + magicID);
 
@@ -72,28 +72,31 @@ public class PlayerControl : MonoBehaviour {
 		Vector3 direction = transform.forward;
 
 		// For metero/Aerolite skill
-		if(magicID == 2)
-		{
-			if(isPosAiming == false)
-			{
-				// start Aiming
-				isPosAiming = true;
-				StartCoroutine(AimingDecending());
-				castingAid.StartAiming();
-			}
-			else
-			{
-				isPosAiming = false;
-				StartCoroutine(CastCoolDown());
-				Vector3 targetPos = castingAid.EndAiming();
-				attackMeans.AttackToPosition ((SpellDB.AttackID)magicID, targetPos);
-			}
-		}
-		else
-		{
-			StartCoroutine(CastCoolDown());
+		// TODO swiss army is fucking idiot 
+		// Avoid it
+		// DEPRECATED 
+//		if(magicID == 2)
+//		{
+//			if(isPosAiming == false)
+//			{
+//				// start Aiming
+//				isPosAiming = true;
+//				StartCoroutine(AimingDecending());
+//				castingAid.StartAiming();
+//			}
+//			else
+//			{
+//				isPosAiming = false;
+//				StartCoroutine(CastCoolDown());
+//				Vector3 targetPos = castingAid.EndAiming();
+//				attackMeans.AttackToPosition ((SpellDB.AttackID)magicID, targetPos);
+//			}
+//		}
+//		else
+//		{
+			// StartCoroutine(CastCoolDown());
 			attackMeans.AttackByDiretion ((SpellDB.AttackID)magicID, direction);
-		}
+//		}
 	}
 
 	IEnumerator AimingDecending()

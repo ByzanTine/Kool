@@ -17,8 +17,8 @@ public class WizardAttackMeans : MonoBehaviour {
 		{
 			new FireballSpell(), 
 			new IceBallSpell(),
-//			new MeteorSpell()
-			new AeroSpell(), 
+			new MeteorSpell(),
+			// new AeroSpell(), 
 			new ReflectSpell(),
 			new SwapSpell(),
 
@@ -30,9 +30,9 @@ public class WizardAttackMeans : MonoBehaviour {
 	private IEnumerator AttackByPosition(SpellDB.AttackID id, Vector3 to = default(Vector3)){
 		magicSpell = magicPool[(int)id];
 		PlayerData pD = GetComponent<PlayerData>();
-		if (pD.DecreaseMana (Constants.MIN_CAST_COOL_DOWN)) {// TODO Mana cost is constant now
+		if (pD.DecreaseMana (0.1f)) {// TODO Mana cost is constant now
 			wizardAnimator.SetBool ("isCasting", true);
-			//yield return new WaitForSeconds (Constants.minCastCoolDown);
+			yield return new WaitForSeconds (Constants.MIN_CAST_COOL_DOWN);
 
 			StartCoroutine (magicSpell.castMagic (gameObject, to));
 

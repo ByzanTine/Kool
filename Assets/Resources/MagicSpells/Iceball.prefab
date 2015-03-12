@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11487742}
   - 54: {fileID: 5487744}
   - 114: {fileID: 11487744}
+  - 114: {fileID: 11489208}
   m_Layer: 0
   m_Name: Iceball
   m_TagString: Fireball
@@ -75,6 +76,7 @@ MonoBehaviour:
   isMoving: 0
   speed: 15
   curSpeed: {x: 0, y: 0, z: 0}
+  damage: .100000001
 --- !u!114 &11487744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,6 +89,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualEffect: {fileID: 108164, guid: 91cda558a41b77543b896deb25636613, type: 2}
+--- !u!114 &11489208
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11a1a60dbff46c349b4a937dfb317f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  livingTime: 3
 --- !u!135 &13587742
 SphereCollider:
   m_ObjectHideFlags: 1
