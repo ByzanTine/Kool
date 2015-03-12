@@ -21,25 +21,26 @@ public class MapManager : MonoBehaviour {
 	// this function load the map from file Assets/map_data.txt
 	// the map in the file should have a size < map_size
 	// TODO: add check of the file 
+
 	public void load_map(){
-		string map_file = File.ReadAllText("Assets/map_data.txt");
-		string[] lines = map_file.Split('\n');
-		int x = 0, y = 0;
-		foreach (string s in lines) {
-			s.Trim();
-			for(int i = 0; i < s.Length; i++){
-				if(s[i] == ' '){
-					continue;
-				}
-				string p = s[i].ToString();
-				if(int.Parse(p) == 1){
-					tileAt(x,y);
-				}
-				x ++;
-			}
-			y ++;
-			x = 0;
-		}
+//		string map_file = File.ReadAllText("Assets/map_data.txt");
+//		string[] lines = map_file.Split('\n');
+//		int x = 0, y = 0;
+//		foreach (string s in lines) {
+//			s.Trim();
+//			for(int i = 0; i < s.Length; i++){
+//				if(s[i] == ' '){
+//					continue;
+//				}
+//				string p = s[i].ToString();
+//				if(int.Parse(p) == 1){
+//					tileAt(x,y);
+//				}
+//				x ++;
+//			}
+//			y ++;
+//			x = 0;
+//		}
 	}
 	
 	// this function remove all the border tiles
@@ -68,7 +69,7 @@ public class MapManager : MonoBehaviour {
 		int ix = (int) (point.x / tile_size_factor);
 		int iy = (int) (point.z / tile_size_factor);
 		List<Vector2> border = new List<Vector2> ();
-		print (ix + " " + iy);
+//		print (ix + " " + iy);
 		tileAround (ix, iy, border);
 		for (int i = 0; i < generate_size; i++) {
 			List<Vector2> new_border = new List<Vector2> ();
@@ -167,7 +168,7 @@ public class MapManager : MonoBehaviour {
 		while(true)
 		{
 			removeRandomBorder();
-			yield return new WaitForSeconds(0.1f);
+			yield return new WaitForSeconds(0.15f);
 		}
 	}
 	// Update is called once per frame
