@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class PlayerData : MonoBehaviour {
+
+	public int teamNum = 0;
 	public float health = 1;
 	public float mana = 1;
 	public bool frozen; //TODO all the buff status, frozen is just a example;
@@ -9,10 +11,13 @@ public class PlayerData : MonoBehaviour {
 	public GameObject ManaBar;
 	private BarControl HPbarControl;
 	private BarControl ManabarControl;
+	private PlayerControl playerCtrl;
 	public float increment = 0.05f;
 
 	public bool isAlive = true;
+	
 	void Start () {
+		playerCtrl = GetComponent<PlayerControl> ();
 		HPbarControl = HPBar.GetComponent<BarControl> ();
 		ManabarControl = ManaBar.GetComponent<BarControl> ();
 	}
@@ -26,7 +31,8 @@ public class PlayerData : MonoBehaviour {
 		{
 			isAlive = false;
 			DecreaseMana(mana);
-			Destroy(this.gameObject);
+//			Destroy(this.gameObject);
+			playerCtrl.Die();
 		}
 	}
 

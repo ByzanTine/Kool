@@ -8,8 +8,6 @@ public class UserInputManager : MonoBehaviour {
 	// variable set in Inspector
 	public int playerNum;
 
-
-
 	// variables for player controller and GUI
 	[HideInInspector]
 	public Vector2 leftInput;
@@ -25,9 +23,10 @@ public class UserInputManager : MonoBehaviour {
 	public event OnInput OnPressButton;
 
 
-	// input lock of each stick
+	// input lock of each: left, right, buttons;
 	private bool lockLeft = false;
 	private bool lockRight = false;
+	private bool lockButton = false;
 	void Start()
 	{}
 	
@@ -56,6 +55,8 @@ public class UserInputManager : MonoBehaviour {
 	
 	void GetButtonInput(InputDevice inputDevice)
 	{
+		if(lockButton) return;
+
 		// if any buttons in X,Y,A,B is pressed down (one shot)
 		if (inputDevice.AnyButton) 
 		{
@@ -174,6 +175,14 @@ public class UserInputManager : MonoBehaviour {
 	public void LockRightInput(float period)
 	{
 		if(!lockRight)
+		{
+			StartCoroutine (LockParameter (false, period));
+		}
+	}
+
+	public void LockButton(float period)
+	{
+		if(!lockButton)
 		{
 			StartCoroutine (LockParameter (false, period));
 		}

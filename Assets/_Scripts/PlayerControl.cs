@@ -12,15 +12,19 @@ public class PlayerControl : MonoBehaviour {
 	public int Speed = 0;
 	// local status
 	public int magicID = 1;
-
+	
 	private UserInputManager inputManager;
 	private Animator animator;
 	private WizardAttackMeans attackMeans;
 	private CastingAid castingAid;
+	private Vector3 rebornPos = new Vector3();
+
 	bool isPosAiming = false;
 
 	void Start()
 	{
+		rebornPos = transform.position;
+
 		// mapping input events
 		inputManager = GetComponent<UserInputManager> ();
 		inputManager.OnPressLBumper += HandleLBumper;
@@ -30,6 +34,7 @@ public class PlayerControl : MonoBehaviour {
 		attackMeans = GetComponent<WizardAttackMeans> ();
 
 		castingAid = GetComponent<CastingAid> ();
+
 	}
 
 	void HandleLBumper()
@@ -199,13 +204,15 @@ public class PlayerControl : MonoBehaviour {
 		int playerId = GetComponent<UserInputManager> ().playerNum;
 		Debug.Log ("[Player] Player died, " + playerId);
 		StartCoroutine (DieAnim ());
-		// TODO lock control 
-		// TODO destory and recreate 
+
 	}
 	private IEnumerator DieAnim() {
 		animator.SetBool ("isAlive", false);
 		yield return new WaitForSeconds(0.2f);
 		animator.SetBool ("isAlive", true); // reset to lock animation
+
+		GameStatus.Instance.DecPlayerLife (inputManager.playerNum);
+
 	}
 
 }
