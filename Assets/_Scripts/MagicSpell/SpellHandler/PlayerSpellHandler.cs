@@ -19,8 +19,8 @@ public class PlayerSpellHandler : MonoBehaviour {
 			Debug.Log ("[Spell] fireball is hit on " + this.name);
 			Vector3 direction = transform.position - spellPos;
 			Vector3 appliedForce = direction.normalized * Globals.FORCE_MULTIPLIER;
-			StartCoroutine(addTimeDecayForce(GetComponent<Rigidbody>(), appliedForce, 0.5f));
-
+//			StartCoroutine(addTimeDecayForce(GetComponent<Rigidbody>(), appliedForce, 0.5f));
+			StartCoroutine(addDistanceDecayForce(GetComponent<Rigidbody>(), appliedForce, 2f, spellPos));
 
 			playerData.DamageHP(Constants.SPELL_DAMAGE[spellID]);
 			Debug.Log ("[Spell] hit " + GetComponent<Collider>().name);
@@ -29,6 +29,16 @@ public class PlayerSpellHandler : MonoBehaviour {
 		Debug.Log("[Spell] Enter spell trigger");
 		// if ice ball 
 		// TODO
+	}
+
+	IEnumerator addDistanceDecayForce(Rigidbody rigidbody, Vector3 Force, float range, Vector3 explosionPos) {
+		float distance = (explosionPos - rigidbody.transform.position).magnitude;
+		while (distance < range) {
+			Debug.Log ("explosion force: " + Force * (range - distance)/range);
+			distance = (explosionPos - rigidbody.transform.position).magnitude;
+			rigidbody.AddForce(Force * (range - distance)/range);
+			yield return new WaitForFixedUpdate();
+		}
 	}
 
 	IEnumerator addTimeDecayForce(Rigidbody rigidbody, Vector3 Force, float time) {
