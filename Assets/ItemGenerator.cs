@@ -2,37 +2,27 @@
 using System.Collections;
 
 public class ItemGenerator : MonoBehaviour {
-	public float timeInterval = 10;
 	private GameObject item;
-	private float CreatingTime = 0;
-	public float CoolDown = 5;
+	public float TimeInterval = 5;
 	private float destroyTime = 0;
 	private bool ShouldExist = false;
 
 	void Start(){
-		CreatingTime = Time.time;
 		destroyTime = Time.time;
+		InvokeRepeating ("check_create", 0, 1);
 	}
 	// Update is called once per frame
-	void Update () {
-		if (item) {
-			if (Time.time - CreatingTime > timeInterval) {
-				Destroy (item);
-				item = null;
-				destroyTime = Time.time;
-				ShouldExist = false;
-			}
-		} else {
+	void check_create () {
+		if (!item) 
+		{
 			if (ShouldExist){
 				destroyTime = Time.time;
 				ShouldExist = false;
 			}
 
-			if (Time.time - destroyTime > CoolDown){
+			if (Time.time - destroyTime > TimeInterval){
 				int num = Random.Range (0, ItemDB.Number_Of_Items);
-//				Debug.Log("item num: " + num + "  " +ItemDB.Number_Of_Items);
 				item = Instantiate (ItemDB.items [num], transform.position, Quaternion.identity) as GameObject;
-				CreatingTime = Time.time;
 				ShouldExist = true;
 			}
 		}

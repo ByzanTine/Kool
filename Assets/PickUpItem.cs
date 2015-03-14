@@ -4,7 +4,10 @@ using System.Collections;
 public class PickUpItem : MonoBehaviour {
 
 	// Update is called once per frame
-	public void buff (float attack_increase, bool ice_fire, int increase_fireball_number) {
-		
+	public void PickUp (GameObject item) {//TODO destroy the item after using the info inside
+
+
+
+		Destroy(item);
 	}
 }
