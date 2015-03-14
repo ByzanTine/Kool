@@ -4,7 +4,7 @@ using System.Collections;
 public class SpellDB : MonoBehaviour {
 	// TODO scale this up!
 	// NOTICE: Still has a coupling with the WizardState
-	public enum AttackID{
+	 public enum AttackID{
 		fireball,
 		iceball,
 		meteor,
@@ -13,12 +13,8 @@ public class SpellDB : MonoBehaviour {
 	};
 
 	static public string[] attackIDnames = {"fireball", "iceball", "meteor", "reflect", "swap"};
-
-
+	
 	// public GameObject meteor_;
-
-
-
 	static public GameObject fireball;
 	static public GameObject iceball;
 	static public GameObject meteor;
@@ -32,8 +28,6 @@ public class SpellDB : MonoBehaviour {
 		Debug.Log("INIT: Create Reference to Spells");
 
 		InitSpells ();
-
-
 	}
 	// May take some time
 	void InitSpells () {
