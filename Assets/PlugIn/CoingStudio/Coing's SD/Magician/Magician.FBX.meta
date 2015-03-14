@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 9328a35a213359b43a0325d73a30b18c
 ModelImporter:
-  serializedVersion: 16
+  serializedVersion: 18
   fileIDToRecycleName:
     100000: ARM_L
     100002: ARM_R
@@ -102,11 +102,13 @@ ModelImporter:
     4300016: FOOT_L
     4300018: ARM_R
     4300020: HAND_R
-    7400000: idle1
+    7400000: Die
     7400002: walk
     7400004: run
     7400006: attack1
     7400008: idle2
+    7400010: idle1
+    7400012: LieDown
     9500000: //RootNode
     13700000: ARM_L
     13700002: ARM_R
@@ -801,11 +803,13 @@ ModelImporter:
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
+    keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
@@ -1148,3 +1152,5 @@ ModelImporter:
   animationType: 3
   additionalBone: 0
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -3,11 +3,11 @@ using System.Collections;
 
 public class GameStatus : MonoBehaviour {
 
-	private int playerNum;
+	// private int playerNum;
 	private bool isGameOver = false;
 	// Use this for initialization
 	void Start () {
-		playerNum = GameObject.FindGameObjectsWithTag (TagList.Player).Length;
+		// playerNum = GameObject.FindGameObjectsWithTag (TagList.Player).Length;
 	}
 	
 	// Update is called once per frame

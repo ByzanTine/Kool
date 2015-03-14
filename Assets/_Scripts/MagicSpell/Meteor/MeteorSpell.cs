@@ -13,8 +13,17 @@ public class MeteorSpell : MagicSpell {
 	{
 		
 		Debug.Log("Meteor Activiated!");
-		Vector3 castLocation = hitpoint + new Vector3 (0, 20, 0);
-		GameObject gb = GameObject.Instantiate (meteor, castLocation, caster.transform.rotation) as GameObject;
+		Vector3 castLocation = caster.transform.position + new Vector3 (0, 20, 0);
+		// TODO Hard code
+		Quaternion lookedQua = Quaternion.LookRotation (castLocation - hitpoint);
+
+		GameObject gb = GameObject.Instantiate (meteor, castLocation, lookedQua) as GameObject;
+		 
+		// TODO create a indicator on the ground 
+		GameObject targetIndicator = Resources.Load ("MagicSpells/CFXM3_MagicAura_B_Runic") as GameObject;
+		GameObject indicator = GameObject.Instantiate (targetIndicator, hitpoint, Quaternion.identity) as GameObject;
+
+
 		MovableUnit movUnit = gb.GetComponent<MovableUnit> ();
 		movUnit.MoveTo (hitpoint);
 		yield return new WaitForSeconds(0.1f);

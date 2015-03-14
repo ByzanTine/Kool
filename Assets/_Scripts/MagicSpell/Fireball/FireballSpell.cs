@@ -17,12 +17,23 @@ public class FireballSpell : MagicSpell {
 //
 //		Debug.Log ("Angle: " + transformed_angle);
 		Quaternion lookedQua = Quaternion.LookRotation (hitpoint - caster.transform.position);
+		for (int i = 0; i < 4; i++) { // TODO num of fireballs 
+			float randomAngle = Random.Range(-10.0f, 10.0f); // TODO range angles 
 
-		GameObject gb = GameObject.Instantiate (fireball, caster.transform.position, lookedQua) as GameObject;
+			GameObject gb = GameObject.Instantiate (fireball, caster.transform.position, lookedQua) as GameObject;
+			gb.transform.Rotate(gb.transform.up, randomAngle, Space.Self);
+
+			MovableUnit movUnit = gb.GetComponent<MovableUnit> ();
+			Vector3 newHitPoint = MathUtil.RotatePointAroundPivot(hitpoint, caster.transform.position, 
+			                                                      new Vector3(0, randomAngle, 0));
+			movUnit.MoveTo (newHitPoint);
+			yield return new WaitForSeconds(0.1f);
+
+		}
+		// GameObject gb = GameObject.Instantiate (fireball, caster.transform.position, lookedQua) as GameObject;
 
 
-		MovableUnit movUnit = gb.GetComponent<MovableUnit> ();
-		movUnit.MoveTo (hitpoint);
+
 		yield return null;
 	}
 }

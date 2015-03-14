@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+// DEPRECATED 
 public class AeroSpell : MagicSpell {
 
 	private GameObject Aerolite;
 
 	public AeroSpell()
 	{
-		Aerolite = SpellDB.aerolite;
+		// Aerolite = SpellDB.aerolite;
 	}
 	public override IEnumerator castMagic (GameObject caster, Vector3 hitpoint = default(Vector3)) 
 	{

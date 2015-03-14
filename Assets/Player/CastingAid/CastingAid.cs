@@ -8,7 +8,11 @@ public class CastingAid : MonoBehaviour {
 
 	private bool isInitiated = false;
 //	private WizardAttackMeans attackMeans;
-	
+	bool isPosAiming = false;
+	public GameObject castingCirclePrefab;
+	GameObject castingCircle;
+	private float castingEnergy;
+
 	void Start()
 	{
 		// mapping input events
@@ -49,10 +53,7 @@ public class CastingAid : MonoBehaviour {
 		isInitiated = false;
 	}
 
-	bool isPosAiming = false;
-	public GameObject castingCirclePrefab;
-	GameObject castingCircle;
-	float castingEnergy;
+
 	public void StartAiming()
 	{
 		isPosAiming = true;
@@ -66,17 +67,26 @@ public class CastingAid : MonoBehaviour {
 				as GameObject;
 		castingCircle.transform.parent = this.gameObject.transform;
 		castingEnergy = 0;
-		for(int i = 0; i < 50; ++i)
-		{
-			yield return new WaitForSeconds (0.1f);
-			castingCircle.transform.localScale += new Vector3(1.0f, 0.0f, 1.0f);
-			castingEnergy += 0.5f;
-		}
+		yield return StartCoroutine(ScaleObject (castingCircle.transform.localScale,
+		                                         castingCircle.transform.localScale * 20,
+		                                         2.0f));
 
 		// End aiming if player does not give the second input in time
 		isPosAiming = false;
 		Destroy (castingCircle);
 
+	}
+
+	public IEnumerator ScaleObject(Vector3 from, Vector3 to, float time) {
+		
+		float i = 0.0f;
+		float rate = 1.0f / time;
+		while (i < 1.0f) {
+			i += Time.fixedDeltaTime * rate;
+			castingCircle.transform.localScale = Vector3.Lerp(from, to, i);
+			// Debug.Log("Lerp once" + i);
+			yield return null;
+		}
 	}
 
 	public Vector3 EndAiming()
@@ -89,7 +99,7 @@ public class CastingAid : MonoBehaviour {
 		else
 		{
 			isPosAiming = false;
-			return transform.position + castingEnergy * transform.forward;
+			return transform.position + castingCircle.transform.localScale.sqrMagnitude * transform.forward;
 		}
 
 	}
