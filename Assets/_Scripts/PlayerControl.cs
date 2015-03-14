@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour {
 	private Animator animator;
 	private WizardAttackMeans attackMeans;
 	private CastingAid castingAid;
+	bool isPosAiming = false;
 
 	void Start()
 	{
@@ -65,7 +66,7 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
-	bool isPosAiming = false;
+
 	void CastMagic(int magicID)
 	{
 		// cast a special spell by magic ID
@@ -97,6 +98,7 @@ public class PlayerControl : MonoBehaviour {
 			// StartCoroutine(CastCoolDown());
 			attackMeans.AttackByDiretion ((SpellDB.AttackID)magicID, direction);
 //		}
+
 	}
 
 	IEnumerator AimingDecending()
@@ -192,6 +194,18 @@ public class PlayerControl : MonoBehaviour {
 
 		//		rigidbody.AddTorque (torqueFactor * Vector3.Cross (vec_from, vec_to));
 
+	}
+	public void Die() {
+		int playerId = GetComponent<UserInputManager> ().playerNum;
+		Debug.Log ("[Player] Player died, " + playerId);
+		StartCoroutine (DieAnim ());
+		// TODO lock control 
+		// TODO destory and recreate 
+	}
+	private IEnumerator DieAnim() {
+		animator.SetBool ("isAlive", false);
+		yield return new WaitForSeconds(0.2f);
+		animator.SetBool ("isAlive", true); // reset to lock animation
 	}
 
 }

@@ -18,6 +18,10 @@ public class MeteorSpell : MagicSpell {
 		Quaternion lookedQua = Quaternion.LookRotation (castLocation - hitpoint);
 
 		GameObject gb = GameObject.Instantiate (meteor, castLocation, lookedQua) as GameObject;
+		 
+		// TODO create a indicator on the ground 
+		GameObject targetIndicator = Resources.Load ("MagicSpells/CFXM3_MagicAura_B_Runic") as GameObject;
+		GameObject indicator = GameObject.Instantiate (targetIndicator, hitpoint, Quaternion.identity) as GameObject;
 
 
 		MovableUnit movUnit = gb.GetComponent<MovableUnit> ();
