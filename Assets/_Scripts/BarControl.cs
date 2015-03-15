@@ -3,12 +3,14 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class BarControl : MonoBehaviour {
-	
-	public Vector3 startPos;
-	public Vector3 endPos;
+
+
+	private Vector3 startPos;
+	private Vector3 endPos;
 	public float progress = 0;
 	private RectTransform castTransform;
-		
+
+	
 	// Use this for initialization
 	void Start () {
 		castTransform = GetComponent<RectTransform> ();

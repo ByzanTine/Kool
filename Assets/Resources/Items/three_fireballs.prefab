@@ -12,6 +12,7 @@ GameObject:
   - 135: {fileID: 13585172}
   - 23: {fileID: 2387184}
   - 114: {fileID: 11494792}
+  - 114: {fileID: 11476542}
   m_Layer: 0
   m_Name: three_fireballs
   m_TagString: Untagged
@@ -62,6 +63,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180260}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &11476542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11a1a60dbff46c349b4a937dfb317f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  livingTime: 10
 --- !u!114 &11494792
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,7 +86,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f4acf653b3145dd904e8f1270e6002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  existing_time: 10
   attack_increase: 0
   ice_fire: 0
   increase_fireball_number: 0

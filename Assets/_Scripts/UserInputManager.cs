@@ -14,12 +14,13 @@ public class UserInputManager : MonoBehaviour {
 	[HideInInspector]
 	public Vector2 rightInput;
 	[HideInInspector]
-	public int magicID_in = 1;
+	public int button_id = -1;
 
 	// controller input events:
 	public delegate void OnInput();
-	public event OnInput OnPressRBumper;
-	public event OnInput OnPressLBumper;
+	public event OnInput OnPressSubSkill;
+	public event OnInput OnPressMainSkill;
+	public event OnInput OnReleaseButton;
 	public event OnInput OnPressButton;
 
 
@@ -57,51 +58,60 @@ public class UserInputManager : MonoBehaviour {
 	{
 		if(lockButton) return;
 
+		if(inputDevice.AnyButton.WasPressed)
+		{
+			Debug.Log ("Button pressed");
+
+			OnPressButton();
+		}
+		if(inputDevice.Action3.WasReleased)
+		{
+			OnReleaseButton();
+			Debug.Log ("Button released" + inputDevice.AnyButton.Value);
+		}
+
 		// if any buttons in X,Y,A,B is pressed down (one shot)
 		if (inputDevice.AnyButton) 
 		{
-			Debug.Log ("Button pressed");
+
 			if (inputDevice.Action1.WasPressed)
 			{
 				Debug.Log ("Button pressed: A");
-				magicID_in = 1;
+				button_id = 1;
 			}
 			else
 				if (inputDevice.Action2.WasPressed)
 			{
 				Debug.Log ("Button pressed: B");
-				magicID_in = 2;
+				button_id = 2;
 			}
 			else
 				if (inputDevice.Action3.WasPressed)
 			{
 				Debug.Log ("Button pressed: X");
-				magicID_in = 3;
+				button_id = 3;
 			}
 			else
 				if (inputDevice.Action4.WasPressed)
 			{
 				Debug.Log ("Button pressed: Y");
-				magicID_in = 4;
+				button_id = 4;
 			}
 			else
 			{
 				// should occur when keep pressing
 				Debug.Log ("Button pressed: pressing");
 			}
-
-			OnPressButton();
 		}
 
-		// if left or right bumper was pressed down
 		if(inputDevice.LeftBumper.WasPressed)
 		{
-			OnPressLBumper();
+			OnPressMainSkill();
 		}
 
 		if(inputDevice.RightBumper.WasPressed)
 		{
-			OnPressRBumper();
+			OnPressSubSkill();
 		}
 	}
 	
@@ -145,9 +155,9 @@ public class UserInputManager : MonoBehaviour {
 		return ray.GetPoint(distance);
 	}
 
-	IEnumerator LockParameter(bool isLeft, float period)
+	IEnumerator LockParameter(int isLeft, float period)
 	{
-		if(isLeft)
+		if(isLeft == 1)
 		{
 			lockLeft = true;
 		}
@@ -156,7 +166,7 @@ public class UserInputManager : MonoBehaviour {
 
 		yield return new WaitForSeconds (period);
 
-		if(isLeft)
+		if(isLeft == 1)
 		{
 			lockLeft = false;
 		}
@@ -168,7 +178,7 @@ public class UserInputManager : MonoBehaviour {
 	{
 		if(!lockLeft)
 		{
-			StartCoroutine (LockParameter (true, period));
+			StartCoroutine (LockParameter (1, period));
 		}
 	}
 
@@ -176,7 +186,7 @@ public class UserInputManager : MonoBehaviour {
 	{
 		if(!lockRight)
 		{
-			StartCoroutine (LockParameter (false, period));
+			StartCoroutine (LockParameter (0, period));
 		}
 	}
 
@@ -184,7 +194,7 @@ public class UserInputManager : MonoBehaviour {
 	{
 		if(!lockButton)
 		{
-			StartCoroutine (LockParameter (false, period));
+			StartCoroutine (LockParameter (2, period));
 		}
 	}
 }
