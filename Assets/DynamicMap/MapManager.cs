@@ -160,7 +160,7 @@ public class MapManager : MonoBehaviour {
 		generateMapAround (new Vector3 (20f, 0, 20f), 20);
 		//tileAround (10, 10, null);
 		//load_map ();
-		StartCoroutine (Devastating ());
+//		StartCoroutine (Devastating ());
 	}
 
 	IEnumerator Devastating()

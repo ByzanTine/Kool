@@ -38,7 +38,6 @@ public class WizardAttackMeans : MonoBehaviour {
 
 			Debug.Log ("[Spell] Attack using " + SpellDB.attackIDnames [(int)id]);
 
-
 			wizardAnimator.SetBool ("isCasting", false);
 		} else {
 			Debug.Log ("[Spell] not enough mana!");
