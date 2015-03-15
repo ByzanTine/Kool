@@ -7,17 +7,15 @@ public class GameStatus : MonoBehaviour {
 
 
 	// LoseLife: You will die when you lose enough lives;
-	// GainScore: teamwork. Your death will increase the other team's Score
+	// GainScore: You will win when you perform enough killing. Only 2v2 now;
 	public enum GameMode{LoseLife, GainScore};
 	public GameMode gameMode;
 	// Target lives/scores in each mode for winning
-	public int GameTargetRounds = 2;
+	public int GameTargetRounds = 1;
 	public GameObject playerPrefab;
 
 	// private int playerNum;
 	private bool isGameOver = false;
-	private int[] playerDeathCount = new int[4]{0,0,0,0};
-
 	private UserData[] userDataCollection = new UserData[4];
 
 	void Awake()
@@ -27,10 +25,10 @@ public class GameStatus : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// playerNum = GameObject.FindGameObjectsWithTag (TagList.Player).Length;
-		BindPlayerData ();
+		BindAllUserData ();
 	}
 
-	void BindPlayerData()
+	void BindAllUserData()
 	{
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 		foreach(GameObject player in playerCollection)
@@ -50,37 +48,40 @@ public class GameStatus : MonoBehaviour {
 
 	void WinEndGame()
 	{
-		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 
 		isGameOver = true;
 
+		StartCoroutine(WinEndGameEffect());
+	}
+
+	IEnumerator WinEndGameEffect()
+	{
+		yield return new WaitForSeconds (0.1f);
+
+		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
+		
 		foreach(GameObject player in playerCollection)
 		{
 			GameObject winEffPrefab = Resources.Load ("ArenaEffects/WinParEff") as GameObject;
 			GameObject winEff = GameObject.Instantiate (winEffPrefab, 
-			                                            player.transform.position, Quaternion.identity)
-				as GameObject;
+			                                            player.transform.position, Quaternion.identity)	as GameObject;
 			UserInputManager userInput = player.GetComponent<UserInputManager>();
 			userInput.LockLeftInput(3.0f);
 		}
-		StartCoroutine(ReadyToRestart());
-	}
 
-	IEnumerator ReadyToRestart()
-	{
 		yield return new WaitForSeconds (3.0f);
 		Application.LoadLevel (Application.loadedLevel);
 	}
 
-	public void DecPlayerLife(int playerID)
+	public void DecrementPlayerLife(int playerID)
 	{
-		playerDeathCount [playerID] ++;
+		userDataCollection [playerID].deathCount ++;
 		DestroyPlayerWithID(playerID);
 
 		switch(gameMode)
 		{
 		case GameMode.LoseLife:
-			if(playerDeathCount [playerID] >= GameTargetRounds)
+			if(userDataCollection [playerID].deathCount >= GameTargetRounds)
 			{
 
 				GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
@@ -97,12 +98,17 @@ public class GameStatus : MonoBehaviour {
 			break;
 
 		case GameMode.GainScore:
-			int team = playerID >= 2 ? 0 : 2;
-			if(playerDeathCount [team] + playerDeathCount [team+1] >= GameTargetRounds)
+			int team = playerID >= 2 ? 2 : 0;
+			if(userDataCollection [playerID].deathCount 
+			   + userDataCollection [playerID].deathCount >= GameTargetRounds)
 			{
-				DestroyPlayerWithID((team + 2)%4);
-				DestroyPlayerWithID((team + 3)%4);
-				WinEndGame();
+				if(!isGameOver)
+				{
+					DestroyPlayerWithID(team);
+					DestroyPlayerWithID(team+1);
+					WinEndGame();
+				}
+
 			}
 			else
 			{
@@ -111,9 +117,7 @@ public class GameStatus : MonoBehaviour {
 			break;
 		default:
 			break;
-
 		}
-
 	}
 
 	

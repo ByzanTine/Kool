@@ -67,9 +67,7 @@ public class PlayerControl : MonoBehaviour {
 		{
 			Debug.Log ("[SPELL]: casting spell " + magicID);
 
-
 			CastMagic(magicID);
-
 		}
 	}
 
@@ -143,9 +141,6 @@ public class PlayerControl : MonoBehaviour {
 
 		// show casting lines
 		DrawDebug();
-
-
-
 	}
 
 	void DrawDebug()
@@ -222,7 +217,7 @@ public class PlayerControl : MonoBehaviour {
 		yield return new WaitForSeconds(0.2f);
 		animator.SetBool ("isAlive", true); // reset to lock animation
 
-		GameStatus.Instance.DecPlayerLife (inputManager.playerNum);
+		GameStatus.Instance.DecrementPlayerLife (inputManager.playerNum);
 
 	}
 

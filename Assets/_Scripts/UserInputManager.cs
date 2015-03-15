@@ -18,16 +18,14 @@ public class UserInputManager : MonoBehaviour {
 
 	// controller input events:
 	public delegate void OnInput();
-	public event OnInput OnPressSubSkill;
 	public event OnInput OnPressMainSkill;
-	public event OnInput OnReleaseButton;
+	public event OnInput OnPressSubSkill;
 	public event OnInput OnPressButton;
+	public event OnInput OnReleaseButton;
 
-
+	
 	// input lock of each: left, right, buttons;
-	private bool lockLeft = false;
-	private bool lockRight = false;
-	private bool lockButton = false;
+	private bool[] ctrlLocks = new bool[3]{false, false, false};
 	void Start()
 	{}
 	
@@ -36,8 +34,6 @@ public class UserInputManager : MonoBehaviour {
 		var inputDevice = (InputManager.Devices.Count > playerNum) ? InputManager.Devices[playerNum] : null;
 		if (inputDevice == null)
 		{
-			// If no controller exists for this cube, just make it translucent.
-			// renderer.material.color = new Color( 1.0f, 1.0f, 1.0f, 0.2f );
 //			Debug.Log ("No devide detected for player:" + playerNum);
 		}
 		else
@@ -56,7 +52,7 @@ public class UserInputManager : MonoBehaviour {
 	
 	void GetButtonInput(InputDevice inputDevice)
 	{
-		if(lockButton) return;
+		if(ctrlLocks[2]) return;
 
 		if(inputDevice.AnyButton.WasPressed)
 		{
@@ -125,24 +121,20 @@ public class UserInputManager : MonoBehaviour {
 		{
 			Vector3 mousePos2D = Input.mousePosition;
 			// Convert the mouse position to 3D world coordinates
-//			mousePos2D.z = mousePos2D.y;
-//			mousePos2D.y = -Camera.main.transform.position.y;
-//			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint( mousePos2D );
 			Vector3 mousePos3D = GetWorldPositionOnPlane(mousePos2D, 0);
-
-			// Debug.Log ("input posision" + mousePos2D.ToString() + "\t\n" + mousePos3D.ToString());
 			rightInput = new Vector2(mousePos3D.x - transform.position.x,
 			                         mousePos3D.z - transform.position.z);
 		}
 
-		if(lockLeft) 
+		if(ctrlLocks[0]) 
 		{
 			leftInput *= 0.0f;
 			Debug.Log ("Moving control locked");
 		}
-		if(lockRight)
+		if(ctrlLocks[1])
 		{
 			rightInput *= 0.0f;
+			Debug.Log ("Direction control locked");
 		}
 
 	}
@@ -155,44 +147,34 @@ public class UserInputManager : MonoBehaviour {
 		return ray.GetPoint(distance);
 	}
 
-	IEnumerator LockParameter(int isLeft, float period)
+	IEnumerator LockParameter(int lockIndex, float period)
 	{
-		if(isLeft == 1)
-		{
-			lockLeft = true;
-		}
-		else
-			lockRight = true;
+		ctrlLocks[lockIndex] = true;
 
 		yield return new WaitForSeconds (period);
 
-		if(isLeft == 1)
-		{
-			lockLeft = false;
-		}
-		else
-			lockRight = false;
+		ctrlLocks[lockIndex] = false;
 	}
 
 	public void LockLeftInput(float period)
 	{
-		if(!lockLeft)
-		{
-			StartCoroutine (LockParameter (1, period));
-		}
-	}
-
-	public void LockRightInput(float period)
-	{
-		if(!lockRight)
+		if(!ctrlLocks[0])
 		{
 			StartCoroutine (LockParameter (0, period));
 		}
 	}
 
+	public void LockRightInput(float period)
+	{
+		if(!ctrlLocks[1])
+		{
+			StartCoroutine (LockParameter (1, period));
+		}
+	}
+
 	public void LockButton(float period)
 	{
-		if(!lockButton)
+		if(!ctrlLocks[2])
 		{
 			StartCoroutine (LockParameter (2, period));
 		}
