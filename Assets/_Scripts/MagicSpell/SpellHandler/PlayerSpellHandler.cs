@@ -34,7 +34,7 @@ public class PlayerSpellHandler : MonoBehaviour {
 	IEnumerator addDistanceDecayForce(Rigidbody rigidbody, Vector3 Force, float range, Vector3 explosionPos) {
 		float distance = (explosionPos - rigidbody.transform.position).magnitude;
 		while (distance < range) {
-			Debug.Log ("explosion force: " + Force * (range - distance)/range);
+			// Debug.Log ("explosion force: " + Force * (range - distance)/range);
 			distance = (explosionPos - rigidbody.transform.position).magnitude;
 			rigidbody.AddForce(Force * (range - distance)/range);
 			yield return new WaitForFixedUpdate();
