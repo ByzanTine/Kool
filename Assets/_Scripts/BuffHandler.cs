@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class BuffHandler : MonoBehaviour {
-	public float coolDown = 3;
-	private List<float> Buff_time_List;	
-	private List<bool> Buff_valid_List;	
+	public float effectiveTime = 3;
+	private List<float> Buff_time_List;	// keep track of the cool down time for all the buffs
+	private List<bool> Buff_valid_List;	// keep track of the all the buff which is valid 
 	private PlayerData pd;
 
 	// Use this for initialization
@@ -22,14 +22,14 @@ public class BuffHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		for (int i = 0; i < ItemDB.Number_Of_Items; i ++) {
-			if ((Time.time - Buff_time_List [i] > coolDown )&& Buff_valid_List[i]) {
+			if ((Time.time - Buff_time_List [i] > effectiveTime )&& Buff_valid_List[i]) {// if it is not effective
 				Buff_valid_List[i] = false;
 				DebuffPlayerData(i);
 			}
 		}
 	}
 
-	public void updateBuff(int mode){
+	public void UpdateBuff(int mode){
 		Buff_time_List [mode] = Time.time;
 		if (!Buff_valid_List [mode]){
 			BuffPlayerData (mode);

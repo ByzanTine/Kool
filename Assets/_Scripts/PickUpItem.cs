@@ -10,7 +10,7 @@ public class PickUpItem : MonoBehaviour {
 	// Update is called once per frame
 	public void PickUp (int mode, bool isBuff) {
 		if (isBuff)
-			BH.updateBuff (mode);
+			BH.UpdateBuff (mode);
 		else 
 			Debug.Log ("da zhao");// TODO da zhao
 	}
