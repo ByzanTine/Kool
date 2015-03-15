@@ -5,21 +5,22 @@ public class PlayerData : MonoBehaviour {
 	public float health = 1;
 	public float mana = 1;
 	public bool frozen; //TODO all the buff status, frozen is just a example;
-	public GameObject HPBar;
+	// public GameObject HPBar;
 	public GameObject ManaBar;
-	private BarControl HPbarControl;
+	// private BarControl HPbarControl;
 	private BarControl ManabarControl;
 	public float increment = 0.05f;
 
 	public bool isAlive = true;
+
 	void Start () {
-		HPbarControl = HPBar.GetComponent<BarControl> ();
+		// HPbarControl = HPBar.GetComponent<BarControl> ();
 		ManabarControl = ManaBar.GetComponent<BarControl> ();
 	}
 
 	public void DamageHP (float damage){
 		health -= damage;
-		HPbarControl.SetBar (health);
+		// HPbarControl.SetBar (health);
 
 		// update player status
 		if(health <= 0)
