@@ -15,6 +15,6 @@ public class updateAnimation : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// animator.SetBool("isCasting", playControl.isCasting);
-		animator.SetInteger ("Speed", playControl.Speed);
+//		animator.SetInteger ("Speed", playControl.Speed);
 	}
 }

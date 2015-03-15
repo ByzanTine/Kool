@@ -8,28 +8,35 @@ public class PlayerControl : MonoBehaviour {
 
 	// is casting (fireball or special spell) or not, sync with animator in child model
 	public bool isCasting = false;
-	// CurSpeed, as the absolute value, currently only 1 or 0 is used
-	public int Speed = 0;
+
+	// Current speed ratio.
+	public float speed = 1.0f;
+	public bool isRunning = false;
+
 	// local status
 	public int magicID = 1;
-
+	
 	private UserInputManager inputManager;
 	private Animator animator;
 	private WizardAttackMeans attackMeans;
 	private CastingAid castingAid;
+
 	bool isPosAiming = false;
 
 	void Start()
 	{
+
 		// mapping input events
 		inputManager = GetComponent<UserInputManager> ();
-		inputManager.OnPressLBumper += HandleLBumper;
-		inputManager.OnPressRBumper += HandleRBumper;
+		inputManager.OnPressMainSkill += HandleLBumper;
+		inputManager.OnPressSubSkill += HandleRBumper;
 		inputManager.OnPressButton += HandleButton;
+		inputManager.OnReleaseButton += ReleaseSpeedUp;
 		animator = GetComponentInChildren<Animator> ();
 		attackMeans = GetComponent<WizardAttackMeans> ();
 
 		castingAid = GetComponent<CastingAid> ();
+
 	}
 
 	void HandleLBumper()
@@ -60,9 +67,7 @@ public class PlayerControl : MonoBehaviour {
 		{
 			Debug.Log ("[SPELL]: casting spell " + magicID);
 
-
 			CastMagic(magicID);
-
 		}
 	}
 
@@ -116,7 +121,14 @@ public class PlayerControl : MonoBehaviour {
 
 	void HandleButton()
 	{
-		magicID = inputManager.magicID_in;
+		if(inputManager.button_id == 3)
+			isRunning = true;
+		magicID = inputManager.button_id;
+	}
+
+	void ReleaseSpeedUp()
+	{
+		isRunning = false;
 	}
 
 	void FixedUpdate()
@@ -129,9 +141,6 @@ public class PlayerControl : MonoBehaviour {
 
 		// show casting lines
 		DrawDebug();
-
-
-
 	}
 
 	void DrawDebug()
@@ -144,17 +153,19 @@ public class PlayerControl : MonoBehaviour {
 		               transform.localPosition + 10.0f * transform.forward,
 		               lineColor);
 	}
-
+	
 
 	void Move(Vector2 input)
 	{
-		Speed = input.magnitude > 0 ? 1 : 0;
+		animator.SetInteger ("Speed", input.magnitude > 0 ? 1 : 0);
+
 		if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting") &&
 			input.magnitude > 0 )
 		{
 			// move target object with left stick.
-			float ratio = 7.0f;
+			float ratio = 7.0f * speed;
+			ratio *= isRunning ? 2.0f : 1.0f;
 			Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
 
 			if(inputManager.rightInput.magnitude == 0)
@@ -199,13 +210,15 @@ public class PlayerControl : MonoBehaviour {
 		int playerId = GetComponent<UserInputManager> ().playerNum;
 		Debug.Log ("[Player] Player died, " + playerId);
 		StartCoroutine (DieAnim ());
-		// TODO lock control 
-		// TODO destory and recreate 
+
 	}
 	private IEnumerator DieAnim() {
 		animator.SetBool ("isAlive", false);
 		yield return new WaitForSeconds(0.2f);
 		animator.SetBool ("isAlive", true); // reset to lock animation
+
+		GameStatus.Instance.DecrementPlayerLife (inputManager.playerNum);
+
 	}
 
 }
