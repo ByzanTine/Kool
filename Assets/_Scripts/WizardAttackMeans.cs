@@ -30,7 +30,7 @@ public class WizardAttackMeans : MonoBehaviour {
 	private IEnumerator AttackByPosition(SpellDB.AttackID id, Vector3 to = default(Vector3)){
 		magicSpell = magicPool[(int)id];
 		PlayerData pD = GetComponent<PlayerData>();
-		if (pD.DecreaseMana (0.1f)) {// TODO Mana cost is constant now
+		if (pD.DecreaseMana (Constants.FIREBALL_MANA_COST)) {// TODO Mana cost is constant now
 			wizardAnimator.SetBool ("isCasting", true);
 			yield return new WaitForSeconds (Constants.MIN_CAST_COOL_DOWN);
 

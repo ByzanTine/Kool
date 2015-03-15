@@ -6,6 +6,9 @@ public class PlayerData : MonoBehaviour {
 	public float mana = 1;
 	public bool frozen; //TODO all the buff status, frozen is just a example;
 	// public GameObject HPBar;
+	public int number_of_balls = 4; 
+	public float Spell_size = 1;
+	public Constants.spell_mode ice_fire = Constants.spell_mode.Fire;
 	public GameObject ManaBar;
 	// private BarControl HPbarControl;
 	private BarControl ManabarControl;

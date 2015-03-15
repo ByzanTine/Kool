@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11401628}
   m_Layer: 0
   m_Name: fireball_attack_increase
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,8 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f4acf653b3145dd904e8f1270e6002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack_increase: 0
-  ice_fire: 0
+  isBuff: 1
+  index_in_spellDB: 0
+  increase_size: 1
   increase_fireball_number: 0
 --- !u!1001 &100100000
 Prefab:

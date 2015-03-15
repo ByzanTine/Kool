@@ -3,19 +3,20 @@ using System.Collections;
 
 public class Item : MonoBehaviour {
 
-
-	public float attack_increase;
-	public bool ice_fire;
+	public bool isBuff = true;
+	public int index_in_spellDB;
+	public float increase_size;
 	public int increase_fireball_number;
 	private bool PickedUP = false;
 
 	// Use this for initialization
 	void OnTriggerEnter(Collider other){
 		if (other.tag == TagList.Player && !PickedUP) {
-			Debug.Log ("destroy item pick up by player");
-			other.GetComponent<PickUpItem>().PickUp(gameObject);
 			PickedUP = true;
-			gameObject.SetActive(false);
+			Debug.Log ("destroy item pick up by player");
+			Item itemInfo = GetComponent<Item> ();
+			other.GetComponent<PickUpItem>().PickUp(itemInfo.index_in_spellDB, isBuff);
+			Destroy(gameObject);
 		}
 	}
 

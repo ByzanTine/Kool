@@ -2,12 +2,16 @@
 using System.Collections;
 
 public class PickUpItem : MonoBehaviour {
+	private BuffHandler BH;
 
+	void Start (){
+		BH = GetComponent<BuffHandler> ();
+	}
 	// Update is called once per frame
-	public void PickUp (GameObject item) {//TODO destroy the item after using the info inside
-
-
-
-		Destroy(item);
+	public void PickUp (int mode, bool isBuff) {
+		if (isBuff)
+			BH.updateBuff (mode);
+		else 
+			Debug.Log ("da zhao");// TODO da zhao
 	}
 }
