@@ -21,7 +21,7 @@ public class MeteorSpell : MagicSpell {
 		 
 		// TODO create a indicator on the ground 
 		GameObject targetIndicator = Resources.Load ("MagicSpells/CFXM3_MagicAura_B_Runic") as GameObject;
-		GameObject indicator = GameObject.Instantiate (targetIndicator, hitpoint, Quaternion.identity) as GameObject;
+		GameObject.Instantiate (targetIndicator, hitpoint, Quaternion.identity);
 
 
 		MovableUnit movUnit = gb.GetComponent<MovableUnit> ();
