@@ -10,7 +10,9 @@ public class PlayerControl : MonoBehaviour {
 	public bool isCasting = false;
 
 	// Current speed ratio.
-	public float speed = 1.0f;
+	public float speedScale = 7.0f;
+	// This is a public speed indicator for debugging usage
+	public float Speed;
 	public bool isRunning = false;
 
 	// local status
@@ -157,25 +159,33 @@ public class PlayerControl : MonoBehaviour {
 
 	void Move(Vector2 input)
 	{
-		animator.SetInteger ("Speed", input.magnitude > 0 ? 1 : 0);
+		// hold a bar 
+		if (input.magnitude < 0.01f) {
+			Speed = 0;
+			return;
+		}
+		// Speed Animator > 1 Run <= 1 Walk, 0 idle
+		animator.SetInteger ("Speed", Mathf.RoundToInt(Speed/speedScale));
 
 		if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting") &&
 			input.magnitude > 0 )
 		{
 			// move target object with left stick.
-			float ratio = 7.0f * speed;
-			ratio *= isRunning ? 2.0f : 1.0f;
+
+			Speed = speedScale * (isRunning ? 2.0f : 1.0f);
 			Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
 
 			if(inputManager.rightInput.magnitude == 0)
 				SmoothRotate (newForward);
 
-			transform.Translate( Vector3.right * ratio * Time.deltaTime * input.x, Space.World );
+			transform.Translate( Vector3.right * Speed * Time.fixedDeltaTime * input.x, Space.World );
 			//		transform.Rotate( Vector3.right, 500.0f * Time.deltaTime * inputDevice.Direction.Y, Space.World );
-			transform.Translate( Vector3.forward *  ratio * Time.deltaTime * input.y, Space.World );
+			transform.Translate( Vector3.forward *  Speed * Time.fixedDeltaTime * input.y, Space.World );
 			//		transform.Rotate( Vector3.right, 500.0f * Time.deltaTime * inputDevice.RightStickY, Space.World );
 		}
+
+
 	}
 
 	void Rotate(Vector2 input)
