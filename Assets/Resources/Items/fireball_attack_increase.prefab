@@ -11,11 +11,11 @@ GameObject:
   - 33: {fileID: 3327406}
   - 65: {fileID: 6585784}
   - 23: {fileID: 2339656}
-  - 114: {fileID: 11492854}
   - 114: {fileID: 11401628}
+  - 114: {fileID: 11403648}
   m_Layer: 0
   m_Name: fireball_attack_increase
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   livingTime: 10
---- !u!114 &11492854
+--- !u!114 &11403648
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -98,9 +98,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f4acf653b3145dd904e8f1270e6002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack_increase: 0
-  ice_fire: 0
-  increase_fireball_number: 0
+  isBuff: 1
+  IncreaseNumber: 0
+  Bigger: 1
+  index_number: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
