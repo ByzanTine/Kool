@@ -56,7 +56,8 @@ public class PlayerControl : MonoBehaviour {
 	{
 		// cast one fireball
 		Vector3 direction = transform.forward;
-		attackMeans.AttackByDiretion (SpellDB.AttackID.fireball, direction);
+		PlayerData pd = GetComponent<PlayerData> ();
+		attackMeans.AttackByDiretion (pd.spellID, direction);
 	}
 
 	void HandleRBumper()

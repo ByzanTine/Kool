@@ -6,13 +6,17 @@ public class SpellDB : MonoBehaviour {
 	// NOTICE: Still has a coupling with the WizardState
 	 public enum AttackID{
 		fireball,
+		morefireball,
+		bigfireball,
+		morebigfireball,
 		iceball,
 		meteor,
 		reflect,
 		swap
 	};
 
-	static public string[] attackIDnames = {"fireball", "iceball", "meteor", "reflect", "swap"};
+	static public string[] attackIDnames = {"fireball", "morefireball",
+		"bigfireball","morebigfireball","iceball", "meteor", "reflect", "swap"};
 	
 	// public GameObject meteor_;
 	static public GameObject fireball;
