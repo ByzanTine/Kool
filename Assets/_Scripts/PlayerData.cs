@@ -8,7 +8,7 @@ public class PlayerData : MonoBehaviour {
 	// public GameObject HPBar;
 	public int number_of_balls = 4; 
 	public float Spell_size = 1;
-	public Constants.spell_mode ice_fire = Constants.spell_mode.Fire;
+	public Constants.SpellMode ice_fire = Constants.SpellMode.Fire;
 	public GameObject ManaBar;
 	// private BarControl HPbarControl;
 	private BarControl ManabarControl;

@@ -6,6 +6,9 @@ public class SpellDB : MonoBehaviour {
 	// NOTICE: Still has a coupling with the WizardState
 	 public enum AttackID{
 		fireball,
+		morefireball,
+		bigfireball,
+		morebigfireball,
 		iceball,
 		meteor,
 		reflect,

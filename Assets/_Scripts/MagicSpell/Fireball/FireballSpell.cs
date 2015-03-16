@@ -2,13 +2,35 @@
 using System.Collections;
 
 public class FireballSpell : MagicSpell {
-	private GameObject fireball;
-
+	public GameObject fireball;
+	private int NumberOfBalls;
+	private float Range;
+	private Vector3 scale;
+	/// <summary>
+	/// Initializes a new instance of the <see cref="FireballSpell"/> class.
+	/// </summary>
 	public FireballSpell()
 	{
+		NumberOfBalls = 4;
+		Range = 10;
+		scale = new Vector3 (1, 1, 1);
 		fireball = SpellDB.fireball;
-		// Debug.Log("Constructor Loaded");
 	}
+	/// <summary>
+	/// Initializes a new instance of the <see cref="FireballSpell"/> class.
+	/// </summary>
+	/// <param name="num">Number.</param>
+	/// <param name="range">Range.</param>
+	/// <param name="scale_">Scale_.</param>
+
+	public FireballSpell(int num, float range, float scale_)
+	{
+		NumberOfBalls = num;
+		Range = range;
+		scale = new Vector3 (1, 1, 1) * scale_;
+		fireball = SpellDB.fireball;
+	}
+
 	public override IEnumerator castMagic (GameObject caster, Vector3 hitpoint = default(Vector3)) 
 	{
 
@@ -17,10 +39,11 @@ public class FireballSpell : MagicSpell {
 //
 //		Debug.Log ("Angle: " + transformed_angle);
 		Quaternion lookedQua = Quaternion.LookRotation (hitpoint - caster.transform.position);
-		for (int i = 0; i < 4; i++) { // TODO num of fireballs 
-			float randomAngle = Random.Range(-10.0f, 10.0f); // TODO range angles 
+		for (int i = 0; i < NumberOfBalls; i++) { // TODO num of fireballs 
+			float randomAngle = Random.Range(-1 * Range, Range); // TODO range angles 
 
 			GameObject gb = GameObject.Instantiate (fireball, caster.transform.position, lookedQua) as GameObject;
+			gb.transform.localScale = scale;
 			gb.transform.Rotate(gb.transform.up, randomAngle, Space.Self);
 
 			MovableUnit movUnit = gb.GetComponent<MovableUnit> ();

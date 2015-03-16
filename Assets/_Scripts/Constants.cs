@@ -19,7 +19,7 @@ public class Constants : MonoBehaviour {
 
 	static public float[] SPELL_DAMAGE = {0.1f, 0.2f};
 
-	public enum spell_mode{
+	public enum SpellMode{
 		Ice,
 		Fire,
 		Thunder,

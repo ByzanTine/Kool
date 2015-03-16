@@ -15,7 +15,10 @@ public class WizardAttackMeans : MonoBehaviour {
 		Debug.Log ("INIT: Number of Spells a wizard can use: " + enumSize);
 		magicPool = new List<MagicSpell>
 		{
-			new FireballSpell(), 
+			new FireballSpell(),
+			new MoreFireballSpell();
+			new BigFireballSpell();
+			new MoreBigFireballSpell();
 			new IceBallSpell(),
 			new MeteorSpell(),
 			// new AeroSpell(), 
