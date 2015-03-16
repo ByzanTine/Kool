@@ -16,9 +16,9 @@ public class WizardAttackMeans : MonoBehaviour {
 		magicPool = new List<MagicSpell>
 		{
 			new FireballSpell(),
-			new MoreFireballSpell();
-			new BigFireballSpell();
-			new MoreBigFireballSpell();
+			new MoreFireballSpell(),
+			new BigFireballSpell(),
+			new MoreBigFireballSpell(),
 			new IceBallSpell(),
 			new MeteorSpell(),
 			// new AeroSpell(), 

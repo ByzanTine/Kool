@@ -4,10 +4,10 @@ using System.Collections;
 public class Item : MonoBehaviour {
 
 	public bool isBuff = true;
-	public int index_in_spellDB;
-	public float increase_size;
-	public int increase_fireball_number;
+	public bool IncreaseNumber;
+	public bool Bigger;
 	private bool PickedUP = false;
+	public int index_number;
 
 	// Use this for initialization
 	void OnTriggerEnter(Collider other){
@@ -15,7 +15,7 @@ public class Item : MonoBehaviour {
 			PickedUP = true;
 			Debug.Log ("destroy item pick up by player");
 			Item itemInfo = GetComponent<Item> ();
-			other.GetComponent<PickUpItem>().PickUp(itemInfo.index_in_spellDB, isBuff);
+			other.GetComponent<PickUpItem>().PickUp(itemInfo.index_number, isBuff);
 			Destroy(gameObject);
 		}
 	}

@@ -3,13 +3,14 @@ using System.Collections;
 
 public class PlayerData : MonoBehaviour {
 
+	public SpellDB.AttackID spellID = SpellDB.AttackID.fireball;
+	public bool IncreaseNumber = false;
+	public bool Bigger = false;
 	public int teamNum = 0;
 	public float health = 1;
 	public float mana = 1;
 	public bool frozen; //TODO all the buff status, frozen is just a example;
 	// public GameObject HPBar;
-	public int number_of_balls = 4; 
-	public float Spell_size = 1;
 	public Constants.SpellMode ice_fire = Constants.SpellMode.Fire;
 	public GameObject ManaBar;
 	// private BarControl HPbarControl;

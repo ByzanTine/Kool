@@ -5,7 +5,7 @@ public class FireballSpell : MagicSpell {
 	public GameObject fireball;
 	private int NumberOfBalls;
 	private float Range;
-	private Vector3 scale;
+	private float scale;
 	/// <summary>
 	/// Initializes a new instance of the <see cref="FireballSpell"/> class.
 	/// </summary>
@@ -13,7 +13,7 @@ public class FireballSpell : MagicSpell {
 	{
 		NumberOfBalls = 4;
 		Range = 10;
-		scale = new Vector3 (1, 1, 1);
+		scale = 1;
 		fireball = SpellDB.fireball;
 	}
 	/// <summary>
@@ -27,7 +27,7 @@ public class FireballSpell : MagicSpell {
 	{
 		NumberOfBalls = num;
 		Range = range;
-		scale = new Vector3 (1, 1, 1) * scale_;
+		scale = scale_;
 		fireball = SpellDB.fireball;
 	}
 
@@ -43,7 +43,7 @@ public class FireballSpell : MagicSpell {
 			float randomAngle = Random.Range(-1 * Range, Range); // TODO range angles 
 
 			GameObject gb = GameObject.Instantiate (fireball, caster.transform.position, lookedQua) as GameObject;
-			gb.transform.localScale = scale;
+			gb.transform.localScale *= scale;
 			gb.transform.Rotate(gb.transform.up, randomAngle, Space.Self);
 
 			MovableUnit movUnit = gb.GetComponent<MovableUnit> ();

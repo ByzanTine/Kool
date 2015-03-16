@@ -87,9 +87,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBuff: 1
-  index_in_spellDB: 1
-  increase_size: 0
-  increase_fireball_number: 2
+  IncreaseNumber: 1
+  Bigger: 0
+  index_number: 1
 --- !u!135 &13585172
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -97,7 +97,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180260}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: .5

@@ -27,6 +27,7 @@ public class BuffHandler : MonoBehaviour {
 				DebuffPlayerData(i);
 			}
 		}
+		updateFireballID ();
 	}
 
 	public void UpdateBuff(int mode){
@@ -39,13 +40,24 @@ public class BuffHandler : MonoBehaviour {
 
 	private void BuffPlayerData(int i){
 		Item itemInfo = ItemDB.items [i].GetComponent<Item> ();
-		pd.number_of_balls += itemInfo.increase_fireball_number;
-		pd.Spell_size += itemInfo.increase_size;
+		pd.IncreaseNumber = pd.IncreaseNumber || itemInfo.IncreaseNumber;
+		pd.Bigger = itemInfo.Bigger || pd.Bigger;
 	}
 
 	private void DebuffPlayerData(int i){
 		Item itemInfo = ItemDB.items [i].GetComponent<Item> ();
-		pd.number_of_balls -= itemInfo.increase_fireball_number;
-		pd.Spell_size -= itemInfo.increase_size;
+		pd.IncreaseNumber = (itemInfo.IncreaseNumber)? false : pd.IncreaseNumber;
+		pd.Bigger = (itemInfo.Bigger)? false : pd.Bigger;
+	}
+
+	private void updateFireballID (){
+		if (pd.IncreaseNumber && pd.Bigger)
+			pd.spellID = SpellDB.AttackID.morebigfireball;
+		if (pd.IncreaseNumber && !pd.Bigger)
+			pd.spellID = SpellDB.AttackID.morefireball;
+		if (!pd.IncreaseNumber && pd.Bigger)
+			pd.spellID = SpellDB.AttackID.bigfireball;
+		if (!pd.IncreaseNumber && !pd.Bigger)
+			pd.spellID = SpellDB.AttackID.fireball;
 	}
 }

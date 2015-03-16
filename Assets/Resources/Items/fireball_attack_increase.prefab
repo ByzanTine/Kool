@@ -11,8 +11,8 @@ GameObject:
   - 33: {fileID: 3327406}
   - 65: {fileID: 6585784}
   - 23: {fileID: 2339656}
-  - 114: {fileID: 11492854}
   - 114: {fileID: 11401628}
+  - 114: {fileID: 11403648}
   m_Layer: 0
   m_Name: fireball_attack_increase
   m_TagString: Item
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   livingTime: 10
---- !u!114 &11492854
+--- !u!114 &11403648
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBuff: 1
-  index_in_spellDB: 0
-  increase_size: 1
-  increase_fireball_number: 0
+  IncreaseNumber: 0
+  Bigger: 1
+  index_number: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
