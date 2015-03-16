@@ -8,26 +8,24 @@ public class UserInputManager : MonoBehaviour {
 	// variable set in Inspector
 	public int playerNum;
 
-
-
 	// variables for player controller and GUI
 	[HideInInspector]
 	public Vector2 leftInput;
 	[HideInInspector]
 	public Vector2 rightInput;
 	[HideInInspector]
-	public int magicID_in = 1;
+	public int button_id = -1;
 
 	// controller input events:
 	public delegate void OnInput();
-	public event OnInput OnPressRBumper;
-	public event OnInput OnPressLBumper;
+	public event OnInput OnPressMainSkill;
+	public event OnInput OnPressSubSkill;
 	public event OnInput OnPressButton;
+	public event OnInput OnReleaseButton;
 
-
-	// input lock of each stick
-	private bool lockLeft = false;
-	private bool lockRight = false;
+	
+	// input lock of each: left, right, buttons;
+	private bool[] ctrlLocks = new bool[3]{false, false, false};
 	void Start()
 	{}
 	
@@ -36,8 +34,6 @@ public class UserInputManager : MonoBehaviour {
 		var inputDevice = (InputManager.Devices.Count > playerNum) ? InputManager.Devices[playerNum] : null;
 		if (inputDevice == null)
 		{
-			// If no controller exists for this cube, just make it translucent.
-			// renderer.material.color = new Color( 1.0f, 1.0f, 1.0f, 0.2f );
 //			Debug.Log ("No devide detected for player:" + playerNum);
 		}
 		else
@@ -56,51 +52,62 @@ public class UserInputManager : MonoBehaviour {
 	
 	void GetButtonInput(InputDevice inputDevice)
 	{
+		if(ctrlLocks[2]) return;
+
+		if(inputDevice.AnyButton.WasPressed)
+		{
+			Debug.Log ("Button pressed");
+
+			OnPressButton();
+		}
+		if(inputDevice.Action3.WasReleased)
+		{
+			OnReleaseButton();
+			Debug.Log ("Button released" + inputDevice.AnyButton.Value);
+		}
+
 		// if any buttons in X,Y,A,B is pressed down (one shot)
 		if (inputDevice.AnyButton) 
 		{
-			Debug.Log ("Button pressed");
+
 			if (inputDevice.Action1.WasPressed)
 			{
 				Debug.Log ("Button pressed: A");
-				magicID_in = 1;
+				button_id = 1;
 			}
 			else
 				if (inputDevice.Action2.WasPressed)
 			{
 				Debug.Log ("Button pressed: B");
-				magicID_in = 2;
+				button_id = 2;
 			}
 			else
 				if (inputDevice.Action3.WasPressed)
 			{
 				Debug.Log ("Button pressed: X");
-				magicID_in = 3;
+				button_id = 3;
 			}
 			else
 				if (inputDevice.Action4.WasPressed)
 			{
 				Debug.Log ("Button pressed: Y");
-				magicID_in = 4;
+				button_id = 4;
 			}
 			else
 			{
 				// should occur when keep pressing
 				Debug.Log ("Button pressed: pressing");
 			}
-
-			OnPressButton();
 		}
 
-		// if left or right bumper was pressed down
 		if(inputDevice.LeftBumper.WasPressed)
 		{
-			OnPressLBumper();
+			OnPressMainSkill();
 		}
 
 		if(inputDevice.RightBumper.WasPressed)
 		{
-			OnPressRBumper();
+			OnPressSubSkill();
 		}
 	}
 	
@@ -114,24 +121,20 @@ public class UserInputManager : MonoBehaviour {
 		{
 			Vector3 mousePos2D = Input.mousePosition;
 			// Convert the mouse position to 3D world coordinates
-//			mousePos2D.z = mousePos2D.y;
-//			mousePos2D.y = -Camera.main.transform.position.y;
-//			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint( mousePos2D );
 			Vector3 mousePos3D = GetWorldPositionOnPlane(mousePos2D, 0);
-
-			// Debug.Log ("input posision" + mousePos2D.ToString() + "\t\n" + mousePos3D.ToString());
 			rightInput = new Vector2(mousePos3D.x - transform.position.x,
 			                         mousePos3D.z - transform.position.z);
 		}
 
-		if(lockLeft) 
+		if(ctrlLocks[0]) 
 		{
 			leftInput *= 0.0f;
 			Debug.Log ("Moving control locked");
 		}
-		if(lockRight)
+		if(ctrlLocks[1])
 		{
 			rightInput *= 0.0f;
+			Debug.Log ("Direction control locked");
 		}
 
 	}
@@ -144,38 +147,36 @@ public class UserInputManager : MonoBehaviour {
 		return ray.GetPoint(distance);
 	}
 
-	IEnumerator LockParameter(bool isLeft, float period)
+	IEnumerator LockParameter(int lockIndex, float period)
 	{
-		if(isLeft)
-		{
-			lockLeft = true;
-		}
-		else
-			lockRight = true;
+		ctrlLocks[lockIndex] = true;
 
 		yield return new WaitForSeconds (period);
 
-		if(isLeft)
-		{
-			lockLeft = false;
-		}
-		else
-			lockRight = false;
+		ctrlLocks[lockIndex] = false;
 	}
 
 	public void LockLeftInput(float period)
 	{
-		if(!lockLeft)
+		if(!ctrlLocks[0])
 		{
-			StartCoroutine (LockParameter (true, period));
+			StartCoroutine (LockParameter (0, period));
 		}
 	}
 
 	public void LockRightInput(float period)
 	{
-		if(!lockRight)
+		if(!ctrlLocks[1])
 		{
-			StartCoroutine (LockParameter (false, period));
+			StartCoroutine (LockParameter (1, period));
+		}
+	}
+
+	public void LockButton(float period)
+	{
+		if(!ctrlLocks[2])
+		{
+			StartCoroutine (LockParameter (2, period));
 		}
 	}
 }
