@@ -4,48 +4,59 @@ using InControl;
 
 
 public class PlayerControl : MonoBehaviour {
-	// for testing
 
 	// is casting (fireball or special spell) or not, sync with animator in child model
 	public bool isCasting = false;
 
 	// Current speed ratio.
-	public float speedScale = 7.0f;
-	// This is a public speed indicator for debugging usage
-	public float Speed;
-	public float velocityMagnitude;
-	public float maxVelocity;
+	private float speedScale = 3.5f;
+
+	// Is player running
 	public bool isRunning = false;
 
-
-	// local status
+	// Current magic ID that player chosed
 	public int magicID = 1;
-	
+
+	// This is a public speed indicator for debugging usage
+	public int Speed;
+	public float KineticSpeed;
+
+	// Local components
 	private UserInputManager inputManager;
 	private Animator animator;
 	private WizardAttackMeans attackMeans;
 	private CastingAid castingAid;
 	private PlayerData PD;
 
-	bool isPosAiming = false;
+	// Local variables & local status
+	private float maxVelocity = 10.0f;
+	private bool isPosAiming = false;
 
 	void Start()
 	{
 
 		// mapping input events
 		inputManager = GetComponent<UserInputManager> ();
-		inputManager.OnPressMainSkill += HandleLBumper;
-		inputManager.OnPressSubSkill += HandleRBumper;
+		inputManager.OnPressMainSkill += TryCastingMainSkil;
+		inputManager.OnPressSubSkill += TryCastingSubSkill;
+		inputManager.OnReleaseSubSkill += StopCastingSubSkill;
 		inputManager.OnPressButton += HandleButton;
-		inputManager.OnReleaseButton += ReleaseSpeedUp;
+		inputManager.OnReleaseButton += ReleaseButton;
+		inputManager.OnPressRunning += StartRunning;
+		inputManager.OnReleaseRunning += EndRunning;
+
+		// other local components
 		animator = GetComponentInChildren<Animator> ();
 		attackMeans = GetComponent<WizardAttackMeans> ();
-
 		castingAid = GetComponent<CastingAid> ();
 		PD = GetComponent<PlayerData> ();
 	}
 
-	void HandleLBumper()
+	// -------------------------------------------------------------------------
+	// ------- Start ---------- Input Events Callback Functions ----------------
+	// -------------------------------------------------------------------------
+
+	void TryCastingMainSkil()
 	{
 		// Debug.Log ("try casting fireball");
 		if(!animator.GetBool("isCasting") && 
@@ -58,14 +69,8 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
-	void CastFireball()
-	{
-		// cast one fireball
-		Vector3 direction = transform.forward;
-		attackMeans.AttackByDiretion (PD.spellID, direction);
-	}
 
-	void HandleRBumper()
+	void TryCastingSubSkill()
 	{
 		// Debug.Log ("try casting spell");
 		if(!animator.GetBool("isCasting") && 
@@ -77,54 +82,9 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
-
-	void CastMagic(int magicID)
+	void StopCastingSubSkill()
 	{
-		// cast a special spell by magic ID
-		Vector3 direction = transform.forward;
 
-		// For metero/Aerolite skill
-		// TODO swiss army is fucking idiot 
-		// Avoid it
-		// DEPRECATED 
-//		if(magicID == 2)
-//		{
-//			if(isPosAiming == false)
-//			{
-//				// start Aiming
-//				isPosAiming = true;
-//				StartCoroutine(AimingDecending());
-//				castingAid.StartAiming();
-//			}
-//			else
-//			{
-//				isPosAiming = false;
-//				StartCoroutine(CastCoolDown());
-//				Vector3 targetPos = castingAid.EndAiming();
-//				attackMeans.AttackToPosition ((SpellDB.AttackID)magicID, targetPos);
-//			}
-//		}
-//		else
-//		{
-			// StartCoroutine(CastCoolDown());
-//			attackMeans.AttackByDiretion ((SpellDB.AttackID)magicID, direction);
-			attackMeans.AttackByDiretion (PD.SpecialSpellID, direction);
-			PD.SpecialSpellID = SpellDB.AttackID.None;
-//		}
-
-	}
-
-	IEnumerator AimingDecending()
-	{
-		yield return new WaitForSeconds (3.0f);
-		isPosAiming = false;
-	}
-
-	IEnumerator CastCoolDown()
-	{
-		animator.SetBool("isCasting", true);
-		yield return new WaitForSeconds (Constants.MIN_CAST_COOL_DOWN);
-		animator.SetBool("isCasting", false);
 	}
 
 	void HandleButton()
@@ -134,12 +94,78 @@ public class PlayerControl : MonoBehaviour {
 		if (inputManager.button_id == 2)
 			PD.ChangeIceFire ();
 		magicID = inputManager.button_id;
+		magicID = inputManager.button_id;
 	}
 
-	void ReleaseSpeedUp()
+	void ReleaseButton()
 	{
+
+
+	}
+
+	void StartRunning()
+	{
+		Debug.Log("Start Running");
+		isRunning = true;
+	}
+
+	void EndRunning()
+	{
+		Debug.Log("Finish Running");
 		isRunning = false;
 	}
+
+	// ---------------------------------------------------------------------
+	// ------ START ------------- Casting Functions ------------------------
+	// ---------------------------------------------------------------------
+
+
+	void CastFireball()
+	{
+		// cast one fireball
+		Vector3 direction = transform.forward;
+		attackMeans.AttackByDiretion (PD.spellID, direction);
+	}
+
+
+	void CastMagic(int magicID)
+	{
+		// cast a special spell by magic ID
+		Vector3 direction = transform.forward;
+		
+		// For metero/Aerolite skill
+		// TODO swiss army is fucking idiot 
+		// Avoid it
+		// DEPRECATED 
+		//		if(magicID == 2)
+		//		{
+		//			if(isPosAiming == false)
+		//			{
+		//				// start Aiming
+		//				isPosAiming = true;
+		//				StartCoroutine(AimingDecending());
+		//				castingAid.StartAiming();
+		//			}
+		//			else
+		//			{
+		//				isPosAiming = false;
+		//				StartCoroutine(CastCoolDown());
+		//				Vector3 targetPos = castingAid.EndAiming();
+		//				attackMeans.AttackToPosition ((SpellDB.AttackID)magicID, targetPos);
+		//			}
+		//		}
+		//		else
+		//		{
+		// StartCoroutine(CastCoolDown());
+		attackMeans.AttackByDiretion (PD.SpecialSpellID, direction);
+			PD.SpecialSpellID = SpellDB.AttackID.None;
+		//		}
+		
+	}
+
+	// -------------------------------------------------------------------------
+	// ------ START ------------- Frame Update Funcions ------------------------
+	// -------------------------------------------------------------------------
 
 	void FixedUpdate()
 	{
@@ -151,31 +177,11 @@ public class PlayerControl : MonoBehaviour {
 
 		// show casting lines
 		DrawDebug();
-
-	}
-
-	void DrawDebug()
-	{
-		Color lineColor = Color.red;
-
-		if(isCasting)
-			lineColor = Color.green;
-		Debug.DrawLine(transform.localPosition, 
-		               transform.localPosition + 10.0f * transform.forward,
-		               lineColor);
 	}
 	
 
 	void Move(Vector2 input)
-	{
-
-		// hold a bar 
-		if (input.magnitude < 0.01f) {
-			Speed = 0;
-		}
-		// Speed Animator > 1 Run <= 1 Walk, 0 idle
-		animator.SetInteger ("Speed", Mathf.RoundToInt(Speed/speedScale));
-		
+	{	
 		Rigidbody RB = GetComponent<Rigidbody>();
 
 		if(!animator.GetBool("isCasting") && 
@@ -184,33 +190,38 @@ public class PlayerControl : MonoBehaviour {
 		{
 			// move target object with left stick.
 
-			Speed = speedScale * (isRunning ? 2.0f : 1.0f);
-			Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
-
-
-
 			if(inputManager.rightInput.magnitude == 0)
+			{
+				Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
 				SmoothRotate (newForward);
-			RB.AddForce(Vector3.right * Speed * input.x);
-			RB.AddForce(Vector3.forward *  Speed * input.y);
+			}
+				
+			float runningForce = 50.0f;
 
-//			RB.velocity = Vector3.right * Speed * input.x + Vector3.forward *  Speed * input.y;
+			if(isRunning)
+				RB.AddForce(transform.forward * runningForce);
+			else
+			{
+				RB.velocity = Vector3.right * speedScale * input.x + Vector3.forward * speedScale * input.y;
 
+//				transform.Translate( Vector3.right * speedScale * Time.fixedDeltaTime * input.x, Space.World);
+//				transform.Translate( Vector3.forward * speedScale * Time.fixedDeltaTime * input.y, Space.World);
+			}
 
-			// transform.Translate( Vector3.right * Speed * Time.fixedDeltaTime * input.x, Space.World );
-			//		transform.Rotate( Vector3.right, 500.0f * Time.deltaTime * inputDevice.Direction.Y, Space.World );
-			// transform.Translate( Vector3.forward *  Speed * Time.fixedDeltaTime * input.y, Space.World );
-			//		transform.Rotate( Vector3.right, 500.0f * Time.deltaTime * inputDevice.RightStickY, Space.World );
 		}
-//		float mag = (RB.velocity.sqrMagnitude > 5.0f)? 5.0f :  RB.velocity.sqrMagnitude;
-//		RB.velocity = RB.velocity.normalized * mag;
-		
-		GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(GetComponent<Rigidbody>().velocity,
-		                                                            maxVelocity);
-		velocityMagnitude = GetComponent<Rigidbody>().velocity.magnitude;
-		    
+		KineticSpeed = RB.velocity.magnitude;
+		Speed = 1;
+		// Speed Animator > 1 Run <= 1 Walk, 0 idle
+		if(input.magnitude == 0)
+		{
+			Speed = 0;
+		}
+		else if(isRunning)
+		{
+			Speed = 2;
+		}
+		animator.SetInteger ("Speed", Mathf.RoundToInt(Speed));
 	}
-
 
 	void Rotate(Vector2 input)
 	{
@@ -229,7 +240,7 @@ public class PlayerControl : MonoBehaviour {
 		//	transform.LookAt (transform.position + newForward);
 		Vector3 vec_from = transform.forward;
 		float minDeltaAngle = Constants.PLAYER_ANGULAR_SPEED;
-
+		if(isRunning) minDeltaAngle /= 2.5f;
 		// calculate new direction by
 		Vector3 newDir = Vector3.RotateTowards(vec_from, vec_to, minDeltaAngle, 0.0F);
 
@@ -240,12 +251,33 @@ public class PlayerControl : MonoBehaviour {
 		//		rigidbody.AddTorque (torqueFactor * Vector3.Cross (vec_from, vec_to));
 
 	}
+	// -------------------------------------------------------------------------
+	// -------- Start ----------------- Public Interfaces ----------------------
+	// -------------------------------------------------------------------------
+
 	public void Die() {
 		int playerId = GetComponent<UserInputManager> ().playerNum;
 		Debug.Log ("[Player] Player died, " + playerId);
 		StartCoroutine (DieAnim ());
 
 	}
+	// -------------------------------------------------------------------------
+	// -------- Start ---------- Helper and IEnumerator Functions --------------
+	// -------------------------------------------------------------------------
+
+	IEnumerator AimingDecending()
+	{
+		yield return new WaitForSeconds (3.0f);
+		isPosAiming = false;
+	}
+	
+	IEnumerator CastCoolDown()
+	{
+		animator.SetBool("isCasting", true);
+		yield return new WaitForSeconds (Constants.MIN_CAST_COOL_DOWN);
+		animator.SetBool("isCasting", false);
+	}
+
 	private IEnumerator DieAnim() {
 		animator.SetBool ("isAlive", false);
 		yield return new WaitForSeconds(0.2f);
@@ -255,4 +287,14 @@ public class PlayerControl : MonoBehaviour {
 
 	}
 
+	void DrawDebug()
+	{
+		Color lineColor = Color.red;
+		
+		if(isCasting)
+			lineColor = Color.green;
+		Debug.DrawLine(transform.localPosition, 
+		               transform.localPosition + 10.0f * transform.forward,
+		               lineColor);
+	}
 }
