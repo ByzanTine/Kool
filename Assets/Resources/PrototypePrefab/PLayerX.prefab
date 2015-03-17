@@ -1565,8 +1565,8 @@ Rigidbody:
   m_GameObject: {fileID: 134422}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: .5
-  m_AngularDrag: .5
+  m_Drag: 8
+  m_AngularDrag: 3
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1651,7 +1651,7 @@ MonoBehaviour:
   playerNum: 0
   leftInput: {x: 0, y: 0}
   rightInput: {x: 0, y: 0}
-  magicID_in: 1
+  button_id: -1
 --- !u!114 &11434508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1664,8 +1664,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCasting: 0
-  Speed: 1
+  isRunning: 0
   magicID: 1
+  Speed: 0
+  KineticSpeed: 0
 --- !u!114 &11434510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1692,7 +1694,6 @@ MonoBehaviour:
   health: 1
   mana: 1
   frozen: 0
-  HPBar: {fileID: 0}
   ManaBar: {fileID: 0}
   increment: .0500000007
   isAlive: 1
