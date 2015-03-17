@@ -16,7 +16,6 @@ public class SpellDB : MonoBehaviour {
 		meteor,
 		reflect,
 		swap,
-		SpecialAttack,
 		iceBurst,
 		None
 	};
@@ -24,7 +23,7 @@ public class SpellDB : MonoBehaviour {
 	static public string[] attackIDnames = {
 		"fireball", "morefireball","bigfireball","morebigfireball",
 		"iceball",  "moreiceball", "bigiceball", "morebigiceball", 
-		"meteor", "reflect", "swap", "SpecialAttack",
+		"meteor", "reflect", "swap",
 		"iceBurst", "None"};
 
 	

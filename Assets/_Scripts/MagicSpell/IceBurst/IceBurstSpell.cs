@@ -17,6 +17,7 @@ public class IceBurstSpell : MagicSpell {
 		                                        caster.transform.position, 
 		                                        Quaternion.identity) as GameObject;
 		gb.GetComponent<IceBurstControl> ().caster = caster;
+		gb.GetComponent<ColliderExplode> ().caster = caster;
 		
 	
 		yield return new WaitForSeconds(0.1f);
