@@ -18,8 +18,16 @@ public class UserInputManager : MonoBehaviour {
 
 	// controller input events:
 	public delegate void OnInput();
+
+	// Trigger and bumpers
 	public event OnInput OnPressMainSkill;
 	public event OnInput OnPressSubSkill;
+	public event OnInput OnReleaseSubSkill;
+	public event OnInput OnPressHit;
+	public event OnInput OnPressRunning;
+	public event OnInput OnReleaseRunning;
+	
+	// Buttons: X, Y, A, B
 	public event OnInput OnPressButton;
 	public event OnInput OnReleaseButton;
 
@@ -47,24 +55,13 @@ public class UserInputManager : MonoBehaviour {
 	void UpdateWithInputDevice( InputDevice inputDevice )
 	{
 		GetButtonInput (inputDevice);
+		GetTriggerBumperInput (inputDevice);
 		GetDirectionInput (inputDevice);
 	}
 	
 	void GetButtonInput(InputDevice inputDevice)
 	{
 		if(ctrlLocks[2]) return;
-
-		if(inputDevice.AnyButton.WasPressed)
-		{
-			Debug.Log ("Button pressed");
-
-			OnPressButton();
-		}
-		if(inputDevice.Action3.WasReleased)
-		{
-			OnReleaseButton();
-			Debug.Log ("Button released" + inputDevice.AnyButton.Value);
-		}
 
 		// if any buttons in X,Y,A,B is pressed down (one shot)
 		if (inputDevice.AnyButton) 
@@ -100,17 +97,58 @@ public class UserInputManager : MonoBehaviour {
 			}
 		}
 
+		if(inputDevice.AnyButton.WasPressed)
+		{
+			Debug.Log ("Button pressed");
+			
+			OnPressButton();
+		}
+
+		if(inputDevice.Action1.WasReleased
+		   || inputDevice.Action2.WasReleased
+		   || inputDevice.Action3.WasReleased
+		   || inputDevice.Action4.WasReleased)
+		{
+			OnReleaseButton();
+			Debug.Log ("Button released" + inputDevice.AnyButton.Value);
+		}
+
+
+	}
+
+	void GetTriggerBumperInput(InputDevice inputDevice)
+	{
 		if(inputDevice.LeftBumper.WasPressed)
+		{
+			OnPressHit();
+		}
+		
+		if(inputDevice.RightBumper.WasPressed)
+		{
+			OnPressRunning();
+		}
+
+		if(inputDevice.RightBumper.WasReleased)
+		{
+			OnReleaseRunning();
+		}
+
+		if(inputDevice.LeftTrigger.WasPressed)
 		{
 			OnPressMainSkill();
 		}
-
-		if(inputDevice.RightBumper.WasPressed)
+		
+		if(inputDevice.RightTrigger.WasPressed)
 		{
 			OnPressSubSkill();
 		}
+
+		if(inputDevice.RightTrigger.WasPressed)
+		{
+			OnReleaseSubSkill();
+		}
 	}
-	
+
 	void GetDirectionInput(InputDevice inputDevice )
 	{
 		leftInput = new Vector2 (inputDevice.LeftStickX, inputDevice.LeftStickY);
