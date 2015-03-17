@@ -17,8 +17,10 @@ ModelImporter:
     400008: Outer
     2300000: InnerCube
     2300002: Outer
+    2300004: //RootNode
     3300000: InnerCube
     3300002: Outer
+    3300004: //RootNode
     4300000: InnerCube
     4300002: Outer
     7400000: Default Take
