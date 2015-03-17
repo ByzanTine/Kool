@@ -24,6 +24,7 @@ public class WizardAttackMeans : MonoBehaviour {
 			// new AeroSpell(), 
 			new ReflectSpell(),
 			new SwapSpell(),
+			new IceBurstSpell()
 
 		};
 
