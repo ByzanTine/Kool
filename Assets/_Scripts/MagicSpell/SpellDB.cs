@@ -16,6 +16,7 @@ public class SpellDB : MonoBehaviour {
 		meteor,
 		reflect,
 		swap,
+		iceBurst,
 		None
 	};
 
@@ -23,6 +24,8 @@ public class SpellDB : MonoBehaviour {
 		"fireball", "morefireball","bigfireball","morebigfireball",
 		"iceball",  "moreiceball", "bigiceball", "morebigiceball", 
 		"meteor", "reflect", "swap"};
+		
+	};
 	
 	// public GameObject meteor_;
 	static public GameObject fireball;
@@ -30,6 +33,7 @@ public class SpellDB : MonoBehaviour {
 	static public GameObject meteor;
 	static public GameObject reflector;
 	static public GameObject swap;
+	static public GameObject iceBurst;
 
 	// static public GameObject aerolite;
 
@@ -49,5 +53,6 @@ public class SpellDB : MonoBehaviour {
 		// aerolite = Resources.Load ("MagicSpells/Aerolite") as GameObject;
 
 		swap = Resources.Load ("MagicSpells/Swapper") as GameObject;
+		iceBurst = Resources.Load ("MagicSpells/IceBurst/IceBurst") as GameObject;
 	}
 }
