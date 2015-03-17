@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
-
+using System.Collections.Generic;
 public class DynamicCamera : MonoBehaviour {
 	public float dampTime = 0.1f;
 
 	[SerializeField] 
-	Transform[] targets;
-	
+	//public Transform[] targets;
+	List<Transform> targets;
 	[SerializeField] 
 	float boundingBoxPadding = 0.1f;
 	
@@ -17,8 +17,9 @@ public class DynamicCamera : MonoBehaviour {
 	
 	[SerializeField]
 	float zoomSpeed = 20f;
+
 	[SerializeField]
-	float xAngle = Mathf.PI/180*30;
+	float xAngle = Mathf.PI/180*30; // angle in rad
 	Camera camera;
 	
 	void Awake () 
@@ -28,6 +29,11 @@ public class DynamicCamera : MonoBehaviour {
 	
 	void LateUpdate()
 	{
+		targets.Clear ();
+		GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+		foreach (GameObject obj in objs) {
+			targets.Add(obj.transform);
+		}
 		Rect boundingBox = CalculateTargetsBoundingBox();
 			Vector3 camerNextPos = CalculateCameraPosition(CalculateCameraBoundingBox(boundingBox));
 		Vector3 velocity = Vector3.zero;
