@@ -15,6 +15,8 @@ public class PlayerSpellHandler : MonoBehaviour {
 	// Update is called once per frame
 	public void onSpellTrigger (Vector3 spellPos, int spellID) {
 		// if fireball, deduct health
+		Debug.Log (spellID + "   onspelltrigger");
+
 		if (spellID == 0){ // fireball id is 0
 			Debug.Log ("[Spell] fireball is hit on " + this.name);
 			Vector3 direction = transform.position - spellPos;
@@ -26,10 +28,21 @@ public class PlayerSpellHandler : MonoBehaviour {
 			Debug.Log ("[Spell] hit " + GetComponent<Collider>().name);
 		}
 
-		Debug.Log("[Spell] Enter spell trigger");
-		// if ice ball 
-		// TODO
+		if (spellID == 1){ // iceball id is 1
+			playerData.DamageHP(Constants.SPELL_DAMAGE[spellID]);
+			StartCoroutine(GetFrozen());
+		}
 	}
+	
+	
+	IEnumerator GetFrozen() {
+		playerData.frozen = true;
+		yield return new WaitForSeconds(3f); // waits 3 seconds
+		playerData.frozen = false; // will make the update method pick up 
+	}
+
+
+	
 
 	IEnumerator addDistanceDecayForce(Rigidbody rigidbody, Vector3 Force, float range, Vector3 explosionPos) {
 		float distance = (explosionPos - rigidbody.transform.position).magnitude;

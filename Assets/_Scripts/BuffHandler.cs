@@ -32,6 +32,7 @@ public class BuffHandler : MonoBehaviour {
 
 	public void UpdateBuff(int mode){
 		Buff_time_List [mode] = Time.time;
+		pd.ChangeIceFire ();
 		if (!Buff_valid_List [mode]){
 			BuffPlayerData (mode);
 			Buff_valid_List [mode] = true;
@@ -59,5 +60,7 @@ public class BuffHandler : MonoBehaviour {
 			pd.spellID = SpellDB.AttackID.bigfireball;
 		if (!pd.IncreaseNumber && !pd.Bigger)
 			pd.spellID = SpellDB.AttackID.fireball;
+		if (pd.ice_fire == Constants.SpellMode.Ice)
+			pd.spellID += 4;
 	}
 }

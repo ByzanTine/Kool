@@ -18,6 +18,8 @@ public class PlayerData : MonoBehaviour {
 	private PlayerControl playerCtrl;
 	public float increment = 0.05f;
 
+	public SpellDB.AttackID SpecialSpellID = SpellDB.AttackID.None;
+
 	public bool isAlive = true;
 
 	void Start () {
@@ -58,5 +60,18 @@ public class PlayerData : MonoBehaviour {
 	private void AutoIncrement(){
 		mana += increment * Time.deltaTime;
 		ManabarControl.SetBar (mana);
+	}
+
+	public void ChangeIceFire(){
+		ice_fire = (ice_fire == Constants.SpellMode.Fire) ? 
+			Constants.SpellMode.Ice : Constants.SpellMode.Fire;
+		Debug.Log ("spell id now is : " + spellID);
+	}
+
+	public void frozenCheck (){
+		if (frozen) {
+			Debug.Log("get frozen and slow down");
+			// TODO slow down the speed
+		}
 	}
 }
