@@ -32,6 +32,12 @@ public class PlayerSpellHandler : MonoBehaviour {
 			playerData.DamageHP(Constants.SPELL_DAMAGE[spellID]);
 			StartCoroutine(GetFrozen());
 		}
+
+
+		if (spellID == 2){ // iceburst id is 2
+			playerData.DamageHP(Constants.SPELL_DAMAGE[spellID]);
+			StartCoroutine(GetFrozen());
+		}
 	}
 	
 	
