@@ -15,6 +15,7 @@ GameObject:
   - 54: {fileID: 5487744}
   - 114: {fileID: 11487744}
   - 114: {fileID: 11489208}
+  - 114: {fileID: 11403358}
   m_Layer: 0
   m_Name: Iceball
   m_TagString: Fireball
@@ -49,6 +50,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &11403358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f560fbaaa3865604d94193537276c309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11487740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,8 +85,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destination: {x: 0, y: 0, z: 0}
   explosion: {fileID: 112404, guid: 2515fba05d43d404c951f40e2677dfce, type: 2}
-  isMoving: 0
-  speed: 15
+  isMoving: 1
+  speed: 24
   curSpeed: {x: 0, y: 0, z: 0}
   damage: .100000001
 --- !u!114 &11487744
@@ -100,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a1a60dbff46c349b4a937dfb317f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livingTime: 3
+  livingTime: 4
 --- !u!135 &13587742
 SphereCollider:
   m_ObjectHideFlags: 1

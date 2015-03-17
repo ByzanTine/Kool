@@ -10,13 +10,19 @@ public class SpellDB : MonoBehaviour {
 		bigfireball,
 		morebigfireball,
 		iceball,
+		moreiceball,
+		bigiceball,
+		morebigiceball,
 		meteor,
 		reflect,
-		swap
+		swap,
+		None
 	};
 
-	static public string[] attackIDnames = {"fireball", "morefireball",
-		"bigfireball","morebigfireball","iceball", "meteor", "reflect", "swap"};
+	static public string[] attackIDnames = {
+		"fireball", "morefireball","bigfireball","morebigfireball",
+		"iceball",  "moreiceball", "bigiceball", "morebigiceball", 
+		"meteor", "reflect", "swap"};
 	
 	// public GameObject meteor_;
 	static public GameObject fireball;

@@ -20,6 +20,7 @@ public class PlayerControl : MonoBehaviour {
 	private Animator animator;
 	private WizardAttackMeans attackMeans;
 	private CastingAid castingAid;
+	private PlayerData PD;
 
 	bool isPosAiming = false;
 
@@ -36,7 +37,7 @@ public class PlayerControl : MonoBehaviour {
 		attackMeans = GetComponent<WizardAttackMeans> ();
 
 		castingAid = GetComponent<CastingAid> ();
-
+		PD = GetComponent<PlayerData> ();
 	}
 
 	void HandleLBumper()
@@ -56,8 +57,7 @@ public class PlayerControl : MonoBehaviour {
 	{
 		// cast one fireball
 		Vector3 direction = transform.forward;
-		PlayerData pd = GetComponent<PlayerData> ();
-		attackMeans.AttackByDiretion (pd.spellID, direction);
+		attackMeans.AttackByDiretion (PD.spellID, direction);
 	}
 
 	void HandleRBumper()
@@ -67,8 +67,8 @@ public class PlayerControl : MonoBehaviour {
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
 		{
 			Debug.Log ("[SPELL]: casting spell " + magicID);
-
-			CastMagic(magicID);
+			if (PD.SpecialSpellID != SpellDB.AttackID.None)
+				CastMagic(magicID);
 		}
 	}
 
@@ -102,7 +102,9 @@ public class PlayerControl : MonoBehaviour {
 //		else
 //		{
 			// StartCoroutine(CastCoolDown());
-			attackMeans.AttackByDiretion ((SpellDB.AttackID)magicID, direction);
+//			attackMeans.AttackByDiretion ((SpellDB.AttackID)magicID, direction);
+			attackMeans.AttackByDiretion (PD.SpecialSpellID, direction);
+			PD.SpecialSpellID = SpellDB.AttackID.None;
 //		}
 
 	}
@@ -122,8 +124,10 @@ public class PlayerControl : MonoBehaviour {
 
 	void HandleButton()
 	{
-		if(inputManager.button_id == 3)
+		if (inputManager.button_id == 3)
 			isRunning = true;
+		if (inputManager.button_id == 2)
+			PD.ChangeIceFire ();
 		magicID = inputManager.button_id;
 	}
 
