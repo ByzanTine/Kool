@@ -32,7 +32,7 @@ public class BuffHandler : MonoBehaviour {
 
 	public void UpdateBuff(int mode){
 		Buff_time_List [mode] = Time.time;
-		pd.ChangeIceFire ();
+		//pd.ChangeIceFire ();
 		if (!Buff_valid_List [mode]){
 			BuffPlayerData (mode);
 			Buff_valid_List [mode] = true;

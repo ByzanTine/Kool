@@ -2,6 +2,6 @@
 using System.Collections;
 
 public class MoreBigIceBallSpell : IceBallSpell {
-	public MoreBigIceBallSpell() : base (6, 10, 2){
+	public MoreBigIceBallSpell() : base (4, 10, 2){
 	}
 }

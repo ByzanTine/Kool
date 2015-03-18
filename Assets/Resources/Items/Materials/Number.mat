@@ -222,12 +222,12 @@ Material:
         second: 0
       data:
         first:
-          name: _Rotation
-        second: 0
-      data:
-        first:
           name: _InvFade
         second: 1
+      data:
+        first:
+          name: _Rotation
+        second: 0
       data:
         first:
           name: _WiggleStrength
@@ -259,9 +259,9 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
-          name: _Tint
+          name: _TintColor
         second: {r: .5, g: .5, b: .5, a: .5}
       data:
         first:
-          name: _TintColor
+          name: _Tint
         second: {r: .5, g: .5, b: .5, a: .5}

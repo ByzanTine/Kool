@@ -11,7 +11,7 @@ public class IceBallSpell : MagicSpell {
 	/// </summary>
 	public IceBallSpell()
 	{
-		NumberOfBalls = 4;
+		NumberOfBalls = 2;
 		Range = 10;
 		scale = 1;
 		iceball = SpellDB.iceball;
