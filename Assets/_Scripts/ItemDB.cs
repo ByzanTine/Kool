@@ -11,9 +11,11 @@ public class ItemDB : MonoBehaviour {
 	void Awake()
 	{
 		items = new List<GameObject> {
-			Resources.Load ("Items/fireball_attack_increase") as GameObject,
-			Resources.Load ("Items/six_fireballs") as GameObject,
-			Resources.Load ("Items/reflect") as GameObject
+			Resources.Load ("Items/attack_increase") as GameObject,
+			Resources.Load ("Items/six_spells") as GameObject,
+			Resources.Load ("Items/reflect") as GameObject,
+			Resources.Load ("Items/IceBurst") as GameObject
+
 
 		};
 
