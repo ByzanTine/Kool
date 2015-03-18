@@ -19,7 +19,7 @@ public class PickUpItem : MonoBehaviour {
 			if (ID == SpellDB.AttackID.reflect) // reflect
 			{
 				WAM.AttackToPosition (ID);
-			} else if (ID == SpellDB.AttackID.meteor){
+			} else {
 				pd.SpecialSpellID = ID;
 			}
 			Debug.Log ("da zhao");// TODO da zhao

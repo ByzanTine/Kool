@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11493084}
   - 114: {fileID: 11451580}
   m_Layer: 0
-  m_Name: fireball_attack_increase
+  m_Name: attack_increase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

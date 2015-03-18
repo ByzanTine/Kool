@@ -50,7 +50,8 @@ public class PlayerHealthView : MonoBehaviour {
 			// fetch the player by id, and get the player data
 			img.enabled = false;
 			GetPlayerObjById(playerId);
-			pd = Player.GetComponent<PlayerData> ();
+			if(Player)
+				pd = Player.GetComponent<PlayerData> ();
 		}
 	}
 

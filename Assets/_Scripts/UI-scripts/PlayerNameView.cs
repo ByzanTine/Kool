@@ -44,14 +44,15 @@ public class PlayerNameView : MonoBehaviour {
 			GetComponent<RectTransform>().sizeDelta =  rectOrigin * 10.0f/Camera.main.fieldOfView;
 			// Debug.Log(pd.health);
 			textUI.fontSize = Mathf.RoundToInt(originSize * 10.0f/Camera.main.fieldOfView);
-			textUI.text = gameStatus.Usernames[playerId];
-			textUI.color = gameStatus.UserColors[playerId];
-			Debug.Log ("Printing name");
+			textUI.text = GameStatus.Instance.Usernames[playerId];
+			textUI.color = GameStatus.Instance.UserColors[playerId];
+			// Debug.Log ("Printing name");
 		}
 		else {
 			textUI.enabled = false;
 			GetPlayerObjById(playerId);
-			pd = Player.GetComponent<PlayerData> ();
+			if(Player)
+				pd = Player.GetComponent<PlayerData> ();
 		}
 	}
 	
