@@ -198,11 +198,15 @@ public class PlayerControl : MonoBehaviour {
 				
 			float runningForce = 50.0f;
 
+			float LocalForzenScale = 1;
+			if (PD.frozen)
+				LocalForzenScale = 0.5f;
+
 			if(isRunning)
-				RB.AddForce(transform.forward * runningForce);
+				RB.AddForce(transform.forward * runningForce * LocalForzenScale);
 			else
 			{
-				RB.velocity = Vector3.right * speedScale * input.x + Vector3.forward * speedScale * input.y;
+				RB.velocity = (Vector3.right * speedScale * input.x + Vector3.forward * speedScale * input.y) * LocalForzenScale;
 
 //				transform.Translate( Vector3.right * speedScale * Time.fixedDeltaTime * input.x, Space.World);
 //				transform.Translate( Vector3.forward * speedScale * Time.fixedDeltaTime * input.y, Space.World);

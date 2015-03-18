@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11418686}
   - 65: {fileID: 6522250}
   m_Layer: 0
-  m_Name: six_fireballs
+  m_Name: six_spells
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
