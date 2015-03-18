@@ -2,6 +2,6 @@
 using System.Collections;
 
 public class MoreFireballSpell : FireballSpell {
-	public MoreFireballSpell() : base (6, 10, 1){
+	public MoreFireballSpell() : base (4, 10, 1){
 	}
 }

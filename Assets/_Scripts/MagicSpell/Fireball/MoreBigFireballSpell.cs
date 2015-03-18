@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class MoreBigFireballSpell : FireballSpell {
-	public MoreBigFireballSpell() : base (6, 10, 2){
+	public MoreBigFireballSpell() : base (4, 10, 2){
 	}
 
 }
