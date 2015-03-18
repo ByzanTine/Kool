@@ -9,7 +9,7 @@ public class PlayerControl : MonoBehaviour {
 	public bool isCasting = false;
 
 	// Current speed ratio.
-	private float speedScale = 3.5f;
+	private float speedScale = 5.0f;
 
 	// Is player running
 	public bool isRunning = false;
@@ -92,7 +92,11 @@ public class PlayerControl : MonoBehaviour {
 		if (inputManager.button_id == 3)
 			isRunning = true;
 		if (inputManager.button_id == 2)
+		{
+			Debug.Log ("change Ice fire");
 			PD.ChangeIceFire ();
+
+		}
 		magicID = inputManager.button_id;
 		magicID = inputManager.button_id;
 	}
@@ -196,7 +200,7 @@ public class PlayerControl : MonoBehaviour {
 				SmoothRotate (newForward);
 			}
 				
-			float runningForce = 50.0f;
+			float runningForce = speedScale * 15.0f;
 
 			if(isRunning)
 				RB.AddForce(transform.forward * runningForce);

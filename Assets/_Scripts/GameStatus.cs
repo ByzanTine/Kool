@@ -10,12 +10,17 @@ public class GameStatus : MonoBehaviour {
 	// GainScore: You will win when you perform enough killing. Only 2v2 now;
 	public enum GameMode{LoseLife, GainScore};
 	public GameMode gameMode;
+
 	// Target lives/scores in each mode for winning
 	public int GameTargetRounds = 1;
 	public GameObject playerPrefab;
 
+	public string[] Usernames = new string[4];
+	public Color[] UserColors = new Color[4]; 
+
 	// private int playerNum;
 	private bool isGameOver = false;
+
 	private UserData[] userDataCollection = new UserData[4];
 
 	void Awake()

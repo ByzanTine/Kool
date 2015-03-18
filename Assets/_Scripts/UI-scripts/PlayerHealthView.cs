@@ -4,33 +4,33 @@ using UnityEngine.UI;
 
 public class PlayerHealthView : MonoBehaviour {
 	// use a hot link rather than playerId 
-	public GameObject Player;
-	public int id;
+	public int playerId;
 	private Camera camera;
 	PlayerData pd;
 	BarControl barCon;
+	GameObject Player;
 
 	// now for y-axis
 	private float heightOffset = 250.0f; 
 	private float widthOffset = 125.0f;
 	private Vector2 rectOrigin;
+	private Image img;
+
 	
 	// Use this for initialization
 	void Start () {
 		// adjust Position.
 		camera = Camera.main;
 		rectOrigin = GetComponent<RectTransform> ().sizeDelta;
-
-		pd = Player.GetComponent<PlayerData> ();
-		if (!pd) {
-			Debug.LogError("[UI] No Player attached to this health bar");
-
-		}
+		img = GetComponent<Image>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
 		if (pd) {
+			img.enabled = true;
+
 			barCon = GetComponentInChildren<BarControl>();
 			barCon.SetBar(pd.health);
 
@@ -47,11 +47,25 @@ public class PlayerHealthView : MonoBehaviour {
 
 		}
 		else {
-			// TODO fetch the player by id, and get the player data
-
+			// fetch the player by id, and get the player data
+			img.enabled = false;
+			GetPlayerObjById(playerId);
+			pd = Player.GetComponent<PlayerData> ();
 		}
+	}
 
-
+	void GetPlayerObjById(int playerId_in)
+	{
+		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
+		foreach(GameObject player in playerCollection)
+		{
+			UserInputManager userCtrl = player.GetComponent<UserInputManager>();
+			if(userCtrl.playerNum == playerId_in)
+			{
+				Player = player;
+				return;
+			}
+		}
 	}
 
 

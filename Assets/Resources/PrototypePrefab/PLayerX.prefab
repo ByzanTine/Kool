@@ -39,6 +39,8 @@ GameObject:
   - 114: {fileID: 11476454}
   - 114: {fileID: 11419160}
   - 114: {fileID: 11456452}
+  - 114: {fileID: 11448708}
+  - 114: {fileID: 11447538}
   m_Layer: 0
   m_Name: PLayerX
   m_TagString: Player
@@ -771,7 +773,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 30}
+  m_LocalPosition: {x: 1.89999998, y: .400000006, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 476916}
@@ -1679,6 +1681,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01048f2af36b4794907f068f06263ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11447538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2ee68ca735f84c9284d32a84d035f81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectiveTime: 10
+--- !u!114 &11448708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159005b1995d7470b856539d97328959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11456452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1690,12 +1715,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040be2a7ee6bc49e996893d668607609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellID: 0
+  IncreaseNumber: 0
+  Bigger: 0
   teamNum: 0
   health: 1
   mana: 1
   frozen: 0
-  ManaBar: {fileID: 0}
+  ice_fire: 1
   increment: .0500000007
+  SpecialSpellID: 12
   isAlive: 1
 --- !u!114 &11462314
 MonoBehaviour:
