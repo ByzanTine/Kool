@@ -45,7 +45,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   ExplodeEffect: {fileID: 0}
-  spellID: 5
+  spellID: 2
   ExplodeRadius: 15
 --- !u!114 &11446278
 MonoBehaviour:

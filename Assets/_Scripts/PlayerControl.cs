@@ -26,6 +26,7 @@ public class PlayerControl : MonoBehaviour {
 	private Animator animator;
 	private WizardAttackMeans attackMeans;
 	private CastingAid castingAid;
+	private PlayerData PD;
 
 	// Local variables & local status
 	private float maxVelocity = 10.0f;
@@ -48,7 +49,7 @@ public class PlayerControl : MonoBehaviour {
 		animator = GetComponentInChildren<Animator> ();
 		attackMeans = GetComponent<WizardAttackMeans> ();
 		castingAid = GetComponent<CastingAid> ();
-
+		PD = GetComponent<PlayerData> ();
 	}
 
 	// -------------------------------------------------------------------------
@@ -68,6 +69,7 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
+
 	void TryCastingSubSkill()
 	{
 		// Debug.Log ("try casting spell");
@@ -75,8 +77,8 @@ public class PlayerControl : MonoBehaviour {
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
 		{
 			Debug.Log ("[SPELL]: casting spell " + magicID);
-
-			CastMagic(magicID);
+			if (PD.SpecialSpellID != SpellDB.AttackID.None)
+				CastMagic(magicID);
 		}
 	}
 
@@ -87,11 +89,17 @@ public class PlayerControl : MonoBehaviour {
 
 	void HandleButton()
 	{
+		if (inputManager.button_id == 3)
+			isRunning = true;
+		if (inputManager.button_id == 2)
+			PD.ChangeIceFire ();
+		magicID = inputManager.button_id;
 		magicID = inputManager.button_id;
 	}
 
 	void ReleaseButton()
 	{
+
 
 	}
 
@@ -111,11 +119,12 @@ public class PlayerControl : MonoBehaviour {
 	// ------ START ------------- Casting Functions ------------------------
 	// ---------------------------------------------------------------------
 
+
 	void CastFireball()
 	{
-		// cast fireball
+		// cast one fireball
 		Vector3 direction = transform.forward;
-		attackMeans.AttackByDiretion (SpellDB.AttackID.fireball, direction);
+		attackMeans.AttackByDiretion (PD.spellID, direction);
 	}
 
 
@@ -148,7 +157,8 @@ public class PlayerControl : MonoBehaviour {
 		//		else
 		//		{
 		// StartCoroutine(CastCoolDown());
-		attackMeans.AttackByDiretion ((SpellDB.AttackID)magicID, direction);
+		attackMeans.AttackByDiretion (PD.SpecialSpellID, direction);
+			PD.SpecialSpellID = SpellDB.AttackID.None;
 		//		}
 		
 	}

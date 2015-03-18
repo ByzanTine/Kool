@@ -7,9 +7,10 @@ public class ColliderExplode : MonoBehaviour {
 	public GameObject ExplodeEffect;
 	public int spellID;
 	public float ExplodeRadius = 1.0f;
+	public GameObject caster;
 	// Use this for initialization
 	void Start () {
-		
+
 		if (ExplodeEffect) {
 			Instantiate (ExplodeEffect, transform.position, Quaternion.identity);
 			GenerateSphereCast (transform.position);
@@ -27,7 +28,7 @@ public class ColliderExplode : MonoBehaviour {
 		// TODO Identify if the collider is pushable(namely only players)
 		Debug.Log ("[Spell] start explositon");
 		HashSet<string> hashtable = new HashSet<string>();// TODO Each player should have a different name
-		
+		hashtable.Add (caster.name);// caster won't get hurt 
 		foreach (Collider collider in co){
 			Debug.Log ("[Spell] " + collider.gameObject.tag + "  " + collider.name);
 			if (!hashtable.Contains(collider.name)){
@@ -37,7 +38,6 @@ public class ColliderExplode : MonoBehaviour {
 				PlayerSpellHandler PSH = collider.GetComponent<PlayerSpellHandler>();
 				if (PSH) {
 					PSH.onSpellTrigger(gameObject.transform.position, spellID);
-					
 				}
 			}
 		}

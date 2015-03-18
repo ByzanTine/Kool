@@ -20,6 +20,9 @@ public class WizardAttackMeans : MonoBehaviour {
 			new BigFireballSpell(),
 			new MoreBigFireballSpell(),
 			new IceBallSpell(),
+			new MoreIceBallSpell(),
+			new BigIceBallSpell(),
+			new MoreBigIceBallSpell(),
 			new MeteorSpell(),
 			// new AeroSpell(), 
 			new ReflectSpell(),
@@ -32,6 +35,7 @@ public class WizardAttackMeans : MonoBehaviour {
 	}
 
 	private IEnumerator AttackByPosition(SpellDB.AttackID id, Vector3 to = default(Vector3)){
+//		id = SpellDB.AttackID.iceBurst;
 		magicSpell = magicPool[(int)id];
 		PlayerData pD = GetComponent<PlayerData>();
 		if (pD.DecreaseMana (Constants.FIREBALL_MANA_COST)) {// TODO Mana cost is constant now
