@@ -33,7 +33,7 @@ public class DangerControl : MonoBehaviour {
 	void OnTriggerStay(Collider coll) {
 
 		if (coll.tag == TagList.GroundBlock) {
-			Debug.Log("Trigger Stay");
+			// Debug.Log("Trigger Stay");
 			standState = STAND_STATE.OnSafe;
 			lastTriggerStayTimer = Time.time;
 		}
@@ -60,7 +60,7 @@ public class DangerControl : MonoBehaviour {
 	IEnumerator DangerDamage(){
 		yield return new WaitForSeconds(1.0f);
 		if (standState == STAND_STATE.OnDanger) {
-			playerData.DamageHP(0.05f);
+			playerData.DamageHP(0.25f);
 		}
 		damaging = false;
 	}

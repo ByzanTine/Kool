@@ -18,11 +18,6 @@ public class ItemGenerator : MonoBehaviour {
 	// Update is called once per frame
 	// TODO the ShouldExist lock may not be neccessary 
 	void Update () {
-		if (item) {
-			// if item already there
-			// update generation clock
-			generationClock = Time.time;
-		}
 		// if item is not there
 		// And it has been TimeInterval time
 		// Generate a item then
@@ -37,6 +32,7 @@ public class ItemGenerator : MonoBehaviour {
 	void GenerateItem() {
 		int num = Random.Range (0, ItemDB.Number_Of_Items);
 		item = Instantiate (ItemDB.items [num], transform.position, Quaternion.identity) as GameObject;
+		generationClock = Time.time;
 	}
 
 

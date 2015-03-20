@@ -9,6 +9,7 @@ public class IceBurstControl : MonoBehaviour {
 
 	public float auraShrinkTime;
 	private GameObject aura;
+	private GameObject iceRing; 
 	void Start () {
 		// TODO disable control
 		// create a aura shrinking.
@@ -19,7 +20,7 @@ public class IceBurstControl : MonoBehaviour {
 		ParticleSystem ps = aura.GetComponent<ParticleSystem> ();
 		ps.startLifetime = auraShrinkTime;
 		ps.enableEmission = true;
-
+		iceRing = Resources.Load ("MagicSpells/IceBurst/CFXM3_Hit_Ice_B_Ground") as GameObject;
 		// after finished 
 
 		// create a iceRing
@@ -29,7 +30,7 @@ public class IceBurstControl : MonoBehaviour {
 
 	IEnumerator CreateIceRing() {
 		yield return new WaitForSeconds (auraShrinkTime);
-		GameObject iceRing = Resources.Load ("MagicSpells/IceBurst/CFXM3_Hit_Ice_B_Ground") as GameObject;
+
 		GameObject iBurst = Instantiate (iceRing, 
 		                                 caster.transform.position, 
 		                                 caster.transform.rotation) as GameObject;

@@ -27,13 +27,13 @@ public class ColliderExplode : MonoBehaviour {
 		
 		// TODO Identify if the collider is pushable(namely only players)
 		Debug.Log ("[Spell] start explositon");
-		HashSet<string> hashtable = new HashSet<string>();// TODO Each player should have a different name
+		HashSet<int> hashtable = new HashSet<int>();// TODO Each player should have a different name
 		if (caster)
-			hashtable.Add (caster.transform.name);// caster won't get hurt 
+			hashtable.Add (caster.GetInstanceID());// caster won't get hurt 
 		foreach (Collider collider in co){
 			Debug.Log ("[Spell] " + collider.gameObject.tag + "  " + collider.name);
-			if (!hashtable.Contains(collider.name)){
-				hashtable.Add(collider.name);
+			if (!hashtable.Contains(collider.gameObject.GetInstanceID())){
+				hashtable.Add(collider.gameObject.GetInstanceID());
 				
 				
 				PlayerSpellHandler PSH = collider.GetComponent<PlayerSpellHandler>();

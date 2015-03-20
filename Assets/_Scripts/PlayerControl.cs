@@ -9,7 +9,7 @@ public class PlayerControl : MonoBehaviour {
 	public bool isCasting = false;
 
 	// Current speed ratio.
-	private float speedScale = 3.5f;
+	private float speedScale = Constants.PLAYER_MOVE_SPEED;
 
 	// Is player running
 	public bool isRunning = false;
@@ -37,6 +37,8 @@ public class PlayerControl : MonoBehaviour {
 
 		// mapping input events
 		inputManager = GetComponent<UserInputManager> ();
+		inputManager.OnPressHit += CombatHit;
+
 		inputManager.OnPressMainSkill += TryCastingMainSkil;
 		inputManager.OnPressSubSkill += TryCastingSubSkill;
 		inputManager.OnReleaseSubSkill += StopCastingSubSkill;
@@ -55,6 +57,9 @@ public class PlayerControl : MonoBehaviour {
 	// -------------------------------------------------------------------------
 	// ------- Start ---------- Input Events Callback Functions ----------------
 	// -------------------------------------------------------------------------
+
+	void CombatHit()
+	{}
 
 	void TryCastingMainSkil()
 	{
@@ -92,8 +97,11 @@ public class PlayerControl : MonoBehaviour {
 		if (inputManager.button_id == 3)
 			isRunning = true;
 		if (inputManager.button_id == 2)
+		{
+			Debug.Log ("change Ice fire");
 			PD.ChangeIceFire ();
-		magicID = inputManager.button_id;
+
+		}
 		magicID = inputManager.button_id;
 	}
 
@@ -130,37 +138,11 @@ public class PlayerControl : MonoBehaviour {
 
 	void CastMagic(int magicID)
 	{
+		inputManager.LockLeftInput (2.0f);
 		// cast a special spell by magic ID
 		Vector3 direction = transform.forward;
-		
-		// For metero/Aerolite skill
-		// TODO swiss army is fucking idiot 
-		// Avoid it
-		// DEPRECATED 
-		//		if(magicID == 2)
-		//		{
-		//			if(isPosAiming == false)
-		//			{
-		//				// start Aiming
-		//				isPosAiming = true;
-		//				StartCoroutine(AimingDecending());
-		//				castingAid.StartAiming();
-		//			}
-		//			else
-		//			{
-		//				isPosAiming = false;
-		//				StartCoroutine(CastCoolDown());
-		//				Vector3 targetPos = castingAid.EndAiming();
-		//				attackMeans.AttackToPosition ((SpellDB.AttackID)magicID, targetPos);
-		//			}
-		//		}
-		//		else
-		//		{
-		// StartCoroutine(CastCoolDown());
 		attackMeans.AttackByDiretion (PD.SpecialSpellID, direction);
-			PD.SpecialSpellID = SpellDB.AttackID.None;
-		//		}
-		
+		PD.SpecialSpellID = SpellDB.AttackID.None;
 	}
 
 	// -------------------------------------------------------------------------
@@ -195,18 +177,24 @@ public class PlayerControl : MonoBehaviour {
 				Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
 				SmoothRotate (newForward);
 			}
-				
-			float runningForce = 50.0f;
+
+			speedScale = Constants.PLAYER_MOVE_SPEED;
 
 			float LocalForzenScale = 1;
 			if (PD.frozen)
-				LocalForzenScale = 0.5f;
+				LocalForzenScale = 0.25f;
+
+			speedScale *= LocalForzenScale;
+
 
 			if(isRunning)
-				RB.AddForce(transform.forward * runningForce * LocalForzenScale);
+			{
+				float runningForce = speedScale * 15.0f;
+				RB.AddForce(transform.forward * runningForce);
+			}
 			else
 			{
-				RB.velocity = (Vector3.right * speedScale * input.x + Vector3.forward * speedScale * input.y) * LocalForzenScale;
+				RB.velocity = (Vector3.right * speedScale * input.x + Vector3.forward * speedScale * input.y);
 
 //				transform.Translate( Vector3.right * speedScale * Time.fixedDeltaTime * input.x, Space.World);
 //				transform.Translate( Vector3.forward * speedScale * Time.fixedDeltaTime * input.y, Space.World);
@@ -244,7 +232,7 @@ public class PlayerControl : MonoBehaviour {
 		//	transform.LookAt (transform.position + newForward);
 		Vector3 vec_from = transform.forward;
 		float minDeltaAngle = Constants.PLAYER_ANGULAR_SPEED;
-		if(isRunning) minDeltaAngle /= 2.5f;
+		if(isRunning) minDeltaAngle /= 2.0f;
 		// calculate new direction by
 		Vector3 newDir = Vector3.RotateTowards(vec_from, vec_to, minDeltaAngle, 0.0F);
 
@@ -286,6 +274,8 @@ public class PlayerControl : MonoBehaviour {
 		animator.SetBool ("isAlive", false);
 		yield return new WaitForSeconds(0.2f);
 		animator.SetBool ("isAlive", true); // reset to lock animation
+
+		yield return new WaitForSeconds(1.0f);
 
 		GameStatus.Instance.DecrementPlayerLife (inputManager.playerNum);
 

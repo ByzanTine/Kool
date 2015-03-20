@@ -5,10 +5,11 @@ using UnityEngine.UI;
 public class PlayerNameView : MonoBehaviour {
 
 	// use a hot link rather than playerId 
-	public GameObject Player;
-	public int id;
+	GameObject Player;
+	public int playerId;
 	private Camera camera;
 	PlayerData pd;
+	GameStatus gameStatus;
 	BarControl barCon;
 	
 	// now for y-axis
@@ -26,36 +27,46 @@ public class PlayerNameView : MonoBehaviour {
 		rectOrigin = GetComponent<RectTransform> ().sizeDelta;
 		textUI = GetComponent<Text> ();
 		originSize = textUI.fontSize;
-		pd = Player.GetComponent<PlayerData> ();
-		if (!pd) {
-			Debug.LogError("[UI] No Player attached to this health bar");
-			
-		}
+		gameStatus = GameObject.Find ("GameStatus").GetComponent<GameStatus>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (pd) {
-
+			textUI.enabled = true;
 			// get.sizeDelta *= 10.0f / Camera.main.fieldOfView;
 			// get the new transform position
 			Vector3 rawPos = camera.WorldToScreenPoint (Player.transform.position);
 			rawPos.y += heightOffset / camera.fieldOfView;
 			rawPos.x -= widthOffset / camera.fieldOfView;
-			
-			
+
 			transform.position = rawPos;
 			GetComponent<RectTransform>().sizeDelta =  rectOrigin * 10.0f/Camera.main.fieldOfView;
 			// Debug.Log(pd.health);
 			textUI.fontSize = Mathf.RoundToInt(originSize * 10.0f/Camera.main.fieldOfView);
-			textUI.text = "Weddy";
-
+			textUI.text = GameStatus.Instance.Usernames[playerId];
+			textUI.color = GameStatus.Instance.UserColors[playerId];
+			// Debug.Log ("Printing name");
 		}
 		else {
-			// TODO fetch the player by id, and get the player data
-			
+			textUI.enabled = false;
+			GetPlayerObjById(playerId);
+			if(Player)
+				pd = Player.GetComponent<PlayerData> ();
 		}
-		
-		
+	}
+	
+	void GetPlayerObjById(int playerId_in)
+	{
+		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
+		foreach(GameObject player in playerCollection)
+		{
+			UserInputManager userCtrl = player.GetComponent<UserInputManager>();
+			if(userCtrl.playerNum == playerId_in)
+			{
+				Player = player;
+				return;
+			}
+		}
 	}
 }
