@@ -8,9 +8,8 @@ public class PlayerNameView : MonoBehaviour {
 	GameObject Player;
 	public int playerId;
 	private Camera viewCamera;
-	PlayerData pd;
-	GameStatus gameStatus;
-	BarControl barCon;
+	private PlayerData pd;
+	private BarControl barCon;
 	
 	// now for y-axis
 	private float heightOffset = 320.0f; 
@@ -27,7 +26,7 @@ public class PlayerNameView : MonoBehaviour {
 		rectOrigin = GetComponent<RectTransform> ().sizeDelta;
 		textUI = GetComponent<Text> ();
 		originSize = textUI.fontSize;
-		gameStatus = GameObject.Find ("GameStatus").GetComponent<GameStatus>();
+
 	}
 	
 	// Update is called once per frame
