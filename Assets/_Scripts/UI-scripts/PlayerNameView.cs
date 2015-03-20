@@ -50,23 +50,11 @@ public class PlayerNameView : MonoBehaviour {
 		}
 		else {
 			textUI.enabled = false;
-			GetPlayerObjById(playerId);
+			Player = GameStatus.GetPlayerObjById(playerId);
 			if(Player)
 				pd = Player.GetComponent<PlayerData> ();
 		}
 	}
 	
-	void GetPlayerObjById(int playerId_in)
-	{
-		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
-		foreach(GameObject player in playerCollection)
-		{
-			UserInputManager userCtrl = player.GetComponent<UserInputManager>();
-			if(userCtrl.playerNum == playerId_in)
-			{
-				Player = player;
-				return;
-			}
-		}
-	}
+
 }

@@ -183,4 +183,18 @@ public class GameStatus : MonoBehaviour {
 		}
 	}
 
+	public static GameObject GetPlayerObjById(int playerId_in)
+	{
+		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
+		foreach(GameObject player in playerCollection)
+		{
+			UserInputManager userCtrl = player.GetComponent<UserInputManager>();
+			if(userCtrl.playerNum == playerId_in)
+			{
+				return player;
+			}
+		}
+		return null;
+	}
+
 }
