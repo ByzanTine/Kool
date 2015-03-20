@@ -7,7 +7,7 @@ public class PlayerNameView : MonoBehaviour {
 	// use a hot link rather than playerId 
 	GameObject Player;
 	public int playerId;
-	private Camera camera;
+	private Camera viewCamera;
 	PlayerData pd;
 	GameStatus gameStatus;
 	BarControl barCon;
@@ -23,7 +23,7 @@ public class PlayerNameView : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// adjust Position.
-		camera = Camera.main;
+		viewCamera = Camera.main;
 		rectOrigin = GetComponent<RectTransform> ().sizeDelta;
 		textUI = GetComponent<Text> ();
 		originSize = textUI.fontSize;
@@ -36,14 +36,14 @@ public class PlayerNameView : MonoBehaviour {
 			textUI.enabled = true;
 			// get.sizeDelta *= 10.0f / Camera.main.fieldOfView;
 			// get the new transform position
-			Vector3 rawPos = camera.WorldToScreenPoint (Player.transform.position);
-			rawPos.y += heightOffset / camera.fieldOfView;
-			rawPos.x -= widthOffset / camera.fieldOfView;
+			Vector3 rawPos = viewCamera.WorldToScreenPoint (Player.transform.position);
+			rawPos.y += heightOffset / viewCamera.fieldOfView;
+			rawPos.x -= widthOffset / viewCamera.fieldOfView;
 
 			transform.position = rawPos;
-			GetComponent<RectTransform>().sizeDelta =  rectOrigin * 10.0f/Camera.main.fieldOfView;
+			GetComponent<RectTransform>().sizeDelta =  rectOrigin * 10.0f/viewCamera.fieldOfView;
 			// Debug.Log(pd.health);
-			textUI.fontSize = Mathf.RoundToInt(originSize * 10.0f/Camera.main.fieldOfView);
+			textUI.fontSize = Mathf.RoundToInt(originSize * 10.0f/viewCamera.fieldOfView);
 			textUI.text = GameStatus.Instance.Usernames[playerId];
 			textUI.color = GameStatus.Instance.UserColors[playerId];
 			// Debug.Log ("Printing name");

@@ -29,7 +29,6 @@ public class PlayerControl : MonoBehaviour {
 	private PlayerData PD;
 
 	// Local variables & local status
-	private float maxVelocity = 10.0f;
 	private bool isPosAiming = false;
 
 	void Start()

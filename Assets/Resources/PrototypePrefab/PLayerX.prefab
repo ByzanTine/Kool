@@ -607,7 +607,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 434496}
   - 95: {fileID: 9534510}
-  - 114: {fileID: 11434510}
   m_Layer: 0
   m_Name: Magician
   m_TagString: Untagged
@@ -772,8 +771,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134422}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.89999998, y: .400000006, z: 1}
+  m_LocalRotation: {x: 0, y: -.778073609, z: 0, w: .628173113}
+  m_LocalPosition: {x: 15.1000004, y: 1, z: 14.6000004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 476916}
@@ -1650,7 +1649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af2e4bc4503b40a9b739cc8e595e2ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 0
+  playerNum: 3
   leftInput: {x: 0, y: 0}
   rightInput: {x: 0, y: 0}
   button_id: -1
@@ -1670,17 +1669,6 @@ MonoBehaviour:
   magicID: 1
   Speed: 0
   KineticSpeed: 0
---- !u!114 &11434510
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b01048f2af36b4794907f068f06263ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11447538
 MonoBehaviour:
   m_ObjectHideFlags: 1

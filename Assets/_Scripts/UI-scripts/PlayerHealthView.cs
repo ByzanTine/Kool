@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerHealthView : MonoBehaviour {
 	// use a hot link rather than playerId 
 	public int playerId;
-	private Camera camera;
+	private Camera viewCamera;
 	PlayerData pd;
 	BarControl barCon;
 	GameObject Player;
@@ -20,7 +20,7 @@ public class PlayerHealthView : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// adjust Position.
-		camera = Camera.main;
+		viewCamera = Camera.main;
 		rectOrigin = GetComponent<RectTransform> ().sizeDelta;
 		img = GetComponent<Image>();
 	}
@@ -36,13 +36,13 @@ public class PlayerHealthView : MonoBehaviour {
 
 			// get.sizeDelta *= 10.0f / Camera.main.fieldOfView;
 			// get the new transform position
-			Vector3 rawPos = camera.WorldToScreenPoint (Player.transform.position);
-			rawPos.y += heightOffset / camera.fieldOfView;
-			rawPos.x -= widthOffset / camera.fieldOfView;
+			Vector3 rawPos = viewCamera.WorldToScreenPoint (Player.transform.position);
+			rawPos.y += heightOffset / viewCamera.fieldOfView;
+			rawPos.x -= widthOffset / viewCamera.fieldOfView;
 
 
 			transform.position = rawPos;
-			GetComponent<RectTransform>().sizeDelta =  rectOrigin * 10.0f/Camera.main.fieldOfView;
+			GetComponent<RectTransform>().sizeDelta =  rectOrigin * 10.0f/viewCamera.fieldOfView;
 			// Debug.Log(pd.health);
 
 		}
