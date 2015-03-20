@@ -16,6 +16,8 @@ public class GameStatus : MonoBehaviour {
 	public string[] Usernames = new string[4];
 	public Color[] UserColors = new Color[4]; 
 
+	private static Hashtable playerTable;
+
 	// private int playerNum;
 	private bool isGameOver = false;
 
@@ -38,6 +40,7 @@ public class GameStatus : MonoBehaviour {
 
 	void Awake() 
 	{
+
 //		if(_instance == null)
 //		{
 			//If I am the first instance, make me the Singleton
@@ -55,10 +58,12 @@ public class GameStatus : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		playerTable = new Hashtable ();
 		// playerNum = GameObject.FindGameObjectsWithTag (TagList.Player).Length;
 		BindAllUserData ();
-	}
 
+	}
+	// store into hashtable as well
 	void BindAllUserData()
 	{
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
@@ -69,6 +74,8 @@ public class GameStatus : MonoBehaviour {
 			userDataCollection[playerID] = new UserData();
 			userDataCollection[playerID].userID = playerID;
 			userDataCollection[playerID].initPosition = player.transform.position;
+			// add to hashtable
+			playerTable.Add(playerID, player);
 		}
 	}
 
@@ -167,20 +174,29 @@ public class GameStatus : MonoBehaviour {
 				as GameObject;
 		UserInputManager userCtrl = wizard.GetComponent<UserInputManager>();
 		userCtrl.playerNum = id;
+		// add to table
+		playerTable.Add (id, wizard);
 	}
 
-	void DestroyPlayerWithID(int id)
+	void DestroyPlayerWithID(int playerid)
 	{
-		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
-		foreach(GameObject player in playerCollection)
-		{
-			UserInputManager userCtrl = player.GetComponent<UserInputManager>();
-			if(userCtrl.playerNum == id)
-			{
-				Destroy(player);
-				return;
-			}
+
+		if (playerTable.ContainsKey(playerid)) {
+			Destroy(playerTable[playerid] as GameObject);
+			playerTable.Remove(playerid);
 		}
+		else {
+			Debug.LogError("[Status] Try deleting non exist player");
+		}
+
+	}
+
+	public static GameObject GetPlayerObjById(int playerId_in)
+	{
+		if (playerTable.ContainsKey(playerId_in))
+			return playerTable[playerId_in] as GameObject;
+		else 
+			return null;
 	}
 
 }

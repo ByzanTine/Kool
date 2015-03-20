@@ -7,6 +7,13 @@ public class ItemDB : MonoBehaviour {
 	static public int Number_Of_Items;
 
 
+	// TODO more accessor but not the public variable 
+
+
+	static public GameObject GetRandomItemPrefab() {
+		int num = Random.Range (0, Number_Of_Items);
+		return items [num];
+	}
 
 	void Awake()
 	{
@@ -24,4 +31,6 @@ public class ItemDB : MonoBehaviour {
 //		}
 		Number_Of_Items = items.Count;
 	}
+
+
 }

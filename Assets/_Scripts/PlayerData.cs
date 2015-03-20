@@ -4,8 +4,9 @@ using System.Collections;
 public class PlayerData : MonoBehaviour {
 
 	public SpellDB.AttackID spellID = SpellDB.AttackID.fireball;
-	public bool IncreaseNumber = false;
-	public bool Bigger = false;
+
+
+
 	public int teamNum = 0;
 	public float health = 1;
 	public float mana = 1;
@@ -65,7 +66,7 @@ public class PlayerData : MonoBehaviour {
 	public void ChangeIceFire(){
 		ice_fire = (ice_fire == Constants.SpellMode.Fire) ? 
 			Constants.SpellMode.Ice : Constants.SpellMode.Fire;
-		Debug.Log ("spell id now is : " + spellID);
+		Debug.Log ("[Spell] spell id now is : " + spellID);
 	}
 
 	public void frozenCheck (){
