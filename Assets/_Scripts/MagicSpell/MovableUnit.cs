@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// May need explodeLink to delegate the caster info
+/// But no explodeLink is still plausible
+/// </summary>
 public class MovableUnit : MonoBehaviour {
 	public Vector3 destination;
 	public GameObject explosion;
@@ -19,8 +22,15 @@ public class MovableUnit : MonoBehaviour {
 		if ((transform.position - destination).magnitude < 1.0f && isMoving){
 			isMoving = false;
 			// Cause Explosion Here
-			Instantiate(explosion, destination, Quaternion.identity);
-			Destroy(gameObject);
+			ExplodeLink explodeLink = GetComponent<ExplodeLink>();
+			if (explodeLink) {
+				explodeLink.CasterDelegateDestory(destination);
+			}
+			else {
+				// no caster delegate 
+				Instantiate(explosion, destination, Quaternion.identity);
+				Destroy(gameObject);
+			}
 		}
 
 		// Reflect if speed change 
@@ -39,15 +49,30 @@ public class MovableUnit : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
+		// avoid collider with self
+		ExplodeLink explodeLink = GetComponent<ExplodeLink>();
+		if (explodeLink && 
+		    other.gameObject.GetInstanceID() == explodeLink.caster.GetInstanceID()) {
+			// nothing should happen
+			return;
+		}
 		if ((other.gameObject.tag == TagList.Player
 		    || other.gameObject.tag == TagList.Fireball) && isMoving){
+
 			isMoving = false;
 			// Cause Explosion Here
 			// Debug.Log ("Knocked On other, explode now");
 			Debug.DrawLine (transform.position,
 			                new Vector3(transform.position.x, 30.0f, transform.position.z),Color.red,10.0f);
-			Instantiate(explosion, transform.position, Quaternion.identity);
-			Destroy(gameObject);
+
+			if (explodeLink) {
+				explodeLink.CasterDelegateDestory(transform.position);
+			}
+			else {
+				// no caster delegate 
+				Instantiate(explosion, transform.position, Quaternion.identity);
+				Destroy(gameObject);
+			}
 		}
 		
 	}

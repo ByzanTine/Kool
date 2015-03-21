@@ -18,7 +18,7 @@ GameObject:
   - 114: {fileID: 11450852}
   - 114: {fileID: 11409576}
   m_Layer: 0
-  m_Name: Fireball
+  m_Name: BigFireball
   m_TagString: Fireball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d6090fe2ba30448acf52d1a5da3943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualEffect: {fileID: 122416, guid: 643013302aae4194cad20ccc6a7269ba, type: 2}
+  visualEffect: {fileID: 122416, guid: 308f96b8212033b41a692553f119b3bf, type: 2}
 --- !u!114 &11463724
 MonoBehaviour:
   m_ObjectHideFlags: 1
