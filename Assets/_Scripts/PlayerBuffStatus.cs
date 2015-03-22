@@ -2,12 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BuffHandler : MonoBehaviour {
+public class PlayerBuffStatus : MonoBehaviour {
 	public float effectiveTime = 3;
+	// this should not index with 0 1 2 3.
+	// Should be some Enum
 	private List<float> Buff_time_List;	// keep track of the cool down time for all the buffs
 	private List<bool> Buff_valid_List;	// keep track of the all the buff which is valid 
 	private PlayerData pd;
 
+	public bool IncreaseNumber = false;
+	public bool Bigger = false;
 	// Use this for initialization
 	void Start () {
 		Buff_time_List = new List<float>();
@@ -27,12 +31,12 @@ public class BuffHandler : MonoBehaviour {
 				DebuffPlayerData(i);
 			}
 		}
-		updateFireballID ();
+		UpdateFireballID ();
 	}
 
 	public void UpdateBuff(int mode){
 		Buff_time_List [mode] = Time.time;
-		//pd.ChangeIceFire ();
+		//ChangeIceFire ();
 		if (!Buff_valid_List [mode]){
 			BuffPlayerData (mode);
 			Buff_valid_List [mode] = true;
@@ -41,24 +45,25 @@ public class BuffHandler : MonoBehaviour {
 
 	private void BuffPlayerData(int i){
 		Item itemInfo = ItemDB.items [i].GetComponent<Item> ();
-		pd.IncreaseNumber = pd.IncreaseNumber || itemInfo.IncreaseNumber;
-		pd.Bigger = itemInfo.Bigger || pd.Bigger;
+		IncreaseNumber = IncreaseNumber || itemInfo.IncreaseNumber;
+		Bigger = itemInfo.Bigger || Bigger;
 	}
 
 	private void DebuffPlayerData(int i){
 		Item itemInfo = ItemDB.items [i].GetComponent<Item> ();
-		pd.IncreaseNumber = (itemInfo.IncreaseNumber)? false : pd.IncreaseNumber;
-		pd.Bigger = (itemInfo.Bigger)? false : pd.Bigger;
+		IncreaseNumber = (itemInfo.IncreaseNumber)? false : IncreaseNumber;
+		Bigger = (itemInfo.Bigger)? false : Bigger;
 	}
 
-	private void updateFireballID (){
-		if (pd.IncreaseNumber && pd.Bigger)
+	// only change spell id 
+	private void UpdateFireballID (){
+		if (IncreaseNumber && Bigger)
 			pd.spellID = SpellDB.AttackID.morebigfireball;
-		if (pd.IncreaseNumber && !pd.Bigger)
+		if (IncreaseNumber && !Bigger)
 			pd.spellID = SpellDB.AttackID.morefireball;
-		if (!pd.IncreaseNumber && pd.Bigger)
+		if (!IncreaseNumber && Bigger)
 			pd.spellID = SpellDB.AttackID.bigfireball;
-		if (!pd.IncreaseNumber && !pd.Bigger)
+		if (!IncreaseNumber && !Bigger)
 			pd.spellID = SpellDB.AttackID.fireball;
 		if (pd.ice_fire == Constants.SpellMode.Ice)
 			pd.spellID += 4;

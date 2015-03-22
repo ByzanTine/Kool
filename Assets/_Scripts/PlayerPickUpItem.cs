@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PickUpItem : MonoBehaviour {
-	private BuffHandler BH;
+public class PlayerPickUpItem : MonoBehaviour {
+	private PlayerBuffStatus BH;
 	private WizardAttackMeans WAM;
 	private PlayerData pd;
 
 	void Start (){
-		BH = GetComponent<BuffHandler> ();
+		BH = GetComponent<PlayerBuffStatus> ();
 		WAM = GetComponent<WizardAttackMeans> ();
 		pd = GetComponent<PlayerData> ();
 	}
@@ -19,10 +19,10 @@ public class PickUpItem : MonoBehaviour {
 			if (ID == SpellDB.AttackID.reflect) // reflect
 			{
 				WAM.AttackToPosition (ID);
-			} else if (ID == SpellDB.AttackID.meteor){
+			} else {
 				pd.SpecialSpellID = ID;
 			}
-			Debug.Log ("da zhao");// TODO da zhao
+			Debug.Log ("[Spell] Super Skill");// TODO da zhao
 		}
 	}
 }

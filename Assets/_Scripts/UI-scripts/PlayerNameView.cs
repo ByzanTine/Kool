@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class PlayerNameView : MonoBehaviour {
 
 	// use a hot link rather than playerId 
-	public GameObject Player;
-	public int id;
-	private Camera camera;
-	PlayerData pd;
-	BarControl barCon;
+	GameObject Player;
+	public int playerId;
+	private Camera viewCamera;
+	private PlayerData pd;
+	private BarControl barCon;
 	
 	// now for y-axis
 	private float heightOffset = 320.0f; 
@@ -22,40 +22,38 @@ public class PlayerNameView : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// adjust Position.
-		camera = Camera.main;
+		viewCamera = Camera.main;
 		rectOrigin = GetComponent<RectTransform> ().sizeDelta;
 		textUI = GetComponent<Text> ();
 		originSize = textUI.fontSize;
-		pd = Player.GetComponent<PlayerData> ();
-		if (!pd) {
-			Debug.LogError("[UI] No Player attached to this health bar");
-			
-		}
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (pd) {
-
+			textUI.enabled = true;
 			// get.sizeDelta *= 10.0f / Camera.main.fieldOfView;
 			// get the new transform position
-			Vector3 rawPos = camera.WorldToScreenPoint (Player.transform.position);
-			rawPos.y += heightOffset / camera.fieldOfView;
-			rawPos.x -= widthOffset / camera.fieldOfView;
-			
-			
-			transform.position = rawPos;
-			GetComponent<RectTransform>().sizeDelta =  rectOrigin * 10.0f/Camera.main.fieldOfView;
-			// Debug.Log(pd.health);
-			textUI.fontSize = Mathf.RoundToInt(originSize * 10.0f/Camera.main.fieldOfView);
-			textUI.text = "Weddy";
+			Vector3 rawPos = viewCamera.WorldToScreenPoint (Player.transform.position);
+			rawPos.y += heightOffset / viewCamera.fieldOfView;
+			rawPos.x -= widthOffset / viewCamera.fieldOfView;
 
+			transform.position = rawPos;
+			GetComponent<RectTransform>().sizeDelta =  rectOrigin * 10.0f/viewCamera.fieldOfView;
+			// Debug.Log(pd.health);
+			textUI.fontSize = Mathf.RoundToInt(originSize * 10.0f/viewCamera.fieldOfView);
+			textUI.text = GameStatus.Instance.Usernames[playerId];
+			textUI.color = GameStatus.Instance.UserColors[playerId];
+			// Debug.Log ("Printing name");
 		}
 		else {
-			// TODO fetch the player by id, and get the player data
-			
+			textUI.enabled = false;
+			Player = GameStatus.GetPlayerObjById(playerId);
+			if(Player)
+				pd = Player.GetComponent<PlayerData> ();
 		}
-		
-		
 	}
+	
+
 }
