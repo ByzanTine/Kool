@@ -275,8 +275,11 @@ public class PlayerControl : MonoBehaviour {
 		animator.SetBool ("isAlive", true); // reset to lock animation
 
 		yield return new WaitForSeconds(1.0f);
-
-		GameStatus.Instance.DecrementPlayerLife (inputManager.playerNum);
+		// For compatiblity for other scenes
+		if (GameStatus.Instance)
+			GameStatus.Instance.DecrementPlayerLife (inputManager.playerNum);
+		else 
+			Debug.Log("[Player] player died, but no Gamestatus to update");
 
 	}
 

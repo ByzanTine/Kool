@@ -49,6 +49,14 @@ public class IceBallSpell : MagicSpell {
 			GameObject gb = GameObject.Instantiate (iceball, caster.transform.position, lookedQua) as GameObject;
 			gb.transform.localScale *= scale;
 			gb.transform.Rotate(gb.transform.up, randomAngle, Space.Self);
+
+			ExplodeLink explodeLink = gb.GetComponent<ExplodeLink>();
+			if (explodeLink) {
+				explodeLink.caster = caster;
+			}
+			else {
+				Debug.LogWarning("[Spell] Spell has no explode delegate");
+			}
 			
 			MovableUnit movUnit = gb.GetComponent<MovableUnit> ();
 			Vector3 newHitPoint = MathUtil.RotatePointAroundPivot(hitpoint, caster.transform.position, 

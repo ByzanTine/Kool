@@ -44,8 +44,7 @@ public class SpellDB : MonoBehaviour {
 	static public GameObject reflector;
 	static public GameObject swap;
 	static public GameObject iceBurst;
-
-	// static public GameObject aerolite;
+	static public GameObject Bigfireball;
 
 	void Awake()
 	{
@@ -57,7 +56,9 @@ public class SpellDB : MonoBehaviour {
 	void InitSpells () {
 
 		fireball = Resources.Load ("MagicSpells/Fireball") as GameObject;
-		meteor = Resources.Load ("MagicSpells/meteor") as GameObject;
+		Bigfireball = Resources.Load ("MagicSpells/BigFireball") as GameObject;
+
+		meteor = Resources.Load ("MagicSpells/meteorController") as GameObject;
 		iceball = Resources.Load ("MagicSpells/Iceball") as GameObject;
 		reflector = Resources.Load ("MagicSpells/Reflector") as GameObject;
 		// aerolite = Resources.Load ("MagicSpells/Aerolite") as GameObject;

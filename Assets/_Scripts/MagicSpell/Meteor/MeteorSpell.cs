@@ -2,30 +2,27 @@
 using System.Collections;
 
 public class MeteorSpell : MagicSpell {
-
-	private GameObject meteor;
-
+	
+	private GameObject meteorController;
 	public MeteorSpell()
 	{
-		meteor = SpellDB.meteor;
+		meteorController = SpellDB.meteor;
 	}
 	public override IEnumerator castMagic (GameObject caster, Vector3 hitpoint = default(Vector3)) 
 	{
 		
-		Debug.Log("Meteor Activiated!");
-		Vector3 castLocation = caster.transform.position + new Vector3 (0, 20, 0);
-		// TODO Hard code
-		Quaternion lookedQua = Quaternion.LookRotation (castLocation - hitpoint);
+		Debug.Log("[Spell] Meteor Activiated!");
+		GameObject gb = GameObject.Instantiate (meteorController, 
+		                                        default(Vector3), 
+		                                        Quaternion.identity) as GameObject;
+		gb.GetComponent<MeteorController> ().caster = caster;
+		yield return new WaitForSeconds (1.0f);
 
-		GameObject gb = GameObject.Instantiate (meteor, castLocation, lookedQua) as GameObject;
-		 
-		// TODO create a indicator on the ground 
-		GameObject targetIndicator = Resources.Load ("MagicSpells/CFXM3_MagicAura_B_Runic") as GameObject;
-		GameObject.Instantiate (targetIndicator, hitpoint, Quaternion.identity);
+		// drop from a higher place
+		// meteorController.GetComponent<MeteorController> ().MeteorDrop ();
 
-
-		MovableUnit movUnit = gb.GetComponent<MovableUnit> ();
-		movUnit.MoveTo (hitpoint);
-		yield return new WaitForSeconds(0.1f);
+		yield return null;
 	}
+
+
 }

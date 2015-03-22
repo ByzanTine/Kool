@@ -30,6 +30,14 @@ public class FireballSpell : MagicSpell {
 		scale = scale_;
 		fireball = SpellDB.fireball;
 	}
+	// working with particle system and collider delay 
+	private void ScaleFireball(GameObject gb, float scale) {
+		gb.transform.localScale *= scale; // only fixed the collider size
+		// get the particle system
+
+	}
+
+
 
 	public override IEnumerator castMagic (GameObject caster, Vector3 hitpoint = default(Vector3)) 
 	{
@@ -43,7 +51,20 @@ public class FireballSpell : MagicSpell {
 			float randomAngle = Random.Range(-1 * Range, Range); // TODO range angles 
 
 			GameObject gb = GameObject.Instantiate (fireball, caster.transform.position, lookedQua) as GameObject;
-			gb.transform.localScale *= scale;
+			//  add caster delegate 
+			ExplodeLink explodeLink = gb.GetComponent<ExplodeLink>();
+			if (explodeLink) {
+				explodeLink.caster = caster;
+			}
+			else {
+				Debug.LogWarning("[Spell] Spell has no explode delegate");
+			}
+
+
+			// scale 
+			ScaleFireball(gb, scale);
+
+
 			gb.transform.Rotate(gb.transform.up, randomAngle, Space.Self);
 
 			MovableUnit movUnit = gb.GetComponent<MovableUnit> ();

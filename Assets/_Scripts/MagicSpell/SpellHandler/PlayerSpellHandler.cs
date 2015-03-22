@@ -15,7 +15,7 @@ public class PlayerSpellHandler : MonoBehaviour {
 	// Update is called once per frame
 	public void onSpellTrigger (Vector3 spellPos, int spellID) {
 		// if fireball, deduct health
-		Debug.Log ("[Spell] " + spellID + "   on spell trigger");
+		Debug.Log ("[Spell] " + SpellDB.attackIDnames[spellID] + "   on spell trigger");
 
 		if (spellID == 0){ // fireball id is 0
 			Debug.Log ("[Spell] fireball is hit on " + this.name);

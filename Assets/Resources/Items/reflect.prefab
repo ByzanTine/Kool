@@ -10,9 +10,9 @@ GameObject:
   - 4: {fileID: 484554}
   - 33: {fileID: 3333560}
   - 23: {fileID: 2397118}
-  - 114: {fileID: 11456024}
   - 114: {fileID: 11469212}
   - 65: {fileID: 6513854}
+  - 114: {fileID: 11407162}
   m_Layer: 0
   m_Name: reflect
   m_TagString: Untagged
@@ -96,7 +96,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 1ce64a9fcc66ef94293caed8dbc93553, type: 2}
+  - {fileID: 2100000, guid: 7629d1fe669b2b645b4b02e869d815df, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -136,7 +136,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 2.5, z: 2.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11456024
+--- !u!114 &11407162
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -144,10 +144,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 116532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11a1a60dbff46c349b4a937dfb317f91, type: 3}
+  m_Script: {fileID: 11500000, guid: 2cb80de458607f14ba5ab9cf1bc30722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   livingTime: 10
+  hintTime: 2
 --- !u!114 &11469212
 MonoBehaviour:
   m_ObjectHideFlags: 1
