@@ -147,19 +147,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f4acf653b3145dd904e8f1270e6002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  AttID: 1
-  buff: 1
-  TriggerNow: 0
---- !u!114 &11466912
-=======
   isBuff: 1
   IncreaseNumber: 1
   Bigger: 0
   index_number: 1
   AttID: 9
 --- !u!114 &11457424
->>>>>>> upstream/master
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
