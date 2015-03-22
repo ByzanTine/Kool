@@ -8,8 +8,8 @@ public class PlayerBuffStatus : MonoBehaviour {
 	private List<bool> Buff_valid_List;	// keep track of the all the buff which is valid 
 	private PlayerData pd;
 
-	public bool IncreaseNumber = false;
-	public bool Bigger = false;
+	private bool IncreaseNumber = false;
+	private bool Bigger = false;
 	// Use this for initialization
 	void Start () {
 		Buff_time_List = new List<float>();
