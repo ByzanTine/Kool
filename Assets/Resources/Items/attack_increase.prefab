@@ -12,7 +12,7 @@ GameObject:
   - 23: {fileID: 2385892}
   - 65: {fileID: 6533548}
   - 114: {fileID: 11493084}
-  - 114: {fileID: 11451580}
+  - 114: {fileID: 11462664}
   m_Layer: 0
   m_Name: attack_increase
   m_TagString: Untagged
@@ -96,7 +96,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: f8819428158cb7f4382d89fc9704bc55, type: 2}
+  - {fileID: 2100000, guid: 7629d1fe669b2b645b4b02e869d815df, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -136,7 +136,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 2.5, z: 2.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11451580
+--- !u!114 &11462664
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -144,10 +144,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 110700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11a1a60dbff46c349b4a937dfb317f91, type: 3}
+  m_Script: {fileID: 11500000, guid: 2cb80de458607f14ba5ab9cf1bc30722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   livingTime: 10
+  hintTime: 2
 --- !u!114 &11493084
 MonoBehaviour:
   m_ObjectHideFlags: 1
