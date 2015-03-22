@@ -16,6 +16,7 @@ GameObject:
   - 114: {fileID: 11487744}
   - 114: {fileID: 11489208}
   - 114: {fileID: 11403358}
+  - 114: {fileID: 11468094}
   m_Layer: 0
   m_Name: Iceball
   m_TagString: Fireball
@@ -61,6 +62,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f560fbaaa3865604d94193537276c309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11468094
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44a5bdaa73376684eb23787ae395a6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  caster: {fileID: 0}
+  explodePrefab: {fileID: 112404, guid: 2515fba05d43d404c951f40e2677dfce, type: 2}
 --- !u!114 &11487740
 MonoBehaviour:
   m_ObjectHideFlags: 1

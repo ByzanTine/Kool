@@ -24,7 +24,7 @@ public class MovableUnit : MonoBehaviour {
 			// Cause Explosion Here
 			ExplodeLink explodeLink = GetComponent<ExplodeLink>();
 			if (explodeLink) {
-				explodeLink.CasterDelegateDestory(destination);
+				explodeLink.CasterDelegateDestroy(destination);
 			}
 			else {
 				// no caster delegate 
@@ -66,7 +66,7 @@ public class MovableUnit : MonoBehaviour {
 			                new Vector3(transform.position.x, 30.0f, transform.position.z),Color.red,10.0f);
 
 			if (explodeLink) {
-				explodeLink.CasterDelegateDestory(transform.position);
+				explodeLink.CasterDelegateDestroy(transform.position);
 			}
 			else {
 				// no caster delegate 
