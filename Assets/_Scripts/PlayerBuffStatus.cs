@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public class PlayerBuffStatus : MonoBehaviour {
 	public float effectiveTime = 3;
-	// this should not index with 0 1 2 3.
-	// Should be some Enum
 	private List<float> Buff_time_List;	// keep track of the cool down time for all the buffs
 	private List<bool> Buff_valid_List;	// keep track of the all the buff which is valid 
 	private PlayerData pd;
@@ -34,25 +32,23 @@ public class PlayerBuffStatus : MonoBehaviour {
 		UpdateFireballID ();
 	}
 
-	public void UpdateBuff(int mode){
-		Buff_time_List [mode] = Time.time;
+	public void UpdateBuff(SpellDB.AttackID mode){
+		Buff_time_List [(int)mode] = Time.time;
 		//ChangeIceFire ();
-		if (!Buff_valid_List [mode]){
+		if (!Buff_valid_List [(int)mode]){
 			BuffPlayerData (mode);
-			Buff_valid_List [mode] = true;
+			Buff_valid_List [(int)mode] = true;
 		}
 	}
 
-	private void BuffPlayerData(int i){
-		Item itemInfo = ItemDB.items [i].GetComponent<Item> ();
-		IncreaseNumber = IncreaseNumber || itemInfo.IncreaseNumber;
-		Bigger = itemInfo.Bigger || Bigger;
+	private void BuffPlayerData(SpellDB.AttackID mode){
+		IncreaseNumber = IncreaseNumber || (mode == SpellDB.AttackID.morefireball)? true : false;
+		Bigger = Bigger || (mode == SpellDB.AttackID.bigfireball)? true : false;
 	}
 
-	private void DebuffPlayerData(int i){
-		Item itemInfo = ItemDB.items [i].GetComponent<Item> ();
-		IncreaseNumber = (itemInfo.IncreaseNumber)? false : IncreaseNumber;
-		Bigger = (itemInfo.Bigger)? false : Bigger;
+	private void DebuffPlayerData(int mode){
+		IncreaseNumber = (mode == (int)SpellDB.AttackID.morefireball)? false : IncreaseNumber;
+		Bigger = (mode == (int)SpellDB.AttackID.bigfireball)? false : Bigger;
 	}
 
 	// only change spell id 
