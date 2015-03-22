@@ -159,11 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f4acf653b3145dd904e8f1270e6002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBuff: 0
-  IncreaseNumber: 0
-  Bigger: 0
-  index_number: 1
   AttID: 9
+  buff: 0
+  TriggerNow: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
