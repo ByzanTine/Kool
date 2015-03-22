@@ -10,9 +10,9 @@ GameObject:
   - 4: {fileID: 408110}
   - 33: {fileID: 3313676}
   - 23: {fileID: 2383962}
-  - 114: {fileID: 11440440}
   - 114: {fileID: 11423564}
   - 65: {fileID: 6585616}
+  - 114: {fileID: 11449892}
   m_Layer: 0
   m_Name: IceBurst
   m_TagString: Untagged
@@ -96,7 +96,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 1ce64a9fcc66ef94293caed8dbc93553, type: 2}
+  - {fileID: 2100000, guid: 7629d1fe669b2b645b4b02e869d815df, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -152,7 +152,7 @@ MonoBehaviour:
   Bigger: 0
   index_number: 1
   AttID: 11
---- !u!114 &11440440
+--- !u!114 &11449892
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -160,10 +160,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 129264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11a1a60dbff46c349b4a937dfb317f91, type: 3}
+  m_Script: {fileID: 11500000, guid: 2cb80de458607f14ba5ab9cf1bc30722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   livingTime: 10
+  hintTime: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
