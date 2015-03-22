@@ -12,17 +12,15 @@ public class PlayerPickUpItem : MonoBehaviour {
 		pd = GetComponent<PlayerData> ();
 	}
 	// Update is called once per frame
-	public void PickUp (int mode, bool isBuff, SpellDB.AttackID ID) {
-		if (isBuff)
-			BH.UpdateBuff (mode);
+	public void PickUp (bool buff, bool TriggerNow, SpellDB.AttackID ID) {
+		if (buff)
+			BH.UpdateBuff (ID);
 		else {
-			if (ID == SpellDB.AttackID.reflect) // reflect
-			{
+			if (TriggerNow){ // reflect
 				WAM.AttackToPosition (ID);
 			} else {
 				pd.SpecialSpellID = ID;
 			}
-			Debug.Log ("[Spell] Super Skill");// TODO da zhao
 		}
 	}
 }
