@@ -58,7 +58,7 @@ public class SpellDB : MonoBehaviour {
 		fireball = Resources.Load ("MagicSpells/Fireball") as GameObject;
 		Bigfireball = Resources.Load ("MagicSpells/BigFireball") as GameObject;
 
-		meteor = Resources.Load ("MagicSpells/meteor") as GameObject;
+		meteor = Resources.Load ("MagicSpells/meteorController") as GameObject;
 		iceball = Resources.Load ("MagicSpells/Iceball") as GameObject;
 		reflector = Resources.Load ("MagicSpells/Reflector") as GameObject;
 		// aerolite = Resources.Load ("MagicSpells/Aerolite") as GameObject;
