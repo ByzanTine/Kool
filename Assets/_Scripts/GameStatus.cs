@@ -41,6 +41,8 @@ public class GameStatus : MonoBehaviour {
 	void Awake() 
 	{
 
+		// Scene transition protection for singleton
+		// For later usage
 //		if(_instance == null)
 //		{
 			//If I am the first instance, make me the Singleton
@@ -59,7 +61,6 @@ public class GameStatus : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerTable = new Hashtable ();
-		// playerNum = GameObject.FindGameObjectsWithTag (TagList.Player).Length;
 		BindAllUserData ();
 
 	}
@@ -104,7 +105,7 @@ public class GameStatus : MonoBehaviour {
 		yield return new WaitForSeconds (0.1f);
 
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
-		
+
 		foreach(GameObject player in playerCollection)
 		{
 			GameObject winEffPrefab = Resources.Load ("ArenaEffects/WinParEff") as GameObject;
@@ -123,14 +124,21 @@ public class GameStatus : MonoBehaviour {
 		userDataCollection [playerID].deathCount ++;
 		DestroyPlayerWithID(playerID);
 
+		UpdateScoreStatusWithDeath (playerID);
+
+	}
+
+	// update the game status when a player died
+	void UpdateScoreStatusWithDeath(int playerID)
+	{
 		switch(gameMode)
 		{
 		case GameMode.LoseLife:
 			if(userDataCollection [playerID].deathCount >= GameTargetRounds)
 			{
-
+				
 				GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
-
+				
 				if(playerCollection.Length <= 2 && !isGameOver)
 				{
 					WinEndGame();
@@ -141,7 +149,7 @@ public class GameStatus : MonoBehaviour {
 				StartCoroutine(RebornPlayerWithID(playerID));
 			}
 			break;
-
+			
 		case GameMode.GainScore:
 			int team = playerID >= 2 ? 2 : 0;
 			if(userDataCollection [team].deathCount 
@@ -153,7 +161,6 @@ public class GameStatus : MonoBehaviour {
 					DestroyPlayerWithID(team+1);
 					WinEndGame();
 				}
-
 			}
 			else
 			{

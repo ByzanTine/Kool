@@ -24,6 +24,8 @@ public class UserInputManager : MonoBehaviour {
 	public event OnInput OnPressSubSkill;
 	public event OnInput OnReleaseSubSkill;
 	public event OnInput OnPressHit;
+	public event OnInput OnPressSwapIceFire;
+
 	public event OnInput OnPressRunning;
 	public event OnInput OnReleaseRunning;
 	
@@ -32,8 +34,8 @@ public class UserInputManager : MonoBehaviour {
 	public event OnInput OnReleaseButton;
 
 	
-	// input lock of each: left, right, buttons;
-	private bool[] ctrlLocks = new bool[3]{false, false, false};
+	// input lock of each: left, right, buttons, trigger & bumper;
+	private bool[] ctrlLocks = new bool[4]{false, false, false, false};
 	void Start()
 	{}
 	
@@ -118,35 +120,36 @@ public class UserInputManager : MonoBehaviour {
 
 	void GetTriggerBumperInput(InputDevice inputDevice)
 	{
+		if(ctrlLocks[3]) return;
+
 		if(inputDevice.LeftBumper.WasPressed)
 		{
-			OnPressHit();
+
+			OnPressSwapIceFire();
 		}
 		
 		if(inputDevice.RightBumper.WasPressed)
 		{
-			OnPressRunning();
-		}
-
-		if(inputDevice.RightBumper.WasReleased)
-		{
-			OnReleaseRunning();
+			OnPressSubSkill();
 		}
 
 		if(inputDevice.LeftTrigger.WasPressed)
 		{
+//			OnPressHit();
 			OnPressMainSkill();
-		}
-		
-		if(inputDevice.RightTrigger.WasPressed)
-		{
-			OnPressSubSkill();
 		}
 
 		if(inputDevice.RightTrigger.WasPressed)
 		{
-			OnReleaseSubSkill();
+			OnPressRunning();
 		}
+
+		if(inputDevice.RightTrigger.WasReleased)
+		{
+			OnReleaseRunning();
+		}
+
+
 	}
 
 	void GetDirectionInput(InputDevice inputDevice )
@@ -216,5 +219,21 @@ public class UserInputManager : MonoBehaviour {
 		{
 			StartCoroutine (LockParameter (2, period));
 		}
+	}
+
+	public void LockTriggerAndBumper(float period)
+	{
+		if(!ctrlLocks[3])
+		{
+			StartCoroutine (LockParameter (3, period));
+		}
+	}
+
+	public void LockAllControl(float period)
+	{
+		LockLeftInput (period);
+		LockRightInput (period);
+		LockButton (period);
+		LockTriggerAndBumper (period);
 	}
 }
