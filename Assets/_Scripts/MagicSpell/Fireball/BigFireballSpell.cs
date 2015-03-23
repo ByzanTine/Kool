@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class BigFireballSpell : FireballSpell {
-	public BigFireballSpell() : base (1, 10, 5){
+	public BigFireballSpell() : base (1, 10, 2.2f){
 		fireball = SpellDB.Bigfireball;
 
 	}
