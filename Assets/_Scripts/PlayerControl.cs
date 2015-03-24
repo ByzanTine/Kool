@@ -173,6 +173,7 @@ public class PlayerControl : MonoBehaviour {
 		// cast a special spell by magic ID
 		Vector3 direction = transform.forward;
 		attackMeans.AttackByDiretion (PD.SpecialSpellID, direction);
+		// HACK Cost the magic point
 		PD.SpecialSpellID = SpellDB.AttackID.None;
 	}
 

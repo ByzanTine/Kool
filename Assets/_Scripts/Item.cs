@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class Item : MonoBehaviour {
-	public SpellDB.AttackID AttID = SpellDB.AttackID.reflect;
+	// must be defined in inspector
+	public ItemDB.ItemType itemType;
+	// TODO more variables for specific item description
 	private bool PickedUP = false;
 
 	// Use this for initialization
@@ -11,7 +13,7 @@ public class Item : MonoBehaviour {
 			PickedUP = true;
 			Debug.Log ("destroy item pick up by player");
 
-			other.GetComponent<PlayerBuffStatus>().UpdateBuff(AttID);
+			other.GetComponent<PlayerBuffStatus>().UpdateBuff(itemType);
 			Destroy(gameObject);
 		}
 	}

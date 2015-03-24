@@ -160,9 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f4acf653b3145dd904e8f1270e6002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttID: 9
-  buff: 0
-  TriggerNow: 1
+  itemType: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
