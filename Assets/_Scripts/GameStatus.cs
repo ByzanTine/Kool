@@ -23,6 +23,14 @@ public class GameStatus : MonoBehaviour {
 
 	private static UserData[] userDataCollection = new UserData[4];
 
+	public static UserData[] UserDataCollection
+	{
+		get
+		{
+			return userDataCollection;
+		}
+	}
+
 	private static GameStatus _instance;
 	
 	//This is the public reference that other classes will use
@@ -41,6 +49,8 @@ public class GameStatus : MonoBehaviour {
 	void Awake() 
 	{
 
+		// Scene transition protection for singleton
+		// For later usage
 //		if(_instance == null)
 //		{
 			//If I am the first instance, make me the Singleton
@@ -59,7 +69,6 @@ public class GameStatus : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerTable = new Hashtable ();
-		// playerNum = GameObject.FindGameObjectsWithTag (TagList.Player).Length;
 		BindAllUserData ();
 
 	}
@@ -73,6 +82,8 @@ public class GameStatus : MonoBehaviour {
 			int playerID = userCtrl.playerNum;
 			userDataCollection[playerID] = new UserData();
 			userDataCollection[playerID].userID = playerID;
+			userDataCollection[playerID].Username = Usernames[playerID];
+			userDataCollection[playerID].Usercolor = UserColors[playerID];
 			userDataCollection[playerID].initPosition = player.transform.position;
 			// add to hashtable
 			playerTable.Add(playerID, player);
@@ -104,7 +115,7 @@ public class GameStatus : MonoBehaviour {
 		yield return new WaitForSeconds (0.1f);
 
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
-		
+
 		foreach(GameObject player in playerCollection)
 		{
 			GameObject winEffPrefab = Resources.Load ("ArenaEffects/WinParEff") as GameObject;
@@ -123,14 +134,21 @@ public class GameStatus : MonoBehaviour {
 		userDataCollection [playerID].deathCount ++;
 		DestroyPlayerWithID(playerID);
 
+		UpdateScoreStatusWithDeath (playerID);
+
+	}
+
+	// update the game status when a player died
+	void UpdateScoreStatusWithDeath(int playerID)
+	{
 		switch(gameMode)
 		{
 		case GameMode.LoseLife:
 			if(userDataCollection [playerID].deathCount >= GameTargetRounds)
 			{
-
+				
 				GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
-
+				
 				if(playerCollection.Length <= 2 && !isGameOver)
 				{
 					WinEndGame();
@@ -141,7 +159,7 @@ public class GameStatus : MonoBehaviour {
 				StartCoroutine(RebornPlayerWithID(playerID));
 			}
 			break;
-
+			
 		case GameMode.GainScore:
 			int team = playerID >= 2 ? 2 : 0;
 			if(userDataCollection [team].deathCount 
@@ -153,7 +171,6 @@ public class GameStatus : MonoBehaviour {
 					DestroyPlayerWithID(team+1);
 					WinEndGame();
 				}
-
 			}
 			else
 			{
@@ -168,7 +185,12 @@ public class GameStatus : MonoBehaviour {
 	
 	IEnumerator RebornPlayerWithID(int id)
 	{
-		yield return new WaitForSeconds (3.0f);
+		for(int i = 5; i >=0 ; --i)
+		{
+			userDataCollection[id].rebornTime = i;
+			yield return new WaitForSeconds (1.0f);
+		}
+		userDataCollection [id].rebornTime = -1;
 		GameObject wizard = 
 			Instantiate(playerPrefab,userDataCollection [id].initPosition,Quaternion.identity) 
 				as GameObject;

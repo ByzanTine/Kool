@@ -7,6 +7,7 @@ public class UserData {
 	public Color Usercolor = Color.green;
 
 	public int deathCount = 0;
+	public int rebornTime = -1;
 	public int userID = -1;
 	public Vector3 initPosition;
 }

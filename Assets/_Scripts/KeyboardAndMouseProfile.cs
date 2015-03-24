@@ -58,17 +58,17 @@ namespace CustomProfile
 				},
 				new InputControlMapping
 				{
-					Handle = "Combat punch",
+					Handle = "Switch F/I",
 					Target = InputControlType.LeftBumper,
 					// KeyCodeComboButton requires that all KeyCode params are down simultaneously.
 					Source = KeyCodeButton( KeyCode.LeftShift )
 				},
 				new InputControlMapping
 				{
-					Handle = "Running",
+					Handle = "Sub Cast",
 					Target = InputControlType.RightBumper,
 					// KeyCodeComboButton requires that all KeyCode params are down simultaneously.
-					Source = KeyCodeButton( KeyCode.Space )
+					Source = MouseButton1 
 				},
 				new InputControlMapping
 				{
@@ -79,10 +79,10 @@ namespace CustomProfile
 				},
 				new InputControlMapping
 				{
-					Handle = "Cast Spell",
+					Handle = "Run",
 					Target = InputControlType.RightTrigger,
 					// KeyCodeComboButton requires that all KeyCode params are down simultaneously.
-					Source = MouseButton1
+					Source = KeyCodeButton( KeyCode.Space )
 				}
 			};
 

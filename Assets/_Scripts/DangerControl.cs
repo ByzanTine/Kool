@@ -58,9 +58,9 @@ public class DangerControl : MonoBehaviour {
 	//Damage player with the Damage Interval and damage health point
 	//This two parameter should be controled by outer script
 	IEnumerator DangerDamage(){
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(0.2f);
 		if (standState == STAND_STATE.OnDanger) {
-			playerData.DamageHP(0.25f);
+			playerData.DamageHP(0.05f);
 		}
 		damaging = false;
 	}
