@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GenerateWIzardUI : MonoBehaviour {
+public class GenerateWizardUI : MonoBehaviour {
 
 	public GameObject playerHealthPrefab;
 	public GameObject namePrefab;
