@@ -34,8 +34,7 @@ public class ColliderExplode : MonoBehaviour {
 			Debug.Log ("[Spell] " + collider.gameObject.tag + "  " + collider.name);
 			if (!hashtable.Contains(collider.gameObject.GetInstanceID())){
 				hashtable.Add(collider.gameObject.GetInstanceID());
-				
-				
+
 				PlayerSpellHandler PSH = collider.GetComponent<PlayerSpellHandler>();
 				if (PSH) {
 					PSH.onSpellTrigger(gameObject.transform.position, spellID);

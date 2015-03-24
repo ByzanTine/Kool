@@ -17,6 +17,9 @@ public class PlayerControl : MonoBehaviour {
 	// Is player running
 	public bool isRunning = false;
 
+	// for stab use
+	public GameObject explodePrefab;
+
 	// Current magic ID that player chosed
 	public int magicID = 1;
 
@@ -66,7 +69,9 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void SwapIceFire()
-	{}
+	{
+
+	}
 
 	void TryCastingMainSkill()
 	{
@@ -123,7 +128,6 @@ public class PlayerControl : MonoBehaviour {
 	void ReleaseButton()
 	{
 
-
 	}
 
 	void StartRunning()
@@ -146,20 +150,30 @@ public class PlayerControl : MonoBehaviour {
 	{
 		StartCoroutine (StabCoolDown ());
 
-		// TODO make damage, raise visual and physic effects
 	}
 
 	IEnumerator StabCoolDown()
 	{
 		animator.SetBool("isStabbing", true);
+
+		yield return new WaitForSeconds (0.3f);
 		inputManager.LockAllControl (Constants.MIN_STAB_COOL_DOWN);
 
-		yield return new WaitForSeconds (Constants.MIN_STAB_COOL_DOWN);
+		explodePrefab.GetComponent<ColliderExplode> ().caster = this.gameObject;
+
+		float explodeNum = 5;
+		for (int i = 0; i < explodeNum; ++i)
+		{
+			yield return new WaitForSeconds ((Constants.MIN_STAB_COOL_DOWN - 0.3f) / explodeNum);
+			Instantiate(explodePrefab, transform.position + i * transform.forward, Quaternion.identity);
+
+		}
+
 		animator.SetBool("isStabbing", false);
 	}
 		
 		
-		void CastFireball()
+	void CastFireball()
 	{
 		// cast one fireball
 		Vector3 direction = transform.forward;
