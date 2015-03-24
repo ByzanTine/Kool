@@ -6,7 +6,8 @@ public class UserInputManager : MonoBehaviour {
 
 
 	// variable set in Inspector
-	public int playerNum;
+	[HideInInspector]
+	public int playerNum = 0;
 
 	// variables for player controller and GUI
 	[HideInInspector]

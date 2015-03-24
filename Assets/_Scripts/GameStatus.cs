@@ -13,14 +13,17 @@ public class GameStatus : MonoBehaviour {
 	public int GameTargetRounds = 1;
 	public GameObject playerPrefab;
 
+
+	// Make this avaliable in inspector to intialize manually
 	public string[] Usernames = new string[4];
 	public Color[] UserColors = new Color[4]; 
 
-	private static Hashtable playerTable;
+//	private static Hashtable playerTable;
 
 	// private int playerNum;
 	private bool isGameOver = false;
 
+	private static int totalPlayerNum = 0;
 	private static UserData[] userDataCollection = new UserData[4];
 
 	public static UserData[] UserDataCollection
@@ -68,25 +71,28 @@ public class GameStatus : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		playerTable = new Hashtable ();
+//		playerTable = new Hashtable ();
 		BindAllUserData ();
 
 	}
 	// store into hashtable as well
 	void BindAllUserData()
 	{
+		totalPlayerNum = 0;
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 		foreach(GameObject player in playerCollection)
 		{
 			UserInputManager userCtrl = player.GetComponent<UserInputManager>();
+			userCtrl.playerNum = totalPlayerNum;
 			int playerID = userCtrl.playerNum;
+
 			userDataCollection[playerID] = new UserData();
 			userDataCollection[playerID].userID = playerID;
 			userDataCollection[playerID].Username = Usernames[playerID];
 			userDataCollection[playerID].Usercolor = UserColors[playerID];
 			userDataCollection[playerID].initPosition = player.transform.position;
-			// add to hashtable
-			playerTable.Add(playerID, player);
+			userDataCollection[playerID].wizardInstance = player;
+			totalPlayerNum++;
 		}
 	}
 
@@ -185,7 +191,7 @@ public class GameStatus : MonoBehaviour {
 	
 	IEnumerator RebornPlayerWithID(int id)
 	{
-		for(int i = 5; i >=0 ; --i)
+		for(int i = 5; i >= 0 ; --i)
 		{
 			userDataCollection[id].rebornTime = i;
 			yield return new WaitForSeconds (1.0f);
@@ -197,15 +203,15 @@ public class GameStatus : MonoBehaviour {
 		UserInputManager userCtrl = wizard.GetComponent<UserInputManager>();
 		userCtrl.playerNum = id;
 		// add to table
-		playerTable.Add (id, wizard);
+		userDataCollection[id].wizardInstance = wizard;
 	}
 
 	void DestroyPlayerWithID(int playerid)
 	{
 
-		if (playerTable.ContainsKey(playerid)) {
-			Destroy(playerTable[playerid] as GameObject);
-			playerTable.Remove(playerid);
+		if (userDataCollection[playerid].wizardInstance != null) {
+			Destroy(userDataCollection[playerid].wizardInstance);
+			userDataCollection[playerid].wizardInstance = null;
 		}
 		else {
 			Debug.LogError("[Status] Try deleting non exist player");
@@ -215,8 +221,8 @@ public class GameStatus : MonoBehaviour {
 
 	public static GameObject GetPlayerObjById(int playerId_in)
 	{
-		if (playerTable.ContainsKey(playerId_in))
-			return playerTable[playerId_in] as GameObject;
+		if (userDataCollection[playerId_in].wizardInstance != null)
+			return userDataCollection[playerId_in].wizardInstance as GameObject;
 		else 
 			return null;
 	}
