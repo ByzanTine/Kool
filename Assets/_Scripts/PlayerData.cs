@@ -33,7 +33,7 @@ public class PlayerData : MonoBehaviour {
 		// HPbarControl.SetBar (health);
 
 		// update player status
-		if(health <= 0)
+		if(health <= 0 && isAlive)
 		{
 			isAlive = false;
 			DecreaseMana(mana);

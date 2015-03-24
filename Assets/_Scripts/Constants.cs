@@ -8,8 +8,7 @@ public class Constants : MonoBehaviour {
 	public const float MIN_CAST_COOL_DOWN = 0.3f;
 
 	public const float MIN_STAB_COOL_DOWN = 0.9f;
-
-
+	
 	public const float PLAYER_MOVE_SPEED = 6.5f;
 
 	public const float PLAYER_ANGULAR_SPEED = 0.25f;
