@@ -70,7 +70,7 @@ public class PlayerControl : MonoBehaviour {
 
 	void TryCastingMainSkill()
 	{
-		if(animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
+		if(isRunning)
 		{
 			// try stabbing if running
 			if(!animator.GetBool("isStabbing") && 
