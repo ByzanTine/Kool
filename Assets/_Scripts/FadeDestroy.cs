@@ -9,7 +9,10 @@ public class FadeDestroy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		startColor = GetComponent<Renderer> ().material.color;
+		if (GetComponent<Renderer>().material.HasProperty("_Color")) {
+			startColor = GetComponent<Renderer> ().material.color;
+		}
+		
 		endColor = startColor;
 		endColor.a = 0.0f;
 		StartCoroutine (DestroyAndFade ());

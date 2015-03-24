@@ -5,8 +5,11 @@ using InControl;
 
 public class PlayerControl : MonoBehaviour {
 
-	// is casting (fireball or special spell) or not, sync with animator in child model
-	public bool isCasting = false;
+//	// is casting (fireball or special spell) or not, sync with animator in child model
+//	public bool isCasting = false;
+//
+//	// is stabing (fireball or special spell) or not, sync with animator in child model
+//	public bool isStabing = false;
 
 	// Current speed ratio.
 	private float speedScale = Constants.PLAYER_MOVE_SPEED;
@@ -36,16 +39,16 @@ public class PlayerControl : MonoBehaviour {
 
 		// mapping input events
 		inputManager = GetComponent<UserInputManager> ();
-		inputManager.OnPressHit += CombatHit;
+//		inputManager.OnPressHit += TryCombatAttack;
 
-		inputManager.OnPressMainSkill += TryCastingMainSkil;
+		inputManager.OnPressMainSkill += TryCastingMainSkill;
 		inputManager.OnPressSubSkill += TryCastingSubSkill;
 		inputManager.OnReleaseSubSkill += StopCastingSubSkill;
 		inputManager.OnPressButton += HandleButton;
 		inputManager.OnReleaseButton += ReleaseButton;
 		inputManager.OnPressRunning += StartRunning;
 		inputManager.OnReleaseRunning += EndRunning;
-
+		inputManager.OnPressSwapIceFire += SwapIceFire;
 		// other local components
 		animator = GetComponentInChildren<Animator> ();
 		attackMeans = GetComponent<WizardAttackMeans> ();
@@ -57,16 +60,29 @@ public class PlayerControl : MonoBehaviour {
 	// ------- Start ---------- Input Events Callback Functions ----------------
 	// -------------------------------------------------------------------------
 
-	void CombatHit()
+	void TryCombatAttack()
+	{
+
+	}
+
+	void SwapIceFire()
 	{}
 
-	void TryCastingMainSkil()
+	void TryCastingMainSkill()
 	{
-		// Debug.Log ("try casting fireball");
-		if(!animator.GetBool("isCasting") && 
+		if(isRunning)
+		{
+			// try stabbing if running
+			if(!animator.GetBool("isStabbing") && 
+			   !animator.GetCurrentAnimatorStateInfo(0).IsName("Stab")) {
+				Debug.Log ("[SPELL]: combat stab");
+				Stab();
+			}
+		}
+		else if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1")) {
-			// Debug.Log ("casting spell" + magicID);
 
+			// try casting if not running
 			Debug.Log ("[SPELL]: casting fireball");
 			// StartCoroutine(castCoolDown());
 			CastFireball();
@@ -126,8 +142,24 @@ public class PlayerControl : MonoBehaviour {
 	// ------ START ------------- Casting Functions ------------------------
 	// ---------------------------------------------------------------------
 
+	void Stab()
+	{
+		StartCoroutine (StabCoolDown ());
 
-	void CastFireball()
+		// TODO make damage, raise visual and physic effects
+	}
+
+	IEnumerator StabCoolDown()
+	{
+		animator.SetBool("isStabbing", true);
+		inputManager.LockAllControl (Constants.MIN_STAB_COOL_DOWN);
+
+		yield return new WaitForSeconds (Constants.MIN_STAB_COOL_DOWN);
+		animator.SetBool("isStabbing", false);
+	}
+		
+		
+		void CastFireball()
 	{
 		// cast one fireball
 		Vector3 direction = transform.forward;
@@ -141,6 +173,7 @@ public class PlayerControl : MonoBehaviour {
 		// cast a special spell by magic ID
 		Vector3 direction = transform.forward;
 		attackMeans.AttackByDiretion (PD.SpecialSpellID, direction);
+		// HACK Cost the magic point
 		PD.SpecialSpellID = SpellDB.AttackID.None;
 	}
 
@@ -261,16 +294,20 @@ public class PlayerControl : MonoBehaviour {
 		yield return new WaitForSeconds (3.0f);
 		isPosAiming = false;
 	}
+
+//	IEnumerator CastCoolDown()
+//	{
+//		animator.SetBool("isCasting", true);
+//		yield return new WaitForSeconds (Constants.MIN_CAST_COOL_DOWN);
+//		animator.SetBool("isCasting", false);
+//	}
 	
-	IEnumerator CastCoolDown()
-	{
-		animator.SetBool("isCasting", true);
-		yield return new WaitForSeconds (Constants.MIN_CAST_COOL_DOWN);
-		animator.SetBool("isCasting", false);
-	}
+
 
 	private IEnumerator DieAnim() {
 		animator.SetBool ("isAlive", false);
+		inputManager.LockAllControl (2.0f);
+
 		yield return new WaitForSeconds(0.2f);
 		animator.SetBool ("isAlive", true); // reset to lock animation
 
@@ -287,7 +324,7 @@ public class PlayerControl : MonoBehaviour {
 	{
 		Color lineColor = Color.red;
 		
-		if(isCasting)
+		if(animator.GetBool("isCasting"))
 			lineColor = Color.green;
 		Debug.DrawLine(transform.localPosition, 
 		               transform.localPosition + 10.0f * transform.forward,
