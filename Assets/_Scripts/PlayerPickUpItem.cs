@@ -12,15 +12,8 @@ public class PlayerPickUpItem : MonoBehaviour {
 		pd = GetComponent<PlayerData> ();
 	}
 	// Update is called once per frame
-	public void PickUp (bool buff, bool TriggerNow, SpellDB.AttackID ID) {
-		if (buff)
-			BH.UpdateBuff (ID);
-		else {
-			if (TriggerNow){ // reflect
-				WAM.AttackToPosition (ID);
-			} else {
-				pd.SpecialSpellID = ID;
-			}
-		}
+	public void PickUp (SpellDB.AttackID ID) {
+		BH.UpdateBuff (ID);
+
 	}
 }

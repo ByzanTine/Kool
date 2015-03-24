@@ -6,15 +6,21 @@ public class PlayerBuffStatus : MonoBehaviour {
 	public float effectiveTime = 3;
 	private List<float> Buff_time_List;	// keep track of the cool down time for all the buffs
 	private List<bool> Buff_valid_List;	// keep track of the all the buff which is valid 
-	private PlayerData pd;
+
 
 	private bool IncreaseNumber = false;
 	private bool Bigger = false;
+
+	// some private components
+	private WizardAttackMeans wizardAttackMeans;
+	private PlayerData pd;
 	// Use this for initialization
 	void Start () {
 		Buff_time_List = new List<float>();
 		Buff_valid_List = new List<bool> ();
 		pd = GetComponent<PlayerData> ();
+		wizardAttackMeans = GetComponent<WizardAttackMeans> ();
+
 		for (int i = 0 ; i < ItemDB.Number_Of_Items;i ++){
 			Buff_time_List.Add(0);
 			Buff_valid_List.Add(false);
@@ -31,14 +37,29 @@ public class PlayerBuffStatus : MonoBehaviour {
 		}
 		UpdateFireballID ();
 	}
-
+	// event delegate 
+	// TODO extend this interface if more parameter is needed
 	public void UpdateBuff(SpellDB.AttackID mode){
-		Buff_time_List [(int)mode] = Time.time;
-		//ChangeIceFire ();
-		if (!Buff_valid_List [(int)mode]){
-			BuffPlayerData (mode);
-			Buff_valid_List [(int)mode] = true;
+		// switch on ID
+		switch (mode) {
+		case SpellDB.AttackID.reflect:
+			// cast directly
+			// may not do animation somehow
+			wizardAttackMeans.AttackByDiretion(SpellDB.AttackID.reflect, transform.position);
+			break;
+		case SpellDB.AttackID.iceBurst:
+			pd.SpecialSpellID = mode;
+			break;
+		default:
+			Buff_time_List [(int)mode] = Time.time;
+			//ChangeIceFire ();
+			if (!Buff_valid_List [(int)mode]){
+				BuffPlayerData (mode);
+				Buff_valid_List [(int)mode] = true;
+			}
+			break;
 		}
+
 	}
 
 	private void BuffPlayerData(SpellDB.AttackID mode){
