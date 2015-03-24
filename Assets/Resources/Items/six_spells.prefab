@@ -147,9 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f4acf653b3145dd904e8f1270e6002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttID: 9
-  buff: 0
-  TriggerNow: 0
+  itemType: 1
 --- !u!114 &11457424
 MonoBehaviour:
   m_ObjectHideFlags: 1

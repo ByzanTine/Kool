@@ -3,6 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ItemDB : MonoBehaviour {
+	public enum ItemType
+	{
+		sizeBoost,
+		numberBoost,
+		protection,
+		specialSkill
+	};
+
 	static public List<GameObject> items;
 	static public int Number_Of_Items;
 
