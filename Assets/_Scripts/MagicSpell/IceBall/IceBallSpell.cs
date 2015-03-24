@@ -12,7 +12,7 @@ public class IceBallSpell : MagicSpell {
 	public IceBallSpell()
 	{
 		NumberOfBalls = 2;
-		Range = 10;
+		Range = 5;
 		scale = 1;
 		iceball = SpellDB.iceball;
 	}

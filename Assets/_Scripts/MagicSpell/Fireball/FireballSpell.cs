@@ -6,13 +6,14 @@ public class FireballSpell : MagicSpell {
 	private int NumberOfBalls;
 	private float Range;
 	private float scale;
+	public float TimeInterval = 0.1f;
 	/// <summary>
 	/// Initializes a new instance of the <see cref="FireballSpell"/> class.
 	/// </summary>
 	public FireballSpell()
 	{
 		NumberOfBalls = 2;
-		Range = 10;
+		Range = 5;
 		scale = 1;
 		fireball = SpellDB.fireball;
 	}
@@ -71,7 +72,7 @@ public class FireballSpell : MagicSpell {
 			Vector3 newHitPoint = MathUtil.RotatePointAroundPivot(hitpoint, caster.transform.position, 
 			                                                      new Vector3(0, randomAngle, 0));
 			movUnit.MoveTo (newHitPoint);
-			yield return new WaitForSeconds(0.1f);
+			yield return new WaitForSeconds(TimeInterval);
 
 		}
 		// GameObject gb = GameObject.Instantiate (fireball, caster.transform.position, lookedQua) as GameObject;

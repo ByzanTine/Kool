@@ -17,7 +17,7 @@ public class PlayerSpellHandler : MonoBehaviour {
 		// if fireball, deduct health
 		Debug.Log ("[Spell] " + SpellDB.attackIDnames[spellID] + "   on spell trigger");
 
-		if (spellID == 0){ // fireball id is 0
+		if (spellID == 0 || spellID == 3){ // fireball id is 0 3 is for big fire ball
 			Debug.Log ("[Spell] fireball is hit on " + this.name);
 			Vector3 direction = transform.position - spellPos;
 			Vector3 appliedForce = direction.normalized * Globals.FORCE_MULTIPLIER;
