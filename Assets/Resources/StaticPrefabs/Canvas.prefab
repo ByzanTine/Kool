@@ -563,8 +563,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1277ab067ae4489b272113f139cec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealthPrefab: {fileID: 0}
-  namePrefab: {fileID: 0}
+  playerHealthPrefab: {fileID: 107888, guid: 4de763131efaf5e4b99d3321595dfea4, type: 2}
+  namePrefab: {fileID: 155742, guid: a470735d40b644957ac438ad8bfd2d35, type: 2}
 --- !u!114 &11464512
 MonoBehaviour:
   m_ObjectHideFlags: 1

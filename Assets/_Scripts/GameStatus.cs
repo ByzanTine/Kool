@@ -107,6 +107,7 @@ public class GameStatus : MonoBehaviour {
 
 	public int GetDeathNum(int teamId)
 	{
+		if(totalPlayerNum != 4) return 0;
 
 		return userDataCollection[teamId * 2].deathCount 
 			+ userDataCollection[1 + teamId * 2].deathCount;
@@ -176,6 +177,7 @@ public class GameStatus : MonoBehaviour {
 			break;
 			
 		case GameMode.GainScore:
+			if(totalPlayerNum < 4) return;
 			int team = playerID >= 2 ? 2 : 0;
 			if(userDataCollection [team].deathCount 
 			   + userDataCollection [team + 1].deathCount >= GameTargetRounds)
@@ -200,7 +202,7 @@ public class GameStatus : MonoBehaviour {
 	
 	IEnumerator RebornPlayerWithID(int id)
 	{
-		for(int i = 5; i >= 0 ; --i)
+		for(int i = 4; i >= 0 ; --i)
 		{
 			userDataCollection[id].rebornTime = i;
 			yield return new WaitForSeconds (1.0f);
