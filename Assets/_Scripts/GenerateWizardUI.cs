@@ -11,9 +11,9 @@ public class GenerateWizardUI : MonoBehaviour {
 		for(int i = 0; i < GameStatus.TotalPlayerNum; ++i)
 		{
 			GameObject health = Instantiate(playerHealthPrefab) as GameObject;
-			health.transform.parent = transform;
+			health.transform.SetParent(this.transform);
 			GameObject name = Instantiate(namePrefab) as GameObject;
-			name.transform.parent = transform;
+			name.transform.SetParent(this.transform);
 
 			PlayerHealthView healthUI  = health.GetComponent<PlayerHealthView>();
 			PlayerNameView nameUI = name.GetComponent<PlayerNameView>();

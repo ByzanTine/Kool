@@ -1804,6 +1804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRunning: 0
+  explodePrefab: {fileID: 100004, guid: 364ce50fb529e4443abce10e4889840b, type: 2}
   magicID: 1
   Speed: 0
   KineticSpeed: 0
