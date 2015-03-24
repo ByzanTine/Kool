@@ -35,24 +35,33 @@ public class PlayerNameView : MonoBehaviour {
 			textUI.enabled = true;
 			// get.sizeDelta *= 10.0f / Camera.main.fieldOfView;
 			// get the new transform position
-			Vector3 rawPos = viewCamera.WorldToScreenPoint (Player.transform.position);
-			rawPos.y += heightOffset / viewCamera.fieldOfView;
-			rawPos.x -= widthOffset / viewCamera.fieldOfView;
-
-			transform.position = rawPos;
-			GetComponent<RectTransform>().sizeDelta =  rectOrigin * 10.0f/viewCamera.fieldOfView;
+			UpdatePosition(Player.transform.position);
 			// Debug.Log(pd.health);
-			textUI.fontSize = Mathf.RoundToInt(originSize * 10.0f/viewCamera.fieldOfView);
 			textUI.text = GameStatus.Instance.Usernames[playerId];
 			textUI.color = GameStatus.Instance.UserColors[playerId];
 			// Debug.Log ("Printing name");
 		}
 		else {
 			textUI.enabled = false;
+			UpdatePosition( GameStatus.UserDataCollection[playerId].initPosition );
 			Player = GameStatus.GetPlayerObjById(playerId);
 			if(Player)
 				pd = Player.GetComponent<PlayerData> ();
 		}
+	}
+
+
+
+	void UpdatePosition(Vector3 targetPosition)
+	{
+		Vector3 rawPos = viewCamera.WorldToScreenPoint (targetPosition);
+		rawPos.y += heightOffset / viewCamera.fieldOfView;
+		rawPos.x -= widthOffset / viewCamera.fieldOfView;
+		
+		transform.position = rawPos;
+		GetComponent<RectTransform>().sizeDelta =  rectOrigin * 10.0f/viewCamera.fieldOfView;
+		textUI.fontSize = Mathf.RoundToInt(originSize * 10.0f/viewCamera.fieldOfView);
+
 	}
 	
 

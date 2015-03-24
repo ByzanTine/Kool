@@ -23,6 +23,14 @@ public class GameStatus : MonoBehaviour {
 
 	private static UserData[] userDataCollection = new UserData[4];
 
+	public static UserData[] UserDataCollection
+	{
+		get
+		{
+			return userDataCollection;
+		}
+	}
+
 	private static GameStatus _instance;
 	
 	//This is the public reference that other classes will use
@@ -74,6 +82,8 @@ public class GameStatus : MonoBehaviour {
 			int playerID = userCtrl.playerNum;
 			userDataCollection[playerID] = new UserData();
 			userDataCollection[playerID].userID = playerID;
+			userDataCollection[playerID].Username = Usernames[playerID];
+			userDataCollection[playerID].Usercolor = UserColors[playerID];
 			userDataCollection[playerID].initPosition = player.transform.position;
 			// add to hashtable
 			playerTable.Add(playerID, player);
@@ -175,7 +185,12 @@ public class GameStatus : MonoBehaviour {
 	
 	IEnumerator RebornPlayerWithID(int id)
 	{
-		yield return new WaitForSeconds (3.0f);
+		for(int i = 5; i >=0 ; --i)
+		{
+			userDataCollection[id].rebornTime = i;
+			yield return new WaitForSeconds (1.0f);
+		}
+		userDataCollection [id].rebornTime = -1;
 		GameObject wizard = 
 			Instantiate(playerPrefab,userDataCollection [id].initPosition,Quaternion.identity) 
 				as GameObject;
