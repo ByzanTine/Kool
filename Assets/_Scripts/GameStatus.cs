@@ -24,6 +24,14 @@ public class GameStatus : MonoBehaviour {
 	private bool isGameOver = false;
 
 	private static int totalPlayerNum = 0;
+	public static int TotalPlayerNum
+	{
+		get
+		{
+			return totalPlayerNum;
+		}
+	}
+
 	private static UserData[] userDataCollection = new UserData[4];
 
 	public static UserData[] UserDataCollection
@@ -67,12 +75,13 @@ public class GameStatus : MonoBehaviour {
 //			if(this != _instance)
 //				Destroy(this.gameObject);
 //		}
+		BindAllUserData ();
+
 	}
 
 	// Use this for initialization
 	void Start () {
 //		playerTable = new Hashtable ();
-		BindAllUserData ();
 
 	}
 	// store into hashtable as well
