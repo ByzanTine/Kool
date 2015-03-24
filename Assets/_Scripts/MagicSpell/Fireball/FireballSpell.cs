@@ -13,7 +13,7 @@ public class FireballSpell : MagicSpell {
 	public FireballSpell()
 	{
 		NumberOfBalls = 2;
-		Range = 10;
+		Range = 5;
 		scale = 1;
 		fireball = SpellDB.fireball;
 	}
