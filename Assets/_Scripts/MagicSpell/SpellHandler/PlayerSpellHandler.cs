@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerSpellHandler : MonoBehaviour {
 	private PlayerData playerData;
+	public GameObject FrozenEffectObj;
 
 	// Use this for initialization
 	void Start () {
@@ -10,6 +11,7 @@ public class PlayerSpellHandler : MonoBehaviour {
 		if (!playerData) {
 			Debug.LogError("[Player] player data not there!");
 		}
+		FrozenEffectObj.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -47,8 +49,10 @@ public class PlayerSpellHandler : MonoBehaviour {
 	
 	IEnumerator GetFrozen() {
 		playerData.frozen = true;
+		FrozenEffectObj.SetActive (true);
 		yield return new WaitForSeconds(3f); // waits 3 seconds
 		playerData.frozen = false; // will make the update method pick up 
+		FrozenEffectObj.SetActive (false);
 	}
 
 
