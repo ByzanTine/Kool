@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ItemGenerator : MonoBehaviour {
 	private GameObject item;
-	public float GenerateInterval = 5;
+	public float GenerateInterval = 10f;
 	// private float destroyTime = 0;
 
 	private float generationClock;
@@ -18,16 +18,14 @@ public class ItemGenerator : MonoBehaviour {
 		// Generate a item then
 		if (!item && Time.time - generationClock > GenerateInterval) 
 		{
-
+			generationClock = Time.time;
 			GenerateItem();
-
 		}
 	}
 
 	void GenerateItem() {
 		GameObject randomItem = ItemDB.GetRandomItemPrefab ();
-		item = Instantiate (randomItem, transform.position, Quaternion.identity) as GameObject;
-		generationClock = Time.time;
+		item = Instantiate (randomItem, transform.position + 5 * Vector3.up, Quaternion.identity) as GameObject;
 	}
 
 

@@ -447,12 +447,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dampTime: .100000001
-  targets: []
-  boundingBoxPadding: .100000001
-  minCamera: 8
-  minimumOrthographicSize: 18
-  zoomSpeed: 20
-  xAngle: 1.01229095
 --- !u!1001 &153951850
 Prefab:
   m_ObjectHideFlags: 0
@@ -491,6 +485,10 @@ Prefab:
     - target: {fileID: 481116, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428502, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
+      propertyPath: GenerateInterval
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
@@ -595,6 +593,10 @@ Prefab:
     - target: {fileID: 118574, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
       propertyPath: m_Name
       value: ItemGenerator 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428502, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
+      propertyPath: GenerateInterval
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
@@ -749,6 +751,10 @@ Prefab:
       propertyPath: m_Name
       value: ItemGenerator 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11428502, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
+      propertyPath: GenerateInterval
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
   m_IsPrefabParent: 0
@@ -899,7 +905,7 @@ Light:
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
-    m_Resolution: -1
+    m_Resolution: 3
     m_Strength: 1
     m_Bias: .0500000007
     m_NormalBias: .400000006
@@ -1227,6 +1233,10 @@ Prefab:
     - target: {fileID: 118574, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
       propertyPath: m_Name
       value: ItemGenerator 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428502, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
+      propertyPath: GenerateInterval
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
