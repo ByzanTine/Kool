@@ -65,7 +65,12 @@ public class PlayerBuffStatus : MonoBehaviour {
 			break;
 		case ItemDB.ItemType.specialSkill:
 			// add one energy point for special skill
-			pd.SpecialSpellID = SpellDB.AttackID.iceBurst;
+			if (pd.ice_fire == Constants.SpellMode.Ice)
+				pd.SpecialSpellID = SpellDB.AttackID.iceBurst;
+			else if (pd.ice_fire == Constants.SpellMode.Fire)
+				pd.SpecialSpellID = SpellDB.AttackID.meteor;
+			else 
+				Debug.LogError("I don't know what happened");
 			break;
 		case ItemDB.ItemType.numberBoost:
 			// create a timed reset 
