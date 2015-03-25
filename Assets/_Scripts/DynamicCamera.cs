@@ -2,23 +2,11 @@
 using System.Collections.Generic;
 public class DynamicCamera : MonoBehaviour {
 	public float dampTime = 0.1f;
-
-	[SerializeField] 
 	//public Transform[] targets;
-	List<Transform> targets;
-	[SerializeField] 
+	List<Transform> targets = new List<Transform>();
 	float boundingBoxPadding = 0.1f;
-	
-	[SerializeField] 
-	float minCamera = 8f;
-	
-	[SerializeField]
-	float minimumOrthographicSize = 18f;
-	
-	[SerializeField]
+	float minCamera = 15f;
 	float zoomSpeed = 20f;
-
-	[SerializeField]
 	float xAngle = 1.012291f; // angle in rad
 	Camera camera;
 	
@@ -35,11 +23,10 @@ public class DynamicCamera : MonoBehaviour {
 			targets.Add(obj.transform);
 		}
 		Rect boundingBox = CalculateTargetsBoundingBox();
-			Vector3 camerNextPos = CalculateCameraPosition(CalculateCameraBoundingBox(boundingBox));
+		Vector3 camerNextPos = CalculateCameraPosition(CalculateCameraBoundingBox(boundingBox));
 		Vector3 velocity = Vector3.zero;
-		transform.position = Vector3.SmoothDamp(transform.position, camerNextPos, ref velocity, dampTime);;
-
-			//camera.orthographicSize = CalculateOrthographicSize(boundingBox);
+		//transform.position = Vector3.SmoothDamp(transform.position, camerNextPos, ref velocity, dampTime);;
+		transform.position = SmoothDampVector3 (transform.position, camerNextPos);
 	}
 	
 	/// <summary>
@@ -71,6 +58,7 @@ public class DynamicCamera : MonoBehaviour {
 		center.y = inR.center.y - transform.position.y * Mathf.Tan (xAngle) ;
 		float w = inR.width > minCamera ? inR.width : minCamera;
 		float h = Mathf.Abs(inR.height) > Mathf.Abs(minCamera) ? Mathf.Abs(inR.height) : Mathf.Abs(minCamera);
+		print (h);
 		return Rect.MinMaxRect(center.x - w/2f , center.y + h / 2f, center.x + w/2f,  center.y - h / 2f);
 		
 		
@@ -82,12 +70,33 @@ public class DynamicCamera : MonoBehaviour {
 	/// <returns>A Vector3 in the center of the bounding box.</returns>
 	Vector3 CalculateCameraPosition(Rect boundingBox)
 	{
-		//	print (boundingBox);
 		Vector2 boundingBoxCenter = boundingBox.center;
-		//	print (boundingBoxCenter);
 		float size = boundingBox.width > Mathf.Abs (boundingBox.height) ? boundingBox.width : Mathf.Abs (boundingBox.height);
-		//print (Mathf.Atan (size * 0.043944f)/ Mathf.PI * 180 / 8);
-		Camera.main.fieldOfView = Mathf.Atan (size * 0.043944f) / Mathf.PI * 180 / 8;
+		Camera.main.fieldOfView = SmoothDampFloat(Camera.main.fieldOfView, Mathf.Atan (size * 0.043944f) / Mathf.PI * 180 / 8);
 		return new Vector3(boundingBoxCenter.x, Camera.main.transform.position.y,boundingBoxCenter.y);
+	}
+	
+	float SmoothDampFloat(float from, float to, float time = 0.4f){
+		float delta = (to - from)/ time * Time.deltaTime;
+		return from + CameraMoveThreshold(delta);
+	}
+	Vector3 SmoothDampVector3(Vector3 from, Vector3 to, float time = 0.4f){
+		Vector3 delta = (to - from) / time * Time.deltaTime;
+		//	return from + delta;
+		return from + CameraMoveThreshold (delta);
+	}
+	float CameraMoveThreshold(float delta, float thresold = 0.2f){
+		if (Mathf.Abs (delta) > thresold) {
+			return delta / Mathf.Abs(delta) * thresold;
+		} else {
+			return delta;
+		}
+	}
+	Vector3 CameraMoveThreshold(Vector3 delta, float threshold = 1f){
+		if (delta.magnitude > threshold) {
+			return delta.normalized * threshold;
+		} else {
+			return delta;
+		}
 	}
 }

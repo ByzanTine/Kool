@@ -95,6 +95,7 @@ public class GameStatus : MonoBehaviour {
 			userCtrl.playerNum = totalPlayerNum;
 			int playerID = userCtrl.playerNum;
 
+			player.name = Usernames[playerID];
 			userDataCollection[playerID] = new UserData();
 			userDataCollection[playerID].userID = playerID;
 			userDataCollection[playerID].Username = Usernames[playerID];
@@ -215,6 +216,7 @@ public class GameStatus : MonoBehaviour {
 		userCtrl.playerNum = id;
 		// add to table
 		userDataCollection[id].wizardInstance = wizard;
+		wizard.name = userDataCollection [id].Username;
 	}
 
 	void DestroyPlayerWithID(int playerid)

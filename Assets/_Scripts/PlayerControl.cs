@@ -17,6 +17,9 @@ public class PlayerControl : MonoBehaviour {
 	// Is player running
 	public bool isRunning = false;
 
+	// for stab use
+	public GameObject explodePrefab;
+
 	// Current magic ID that player chosed
 	public int magicID = 1;
 
@@ -60,17 +63,17 @@ public class PlayerControl : MonoBehaviour {
 	// ------- Start ---------- Input Events Callback Functions ----------------
 	// -------------------------------------------------------------------------
 
-	void TryCombatAttack()
-	{
-
-	}
-
 	void SwapIceFire()
-	{}
+	{
+		Debug.Log ("change Ice fire");
+		PD.ChangeIceFire ();
+	}
 
 	void TryCastingMainSkill()
 	{
-		if(isRunning)
+
+		// If running, main skill will be a combat attack
+		if(isRunning && animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
 		{
 			// try stabbing if running
 			if(!animator.GetBool("isStabbing") && 
@@ -79,6 +82,7 @@ public class PlayerControl : MonoBehaviour {
 				Stab();
 			}
 		}
+		// else will cast fireball/ iceball
 		else if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1")) {
 
@@ -109,20 +113,11 @@ public class PlayerControl : MonoBehaviour {
 
 	void HandleButton()
 	{
-		if (inputManager.button_id == 3)
-			isRunning = true;
-		if (inputManager.button_id == 2)
-		{
-			Debug.Log ("change Ice fire");
-			PD.ChangeIceFire ();
-
-		}
 		magicID = inputManager.button_id;
 	}
 
 	void ReleaseButton()
 	{
-
 
 	}
 
@@ -130,12 +125,17 @@ public class PlayerControl : MonoBehaviour {
 	{
 		Debug.Log("Start Running");
 		isRunning = true;
+//		inputManager.LockRightInput ();
 	}
 
 	void EndRunning()
 	{
-		Debug.Log("Finish Running");
-		isRunning = false;
+		if(isRunning)
+		{
+			Debug.Log("Finish Running");
+			isRunning = false;
+//			inputManager.UnlockAllControl ();
+		}
 	}
 
 	// ---------------------------------------------------------------------
@@ -144,29 +144,40 @@ public class PlayerControl : MonoBehaviour {
 
 	void Stab()
 	{
-		StartCoroutine (StabCoolDown ());
-
-		// TODO make damage, raise visual and physic effects
+		StartCoroutine (CombatAttack ());
 	}
 
-	IEnumerator StabCoolDown()
+	IEnumerator CombatAttack()
 	{
 		animator.SetBool("isStabbing", true);
+
+		yield return new WaitForSeconds (0.3f);
 		inputManager.LockAllControl (Constants.MIN_STAB_COOL_DOWN);
 
-		yield return new WaitForSeconds (Constants.MIN_STAB_COOL_DOWN);
+		explodePrefab.GetComponent<ColliderExplode> ().caster = this.gameObject;
+
+		float explodeNum = 5;
+		for (int i = 0; i < explodeNum; ++i)
+		{
+			yield return new WaitForSeconds (0.2f / explodeNum);
+			Instantiate(explodePrefab, transform.position + i * transform.forward, Quaternion.identity);
+
+		}
+
+		yield return new WaitForSeconds (Constants.MIN_STAB_COOL_DOWN - 0.5f);
+
 		animator.SetBool("isStabbing", false);
 	}
 		
 		
-		void CastFireball()
+	void CastFireball()
 	{
 		// cast one fireball
 		Vector3 direction = transform.forward;
 		attackMeans.AttackByDiretion (PD.spellID, direction);
 	}
 
-
+	// Magic ID is controlled by button
 	void CastMagic(int magicID)
 	{
 		inputManager.LockLeftInput (2.0f);
@@ -227,9 +238,6 @@ public class PlayerControl : MonoBehaviour {
 			else
 			{
 				RB.velocity = (Vector3.right * speedScale * input.x + Vector3.forward * speedScale * input.y);
-
-//				transform.Translate( Vector3.right * speedScale * Time.fixedDeltaTime * input.x, Space.World);
-//				transform.Translate( Vector3.forward * speedScale * Time.fixedDeltaTime * input.y, Space.World);
 			}
 
 		}
