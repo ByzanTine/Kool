@@ -447,12 +447,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dampTime: .100000001
-  targets: []
-  boundingBoxPadding: .100000001
-  minCamera: 8
-  minimumOrthographicSize: 18
-  zoomSpeed: 20
-  xAngle: 1.01229095
 --- !u!1001 &153951850
 Prefab:
   m_ObjectHideFlags: 0
@@ -899,7 +893,7 @@ Light:
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
-    m_Resolution: -1
+    m_Resolution: 3
     m_Strength: 1
     m_Bias: .0500000007
     m_NormalBias: .400000006

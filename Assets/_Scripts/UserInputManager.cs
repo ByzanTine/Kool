@@ -125,7 +125,6 @@ public class UserInputManager : MonoBehaviour {
 
 		if(inputDevice.LeftBumper.WasPressed)
 		{
-
 			OnPressSwapIceFire();
 		}
 		
@@ -136,7 +135,6 @@ public class UserInputManager : MonoBehaviour {
 
 		if(inputDevice.LeftTrigger.WasPressed)
 		{
-//			OnPressHit();
 			OnPressMainSkill();
 		}
 
@@ -198,7 +196,7 @@ public class UserInputManager : MonoBehaviour {
 		ctrlLocks[lockIndex] = false;
 	}
 
-	public void LockLeftInput(float period)
+	public void LockLeftInput(float period = float.MaxValue)
 	{
 		if(!ctrlLocks[0])
 		{
@@ -206,7 +204,7 @@ public class UserInputManager : MonoBehaviour {
 		}
 	}
 
-	public void LockRightInput(float period)
+	public void LockRightInput(float period = float.MaxValue)
 	{
 		if(!ctrlLocks[1])
 		{
@@ -214,7 +212,7 @@ public class UserInputManager : MonoBehaviour {
 		}
 	}
 
-	public void LockButton(float period)
+	public void LockButton(float period = float.MaxValue)
 	{
 		if(!ctrlLocks[2])
 		{
@@ -222,7 +220,7 @@ public class UserInputManager : MonoBehaviour {
 		}
 	}
 
-	public void LockTriggerAndBumper(float period)
+	public void LockTriggerAndBumper(float period = float.MaxValue)
 	{
 		if(!ctrlLocks[3])
 		{
@@ -230,11 +228,19 @@ public class UserInputManager : MonoBehaviour {
 		}
 	}
 
-	public void LockAllControl(float period)
+	public void LockAllControl(float period = float.MaxValue)
 	{
 		LockLeftInput (period);
 		LockRightInput (period);
 		LockButton (period);
 		LockTriggerAndBumper (period);
 	}
+
+	public void UnlockAllControl()
+	{
+		for(int i = 0; i < ctrlLocks.Length; ++i)
+		{
+			ctrlLocks[i] = false;
+		}
+	} 
 }
