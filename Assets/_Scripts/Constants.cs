@@ -19,7 +19,7 @@ public class Constants : MonoBehaviour {
 
 	public const float COLLIDER_DELAY_SECONDS = 0.0f;
 
-	static public float[] SPELL_DAMAGE = {0.1f, 0.1f, 0.3f, 0.2f};// 0 for fireball, 1 for iceball, 2 for iceburst, 3 for big fire ball
+	static public float[] SPELL_DAMAGE = {0.1f, 0.1f, 0.3f, 0.2f, 0.6f};// 0 for fireball, 1 for iceball, 2 for iceburst, 3 for big fire ball, 4 for meteor
 
 	public enum SpellMode{
 		Ice,
