@@ -42,9 +42,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overlapLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   ExplodeEffect: {fileID: 100002, guid: f4eccd837e38e66479c94b552a191d36, type: 2}
-  spellID: 0
+  spellID: 3
+  ExplodeRadius: 1
+  caster: {fileID: 0}
 --- !u!114 &11497648
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -38,6 +38,10 @@ public class PlayerSpellHandler : MonoBehaviour {
 			playerData.DamageHP(Constants.SPELL_DAMAGE[spellID]);
 			StartCoroutine(GetFrozen());
 		}
+
+		if (spellID == 3) { // meteor
+			playerData.DamageHP(Constants.SPELL_DAMAGE[spellID]);
+		}
 	}
 	
 	

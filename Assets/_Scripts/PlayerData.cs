@@ -66,6 +66,13 @@ public class PlayerData : MonoBehaviour {
 	public void ChangeIceFire(){
 		ice_fire = (ice_fire == Constants.SpellMode.Fire) ? 
 			Constants.SpellMode.Ice : Constants.SpellMode.Fire;
+		// HACK change special attack as well
+		if (SpecialSpellID == SpellDB.AttackID.meteor && ice_fire == Constants.SpellMode.Ice)
+			SpecialSpellID = SpellDB.AttackID.iceBurst;
+		if (SpecialSpellID == SpellDB.AttackID.iceBurst && ice_fire == Constants.SpellMode.Fire)
+			SpecialSpellID = SpellDB.AttackID.meteor;
+
+
 		Debug.Log ("[Spell] spell id now is : " + spellID);
 	}
 

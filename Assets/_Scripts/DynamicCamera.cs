@@ -58,7 +58,7 @@ public class DynamicCamera : MonoBehaviour {
 		center.y = inR.center.y - transform.position.y * Mathf.Tan (xAngle) ;
 		float w = inR.width > minCamera ? inR.width : minCamera;
 		float h = Mathf.Abs(inR.height) > Mathf.Abs(minCamera) ? Mathf.Abs(inR.height) : Mathf.Abs(minCamera);
-		print (h);
+		// print (h);
 		return Rect.MinMaxRect(center.x - w/2f , center.y + h / 2f, center.x + w/2f,  center.y - h / 2f);
 		
 		
