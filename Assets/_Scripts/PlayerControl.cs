@@ -75,7 +75,7 @@ public class PlayerControl : MonoBehaviour {
 
 	void TryCastingMainSkill()
 	{
-		if(isRunning)
+		if(isRunning && animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
 		{
 			// try stabbing if running
 			if(!animator.GetBool("isStabbing") && 
@@ -164,10 +164,12 @@ public class PlayerControl : MonoBehaviour {
 		float explodeNum = 5;
 		for (int i = 0; i < explodeNum; ++i)
 		{
-			yield return new WaitForSeconds ((Constants.MIN_STAB_COOL_DOWN - 0.3f) / explodeNum);
+			yield return new WaitForSeconds (0.2f / explodeNum);
 			Instantiate(explodePrefab, transform.position + i * transform.forward, Quaternion.identity);
 
 		}
+
+		yield return new WaitForSeconds (Constants.MIN_STAB_COOL_DOWN - 0.5f);
 
 		animator.SetBool("isStabbing", false);
 	}
