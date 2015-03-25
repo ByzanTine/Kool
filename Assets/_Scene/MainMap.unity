@@ -486,6 +486,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11428502, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
+      propertyPath: GenerateInterval
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
   m_IsPrefabParent: 0
@@ -589,6 +593,10 @@ Prefab:
     - target: {fileID: 118574, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
       propertyPath: m_Name
       value: ItemGenerator 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428502, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
+      propertyPath: GenerateInterval
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
@@ -742,6 +750,10 @@ Prefab:
     - target: {fileID: 118574, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
       propertyPath: m_Name
       value: ItemGenerator 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428502, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
+      propertyPath: GenerateInterval
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
@@ -1221,6 +1233,10 @@ Prefab:
     - target: {fileID: 118574, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
       propertyPath: m_Name
       value: ItemGenerator 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11428502, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
+      propertyPath: GenerateInterval
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}

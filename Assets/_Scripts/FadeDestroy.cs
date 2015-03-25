@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class FadeDestroy : MonoBehaviour {
-	public float livingTime;
-	public float hintTime;
+	private float livingTime = 7f;
+	private float hintTime = 1f;
 	private Color startColor;
 	private Color endColor;
 

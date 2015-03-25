@@ -7,6 +7,12 @@ public class Item : MonoBehaviour {
 	// TODO more variables for specific item description
 	private bool PickedUP = false;
 
+	void Start()
+	{
+		GetComponent<Rigidbody> ().velocity = new Vector3 (0, 5, 0);
+		GetComponent<Rigidbody> ().angularVelocity = new Vector3 (1, 1, 5);
+	}
+
 	// Use this for initialization
 	void OnTriggerEnter(Collider other){
 		if (other.tag == TagList.Player && !PickedUP) {

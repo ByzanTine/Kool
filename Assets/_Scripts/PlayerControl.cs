@@ -125,7 +125,7 @@ public class PlayerControl : MonoBehaviour {
 	{
 		Debug.Log("Start Running");
 		isRunning = true;
-		inputManager.LockRightInput ();
+//		inputManager.LockRightInput ();
 	}
 
 	void EndRunning()
@@ -134,7 +134,7 @@ public class PlayerControl : MonoBehaviour {
 		{
 			Debug.Log("Finish Running");
 			isRunning = false;
-			inputManager.UnlockAllControl ();
+//			inputManager.UnlockAllControl ();
 		}
 	}
 
