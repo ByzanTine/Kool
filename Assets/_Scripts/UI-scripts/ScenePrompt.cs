@@ -14,7 +14,7 @@ public class ScenePrompt : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		txt.text = "Any team who gets " + GameStatus.Instance.GameTargetRounds
+		txt.text = "Alice & Bob \t vs \t Cathy & David.\t\n" + "Any team who gets " + GameStatus.Instance.GameTargetRounds
 			+ " scores will win.";
 	}
 }

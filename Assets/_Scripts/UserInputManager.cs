@@ -133,17 +133,17 @@ public class UserInputManager : MonoBehaviour {
 			OnPressSubSkill();
 		}
 
-		if(inputDevice.LeftTrigger.WasPressed)
+		if(inputDevice.RightTrigger.WasPressed)
 		{
 			OnPressMainSkill();
 		}
 
-		if(inputDevice.RightTrigger.WasPressed)
+		if(inputDevice.LeftTrigger.WasPressed)
 		{
 			OnPressRunning();
 		}
 
-		if(inputDevice.RightTrigger.WasReleased)
+		if(inputDevice.LeftTrigger.WasReleased)
 		{
 			OnReleaseRunning();
 		}

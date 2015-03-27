@@ -159,7 +159,7 @@ Transform:
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!1001 &4235467
 Prefab:
   m_ObjectHideFlags: 0
@@ -239,9 +239,17 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 403152, guid: 95bc64f0dd9c4be4fb026a1e6800c77a, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
+    - target: {fileID: 11487168, guid: 95bc64f0dd9c4be4fb026a1e6800c77a, type: 2}
+      propertyPath: m_Text
+      value: '99 : 99'
+      objectReference: {fileID: 0}
+    - target: {fileID: 22498446, guid: 95bc64f0dd9c4be4fb026a1e6800c77a, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464512, guid: 95bc64f0dd9c4be4fb026a1e6800c77a, type: 2}
+      propertyPath: m_Text
+      value: "Alice & Bob vs Cathy & David. \nAny team who gets 999 scores will win."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95bc64f0dd9c4be4fb026a1e6800c77a, type: 2}
@@ -674,7 +682,7 @@ Light:
   serializedVersion: 6
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: .699999988
+  m_Intensity: 1.20000005
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -707,7 +715,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
 --- !u!1001 &872209249
 Prefab:
   m_ObjectHideFlags: 0

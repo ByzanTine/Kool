@@ -14,6 +14,6 @@ public class ScoreBoard : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		txt.text = GameStatus.Instance.GetDeathNum(1) + " : " + GameStatus.Instance.GetDeathNum(0);
+		txt.text = " " + GameStatus.Instance.GetDeathNum(1) + " vs " + GameStatus.Instance.GetDeathNum(0) + " ";
 	}
 }
