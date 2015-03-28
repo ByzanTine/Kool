@@ -45,6 +45,9 @@ MonoBehaviour:
     m_Bits: 1
   ExplodeEffect: {fileID: 132306, guid: 8d5284420f7311b4490c680eca520fb5, type: 2}
   spellID: 1
+  attackId: 4
+  ExplodeRadius: 1
+  caster: {fileID: 0}
 --- !u!114 &11424714
 MonoBehaviour:
   m_ObjectHideFlags: 1

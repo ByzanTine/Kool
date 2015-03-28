@@ -8,7 +8,7 @@ public class MeteorController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		targetIndicator = Resources.Load ("MagicSpells/CFXM3_MagicAura_B_Runic") as GameObject;
-		meteor = Resources.Load ("MagicSpells/meteor") as GameObject;
+		meteor = Resources.Load ("MagicSpells/Meteor/meteor") as GameObject;
 		MeteorDrop ();
 	}
 

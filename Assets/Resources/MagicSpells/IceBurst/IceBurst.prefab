@@ -46,7 +46,9 @@ MonoBehaviour:
     m_Bits: 1
   ExplodeEffect: {fileID: 0}
   spellID: 2
+  attackId: 11
   ExplodeRadius: 15
+  caster: {fileID: 0}
 --- !u!114 &11446278
 MonoBehaviour:
   m_ObjectHideFlags: 1
