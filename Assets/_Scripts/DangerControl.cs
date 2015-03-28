@@ -23,9 +23,12 @@ public class DangerControl : MonoBehaviour {
 
 	void Start () {
 		// DamagingEffect = GameObject.FindGameObjectWithTag (TagList.DamagingEffect);
-		DamagingEffect = transform.FindChild ("DamagingFlame").gameObject;
-		standState = STAND_STATE.OnSafe;
+		GameObject deathFire = Resources.Load ("PlayerEffect/DamagingFlame") as GameObject;
+		DamagingEffect = Instantiate (deathFire, transform.position, Quaternion.identity) as GameObject;
+		DamagingEffect.transform.parent = transform;
 
+		standState = STAND_STATE.OnSafe;
+		DamagingEffect.SetActive (standState == STAND_STATE.OnDanger);
 		playerData = GetComponent<PlayerData> ();
 
 	}

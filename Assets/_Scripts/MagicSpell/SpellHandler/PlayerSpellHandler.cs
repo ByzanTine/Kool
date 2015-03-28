@@ -11,6 +11,9 @@ public class PlayerSpellHandler : MonoBehaviour {
 		if (!playerData) {
 			Debug.LogError("[Player] player data not there!");
 		}
+		GameObject frozenPrefab = Resources.Load ("PlayerEffect/FrozenEffect") as GameObject;
+		FrozenEffectObj = Instantiate (frozenPrefab, transform.position, Quaternion.identity) as GameObject;
+		FrozenEffectObj.transform.parent = transform;
 		FrozenEffectObj.SetActive (false);
 	}
 	
