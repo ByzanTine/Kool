@@ -8,7 +8,9 @@ public class ItemDB : MonoBehaviour {
 		sizeBoost,
 		numberBoost,
 		protection,
+		HealthUp,
 		specialSkill
+
 	};
 
 	static public List<GameObject> items;
@@ -29,8 +31,8 @@ public class ItemDB : MonoBehaviour {
 			Resources.Load ("Items/attack_increase") as GameObject,
 			Resources.Load ("Items/six_spells") as GameObject,
 			Resources.Load ("Items/reflect") as GameObject,
-			Resources.Load ("Items/IceBurst") as GameObject
-
+			Resources.Load ("Items/IceBurst") as GameObject,
+			Resources.Load ("Items/HealthUp") as GameObject
 
 		};
 

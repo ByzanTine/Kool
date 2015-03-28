@@ -9,6 +9,7 @@ public class Item : MonoBehaviour {
 
 	void Start()
 	{
+		// init with velocity for visual effect
 		GetComponent<Rigidbody> ().velocity = new Vector3 (0, 5, 0);
 		GetComponent<Rigidbody> ().angularVelocity = new Vector3 (1, 1, 5);
 	}

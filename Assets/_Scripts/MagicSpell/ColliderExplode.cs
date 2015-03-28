@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class ColliderExplode : MonoBehaviour {
 	public LayerMask overlapLayer;
 	public GameObject ExplodeEffect;
-	public int spellID;
+	public SpellDB.AttackID attackId;
 	public float ExplodeRadius = 1.0f;
 	public GameObject caster;
 	// Use this for initialization
@@ -37,7 +37,7 @@ public class ColliderExplode : MonoBehaviour {
 
 				PlayerSpellHandler PSH = collider.GetComponent<PlayerSpellHandler>();
 				if (PSH) {
-					PSH.onSpellTrigger(gameObject.transform.position, spellID);
+					PSH.onSpellTrigger(gameObject.transform.position, attackId);
 				}
 			}
 		}

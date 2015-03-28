@@ -30,6 +30,7 @@ public class PlayerData : MonoBehaviour {
 
 	public void DamageHP (float damage){
 		health -= damage;
+
 		// HPbarControl.SetBar (health);
 
 		// update player status
@@ -40,7 +41,9 @@ public class PlayerData : MonoBehaviour {
 //			Destroy(this.gameObject);
 			playerCtrl = GetComponent<PlayerControl> ();
 			playerCtrl.Die();
+			return;
 		}
+		health = Mathf.Clamp (health, 0.0f, 1.0f);
 	}
 
 	public bool DecreaseMana(float Dmana){

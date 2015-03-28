@@ -84,6 +84,9 @@ public class PlayerBuffStatus : MonoBehaviour {
 			UpdateFireballID();
 			timer = Time.time;
 			break;
+		case ItemDB.ItemType.HealthUp:
+			pd.DamageHP(-0.5f);
+			break;
 		}
 
 	}
