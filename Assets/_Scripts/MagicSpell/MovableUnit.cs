@@ -50,12 +50,23 @@ public class MovableUnit : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		// avoid collider with self
+
 		ExplodeLink explodeLink = GetComponent<ExplodeLink>();
 		if (explodeLink && 
 		    other.gameObject.GetInstanceID() == explodeLink.caster.GetInstanceID()) {
 			// nothing should happen
 			return;
 		}
+		// if other got a explodelink as well.
+		// Then we want to identify whether they are from same guy
+		ExplodeLink otherExplodeLink = other.GetComponent<ExplodeLink>();
+		if (otherExplodeLink && 
+		    otherExplodeLink.caster.GetInstanceID() == explodeLink.caster.GetInstanceID()) {
+			// nothing should happen
+			return;
+		}
+
+
 		if ((other.gameObject.tag == TagList.Player
 		    || other.gameObject.tag == TagList.Fireball) && isMoving){
 

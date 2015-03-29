@@ -31,7 +31,7 @@ public class ColliderExplode : MonoBehaviour {
 		if (caster)
 			hashtable.Add (caster.GetInstanceID());// caster won't get hurt 
 		foreach (Collider collider in co){
-			Debug.Log ("[Spell] " + collider.gameObject.tag + "  " + collider.name);
+			Debug.Log ("[Spell] collided object info: " + collider.gameObject.tag + "  " + collider.name);
 			if (!hashtable.Contains(collider.gameObject.GetInstanceID())){
 				hashtable.Add(collider.gameObject.GetInstanceID());
 
