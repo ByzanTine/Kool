@@ -16,7 +16,7 @@ GameObject:
   - 114: {fileID: 11460838}
   - 114: {fileID: 11489330}
   - 114: {fileID: 11450852}
-  - 114: {fileID: 11409576}
+  - 114: {fileID: 11461228}
   m_Layer: 0
   m_Name: FireNova
   m_TagString: Fireball
@@ -51,19 +51,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!114 &11409576
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 163726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44a5bdaa73376684eb23787ae395a6ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  caster: {fileID: 0}
-  explodePrefab: {fileID: 100004, guid: ba430d66339b91a4aa361c0a9d7a5cb0, type: 2}
 --- !u!114 &11450852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,6 +75,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualEffect: {fileID: 106106, guid: bb29b29614b6dee49942df7bc3829371, type: 2}
+--- !u!114 &11461228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49c4332db5eeb57448c1838b11e7392e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  caster: {fileID: 0}
+  explodePrefab: {fileID: 100004, guid: ba430d66339b91a4aa361c0a9d7a5cb0, type: 2}
+  depth: 0
 --- !u!114 &11463724
 MonoBehaviour:
   m_ObjectHideFlags: 1

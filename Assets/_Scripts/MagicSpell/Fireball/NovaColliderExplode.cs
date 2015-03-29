@@ -5,13 +5,17 @@ public class NovaColliderExplode : ColliderExplode {
 	public GameObject subFireball;
 	private int NumberOfBalls = 15;
 	private float distance = 15.0f;
+	public int depth = 0;
 	// Use this for initialization
 	void Start () {
 		if (ExplodeEffect) {
-			Instantiate (ExplodeEffect, transform.position, Quaternion.identity);
+			GameObject gb = Instantiate (ExplodeEffect, transform.position, Quaternion.identity) as GameObject;
+			gb.transform.parent = transform;
 			// GenerateSphereCast (transform.position);
-
-			StartCoroutine(generateNovaSpell());
+			if (depth > 0)
+				StartCoroutine(generateNovaSpell());
+			else
+				print("depth less than 0 stop");
 
 
 		}
@@ -21,6 +25,7 @@ public class NovaColliderExplode : ColliderExplode {
 	// generate a nova effect 
 	// 360 degree spilt
 	private IEnumerator generateNovaSpell() {
+
 		Vector3 hitpoint = transform.position + distance * caster.transform.forward;
 		
 		Quaternion lookedQua = Quaternion.LookRotation (hitpoint - transform.position);
@@ -29,10 +34,12 @@ public class NovaColliderExplode : ColliderExplode {
 			float randomAngle = 360.0f * i/NumberOfBalls; // TODO range angles 
 			
 			GameObject gb = GameObject.Instantiate (subFireball, transform.position, lookedQua) as GameObject;
+
 			//  add caster delegate 
-			ExplodeLink explodeLink = gb.GetComponent<ExplodeLink>();
+			NovaExplodeLink explodeLink = gb.GetComponent<NovaExplodeLink>();
 			if (explodeLink) {
 				explodeLink.caster = caster;
+				explodeLink.depth = depth-1;
 			}
 			else {
 				Debug.LogWarning("[Spell] Spell has no explode delegate");
