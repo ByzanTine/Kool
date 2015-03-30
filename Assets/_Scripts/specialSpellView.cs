@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-[RequireComponent(typeof(Text))]
+[RequireComponent(typeof(Image))]
 
 public class specialSpellView : MonoBehaviour {
 	
 	public int playerId;
 	private Camera viewCamera;
 	PlayerData pd;
-	BarControl barCon;
 	GameObject Player;
 	public Sprite Iceburst;
 	public Sprite Meteor;
