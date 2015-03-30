@@ -19,6 +19,7 @@ ModelImporter:
     3300004: //RootNode
     4300000: InnerCube
     4300002: Outer
+    4300004: Cube
     7400000: Default Take
     9500000: //RootNode
   materials:

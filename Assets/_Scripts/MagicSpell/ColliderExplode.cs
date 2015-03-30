@@ -12,7 +12,8 @@ public class ColliderExplode : MonoBehaviour {
 	void Start () {
 
 		if (ExplodeEffect) {
-			Instantiate (ExplodeEffect, transform.position, Quaternion.identity);
+			GameObject gb = Instantiate (ExplodeEffect, transform.position, Quaternion.identity) as GameObject;
+			gb.transform.parent = transform;
 			GenerateSphereCast (transform.position);
 		}
 
@@ -31,7 +32,7 @@ public class ColliderExplode : MonoBehaviour {
 		if (caster)
 			hashtable.Add (caster.GetInstanceID());// caster won't get hurt 
 		foreach (Collider collider in co){
-			Debug.Log ("[Spell] " + collider.gameObject.tag + "  " + collider.name);
+			Debug.Log ("[Spell] collided object info: " + collider.gameObject.tag + "  " + collider.name);
 			if (!hashtable.Contains(collider.gameObject.GetInstanceID())){
 				hashtable.Add(collider.gameObject.GetInstanceID());
 
