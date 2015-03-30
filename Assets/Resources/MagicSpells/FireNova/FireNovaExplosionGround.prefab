@@ -120,6 +120,7 @@ MonoBehaviour:
   ExplodeRadius: 1
   caster: {fileID: 0}
   subFireball: {fileID: 163726, guid: 0b51164fcc3a2954dafb0fecd8f94fa4, type: 2}
+  depth: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
