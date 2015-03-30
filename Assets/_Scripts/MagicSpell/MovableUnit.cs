@@ -57,8 +57,9 @@ public class MovableUnit : MonoBehaviour {
 			// nothing should happen
 			return;
 		}
-		if ((other.gameObject.tag == TagList.Player
-		    || (other.gameObject.tag == TagList.Fireball && !bigger)) && isMoving){
+		if ((other.gameObject.tag == TagList.Player 
+		    || (other.gameObject.tag == TagList.Fireball && !bigger)) // the bigger fireball cannot be destoried by any other spells.
+		    && isMoving){
 
 			isMoving = false;
 			// Cause Explosion Here
