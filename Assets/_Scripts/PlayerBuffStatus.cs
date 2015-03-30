@@ -7,9 +7,17 @@ public class PlayerBuffStatus : MonoBehaviour {
 //	private List<float> Buff_time_List;	// keep track of the cool down time for all the buffs
 //	private List<bool> Buff_valid_List;	// keep track of the all the buff which is valid 
 
+	private bool _IncreaseNumber = false;
+	public bool IncreaseNumber
+	{
+		get{return _IncreaseNumber;}
+	}
 
-	private bool IncreaseNumber = false;
-	private bool Bigger = false;
+	private bool _Bigger = false;
+	public bool Bigger 
+	{
+		get{return _Bigger;}
+	}
 	// only need one timer 
 	// when eat another, multiply, refresh timer
 	// when eat the same, refresh timer
@@ -48,8 +56,8 @@ public class PlayerBuffStatus : MonoBehaviour {
 //		UpdateFireballID ();
 		// Debug.Log ("RemainBuffTime: " + RemainBuffTime);
 		if (RemainBuffTime < Time.deltaTime) {
-			IncreaseNumber = false;
-			Bigger = false;
+			_IncreaseNumber = false;
+			_Bigger = false;
 			UpdateFireballID();
 		}
 	}
@@ -75,12 +83,12 @@ public class PlayerBuffStatus : MonoBehaviour {
 		case ItemDB.ItemType.numberBoost:
 			// create a timed reset 
 			// if alreay sizeBoosted, do number Boost as well
-			IncreaseNumber = true;
+			_IncreaseNumber = true;
 			UpdateFireballID();
 			timer = Time.time;
 			break;
 		case ItemDB.ItemType.sizeBoost:
-			Bigger = true;
+			_Bigger = true;
 			UpdateFireballID();
 			timer = Time.time;
 			break;
@@ -92,24 +100,24 @@ public class PlayerBuffStatus : MonoBehaviour {
 	}
 
 //	private void BuffPlayerData(SpellDB.AttackID mode){
-//		IncreaseNumber = IncreaseNumber || (mode == SpellDB.AttackID.morefireball)? true : false;
-//		Bigger = Bigger || (mode == SpellDB.AttackID.bigfireball)? true : false;
+//		_IncreaseNumber = _IncreaseNumber || (mode == SpellDB.AttackID.morefireball)? true : false;
+//		_Bigger = _Bigger || (mode == SpellDB.AttackID.bigfireball)? true : false;
 //	}
 //
 //	private void DebuffPlayerData(int mode){
-//		IncreaseNumber = (mode == (int)SpellDB.AttackID.morefireball)? false : IncreaseNumber;
-//		Bigger = (mode == (int)SpellDB.AttackID.bigfireball)? false : Bigger;
+//		_IncreaseNumber = (mode == (int)SpellDB.AttackID.morefireball)? false : _IncreaseNumber;
+//		_Bigger = (mode == (int)SpellDB.AttackID.bigfireball)? false : _Bigger;
 //	}
 
 	// only change spell id 
 	private void UpdateFireballID (){
-		if (IncreaseNumber && Bigger)
+		if (_IncreaseNumber && _Bigger)
 			pd.spellID = SpellDB.AttackID.morebigfireball;
-		if (IncreaseNumber && !Bigger)
+		if (_IncreaseNumber && !_Bigger)
 			pd.spellID = SpellDB.AttackID.morefireball;
-		if (!IncreaseNumber && Bigger)
+		if (!_IncreaseNumber && _Bigger)
 			pd.spellID = SpellDB.AttackID.bigfireball;
-		if (!IncreaseNumber && !Bigger)
+		if (!_IncreaseNumber && !_Bigger)
 			pd.spellID = SpellDB.AttackID.fireball;
 		if (pd.ice_fire == Constants.SpellMode.Ice)
 			pd.spellID += 4;

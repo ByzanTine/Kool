@@ -11,6 +11,7 @@ public class MovableUnit : MonoBehaviour {
 	public float speed;
 	public Vector3 curSpeed;
 	public float damage = 0.1f;
+	public bool bigger = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -56,8 +57,9 @@ public class MovableUnit : MonoBehaviour {
 			// nothing should happen
 			return;
 		}
-		if ((other.gameObject.tag == TagList.Player
-		    || other.gameObject.tag == TagList.Fireball) && isMoving){
+		if ((other.gameObject.tag == TagList.Player 
+		    || (other.gameObject.tag == TagList.Fireball && !bigger)) // the bigger fireball cannot be destoried by any other spells.
+		    && isMoving){
 
 			isMoving = false;
 			// Cause Explosion Here
