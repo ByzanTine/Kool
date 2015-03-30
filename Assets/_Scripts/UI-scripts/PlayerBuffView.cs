@@ -10,6 +10,7 @@ public class PlayerBuffView : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		image = GetComponent<Image> ();
+		playerId = transform.parent.transform.parent.GetComponent<UserInputManager> ().playerNum;
 	}
 	
 	// Update is called once per frame

@@ -8,8 +8,8 @@ public class PlayerBuffStatus : MonoBehaviour {
 //	private List<bool> Buff_valid_List;	// keep track of the all the buff which is valid 
 
 
-	private bool IncreaseNumber = false;
-	private bool Bigger = false;
+	public bool IncreaseNumber = false;
+	public bool Bigger = false;
 	// only need one timer 
 	// when eat another, multiply, refresh timer
 	// when eat the same, refresh timer
