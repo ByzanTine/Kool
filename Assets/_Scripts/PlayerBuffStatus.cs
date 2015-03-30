@@ -55,9 +55,12 @@ public class PlayerBuffStatus : MonoBehaviour {
 //		}
 //		UpdateFireballID ();
 		// Debug.Log ("RemainBuffTime: " + RemainBuffTime);
-		if (RemainBuffTime < Time.deltaTime) {
+
+		if (RemainBuffTime < Time.deltaTime && 
+		    (IncreaseNumber || Bigger)) {
 			_IncreaseNumber = false;
 			_Bigger = false;
+
 			UpdateFireballID();
 		}
 	}

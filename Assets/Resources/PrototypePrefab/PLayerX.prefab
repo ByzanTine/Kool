@@ -1823,7 +1823,7 @@ MonoBehaviour:
   frozen: 0
   ice_fire: 1
   increment: .0500000007
-  SpecialSpellID: 12
+  SpecialSpellID: 13
   isAlive: 1
 --- !u!114 &11462314
 MonoBehaviour:
