@@ -10,7 +10,6 @@ public class ItemDB : MonoBehaviour {
 		protection,
 		HealthUp,
 		specialSkill
-
 	};
 
 	static public List<GameObject> items;

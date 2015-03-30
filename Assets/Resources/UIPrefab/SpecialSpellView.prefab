@@ -32,7 +32,7 @@ MonoBehaviour:
   playerId: 0
   Iceburst: {fileID: 21300000, guid: 4283ea42d24cd474f82cefa438f98b9f, type: 3}
   Meteor: {fileID: 21300000, guid: 8b3aff6087f364cd68c2e6c2da31c977, type: 3}
-  Reflect: {fileID: 21300000, guid: de32f22207f794fb5aa68134760c054f, type: 3}
+  Reflect: {fileID: 21300000, guid: 7f4878a174d8149239c4a26679145c72, type: 3}
 --- !u!114 &11448126
 MonoBehaviour:
   m_ObjectHideFlags: 1

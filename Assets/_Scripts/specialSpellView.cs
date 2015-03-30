@@ -43,12 +43,8 @@ public class specialSpellView : MonoBehaviour {
 					img.sprite = Meteor;
 					img.enabled = true;	
 					break;
-				case SpellDB.AttackID.reflect:
-					img.sprite = Reflect;
-					img.enabled = true;
-					break;
 				default:
-					print ("Not a special Spell");
+					Debug.Log ("Not a special Spell");
 					img.enabled = false;
 					break;
 			}
