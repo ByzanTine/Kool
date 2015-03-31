@@ -17,7 +17,7 @@ public class GameStatus : MonoBehaviour {
 	// Make this avaliable in inspector to intialize manually
 	public string[] Usernames = new string[4];
 	public Color[] UserColors = new Color[4]; 
-
+	public Material[] UserMaterials = new Material[4];
 //	private static Hashtable playerTable;
 
 	// private int playerNum;
@@ -102,6 +102,16 @@ public class GameStatus : MonoBehaviour {
 			userDataCollection[playerID].Usercolor = UserColors[playerID];
 			userDataCollection[playerID].initPosition = player.transform.position;
 			userDataCollection[playerID].wizardInstance = player;
+
+			// 
+			userDataCollection[playerID].wizardMaterial = UserMaterials[playerID];
+			// TODO this a HACK, I think there should be a player factory
+			Renderer[] renders = player.GetComponentsInChildren<Renderer>();
+			foreach (Renderer r in renders) {
+				r.material = UserMaterials[playerID];
+			}
+
+
 			totalPlayerNum++;
 		}
 	}

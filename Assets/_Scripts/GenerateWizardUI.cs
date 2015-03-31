@@ -5,6 +5,7 @@ public class GenerateWizardUI : MonoBehaviour {
 
 	public GameObject playerHealthPrefab;
 	public GameObject namePrefab;
+	public GameObject specialSpellPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -14,12 +15,16 @@ public class GenerateWizardUI : MonoBehaviour {
 			health.transform.SetParent(this.transform);
 			GameObject name = Instantiate(namePrefab) as GameObject;
 			name.transform.SetParent(this.transform);
+			GameObject specialSpell = Instantiate(specialSpellPrefab) as GameObject;
+			specialSpell.transform.SetParent(this.transform);
 
 			PlayerHealthView healthUI  = health.GetComponent<PlayerHealthView>();
 			PlayerNameView nameUI = name.GetComponent<PlayerNameView>();
+			specialSpellView specialSpellUI = specialSpell.GetComponent<specialSpellView>();
 
 			healthUI.playerId = i;
 			nameUI.playerId = i;
+			specialSpellUI.playerId = i;
 		}
 	}
 	

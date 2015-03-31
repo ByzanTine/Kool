@@ -44,7 +44,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   ExplodeEffect: {fileID: 165708, guid: 19b52379472b97743aaec4764e066755, type: 2}
-  spellID: 3
+  attackId: 2
   ExplodeRadius: 4
   caster: {fileID: 0}
 --- !u!114 &11413670

@@ -289,7 +289,7 @@ public class PlayerControl : MonoBehaviour {
 
 	public void Die() {
 		int playerId = GetComponent<UserInputManager> ().playerNum;
-		Debug.Log ("[Player] Player died, " + playerId);
+		Debug.Log ("[Player] Player died, id: " + playerId);
 		StartCoroutine (DieAnim ());
 
 	}
@@ -315,7 +315,7 @@ public class PlayerControl : MonoBehaviour {
 	private IEnumerator DieAnim() {
 		animator.SetBool ("isAlive", false);
 		inputManager.LockAllControl (2.0f);
-
+		Debug.Log("reset player death animation");
 		yield return new WaitForSeconds(0.2f);
 		animator.SetBool ("isAlive", true); // reset to lock animation
 

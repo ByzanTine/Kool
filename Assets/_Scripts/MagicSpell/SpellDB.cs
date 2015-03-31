@@ -17,6 +17,7 @@ public class SpellDB : MonoBehaviour {
 		reflect,
 		swap,
 		iceBurst,
+		fireNova,
 		None
 	};
 
@@ -33,10 +34,23 @@ public class SpellDB : MonoBehaviour {
 		"reflect", 
 		"swap",
 		"iceBurst", 
+		"fireNova",
 		"None"
 	};
+	static public float[] SPELL_DAMAGE = {0.1f, 0.1f, 0.3f, 0.2f, 0.6f};// 0 for fireball, 1 for iceball, 2 for iceburst, 3 for big fire ball, 4 for meteor
 
-	
+	static public Hashtable spellDamage;
+
+	static public float GetSpellDamage (AttackID index) {
+		if (spellDamage.ContainsKey(index)) {
+			return (float)spellDamage[index];
+		}
+		else {
+			Debug.LogError("[SpellDB] no object with the index" + attackIDnames[(int)index]);
+			return 0.0f; // not crashed anyway
+		}
+	}
+
 	// public GameObject meteor_;
 	static public GameObject fireball;
 	static public GameObject iceball;
@@ -45,10 +59,18 @@ public class SpellDB : MonoBehaviour {
 	static public GameObject swap;
 	static public GameObject iceBurst;
 	static public GameObject Bigfireball;
+	static public GameObject fireNova;
 
 	void Awake()
 	{
 		Debug.Log("INIT: Create Reference to Spells");
+		spellDamage = new Hashtable () {
+			{AttackID.fireball, 	0.1f},
+			{AttackID.iceball,  	0.1f},
+			{AttackID.iceBurst, 	0.3f},
+			{AttackID.bigfireball, 	0.2f},
+			{AttackID.meteor, 		0.6f}
+		};
 
 		InitSpells ();
 	}
@@ -62,7 +84,7 @@ public class SpellDB : MonoBehaviour {
 		iceball = Resources.Load ("MagicSpells/Iceball") as GameObject;
 		reflector = Resources.Load ("MagicSpells/Reflector") as GameObject;
 		// aerolite = Resources.Load ("MagicSpells/Aerolite") as GameObject;
-
+		fireNova = Resources.Load ("MagicSpells/fireNova") as GameObject;
 		swap = Resources.Load ("MagicSpells/Swapper") as GameObject;
 		iceBurst = Resources.Load ("MagicSpells/IceBurst/IceBurst") as GameObject;
 	}

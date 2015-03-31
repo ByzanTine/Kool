@@ -5,14 +5,15 @@ using System.Collections.Generic;
 public class ColliderExplode : MonoBehaviour {
 	public LayerMask overlapLayer;
 	public GameObject ExplodeEffect;
-	public int spellID;
+	public SpellDB.AttackID attackId;
 	public float ExplodeRadius = 1.0f;
 	public GameObject caster;
 	// Use this for initialization
 	void Start () {
 
 		if (ExplodeEffect) {
-			Instantiate (ExplodeEffect, transform.position, Quaternion.identity);
+			GameObject gb = Instantiate (ExplodeEffect, transform.position, Quaternion.identity) as GameObject;
+			gb.transform.parent = transform;
 			GenerateSphereCast (transform.position);
 		}
 
@@ -31,13 +32,13 @@ public class ColliderExplode : MonoBehaviour {
 		if (caster)
 			hashtable.Add (caster.GetInstanceID());// caster won't get hurt 
 		foreach (Collider collider in co){
-			Debug.Log ("[Spell] " + collider.gameObject.tag + "  " + collider.name);
+			Debug.Log ("[Spell] collided object info: " + collider.gameObject.tag + "  " + collider.name);
 			if (!hashtable.Contains(collider.gameObject.GetInstanceID())){
 				hashtable.Add(collider.gameObject.GetInstanceID());
 
 				PlayerSpellHandler PSH = collider.GetComponent<PlayerSpellHandler>();
 				if (PSH) {
-					PSH.onSpellTrigger(gameObject.transform.position, spellID);
+					PSH.onSpellTrigger(gameObject.transform.position, attackId);
 				}
 			}
 		}

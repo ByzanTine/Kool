@@ -26,7 +26,7 @@ public class FadeDestroy : MonoBehaviour {
 		// fade all children
 
 		Debug.Log("Start Fade");
-		for ( int childIndex = 0; childIndex < transform.GetChildCount(); childIndex++)
+		for ( int childIndex = 0; childIndex < transform.childCount; childIndex++)
 		{
 			Transform child = gameObject.transform.GetChild(childIndex);           
 			

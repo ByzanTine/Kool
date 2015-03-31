@@ -8,9 +8,10 @@ public class ExplodeLink : MonoBehaviour {
 	/// Casters the delegate destroy. 
 	/// </summary>
 	/// <param name="position">Position. Default is position </param>
-	public void CasterDelegateDestroy (Vector3 position) {
-		Instantiate(explodePrefab, position, Quaternion.identity);
-		explodePrefab.GetComponent<ColliderExplode> ().caster = caster;
+	public virtual void CasterDelegateDestroy (Vector3 position) {
+		GameObject gb = Instantiate(explodePrefab, position, Quaternion.identity) as GameObject;
+		gb.GetComponent<ColliderExplode> ().caster = caster;
 		Destroy(gameObject);
 	}
+
 }

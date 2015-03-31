@@ -6,9 +6,11 @@ public class UserData {
 	public int userID = -1;
 
 	public GameObject wizardInstance = null;
+	public Material wizardMaterial;
 
 	public string Username = "Alice";
 	public Color Usercolor = Color.green;
+
 
 	public int deathCount = 0;
 	public int rebornTime = -1;

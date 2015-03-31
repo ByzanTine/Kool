@@ -11,6 +11,7 @@ public class MovableUnit : MonoBehaviour {
 	public float speed;
 	public Vector3 curSpeed;
 	public float damage = 0.1f;
+	public bool bigger = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -50,14 +51,28 @@ public class MovableUnit : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		// avoid collider with self
+
 		ExplodeLink explodeLink = GetComponent<ExplodeLink>();
 		if (explodeLink && 
 		    other.gameObject.GetInstanceID() == explodeLink.caster.GetInstanceID()) {
 			// nothing should happen
 			return;
 		}
-		if ((other.gameObject.tag == TagList.Player
-		    || other.gameObject.tag == TagList.Fireball) && isMoving){
+
+		// if other got a explodelink as well.
+		// Then we want to identify whether they are from same guy
+		ExplodeLink otherExplodeLink = other.GetComponent<ExplodeLink>();
+		if (otherExplodeLink && 
+		    otherExplodeLink.caster.GetInstanceID() == explodeLink.caster.GetInstanceID()) {
+			// nothing should happen
+			return;
+		}
+
+		
+		if ((other.gameObject.tag == TagList.Player 
+		    || (other.gameObject.tag == TagList.Fireball && !bigger)) // the bigger fireball cannot be destoried by any other spells.
+		    && isMoving){
+
 
 			isMoving = false;
 			// Cause Explosion Here

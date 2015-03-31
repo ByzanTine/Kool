@@ -11,39 +11,54 @@ public class PlayerSpellHandler : MonoBehaviour {
 		if (!playerData) {
 			Debug.LogError("[Player] player data not there!");
 		}
+		GameObject frozenPrefab = Resources.Load ("PlayerEffect/FrozenEffect") as GameObject;
+		FrozenEffectObj = Instantiate (frozenPrefab, transform.position, Quaternion.identity) as GameObject;
+		FrozenEffectObj.transform.parent = transform;
 		FrozenEffectObj.SetActive (false);
 	}
 	
 	// Update is called once per frame
-	public void onSpellTrigger (Vector3 spellPos, int spellID) {
+	public void onSpellTrigger (Vector3 spellPos, SpellDB.AttackID spellId) {
 		// if fireball, deduct health
-		Debug.Log ("[Spell] " + SpellDB.attackIDnames[spellID] + "   on spell trigger");
+		Debug.Log ("[Spell] " + SpellDB.attackIDnames[(int)spellId] + "   on spell trigger");
+		if (spellId == SpellDB.AttackID.iceball) {
+			playerData.DamageHP(SpellDB.GetSpellDamage(spellId));
+			StartCoroutine(GetFrozen());
+		}
+		if (spellId == SpellDB.AttackID.iceBurst) {
+			playerData.DamageHP(SpellDB.GetSpellDamage(spellId));
+			StartCoroutine(GetFrozen());
+		}
 
-		if (spellID == 0 || spellID == 3){ // fireball id is 0 3 is for big fire ball
+		if (spellId == SpellDB.AttackID.meteor) {
+			playerData.DamageHP(SpellDB.GetSpellDamage(spellId));
+		}
+
+		if (spellId == SpellDB.AttackID.fireball || spellId == SpellDB.AttackID.bigfireball) {
 			Debug.Log ("[Spell] fireball is hit on " + this.name);
 			Vector3 direction = transform.position - spellPos;
 			Vector3 appliedForce = direction.normalized * Globals.FORCE_MULTIPLIER;
 //			StartCoroutine(addTimeDecayForce(GetComponent<Rigidbody>(), appliedForce, 0.5f));
 			StartCoroutine(addDistanceDecayForce(GetComponent<Rigidbody>(), appliedForce, 4f, spellPos));
 
-			playerData.DamageHP(Constants.SPELL_DAMAGE[spellID]);
+			playerData.DamageHP(SpellDB.GetSpellDamage(spellId));
 			Debug.Log ("[Spell] hit " + GetComponent<Collider>().name);
 		}
 
-		if (spellID == 1){ // iceball id is 1
-			playerData.DamageHP(Constants.SPELL_DAMAGE[spellID]);
-			StartCoroutine(GetFrozen());
-		}
+//		if (spellID == 1){ // iceball id is 1
+//			playerData.DamageHP(SpellDB.SPELL_DAMAGE[spellID]);
+//			StartCoroutine(GetFrozen());
+//		}
 
 
-		if (spellID == 2){ // iceburst id is 2
-			playerData.DamageHP(Constants.SPELL_DAMAGE[spellID]);
-			StartCoroutine(GetFrozen());
-		}
+//		if (spellID == 2){ // iceburst id is 2
+//			playerData.DamageHP(SpellDB.SPELL_DAMAGE[spellID]);
+//			StartCoroutine(GetFrozen());
+//		}
 
-		if (spellID == 3) { // meteor
-			playerData.DamageHP(Constants.SPELL_DAMAGE[spellID]);
-		}
+//		if (spellID == 3) { // meteor
+//			playerData.DamageHP(SpellDB.SPELL_DAMAGE[spellID]);
+//		}
 	}
 	
 	
