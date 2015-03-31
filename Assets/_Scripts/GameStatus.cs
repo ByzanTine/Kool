@@ -22,6 +22,7 @@ public class GameStatus : MonoBehaviour {
 
 	// private int playerNum;
 	private bool isGameOver = false;
+	private int[] teamScores;
 
 	private static int totalPlayerNum = 0;
 	public static int TotalPlayerNum
@@ -62,28 +63,79 @@ public class GameStatus : MonoBehaviour {
 
 		// Scene transition protection for singleton
 		// For later usage
-//		if(_instance == null)
-//		{
+		if(_instance == null)
+		{
 			//If I am the first instance, make me the Singleton
 			_instance = this;
-//			DontDestroyOnLoad(this);
-//		}
-//		else
-//		{
-//			//If a Singleton already exists and you find
-//			//another reference in scene, destroy it!
-//			if(this != _instance)
-//				Destroy(this.gameObject);
-//		}
-		BindAllUserData ();
+			DontDestroyOnLoad(this);
+			BindAllUserData ();
+		}
+		else
+		{
+			//If a Singleton already exists and you find
+			//another reference in scene, destroy it!
+			if(this != _instance)
+				Destroy(this.gameObject);
+		}
 
 	}
 
 	// Use this for initialization
 	void Start () {
 //		playerTable = new Hashtable ();
+		teamScores = new int[2] {0, 0};
+		isGameOver = false;
 
+		if(Application.loadedLevelName.Equals("MainMap")
+		   || Application.loadedLevelName.Equals("GameMap"))
+		{
+			Debug.Log ("binding wizard to user");
+			BindAllWizardToUser();
+		}
 	}
+
+
+	void OnLevelWasLoaded(int level) {
+		if(Application.loadedLevelName.Equals("MainMap")
+		   || Application.loadedLevelName.Equals("GameMap"))
+		{
+			Debug.Log ("binding wizard to user");
+			BindAllWizardToUser();
+		}
+	}
+
+	void BindAllWizardToUser()
+	{
+		int id = 0;
+		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
+		foreach(GameObject player in playerCollection)
+		{
+			// bind input manager
+			UserInputManager userCtrl = player.GetComponent<UserInputManager>();
+			// assign player ID
+			userCtrl.playerNum = id;
+			player.name = userDataCollection[id].Username;
+			userDataCollection[id].initPosition = player.transform.position;
+			userDataCollection[id].wizardInstance = player;
+			
+			// TODO this a HACK, I think there should be a player factory
+			Renderer[] renders = player.GetComponentsInChildren<Renderer>();
+			foreach (Renderer r in renders) {
+				r.material = UserMaterials[id];
+			}
+
+			if(userDataCollection[id].teamID >= 2)
+			{
+				userDataCollection[id].teamID  = id / 2;
+			}
+			else if(userDataCollection[id].teamID == -1)
+			{
+				Destroy(player);
+			}
+			id++;
+		}
+	}
+
 	// store into hashtable as well
 	void BindAllUserData()
 	{
@@ -91,37 +143,28 @@ public class GameStatus : MonoBehaviour {
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 		foreach(GameObject player in playerCollection)
 		{
+			// bind input manager
 			UserInputManager userCtrl = player.GetComponent<UserInputManager>();
+			// assign player ID
 			userCtrl.playerNum = totalPlayerNum;
 			int playerID = userCtrl.playerNum;
-
-			player.name = Usernames[playerID];
 			userDataCollection[playerID] = new UserData();
 			userDataCollection[playerID].userID = playerID;
+
+			// bind the provided player info into User data.
 			userDataCollection[playerID].Username = Usernames[playerID];
 			userDataCollection[playerID].Usercolor = UserColors[playerID];
-			userDataCollection[playerID].initPosition = player.transform.position;
-			userDataCollection[playerID].wizardInstance = player;
-
-			// 
 			userDataCollection[playerID].wizardMaterial = UserMaterials[playerID];
-			// TODO this a HACK, I think there should be a player factory
-			Renderer[] renders = player.GetComponentsInChildren<Renderer>();
-			foreach (Renderer r in renders) {
-				r.material = UserMaterials[playerID];
-			}
-
 
 			totalPlayerNum++;
 		}
 	}
 
-	public int GetDeathNum(int teamId)
+	public int GetTeamScore(int teamId)
 	{
 		if(totalPlayerNum != 4) return 0;
 
-		return userDataCollection[teamId * 2].deathCount 
-			+ userDataCollection[1 + teamId * 2].deathCount;
+		return teamScores[teamId];
 	}
 	
 	// Update is called once per frame
@@ -189,14 +232,22 @@ public class GameStatus : MonoBehaviour {
 			
 		case GameMode.GainScore:
 			if(totalPlayerNum < 4) return;
-			int team = playerID >= 2 ? 2 : 0;
-			if(userDataCollection [team].deathCount 
-			   + userDataCollection [team + 1].deathCount >= GameTargetRounds)
+			int otherTeamID = (1 + userDataCollection[playerID].teamID) % 2;
+
+			// add score to the other team:
+			teamScores[otherTeamID]++;
+
+			if(teamScores[otherTeamID] >= GameTargetRounds)
 			{
 				if(!isGameOver)
 				{
-					DestroyPlayerWithID(team);
-					DestroyPlayerWithID(team+1);
+					for(int i=0; i<totalPlayerNum; ++i)
+					{
+						if(userDataCollection[i].teamID != otherTeamID)
+						{
+							DestroyPlayerWithID(i);
+						}
+					}
 					WinEndGame();
 				}
 			}
@@ -227,6 +278,12 @@ public class GameStatus : MonoBehaviour {
 		// add to table
 		userDataCollection[id].wizardInstance = wizard;
 		wizard.name = userDataCollection [id].Username;
+
+		// 
+		Renderer[] renders = wizard.GetComponentsInChildren<Renderer>();
+		foreach (Renderer r in renders) {
+			r.material = UserMaterials[id];
+		}
 	}
 
 	void DestroyPlayerWithID(int playerid)

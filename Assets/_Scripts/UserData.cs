@@ -4,6 +4,7 @@ using System.Collections;
 public class UserData {
 
 	public int userID = -1;
+	public int teamID = 2;
 
 	public GameObject wizardInstance = null;
 	public Material wizardMaterial;
