@@ -14,7 +14,7 @@ public class ScreenFadeIn : MonoBehaviour {
 	// Use this for initialization
 	public void Start () {
 		image = GetComponent<Image> ();
-		curColor = image.color;
+		curColor = new Color(0, 0, 0, 255);
 		
 		StartCoroutine (ShowAndFadeFunc (lingerlength));
 	}
