@@ -36,7 +36,13 @@ public class PlayerData : MonoBehaviour {
 		pos += damagePosDelta;
 		GameObject newDamageNum = Instantiate (damageNumberPrefab, pos, Quaternion.identity) as GameObject;
 		newDamageNum.GetComponent<DamageNumber> ().number = (int)(damage * 1000f * Random.Range(0.9f,1.1f));
+		if (damage < 0) {
+			Color c = newDamageNum.GetComponent<TextMesh> ().color;
+			c.r = 0f;
+			newDamageNum.GetComponent<TextMesh> ().color = c;
+			newDamageNum.GetComponent<DamageNumber> ().number = -(int)(damage * 1000f);
 
+		}
 
 		health -= damage;
 
