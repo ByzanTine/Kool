@@ -2,16 +2,16 @@
 using System.Collections;
 
 public class TutorialStatus : MonoBehaviour {
-	private static int NumOfPlayers;
+//	private static int NumOfPlayers;
 
 	// Use this for initialization
 	void Start () {
-		NumOfPlayers = GameStatus.TotalPlayerNum;
+//		NumOfPlayers = GameStatus.TotalPlayerNum;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		for(int i = 0; i < GameStatus.TotalPlayerNum; ++i)
+		for(int i = 0; i < 4; ++i)
 		{
 			GameObject player = GameStatus.GetPlayerObjById(i);
 			if (player){

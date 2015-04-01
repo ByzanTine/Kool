@@ -87,26 +87,27 @@ public class GameStatus : MonoBehaviour {
 		teamScores = new int[2] {0, 0};
 		isGameOver = false;
 
-		if(Application.loadedLevelName.Equals("MainMap")
-		   || Application.loadedLevelName.Equals("GameMap"))
+		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
+		if(playerCollection[0].GetComponent<PlayerControl>() != null)
 		{
-			Debug.Log ("binding wizard to user");
 			BindAllWizardToUser();
 		}
+
 	}
 
 
 	void OnLevelWasLoaded(int level) {
-		if(Application.loadedLevelName.Equals("MainMap")
-		   || Application.loadedLevelName.Equals("GameMap"))
+
+		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
+		if(playerCollection[0].GetComponent<PlayerControl>() != null)
 		{
-			Debug.Log ("binding wizard to user");
 			BindAllWizardToUser();
 		}
 	}
 
 	void BindAllWizardToUser()
 	{
+		Debug.Log ("binding wizard to user");
 		int id = 0;
 		totalPlayerNum = 0;
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);

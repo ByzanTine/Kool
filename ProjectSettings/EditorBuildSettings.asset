@@ -15,3 +15,5 @@ EditorBuildSettings:
     path: Assets/_Scene/MainMenu.unity
   - enabled: 1
     path: Assets/_Scene/TitleScreen.unity
+  - enabled: 1
+    path: Assets/_Scene/TutorialMap.unity
