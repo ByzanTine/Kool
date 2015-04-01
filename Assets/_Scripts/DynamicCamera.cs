@@ -35,11 +35,16 @@ public class DynamicCamera : MonoBehaviour {
 	/// <returns>A Rect containing all the targets.</returns>
 	Rect CalculateTargetsBoundingBox()
 	{
-		float minX = Mathf.Infinity;
-		float maxX = Mathf.NegativeInfinity;
-		float minZ = Mathf.Infinity;
-		float maxZ = Mathf.NegativeInfinity;
-		
+//		float minX = Mathf.Infinity;
+//		float maxX = Mathf.NegativeInfinity;
+//		float minZ = Mathf.Infinity;
+//		float maxZ = Mathf.NegativeInfinity;
+	
+		float minX = 0;
+		float maxX = 0;
+		float minZ = 0;
+		float maxZ = 0;
+
 		foreach (Transform target in targets) {
 			Vector3 position = target.position;
 			

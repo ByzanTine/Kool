@@ -169,8 +169,6 @@ public class GameStatus : MonoBehaviour {
 
 	public int GetTeamScore(int teamId)
 	{
-		if(totalPlayerNum != 4) return 0;
-
 		return teamScores[teamId];
 	}
 	
@@ -238,7 +236,7 @@ public class GameStatus : MonoBehaviour {
 			break;
 			
 		case GameMode.GainScore:
-			if(totalPlayerNum < 4) return;
+
 			int otherTeamID = (1 + userDataCollection[playerID].teamID) % 2;
 
 			// add score to the other team:
