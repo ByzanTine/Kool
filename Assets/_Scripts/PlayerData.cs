@@ -23,12 +23,21 @@ public class PlayerData : MonoBehaviour {
 
 	public bool isAlive = true;
 
+	Vector3 damagePosDelta = new Vector3(-1.0f,0,7.0f);
 	void Start () {
 		// HPbarControl = HPBar.GetComponent<BarControl> ();
 //		ManabarControl = ManaBar.GetComponent<BarControl> ();
 	}
 
 	public void DamageHP (float damage){
+		// damage effect
+		GameObject damageNumberPrefab = Resources.Load ("PlayerEffect/DamageNumber") as GameObject;
+		Vector3 pos = transform.position;
+		pos += damagePosDelta;
+		GameObject newDamageNum = Instantiate (damageNumberPrefab, pos, Quaternion.identity) as GameObject;
+		newDamageNum.GetComponent<DamageNumber> ().number = (int)(damage * 1000f * Random.Range(0.9f,1.1f));
+
+
 		health -= damage;
 
 		// HPbarControl.SetBar (health);
