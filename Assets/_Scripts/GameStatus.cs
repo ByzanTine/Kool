@@ -119,13 +119,10 @@ public class GameStatus : MonoBehaviour {
 			player.name = userDataCollection[id].Username;
 			userDataCollection[id].initPosition = player.transform.position;
 			userDataCollection[id].wizardInstance = player;
-			
-			// TODO this a HACK, I think there should be a player factory
-			Renderer[] renders = player.GetComponentsInChildren<Renderer>();
-			foreach (Renderer r in renders) {
-				r.material = UserMaterials[(userDataCollection[id].teamID * 2 + 4) % 4];
-			}
 
+			// seperate team for default/unassigned player:
+			// default: 0 & 1 in team 0, 2 & 3 in team 1;
+			// unassigned: destroy the corresponding player object;
 			if(userDataCollection[id].teamID >= 2)
 			{
 				totalPlayerNum++;
@@ -135,6 +132,13 @@ public class GameStatus : MonoBehaviour {
 			{
 				Destroy(player);
 			}
+
+			// TODO this a HACK, I think there should be a player factory
+			Renderer[] renders = player.GetComponentsInChildren<Renderer>();
+			foreach (Renderer r in renders) {
+				r.material = UserMaterials[userDataCollection[id].teamID + 1];
+			}
+
 			id++;
 		}
 
