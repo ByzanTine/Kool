@@ -16,7 +16,7 @@ public class TutorialStatus : MonoBehaviour {
 			GameObject player = GameStatus.GetPlayerObjById(i);
 			if (player){
 				PlayerData pd = player.GetComponent<PlayerData>();
-				if (pd.health < 0.6){
+				if (pd.health < 0.45){
 					pd.health = 1;
 				}
 			}
