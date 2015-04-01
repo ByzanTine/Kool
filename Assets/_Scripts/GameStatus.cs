@@ -87,26 +87,27 @@ public class GameStatus : MonoBehaviour {
 		teamScores = new int[2] {0, 0};
 		isGameOver = false;
 
-		if(Application.loadedLevelName.Equals("MainMap")
-		   || Application.loadedLevelName.Equals("GameMap"))
+		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
+		if(playerCollection[0].GetComponent<PlayerControl>() != null)
 		{
-			Debug.Log ("binding wizard to user");
 			BindAllWizardToUser();
 		}
+
 	}
 
 
 	void OnLevelWasLoaded(int level) {
-		if(Application.loadedLevelName.Equals("MainMap")
-		   || Application.loadedLevelName.Equals("GameMap"))
+
+		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
+		if(playerCollection[0].GetComponent<PlayerControl>() != null)
 		{
-			Debug.Log ("binding wizard to user");
 			BindAllWizardToUser();
 		}
 	}
 
 	void BindAllWizardToUser()
 	{
+		Debug.Log ("binding wizard to user");
 		int id = 0;
 		totalPlayerNum = 0;
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
@@ -119,17 +120,17 @@ public class GameStatus : MonoBehaviour {
 			player.name = userDataCollection[id].Username;
 			userDataCollection[id].initPosition = player.transform.position;
 			userDataCollection[id].wizardInstance = player;
-
+			totalPlayerNum++;
 			// seperate team for default/unassigned player:
 			// default: 0 & 1 in team 0, 2 & 3 in team 1;
 			// unassigned: destroy the corresponding player object;
 			if(userDataCollection[id].teamID >= 2)
 			{
-				totalPlayerNum++;
 				userDataCollection[id].teamID = id / 2;
 			}
 			else if(userDataCollection[id].teamID == -1)
 			{
+				totalPlayerNum--;
 				Destroy(player);
 			}
 
@@ -168,8 +169,6 @@ public class GameStatus : MonoBehaviour {
 
 	public int GetTeamScore(int teamId)
 	{
-		if(totalPlayerNum != 4) return 0;
-
 		return teamScores[teamId];
 	}
 	
@@ -237,7 +236,7 @@ public class GameStatus : MonoBehaviour {
 			break;
 			
 		case GameMode.GainScore:
-			if(totalPlayerNum < 4) return;
+
 			int otherTeamID = (1 + userDataCollection[playerID].teamID) % 2;
 
 			// add score to the other team:

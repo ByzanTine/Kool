@@ -15,10 +15,16 @@ public class GenerateWizardUI : MonoBehaviour {
 	IEnumerator LateGenerateWizardUI()
 	{
 		// wait for load scene done
-		yield return new WaitForSeconds (0.1f);
+		Debug.Log ("[UI] Prepare load player");
 
-		for(int i = 0; i < GameStatus.TotalPlayerNum; ++i)
+		yield return new WaitForSeconds (0.1f);
+		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
+		foreach(GameObject player in playerCollection)
 		{
+
+			UserInputManager userCtrl = player.GetComponent<UserInputManager>();
+			// assign player ID
+			int playerId = userCtrl.playerNum;
 			GameObject health = Instantiate(playerHealthPrefab) as GameObject;
 			health.transform.SetParent(this.transform);
 			GameObject name = Instantiate(namePrefab) as GameObject;
@@ -30,9 +36,9 @@ public class GenerateWizardUI : MonoBehaviour {
 			PlayerNameView nameUI = name.GetComponent<PlayerNameView>();
 			SpecialSpellView specialSpellUI = specialSpell.GetComponent<SpecialSpellView>();
 			
-			healthUI.playerId = i;
-			nameUI.playerId = i;
-			specialSpellUI.playerId = i;
+			healthUI.playerId = playerId;
+			nameUI.playerId = playerId;
+			specialSpellUI.playerId = playerId;
 		}
 	}
 	
