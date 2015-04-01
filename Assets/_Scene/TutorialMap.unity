@@ -427,6 +427,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 608649626}
   m_RootOrder: 1
+--- !u!1 &472995927
+GameObject:
+  m_PrefabParentObject: {fileID: 118574, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
+  m_PrefabInternal: {fileID: 683906216}
 --- !u!1001 &488331437
 Prefab:
   m_ObjectHideFlags: 0
@@ -570,8 +574,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -239, y: -67}
-  m_SizeDelta: {x: 480, y: 120}
+  m_AnchoredPosition: {x: -261, y: -72}
+  m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &590788778
 MonoBehaviour:
@@ -863,7 +867,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 960, y: 723}
+  m_SizeDelta: {x: 1280, y: 723}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1049946937
 MonoBehaviour:
@@ -1102,6 +1106,10 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1386445718}
+--- !u!1 &1401279544
+GameObject:
+  m_PrefabParentObject: {fileID: 118574, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
+  m_PrefabInternal: {fileID: 1409976570}
 --- !u!1001 &1409976570
 Prefab:
   m_ObjectHideFlags: 0
@@ -1715,45 +1723,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Img: {fileID: 1049946935}
   Text: {fileID: 590788776}
+  itemGenerators:
+  - {fileID: 1401279544}
+  - {fileID: 472995927}
+  - {fileID: 2125777987}
+  - {fileID: 2146310618}
   TutorialSteps:
   - txt: 'Two joysticks for moving and aiming '
-    img: {fileID: 21300000, guid: 115363644fe534e34b550d688148efa4, type: 3}
+    img: {fileID: 21300000, guid: f847a9965f9e74c0c926d22715a57a4b, type: 3}
     timeInterval: 5
     item: {fileID: 0}
   - txt: Right Trigger to Shoot magic balls according to your aiming direction. The
       magic balls around you indicate the number and size of magic ball you gonna
       shoot
-    img: {fileID: 21300000, guid: e29d18dcbd0cc4f0294bafb36c1a6514, type: 3}
+    img: {fileID: 21300000, guid: a08deef1e91f44c57a30b35c692ba0c6, type: 3}
     timeInterval: 10
     item: {fileID: 0}
   - txt: 'Run:  It is much harder to control. Cannot shoot and run at the same time.'
-    img: {fileID: 21300000, guid: 9165894f5c7dc4e3aa343cecbc704281, type: 3}
+    img: {fileID: 21300000, guid: 1cd1c5a539fe444e5997be553d003ee5, type: 3}
     timeInterval: 7
     item: {fileID: 0}
   - txt: After you pick a special spell box with light, there will be a special spell
       icon above your name.  Try it out.
-    img: {fileID: 21300000, guid: 8b5e1ffb63b524cf5b3d2159d55961cf, type: 3}
+    img: {fileID: 21300000, guid: 562d8a690f29349d7832b407e17e6018, type: 3}
     timeInterval: 12
     item: {fileID: 129264, guid: d9a81daac02c2465dad7d6874d083184, type: 2}
   - txt: Switch between fire mode and ice mode
-    img: {fileID: 21300000, guid: ad53d736cda334c6ab535070d9c8cddf, type: 3}
+    img: {fileID: 21300000, guid: f98233ac922ed495c9218ba457ef4373, type: 3}
     timeInterval: 7
     item: {fileID: 0}
   - txt: Special Spell's mode can also be changed by switch button.
-    img: {fileID: 21300000, guid: 78ccdc1e735e644f595a4e7f3e56f101, type: 3}
+    img: {fileID: 21300000, guid: f98233ac922ed495c9218ba457ef4373, type: 3}
     timeInterval: 7
     item: {fileID: 129264, guid: d9a81daac02c2465dad7d6874d083184, type: 2}
   - txt: While running, press Attack, you gonna hit instead of shoot.
-    img: {fileID: 21300000, guid: 08d4eaca4dc79480e92f98e7cac929c3, type: 3}
+    img: {fileID: 21300000, guid: d8fa2628c8df246d88c9607b5a46a2c0, type: 3}
     timeInterval: 7
     item: {fileID: 0}
   - txt: Buff Item gonna change your status and indicator around you will show the
       status
-    img: {fileID: 21300000, guid: ad53d736cda334c6ab535070d9c8cddf, type: 3}
+    img: {fileID: 21300000, guid: 62e332e5c5d83ef4b92a091af0c03cb9, type: 3}
     timeInterval: 7
     item: {fileID: 112066, guid: 8db018d2981f59346bfbb27368d89623, type: 2}
   - txt: Special Spell box is shining!!!
-    img: {fileID: 21300000, guid: ad53d736cda334c6ab535070d9c8cddf, type: 3}
+    img: {fileID: 21300000, guid: 62e332e5c5d83ef4b92a091af0c03cb9, type: 3}
     timeInterval: 5
     item: {fileID: 129264, guid: d9a81daac02c2465dad7d6874d083184, type: 2}
   - txt: 30 seconds to start the real fight!
@@ -1838,6 +1851,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!1 &2125777987
+GameObject:
+  m_PrefabParentObject: {fileID: 118574, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
+  m_PrefabInternal: {fileID: 760318093}
+--- !u!1 &2146310618
+GameObject:
+  m_PrefabParentObject: {fileID: 118574, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
+  m_PrefabInternal: {fileID: 1421324323}
 --- !u!1 &2146786597
 GameObject:
   m_ObjectHideFlags: 0
