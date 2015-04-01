@@ -72,17 +72,17 @@ namespace CustomProfile
 				},
 				new InputControlMapping
 				{
-					Handle = "Cast Fireball",
+					Handle = "Run",
 					Target = InputControlType.LeftTrigger,
 					// KeyCodeComboButton requires that all KeyCode params are down simultaneously.
-					Source = MouseButton0
+					Source = KeyCodeButton( KeyCode.Space )
 				},
 				new InputControlMapping
 				{
-					Handle = "Run",
+					Handle = "Shoot",
 					Target = InputControlType.RightTrigger,
 					// KeyCodeComboButton requires that all KeyCode params are down simultaneously.
-					Source = KeyCodeButton( KeyCode.Space )
+					Source = MouseButton0
 				}
 			};
 

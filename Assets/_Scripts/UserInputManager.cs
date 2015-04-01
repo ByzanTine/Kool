@@ -6,7 +6,6 @@ public class UserInputManager : MonoBehaviour {
 
 
 	// variable set in Inspector
-	[HideInInspector]
 	public int playerNum = 0;
 
 	// variables for player controller and GUI
@@ -20,7 +19,7 @@ public class UserInputManager : MonoBehaviour {
 	// controller input events:
 	public delegate void OnInput();
 
-	// Trigger and bumpers
+	// Game control: Trigger and bumpers
 	public event OnInput OnPressMainSkill;
 	public event OnInput OnPressSubSkill;
 	public event OnInput OnReleaseSubSkill;
@@ -29,10 +28,19 @@ public class UserInputManager : MonoBehaviour {
 
 	public event OnInput OnPressRunning;
 	public event OnInput OnReleaseRunning;
-	
+
+	// UI control:
+	public event OnInput OnPressConfirm;
+	public event OnInput OnPressBack;
+	public event OnInput OnPressNavUp;
+	public event OnInput OnPressNavDown;
+
 	// Buttons: X, Y, A, B
 	public event OnInput OnPressButton;
 	public event OnInput OnReleaseButton;
+
+
+
 
 	
 	// input lock of each: left, right, buttons, trigger & bumper;
@@ -125,27 +133,31 @@ public class UserInputManager : MonoBehaviour {
 
 		if(inputDevice.LeftBumper.WasPressed)
 		{
-			OnPressSwapIceFire();
+			if(OnPressNavUp != null) OnPressNavUp();
+			if(OnPressSwapIceFire != null) OnPressSwapIceFire();
 		}
 		
 		if(inputDevice.RightBumper.WasPressed)
 		{
-			OnPressSubSkill();
-		}
-
-		if(inputDevice.LeftTrigger.WasPressed)
-		{
-			OnPressMainSkill();
+			if(OnPressNavDown != null) OnPressNavDown();
+			if(OnPressSubSkill != null) OnPressSubSkill();
 		}
 
 		if(inputDevice.RightTrigger.WasPressed)
 		{
-			OnPressRunning();
+			if(OnPressConfirm != null) OnPressConfirm();
+			if(OnPressMainSkill != null) OnPressMainSkill();
 		}
 
-		if(inputDevice.RightTrigger.WasReleased)
+		if(inputDevice.LeftTrigger.WasPressed)
 		{
-			OnReleaseRunning();
+			if(OnPressBack != null) OnPressBack();
+			if(OnPressRunning != null) OnPressRunning();
+		}
+
+		if(inputDevice.LeftTrigger.WasReleased)
+		{
+			if(OnReleaseRunning != null) OnReleaseRunning();
 		}
 
 
