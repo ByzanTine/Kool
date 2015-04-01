@@ -52,6 +52,11 @@ public class MovableUnit : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		// avoid collider with self
 
+		if (other.gameObject.tag == TagList.Wall) {
+			Instantiate(explosion, transform.position, Quaternion.identity);
+			Destroy(gameObject);
+		}
+
 		ExplodeLink explodeLink = GetComponent<ExplodeLink>();
 		if (explodeLink && 
 		    other.gameObject.GetInstanceID() == explodeLink.caster.GetInstanceID()) {
@@ -89,6 +94,7 @@ public class MovableUnit : MonoBehaviour {
 				Destroy(gameObject);
 			}
 		}
+
 		
 	}
 
