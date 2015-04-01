@@ -37,7 +37,7 @@ public class TutorialView : MonoBehaviour {
 		
 		TutorialSteps [6].txt = "Special Spell's mode can also be changed by switch button.";
 		
-		TutorialSteps [7].txt = "30 seconds to start the real fight!";
+		TutorialSteps [7].txt = "15 seconds to start the real fight!";
 	}
 
 	void Start () {
@@ -55,6 +55,11 @@ public class TutorialView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (NumOfCurStep == TutorialSteps.Length) {
+			Debug.Log("End of tutorial and switch to main map!!");
+			Application.LoadLevel("MainMenu");
+		}
+
 		if (Time.time - time > TutorialSteps [NumOfCurStep].timeInterval) {
 			NumOfCurStep = NumOfCurStep + 1;
 			_img.sprite = TutorialSteps[NumOfCurStep].img;
@@ -74,9 +79,6 @@ public class TutorialView : MonoBehaviour {
 			}
 		}
 
-		if (NumOfCurStep == TutorialSteps.Length) {
-			Debug.Log("End of tutorial and switch to main map!!");
 
-		}
 	}
 }
