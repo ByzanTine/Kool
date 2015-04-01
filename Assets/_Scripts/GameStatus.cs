@@ -98,11 +98,15 @@ public class GameStatus : MonoBehaviour {
 
 	void OnLevelWasLoaded(int level) {
 
+		teamScores = new int[2] {0, 0};
+		isGameOver = false;
+		
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 		if(playerCollection[0].GetComponent<PlayerControl>() != null)
 		{
 			BindAllWizardToUser();
 		}
+
 	}
 
 	void BindAllWizardToUser()
@@ -133,11 +137,11 @@ public class GameStatus : MonoBehaviour {
 				totalPlayerNum--;
 				Destroy(player);
 			}
-
+			userDataCollection[id].wizardMaterial = UserMaterials[userDataCollection[id].teamID + 1];
 			// TODO this a HACK, I think there should be a player factory
 			Renderer[] renders = player.GetComponentsInChildren<Renderer>();
 			foreach (Renderer r in renders) {
-				r.material = UserMaterials[userDataCollection[id].teamID + 1];
+				r.material = userDataCollection[id].wizardMaterial;
 			}
 
 			id++;
@@ -287,7 +291,7 @@ public class GameStatus : MonoBehaviour {
 		// 
 		Renderer[] renders = wizard.GetComponentsInChildren<Renderer>();
 		foreach (Renderer r in renders) {
-			r.material = UserMaterials[id];
+			r.material = userDataCollection[id].wizardMaterial;
 		}
 	}
 
