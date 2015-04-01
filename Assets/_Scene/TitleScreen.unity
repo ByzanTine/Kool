@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25737630e82ad044bf680c5a3323338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: wahtthefuxk
+  levelName: MainMenu
   waitTime: 8
 --- !u!4 &1542652403
 Transform:

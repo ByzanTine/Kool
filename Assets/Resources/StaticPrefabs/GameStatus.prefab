@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameMode: 1
-  GameTargetRounds: 5
+  GameTargetRounds: 10
   playerPrefab: {fileID: 134422, guid: 46d7e0dc98cba0a4eb9dab7e24e457b9, type: 2}
   Usernames:
   - Alice
@@ -52,6 +52,11 @@ MonoBehaviour:
   - {r: 1, g: .82961458, b: .382352948, a: 1}
   - {r: .382352948, g: 1, b: .948884368, a: 1}
   - {r: .291954994, g: .992647052, b: .789687932, a: 1}
+  UserMaterials:
+  - {fileID: 2100000, guid: e480f89a716bb2a48a9d608db064ec48, type: 2}
+  - {fileID: 2100000, guid: f4bc5b4c4d9673947be314477310e662, type: 2}
+  - {fileID: 2100000, guid: 876c48bb19adde24ba80ad88779b17a1, type: 2}
+  - {fileID: 2100000, guid: 83ea3634c1a1b1547a6c85630d1ca7b1, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

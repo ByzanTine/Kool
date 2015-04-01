@@ -44,8 +44,12 @@ public class FadeDestroy : MonoBehaviour {
 		float rate = 1.0f / time;
 
 		while (i < 1.0f) {
+			Renderer[] rends = this.GetComponentsInChildren<Renderer>();
 			i += Time.fixedDeltaTime * rate;
-			GetComponent<Renderer> ().material.color = Color.Lerp(from, to, i);
+			foreach( Renderer rend in rends) {
+				rend.material.color = Color.Lerp(from, to, i);
+				//GetComponent<Renderer> ().material.color = Color.Lerp(from, to, i);
+			}
 			// print(GetComponent<Renderer> ().material.color);
 			// Debug.Log("Lerp once" + i);
 			yield return null;

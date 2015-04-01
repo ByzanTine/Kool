@@ -13,8 +13,22 @@ public class ScenePrompt : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-		txt.text = "Any team who gets " + GameStatus.Instance.GameTargetRounds
+		txt.text = "";
+		foreach(UserData user in GameStatus.UserDataCollection)
+		{
+			if(user.teamID == 0)
+				txt.text += user.Username + " ";
+		}
+
+		txt.text += " VS ";
+
+		foreach(UserData user in GameStatus.UserDataCollection)
+		{
+			if(user.teamID == 1)
+				txt.text += user.Username + " ";
+		}
+
+		txt.text += "\t\nAny team who gets " + GameStatus.Instance.GameTargetRounds
 			+ " scores will win.";
 	}
 }
