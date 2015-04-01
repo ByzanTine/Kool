@@ -27,7 +27,7 @@ public class RotateAround : MonoBehaviour {
 		}
 
 		if (PBS.Bigger) {
-			transform.localScale = originalScale * 1.5f;
+			transform.localScale = originalScale * 2f;
 		} else {
 			transform.localScale = originalScale;
 		}

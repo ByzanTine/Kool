@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 
-public class specialSpellView : MonoBehaviour {
+public class SpecialSpellView : MonoBehaviour {
 	
 	public int playerId;
 	private Camera viewCamera;
