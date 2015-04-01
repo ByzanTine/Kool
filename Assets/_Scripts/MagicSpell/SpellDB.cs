@@ -37,10 +37,7 @@ public class SpellDB : MonoBehaviour {
 		"fireNova",
 		"None"
 	};
-	static public float[] SPELL_DAMAGE = {0.1f, 0.1f, 0.3f, 0.2f, 0.6f};// 0 for fireball, 1 for iceball, 2 for iceburst, 3 for big fire ball, 4 for meteor
-
 	static public Hashtable spellDamage;
-
 	static public float GetSpellDamage (AttackID index) {
 		if (spellDamage.ContainsKey(index)) {
 			return (float)spellDamage[index];
@@ -66,12 +63,12 @@ public class SpellDB : MonoBehaviour {
 	{
 		Debug.Log("INIT: Create Reference to Spells");
 		spellDamage = new Hashtable () {
-			{AttackID.fireball, 	0.1f},
+			{AttackID.fireball, 	0.11f},
 			{AttackID.iceball,  	0.08f},
 			{AttackID.iceBurst, 	0.3f},
-			{AttackID.bigfireball, 	0.2f},
+			{AttackID.bigfireball, 	0.22f},
 			{AttackID.bigiceball, 	0.16f},
-			{AttackID.meteor, 		0.6f}
+			{AttackID.meteor, 		0.45f}
 		};
 
 		InitSpells ();
