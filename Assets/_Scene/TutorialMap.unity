@@ -1759,7 +1759,7 @@ MonoBehaviour:
     item: {fileID: 129264, guid: d9a81daac02c2465dad7d6874d083184, type: 2}
   - txt: ready
     img: {fileID: 21300000, guid: 62e332e5c5d83ef4b92a091af0c03cb9, type: 3}
-    timeInterval: 30
+    timeInterval: 15
     item: {fileID: 0}
   itemPos:
   - {fileID: 84179495}

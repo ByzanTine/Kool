@@ -58,6 +58,7 @@ public class UserUIControl : MonoBehaviour {
 	{
 		if(txt.enabled == false) 
 		{
+			ChooseTeamStartCount.PlayerEntered();
 			txt.enabled = true;
 			return;
 		}
@@ -66,7 +67,7 @@ public class UserUIControl : MonoBehaviour {
 		{
 			txt.text = "Please Choose Team!";
 		}
-		else
+		else if(!isChosen)
 		{
 			isChosen = true;
 			txt.color = Color.red;
