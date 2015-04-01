@@ -22,6 +22,24 @@ public class TutorialView : MonoBehaviour {
 	public tutorialStep[] TutorialSteps;
 	public GameObject[] itemPos;
 	// Use this for initialization
+	void Awake(){
+		TutorialSteps [0].txt = "Two joysticks for moving and aiming";
+		
+		TutorialSteps [1].txt = "Cast magic balls according to your aiming direction.";
+		
+		TutorialSteps [2].txt = "Run:  It is much harder to control. ";
+		
+		TutorialSteps [3].txt = "While running, press right trigger, you gonna cast a melee attack.";
+		
+		TutorialSteps [4].txt = "Switch between fire mode and ice mode";
+		
+		TutorialSteps [5].txt = "Pick up the shiny special spell box. Try it out.";
+		
+		TutorialSteps [6].txt = "Special Spell's mode can also be changed by switch button.";
+		
+		TutorialSteps [7].txt = "30 seconds to start the real fight!";
+	}
+
 	void Start () {
 		time = 0;
 		NumOfCurStep = 0;
@@ -29,31 +47,6 @@ public class TutorialView : MonoBehaviour {
 		_txt = Text.GetComponent<Text> ();
 		_img.sprite = TutorialSteps[NumOfCurStep].img;
 		_txt.text = TutorialSteps[NumOfCurStep].txt;
-
-		TutorialSteps [0].txt = "Two joysticks for moving and aiming";
-
-		TutorialSteps [1].txt = "Right Trigger to Shoot magic balls according to " +
-			"your aiming direction. The magic balls around you indicate the number " +
-			"and size of magic ball you gonna shoot";
-
-		TutorialSteps [2].txt = "Run:  It is much harder to control. " +
-			"Cannot shoot and run at the same time.";
-
-		TutorialSteps [3].txt = "After you pick a special spell box with light, " +
-			"there will be a special spell icon above your name.  Try it out.";
-
-		TutorialSteps [4].txt = "Switch between fire mode and ice mode";
-
-		TutorialSteps [5].txt = "Special Spell's mode can also be changed by switch button.";
-
-		TutorialSteps [6].txt = "While running, press Attack, you gonna hit instead of shoot.";
-
-		TutorialSteps [7].txt = "Powerup boxes gonna change your status and " +
-			"indicator around you will show the status";
-
-		TutorialSteps [8].txt = "Special Spell boxes are shining!!!";
-
-		TutorialSteps [9].txt = "30 seconds to start the real fight!";
 		for (int i = 0; i < itemGenerators.Length; i++) {
 			itemGenerators[i].SetActive(false);
 		}
