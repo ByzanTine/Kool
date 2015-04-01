@@ -119,17 +119,17 @@ public class GameStatus : MonoBehaviour {
 			player.name = userDataCollection[id].Username;
 			userDataCollection[id].initPosition = player.transform.position;
 			userDataCollection[id].wizardInstance = player;
-
+			totalPlayerNum++;
 			// seperate team for default/unassigned player:
 			// default: 0 & 1 in team 0, 2 & 3 in team 1;
 			// unassigned: destroy the corresponding player object;
 			if(userDataCollection[id].teamID >= 2)
 			{
-				totalPlayerNum++;
 				userDataCollection[id].teamID = id / 2;
 			}
 			else if(userDataCollection[id].teamID == -1)
 			{
+				totalPlayerNum--;
 				Destroy(player);
 			}
 

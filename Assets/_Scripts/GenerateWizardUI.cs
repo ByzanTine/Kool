@@ -15,8 +15,10 @@ public class GenerateWizardUI : MonoBehaviour {
 	IEnumerator LateGenerateWizardUI()
 	{
 		// wait for load scene done
-		yield return new WaitForSeconds (0.1f);
+		Debug.Log ("[UI] Prepare load player");
 
+		yield return new WaitForSeconds (1.0f);
+		Debug.Log ("[UI] assign world UI to wizards" + GameStatus.TotalPlayerNum);
 		for(int i = 0; i < GameStatus.TotalPlayerNum; ++i)
 		{
 			GameObject health = Instantiate(playerHealthPrefab) as GameObject;
