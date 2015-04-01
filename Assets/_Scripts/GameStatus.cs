@@ -20,10 +20,11 @@ public class GameStatus : MonoBehaviour {
 	public Material[] UserMaterials = new Material[4];
 //	private static Hashtable playerTable;
 
-	// private int playerNum;
+	// Game status control:
 	private bool isGameOver = false;
 	private int[] teamScores;
 
+	// total player number in the game. READ ONLY
 	private static int totalPlayerNum = 0;
 	public static int TotalPlayerNum
 	{
@@ -107,6 +108,7 @@ public class GameStatus : MonoBehaviour {
 	void BindAllWizardToUser()
 	{
 		int id = 0;
+		totalPlayerNum = 0;
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 		foreach(GameObject player in playerCollection)
 		{
@@ -121,12 +123,13 @@ public class GameStatus : MonoBehaviour {
 			// TODO this a HACK, I think there should be a player factory
 			Renderer[] renders = player.GetComponentsInChildren<Renderer>();
 			foreach (Renderer r in renders) {
-				r.material = UserMaterials[id];
+				r.material = UserMaterials[(userDataCollection[id].teamID * 2 + 4) % 4];
 			}
 
 			if(userDataCollection[id].teamID >= 2)
 			{
-				userDataCollection[id].teamID  = id / 2;
+				totalPlayerNum++;
+				userDataCollection[id].teamID = id / 2;
 			}
 			else if(userDataCollection[id].teamID == -1)
 			{
@@ -134,20 +137,20 @@ public class GameStatus : MonoBehaviour {
 			}
 			id++;
 		}
+
 	}
 
 	// store into hashtable as well
 	void BindAllUserData()
 	{
-		totalPlayerNum = 0;
+		int playerID = 0;
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 		foreach(GameObject player in playerCollection)
 		{
 			// bind input manager
 			UserInputManager userCtrl = player.GetComponent<UserInputManager>();
 			// assign player ID
-			userCtrl.playerNum = totalPlayerNum;
-			int playerID = userCtrl.playerNum;
+			userCtrl.playerNum = playerID;
 			userDataCollection[playerID] = new UserData();
 			userDataCollection[playerID].userID = playerID;
 
@@ -155,8 +158,7 @@ public class GameStatus : MonoBehaviour {
 			userDataCollection[playerID].Username = Usernames[playerID];
 			userDataCollection[playerID].Usercolor = UserColors[playerID];
 			userDataCollection[playerID].wizardMaterial = UserMaterials[playerID];
-
-			totalPlayerNum++;
+			playerID++;
 		}
 	}
 

@@ -9,6 +9,14 @@ public class GenerateWizardUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		StartCoroutine (LateGenerateWizardUI ());
+	}
+
+	IEnumerator LateGenerateWizardUI()
+	{
+		// wait for load scene done
+		yield return new WaitForSeconds (0.1f);
+
 		for(int i = 0; i < GameStatus.TotalPlayerNum; ++i)
 		{
 			GameObject health = Instantiate(playerHealthPrefab) as GameObject;
@@ -17,11 +25,11 @@ public class GenerateWizardUI : MonoBehaviour {
 			name.transform.SetParent(this.transform);
 			GameObject specialSpell = Instantiate(specialSpellPrefab) as GameObject;
 			specialSpell.transform.SetParent(this.transform);
-
+			
 			PlayerHealthView healthUI  = health.GetComponent<PlayerHealthView>();
 			PlayerNameView nameUI = name.GetComponent<PlayerNameView>();
 			specialSpellView specialSpellUI = specialSpell.GetComponent<specialSpellView>();
-
+			
 			healthUI.playerId = i;
 			nameUI.playerId = i;
 			specialSpellUI.playerId = i;

@@ -8,6 +8,10 @@ public class LoadLevelAfterTime : MonoBehaviour {
 	void Start () {
 		StartCoroutine (DelayedLoadLevel (waitTime));
 	}
+
+
+
+
 	IEnumerator DelayedLoadLevel(float waitTime_) {
 		yield return new WaitForSeconds(waitTime_);
 		Application.LoadLevel (levelName);
