@@ -9,4 +9,5 @@ public class TagList : MonoBehaviour {
 	public static string Fireball = "Fireball";
 	public static string GroundBlock = "GroundBlock";
 	public static string Item = "Item";
+
 }
