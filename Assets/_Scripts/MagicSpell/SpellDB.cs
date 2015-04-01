@@ -59,6 +59,7 @@ public class SpellDB : MonoBehaviour {
 	static public GameObject swap;
 	static public GameObject iceBurst;
 	static public GameObject Bigfireball;
+	static public GameObject Bigiceball;
 	static public GameObject fireNova;
 
 	void Awake()
@@ -66,9 +67,10 @@ public class SpellDB : MonoBehaviour {
 		Debug.Log("INIT: Create Reference to Spells");
 		spellDamage = new Hashtable () {
 			{AttackID.fireball, 	0.1f},
-			{AttackID.iceball,  	0.1f},
+			{AttackID.iceball,  	0.08f},
 			{AttackID.iceBurst, 	0.3f},
 			{AttackID.bigfireball, 	0.2f},
+			{AttackID.bigiceball, 	0.16f},
 			{AttackID.meteor, 		0.6f}
 		};
 
@@ -79,7 +81,7 @@ public class SpellDB : MonoBehaviour {
 
 		fireball = Resources.Load ("MagicSpells/Fireball") as GameObject;
 		Bigfireball = Resources.Load ("MagicSpells/BigFireball") as GameObject;
-
+		Bigiceball = Resources.Load ("MagicSpells/BigIceball") as GameObject;
 		meteor = Resources.Load ("MagicSpells/meteorController") as GameObject;
 		iceball = Resources.Load ("MagicSpells/Iceball") as GameObject;
 		reflector = Resources.Load ("MagicSpells/Reflector") as GameObject;

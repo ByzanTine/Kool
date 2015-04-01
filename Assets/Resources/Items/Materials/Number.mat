@@ -18,7 +18,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: b79ea401daef649b2863cbc6536a5992, type: 3}
+          m_Texture: {fileID: 2800000, guid: 2c244d9212cf64f35988102669241069, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 1, y: 1}
       data:
@@ -38,13 +38,6 @@ Material:
       data:
         first:
           name: _Tex
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _WiggleTex
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -87,6 +80,20 @@ Material:
       data:
         first:
           name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _WiggleTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _SpecGlossMap
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -140,13 +147,6 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _SpecGlossMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -180,14 +180,6 @@ Material:
         first:
           name: _DstBlend
         second: 0
-      data:
-        first:
-          name: _InvFade
-        second: 1
-      data:
-        first:
-          name: _WiggleStrength
-        second: .00999999978
       data:
         first:
           name: _Parallax
@@ -230,6 +222,14 @@ Material:
         second: 0
       data:
         first:
+          name: _InvFade
+        second: 1
+      data:
+        first:
+          name: _WiggleStrength
+        second: .00999999978
+      data:
+        first:
           name: _Rotation
         second: 0
     m_Colors:
@@ -255,12 +255,12 @@ Material:
         second: {r: .368999988, g: .349000007, b: .340999991, a: 1}
       data:
         first:
-          name: _TintColor
-        second: {r: .5, g: .5, b: .5, a: .5}
-      data:
-        first:
           name: _EmissionColorUI
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _TintColor
+        second: {r: .5, g: .5, b: .5, a: .5}
       data:
         first:
           name: _Tint

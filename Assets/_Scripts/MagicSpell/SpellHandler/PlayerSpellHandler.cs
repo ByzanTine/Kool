@@ -21,11 +21,8 @@ public class PlayerSpellHandler : MonoBehaviour {
 	public void onSpellTrigger (Vector3 spellPos, SpellDB.AttackID spellId) {
 		// if fireball, deduct health
 		Debug.Log ("[Spell] " + SpellDB.attackIDnames[(int)spellId] + "   on spell trigger");
-		if (spellId == SpellDB.AttackID.iceball) {
-			playerData.DamageHP(SpellDB.GetSpellDamage(spellId));
-			StartCoroutine(GetFrozen());
-		}
-		if (spellId == SpellDB.AttackID.iceBurst) {
+		if (spellId == SpellDB.AttackID.iceball || spellId == SpellDB.AttackID.bigiceball
+		    || spellId == SpellDB.AttackID.iceBurst) {
 			playerData.DamageHP(SpellDB.GetSpellDamage(spellId));
 			StartCoroutine(GetFrozen());
 		}
