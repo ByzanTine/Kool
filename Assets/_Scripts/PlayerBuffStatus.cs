@@ -60,9 +60,8 @@ public class PlayerBuffStatus : MonoBehaviour {
 		    (IncreaseNumber || Bigger)) {
 			_IncreaseNumber = false;
 			_Bigger = false;
-
-			UpdateFireballID();
 		}
+		UpdateFireballID();
 	}
 	// event delegate 
 	// TODO extend this interface if more parameter is needed

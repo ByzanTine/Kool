@@ -20,7 +20,7 @@ public class GenerateWizardUI : MonoBehaviour {
 
 			PlayerHealthView healthUI  = health.GetComponent<PlayerHealthView>();
 			PlayerNameView nameUI = name.GetComponent<PlayerNameView>();
-			specialSpellView specialSpellUI = specialSpell.GetComponent<specialSpellView>();
+			SpecialSpellView specialSpellUI = specialSpell.GetComponent<SpecialSpellView>();
 
 			healthUI.playerId = i;
 			nameUI.playerId = i;
