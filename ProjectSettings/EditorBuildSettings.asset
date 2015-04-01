@@ -11,3 +11,7 @@ EditorBuildSettings:
     path: Assets/ChooseTeam/ChooseTeam.unity
   - enabled: 1
     path: Assets/ChooseTeam/GameMap.unity
+  - enabled: 1
+    path: Assets/_Scene/MainMenu.unity
+  - enabled: 1
+    path: Assets/_Scene/TitleScreen.unity
