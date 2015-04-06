@@ -13,7 +13,7 @@ public class LoadLevel : MonoBehaviour {
 	
 	}
 
-	public void LoadLevelWithName(string levelName)
+	public void LoadLevelWithName(string levelName = "ChooseTeam")
 	{
 		Application.LoadLevel (levelName);
 	}
