@@ -11,11 +11,12 @@ public class VirtualButtonController : MonoBehaviour {
 	public Button LeftJoystick;
 	public Button RightJoystick;
 
+	public delegate void SimulatePressButton();
+
 	private PointerEventData pointer;
 	// Use this for initialization
 	void Start () {
 		pointer = new PointerEventData (EventSystem.current);
-		// ExecuteEvents.Execute (button.gameObject, pointer, ExecuteEvents.pointerDownHandler);
 
 	}
 	// public accessors 
@@ -26,6 +27,9 @@ public class VirtualButtonController : MonoBehaviour {
 		ExecuteEvents.Execute(LeftTrigger.gameObject, pointer, ExecuteEvents.pointerEnterHandler);
 		ExecuteEvents.Execute(LeftTrigger.gameObject, pointer, ExecuteEvents.submitHandler);
 	}
+
+
+
 	/// <summary>
 	///  Simulate the event Presses the R trigger.
 	/// </summary>
@@ -63,4 +67,67 @@ public class VirtualButtonController : MonoBehaviour {
 		ExecuteEvents.Execute(RightJoystick.gameObject, pointer, ExecuteEvents.submitHandler);
 	}
 
+
+	/// <summary>
+	/// Blinks the L trigger.
+	/// </summary>
+	/// <param name="times">Number of times to blink.</param>
+	/// <param name="interval">Time Interval for each blink.</param>
+	public void BlinkLTrigger(int times = 5, float interval = 0.5f) {
+		StartCoroutine (
+			BlinkCo(new SimulatePressButton(PressLTrigger), times, interval));
+	}
+	
+	/// <summary>
+	/// Blinks the R trigger.
+	/// </summary>
+	/// <param name="times">Number of times to blink.</param>
+	/// <param name="interval">Time Interval for each blink.</param>
+	public void BlinkRTrigger(int times = 5, float interval = 0.5f) {
+		StartCoroutine (
+			BlinkCo(new SimulatePressButton(PressRTrigger), times, interval));
+	}
+	/// <summary>
+	/// Blinks the L bumper.
+	/// </summary>
+	/// <param name="times">Number of times to blink.</param>
+	/// <param name="interval">Time Interval for each blink.</param>
+	public void BlinkLBumper(int times = 5, float interval = 0.5f) {
+		StartCoroutine (
+			BlinkCo(new SimulatePressButton(PressLBumper), times, interval));
+	}
+	/// <summary>
+	/// Blinks the R bumper.
+	/// </summary>
+	/// <param name="times">Number of times to blink.</param>
+	/// <param name="interval">Time Interval for each blink.</param>
+	public void BlinkRBumper(int times = 5, float interval = 0.5f) {
+		StartCoroutine (
+			BlinkCo(new SimulatePressButton(PressRBumper), times, interval));
+	}
+	/// <summary>
+	/// Blinks the L joystick.
+	/// </summary>
+	/// <param name="times">Number of times to blink.</param>
+	/// <param name="interval">Time Interval for each blink.</param>
+	public void BlinkLJoystick(int times = 5, float interval = 0.5f) {
+		StartCoroutine (
+			BlinkCo(new SimulatePressButton(MoveLeftJoystick), times, interval));
+	}
+	/// <summary>
+	/// Blinks the R joystick.
+	/// </summary>
+	/// <param name="times">Number of times to blink.</param>
+	/// <param name="interval">Time Interval for each blink.</param>
+	public void BlinkRJoystick(int times = 5, float interval = 0.5f) {
+		StartCoroutine (
+			BlinkCo(new SimulatePressButton(MoveRightJoystick), times, interval));
+	}
+	// helper func
+	private IEnumerator BlinkCo(SimulatePressButton func, int times, float interval = 1.0f) {
+		for (int i = 0; i < times; i++) {	
+			func();
+			yield return new WaitForSeconds(interval);
+		}
+	}
 }
