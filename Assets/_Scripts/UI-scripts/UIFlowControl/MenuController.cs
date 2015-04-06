@@ -54,7 +54,6 @@ public class MenuController : MonoBehaviour
                 eventSystem.SetSelectedGameObject(menuElements[0].gameObject, new BaseEventData(eventSystem));
             }
         }
-
     }
 
     private void FindMenuElements()
