@@ -681,6 +681,10 @@ Prefab:
       propertyPath: UserMaterials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e480f89a716bb2a48a9d608db064ec48, type: 2}
+    - target: {fileID: 11416986, guid: 48b6e506a46334e13bc1b40456c943d2, type: 2}
+      propertyPath: GameTargetRounds
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 48b6e506a46334e13bc1b40456c943d2, type: 2}
   m_IsPrefabParent: 0

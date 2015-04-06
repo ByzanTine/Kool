@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 using InControl;
 
@@ -15,6 +17,9 @@ public class UserInputManager : MonoBehaviour {
 	public Vector2 rightInput;
 	[HideInInspector]
 	public int button_id = -1;
+
+	[SerializeField]
+	private EventSystem eventSystem = null;
 
 	// controller input events:
 	public delegate void OnInput();
@@ -112,7 +117,7 @@ public class UserInputManager : MonoBehaviour {
 		{
 			Debug.Log ("Button pressed");
 			
-			OnPressButton();
+			if(OnPressButton != null) OnPressButton();
 		}
 
 		if(inputDevice.Action1.WasReleased
@@ -120,7 +125,7 @@ public class UserInputManager : MonoBehaviour {
 		   || inputDevice.Action3.WasReleased
 		   || inputDevice.Action4.WasReleased)
 		{
-			OnReleaseButton();
+			if(OnReleaseButton != null) OnReleaseButton();
 			Debug.Log ("Button released" + inputDevice.AnyButton.Value);
 		}
 
@@ -145,12 +150,24 @@ public class UserInputManager : MonoBehaviour {
 
 		if(inputDevice.RightTrigger.WasPressed)
 		{
+			if(eventSystem != null && eventSystem.currentSelectedGameObject != null)
+			{
+				Debug.Log(eventSystem.currentSelectedGameObject.ToString());
+				ExecuteEvents.Execute (eventSystem.currentSelectedGameObject, null, ExecuteEvents.submitHandler);
+			}
+
 			if(OnPressConfirm != null) OnPressConfirm();
 			if(OnPressMainSkill != null) OnPressMainSkill();
 		}
 
 		if(inputDevice.LeftTrigger.WasPressed)
 		{
+			if(eventSystem != null && eventSystem.currentSelectedGameObject != null)
+			{
+				Debug.Log(eventSystem.currentSelectedGameObject.ToString());
+				ExecuteEvents.Execute (eventSystem.currentSelectedGameObject, null, ExecuteEvents.submitHandler);
+			}
+
 			if(OnPressBack != null) OnPressBack();
 			if(OnPressRunning != null) OnPressRunning();
 		}
