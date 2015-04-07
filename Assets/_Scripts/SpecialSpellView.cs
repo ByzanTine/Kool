@@ -43,7 +43,7 @@ public class SpecialSpellView : MonoBehaviour {
 					img.enabled = true;	
 					break;
 				default:
-					Debug.Log ("Not a special Spell");
+					// Debug.Log ("Not a special Spell");
 					img.enabled = false;
 					break;
 			}
