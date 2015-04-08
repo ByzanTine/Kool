@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 412164}
   - 82: {fileID: 8264792}
   m_Layer: 0
-  m_Name: FBallExpodeSE
+  m_Name: FBallCastSE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cc93b92f391184ab182aaa339fab2750, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 876caa7bd348043119ff4b62deaf5187, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

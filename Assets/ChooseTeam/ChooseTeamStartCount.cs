@@ -21,7 +21,7 @@ public class ChooseTeamStartCount : MonoBehaviour {
 	void Start () {
 		txt = GetComponent<Text> ();
 		txt.enabled = true;
-		StartCoroutine( WaitToStart ());
+		StartCoroutine(WaitToStart ());
 	}
 
 	public static void PlayerEntered()
