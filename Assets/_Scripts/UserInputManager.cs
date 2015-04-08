@@ -86,12 +86,16 @@ public class UserInputManager : MonoBehaviour {
 			if (inputDevice.Action1.WasPressed)
 			{
 				Debug.Log ("Button pressed: A");
+				if(OnPressConfirm != null) OnPressConfirm();
+
 				button_id = 1;
 			}
 			else
 				if (inputDevice.Action2.WasPressed)
 			{
 				Debug.Log ("Button pressed: B");
+				if(OnPressBack != null) OnPressBack();
+
 				button_id = 2;
 			}
 			else
@@ -156,7 +160,7 @@ public class UserInputManager : MonoBehaviour {
 				ExecuteEvents.Execute (eventSystem.currentSelectedGameObject, null, ExecuteEvents.submitHandler);
 			}
 
-			if(OnPressConfirm != null) OnPressConfirm();
+//			if(OnPressConfirm != null) OnPressConfirm();
 			if(OnPressMainSkill != null) OnPressMainSkill();
 		}
 
@@ -168,7 +172,7 @@ public class UserInputManager : MonoBehaviour {
 				ExecuteEvents.Execute (eventSystem.currentSelectedGameObject, null, ExecuteEvents.submitHandler);
 			}
 
-			if(OnPressBack != null) OnPressBack();
+//			if(OnPressBack != null) OnPressBack();
 			if(OnPressRunning != null) OnPressRunning();
 		}
 

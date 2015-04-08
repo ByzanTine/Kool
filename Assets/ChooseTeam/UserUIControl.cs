@@ -69,16 +69,23 @@ public class UserUIControl : MonoBehaviour {
 		}
 		else if(!isChosen)
 		{
-			isChosen = true;
-			txt.color = Color.red;
-			GameStatus.UserDataCollection [inputManager.playerNum].teamID = currentUIPos - 1;
-			ChooseTeamStartCount.ConfirmedAndCount();
+			bool status = ChooseTeamStartCount.ConfirmedAndCount(currentUIPos - 1);
+			if(status)
+			{
+				isChosen = true;
+				txt.color = Color.red;
+				GameStatus.UserDataCollection [inputManager.playerNum].teamID = currentUIPos - 1;
+			}
+			else
+			{
+				txt.text = "Please Change Team!";
+			}
 		}
 	}
 	
 	void Back()
 	{
-		
+		//
 	}
 
 }
