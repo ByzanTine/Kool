@@ -161,7 +161,6 @@ public class PlayerControl : MonoBehaviour {
 		{
 			yield return new WaitForSeconds (0.2f / explodeNum);
 			Instantiate(explodePrefab, transform.position + i * transform.forward, Quaternion.identity);
-
 		}
 
 		yield return new WaitForSeconds (Constants.MIN_STAB_COOL_DOWN - 0.5f);

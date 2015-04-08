@@ -43,6 +43,10 @@ public class WizardAttackMeans : MonoBehaviour {
 			wizardAnimator.SetBool ("isCasting", true);
 			yield return new WaitForSeconds (Constants.MIN_CAST_COOL_DOWN);
 
+			// create sound effect
+			GameObject FBallcastSEPrefab = Resources.Load (Constants.AudioFileDir + "FBallCastSE") as GameObject;
+			GameObject FBallcastSE = GameObject.Instantiate (FBallcastSEPrefab)	as GameObject;
+
 			StartCoroutine (magicSpell.castMagic (gameObject, to));
 
 			Debug.Log ("[Spell] Attack using " + SpellDB.attackIDnames [(int)id]);

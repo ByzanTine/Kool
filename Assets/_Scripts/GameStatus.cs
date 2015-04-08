@@ -192,7 +192,10 @@ public class GameStatus : MonoBehaviour {
 	IEnumerator WinEndGameEffect()
 	{
 		yield return new WaitForSeconds (0.1f);
+		GameObject winSEPrefab = Resources.Load (Constants.AudioFileDir + "WinningSE") as GameObject;
+		GameObject winSE = GameObject.Instantiate (winSEPrefab)	as GameObject;
 
+		
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 
 		foreach(GameObject player in playerCollection)
@@ -201,10 +204,10 @@ public class GameStatus : MonoBehaviour {
 			GameObject winEff = GameObject.Instantiate (winEffPrefab, 
 			                                            player.transform.position, Quaternion.identity)	as GameObject;
 			UserInputManager userInput = player.GetComponent<UserInputManager>();
-			userInput.LockLeftInput(3.0f);
+			userInput.LockLeftInput(9.0f);
 		}
 
-		yield return new WaitForSeconds (3.0f);
+		yield return new WaitForSeconds (8.0f);
 		Application.LoadLevel (Application.loadedLevel);
 	}
 
