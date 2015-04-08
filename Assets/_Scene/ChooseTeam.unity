@@ -357,11 +357,9 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11453770, guid: d65009f8eff9943078abc6fd93fb6a3f, type: 2}
-      propertyPath: m_Text
-      value: 'Press A to join/confirm
-
-        Use DPad/Left Joystick to navigate'
+    - target: {fileID: 139052, guid: d65009f8eff9943078abc6fd93fb6a3f, type: 2}
+      propertyPath: m_Name
+      value: ChooseTeamCanvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d65009f8eff9943078abc6fd93fb6a3f, type: 2}
