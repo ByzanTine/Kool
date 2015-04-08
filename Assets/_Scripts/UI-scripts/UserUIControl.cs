@@ -147,10 +147,8 @@ public class UserUIControl : MonoBehaviour {
 		switch (position_) {
 		case Position.Left:
 			return 0;
-			break;
 		case Position.Right:
 			return 1;
-			break;
 		case Position.Middle:
 			Debug.LogError("UI: you shouldn't hash Middle to team ID");
 			break;
@@ -162,13 +160,10 @@ public class UserUIControl : MonoBehaviour {
 		switch (position_) {
 		case Position.Left:
 			return txtPos[0];
-			break;
 		case Position.Right:
 			return txtPos[2];
-			break;
 		case Position.Middle:
 			return txtPos[1];
-			break;
 		}
 		return -1.0f;
 		
