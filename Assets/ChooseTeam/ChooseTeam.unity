@@ -357,11 +357,21 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11453770, guid: d65009f8eff9943078abc6fd93fb6a3f, type: 2}
-      propertyPath: m_Text
-      value: 'Press A to join/confirm
-
-        Use DPad/Left Joystick to navigate'
+    - target: {fileID: 193484, guid: d65009f8eff9943078abc6fd93fb6a3f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 119934, guid: d65009f8eff9943078abc6fd93fb6a3f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 104030, guid: d65009f8eff9943078abc6fd93fb6a3f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 180318, guid: d65009f8eff9943078abc6fd93fb6a3f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d65009f8eff9943078abc6fd93fb6a3f, type: 2}

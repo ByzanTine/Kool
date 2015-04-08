@@ -11,15 +11,15 @@ public class FetchGameMode : MonoBehaviour {
 
 		txt.text = "Current Game Mode:" + "\t\n";
 
-		if(ChooseTeamStartCount.TeamSize  == -1)
+		if(TeamSelectionControl.TeamSize  == -1)
 		{
 			// free mode
 			txt.text += "1v1 or 2v2";
 		}
 		else
 		{
-			txt.text += ChooseTeamStartCount.TeamSize + " vs "
-			+ ChooseTeamStartCount.TeamSize;
+			txt.text += TeamSelectionControl.TeamSize + " vs "
+			+ TeamSelectionControl.TeamSize;
 		}
 
 	}

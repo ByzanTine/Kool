@@ -3,15 +3,47 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class UserUIControl : MonoBehaviour {
-
+	public GameObject ReadyEffect;
+	private enum Position
+	{
+		Left,
+		Middle,
+		Right
+	};	
 	// Local components
 	private UserInputManager inputManager;
 
 	private Text txt;
-	private float[] txtPos = new float[3] {-150, 0, 150};
-	private int currentUIPos = 0;
+	private float[] txtPos = new float[3] {-200, 0, 200};
+
+	private Position position = Position.Middle;
+
+	private void MoveRight() {
+		switch (position) {
+		case Position.Left:
+			position = Position.Middle;
+			break;
+		case Position.Middle:
+			position = Position.Right;
+			break;
+		default:
+			break;
+		}
+	}
+	private void MoveLeft() {
+		switch (position) {
+		case Position.Right:
+			position = Position.Middle;
+			break;
+		case Position.Middle:
+			position = Position.Left;
+			break;
+		default:
+			break;
+		}
+	}
 	// Local variables & local status
-	private bool isChosen = false;
+	private bool Confirmed = false;
 	
 	void Start()
 	{
@@ -22,68 +54,124 @@ public class UserUIControl : MonoBehaviour {
 		
 		inputManager.OnPressConfirm += Confirm;
 		inputManager.OnPressBack += Back;
-		inputManager.OnPressNavUp += NavUp;
-		inputManager.OnPressNavDown += NavDown;
+		inputManager.OnPressNavUp += NavLeft;
+		inputManager.OnPressNavDown += NavRight;
 
 		txt = GetComponent<Text> ();
 		txt.text = GameStatus.UserDataCollection [inputManager.playerNum].Username;
 		txt.enabled = false;
 
 		GameStatus.UserDataCollection [inputManager.playerNum].teamID = -1;
+		ReadyEffect.SetActive (false);
 
 	}
 
-	void NavUp()
+	void NavLeft()
 	{
-		if(isChosen) return;
-		if(currentUIPos > 0) currentUIPos--;
+		// if confirmed, don't move then
+		if(Confirmed) return;
+		// if(currentUIPos > 0) currentUIPos--;
+		MoveLeft ();
 		SetPosition ();
 	}
 
-	void NavDown()
+	void NavRight()
 	{
-		if(isChosen) return;
-		if(currentUIPos < 2) currentUIPos++;
+		// if confirmed, don't move then
+		if(Confirmed) return;
+		// if(currentUIPos < 2) currentUIPos++;
+		MoveRight ();
 		SetPosition ();
 	}
 
 	void SetPosition()
 	{
 		txt.text = GameStatus.UserDataCollection [inputManager.playerNum].Username;
-		txt.rectTransform.localPosition = new Vector3 (txtPos [currentUIPos], txt.rectTransform.localPosition.y,
+		float PosXoffset = GetTextPositionOffset (position);
+		txt.rectTransform.localPosition = new Vector3 (PosXoffset, 
+		                                               txt.rectTransform.localPosition.y,
 		                                               txt.rectTransform.localPosition.z);
 	}
+	void Back()
+	{
+		if (Confirmed) {
+			Confirmed = false;
+			disableReady ();
+			// clean team count
+			TeamSelectionControl.leaveTeam(GameStatus.UserDataCollection [inputManager.playerNum].teamID);
+			// reset team id
+			GameStatus.UserDataCollection [inputManager.playerNum].teamID = -1;
+		}
 
+
+	}
 	void Confirm()
 	{
 		if(txt.enabled == false) 
 		{
-			ChooseTeamStartCount.PlayerEntered();
+			TeamSelectionControl.PlayerEntered();
 			txt.enabled = true;
 			return;
 		}
+		if (position == Position.Middle)
+			return;
+		if(!Confirmed)
+		{
+			int teamID = HashPosToTeamID(position);
+			// check if the team spilt is correct
+			// bool status = TeamSelectionControl.ConfirmedAndCount(teamID);
 
-		if(currentUIPos == 1)
-		{
-			StartCoroutine(Blink ());
-		}
-		else if(!isChosen)
-		{
-			bool status = ChooseTeamStartCount.ConfirmedAndCount(currentUIPos/2);
-			if(status)
+			if(TeamSelectionControl.checkTeam(teamID))
 			{
-				isChosen = true;
-				txt.color = Color.red;
-				GameStatus.UserDataCollection [inputManager.playerNum].teamID = currentUIPos/2;
+				// confirm to join the team
+				Confirmed = true;
+				// create a confirm effect
+				// txt.color = Color.red;
+				IndicateReady();
+				// hash currentUIPos to 0 and 1
+				GameStatus.UserDataCollection [inputManager.playerNum].teamID = teamID;
+				TeamSelectionControl.joinTeam(teamID);
 			}
 			else
 			{
-				StartCoroutine(Blink ());
+				// error indication 
+				StartCoroutine(IndicateError ());
 			}
 		}
 	}
 
-	IEnumerator Blink()
+	private int HashPosToTeamID(Position position_) {
+		switch (position_) {
+		case Position.Left:
+			return 0;
+			break;
+		case Position.Right:
+			return 1;
+			break;
+		case Position.Middle:
+			Debug.LogError("UI: you shouldn't hash Middle to team ID");
+			break;
+		}
+		return -1;
+
+	}
+	private float GetTextPositionOffset(Position position_) {
+		switch (position_) {
+		case Position.Left:
+			return txtPos[0];
+			break;
+		case Position.Right:
+			return txtPos[2];
+			break;
+		case Position.Middle:
+			return txtPos[1];
+			break;
+		}
+		return -1.0f;
+		
+	}
+
+	IEnumerator IndicateError()
 	{
 		Color originalColor = txt.color;
 		for(int i = 0; i < 5; ++i)
@@ -93,9 +181,14 @@ public class UserUIControl : MonoBehaviour {
 		}
 		txt.color = originalColor;
 	}
-	
-	void Back()
-	{
+
+	void IndicateReady() {
+		ReadyEffect.SetActive (true);
 	}
+
+	void disableReady() {
+		ReadyEffect.SetActive (false);
+	}
+
 
 }
