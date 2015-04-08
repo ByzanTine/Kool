@@ -176,12 +176,12 @@ public class UserInputManager : MonoBehaviour {
 
 		rightInput = new Vector2 (inputDevice.RightStickX, inputDevice.RightStickY);
 
-		if(inputDevice.DPadLeft.WasPressed)
+		if(inputDevice.DPadLeft.WasPressed || inputDevice.LeftStickX < -0.8)
 		{
 			if(OnPressNavUp != null) OnPressNavUp();
 		}
 
-		if(inputDevice.DPadRight.WasPressed)
+		if(inputDevice.DPadRight.WasPressed || inputDevice.LeftStickX > 0.8)
 		{
 			if(OnPressNavDown != null) OnPressNavDown();
 		}

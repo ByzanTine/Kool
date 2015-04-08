@@ -8,7 +8,7 @@ public class UserUIControl : MonoBehaviour {
 	private UserInputManager inputManager;
 
 	private Text txt;
-	private float[] txtPos = new float[3] {0, 150, -150};
+	private float[] txtPos = new float[3] {-150, 0, 150};
 	private int currentUIPos = 0;
 	// Local variables & local status
 	private bool isChosen = false;
@@ -29,28 +29,28 @@ public class UserUIControl : MonoBehaviour {
 		txt.text = GameStatus.UserDataCollection [inputManager.playerNum].Username;
 		txt.enabled = false;
 
-		GameStatus.UserDataCollection [inputManager.playerNum].teamID = currentUIPos - 1;
+		GameStatus.UserDataCollection [inputManager.playerNum].teamID = -1;
 
 	}
 
 	void NavUp()
 	{
 		if(isChosen) return;
-		currentUIPos++;
+		if(currentUIPos > 0) currentUIPos--;
 		SetPosition ();
 	}
 
 	void NavDown()
 	{
 		if(isChosen) return;
-		currentUIPos += 2;
+		if(currentUIPos < 2) currentUIPos++;
 		SetPosition ();
 	}
 
 	void SetPosition()
 	{
 		txt.text = GameStatus.UserDataCollection [inputManager.playerNum].Username;
-		txt.rectTransform.localPosition = new Vector3 (txtPos [currentUIPos % 3], txt.rectTransform.localPosition.y,
+		txt.rectTransform.localPosition = new Vector3 (txtPos [currentUIPos], txt.rectTransform.localPosition.y,
 		                                               txt.rectTransform.localPosition.z);
 	}
 
@@ -62,19 +62,19 @@ public class UserUIControl : MonoBehaviour {
 			txt.enabled = true;
 			return;
 		}
-		currentUIPos = currentUIPos % 3;
-		if(currentUIPos == 0)
+
+		if(currentUIPos == 1)
 		{
 			StartCoroutine(Blink ());
 		}
 		else if(!isChosen)
 		{
-			bool status = ChooseTeamStartCount.ConfirmedAndCount(currentUIPos - 1);
+			bool status = ChooseTeamStartCount.ConfirmedAndCount(currentUIPos/2);
 			if(status)
 			{
 				isChosen = true;
 				txt.color = Color.red;
-				GameStatus.UserDataCollection [inputManager.playerNum].teamID = currentUIPos - 1;
+				GameStatus.UserDataCollection [inputManager.playerNum].teamID = currentUIPos/2;
 			}
 			else
 			{
@@ -91,6 +91,7 @@ public class UserUIControl : MonoBehaviour {
 			yield return new WaitForSeconds(0.2f);
 			txt.color = i % 2 == 0 ? Color.red : originalColor;
 		}
+		txt.color = originalColor;
 	}
 	
 	void Back()
