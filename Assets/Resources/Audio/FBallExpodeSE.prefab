@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 412164}
   - 82: {fileID: 8264792}
+  - 114: {fileID: 11493616}
   m_Layer: 0
   m_Name: FBallExpodeSE
   m_TagString: Untagged
@@ -39,7 +40,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cc93b92f391184ab182aaa339fab2750, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: .230000004
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -97,6 +98,18 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &11493616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11a1a60dbff46c349b4a937dfb317f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  livingTime: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
