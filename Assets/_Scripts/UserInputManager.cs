@@ -44,10 +44,6 @@ public class UserInputManager : MonoBehaviour {
 	public event OnInput OnPressButton;
 	public event OnInput OnReleaseButton;
 
-
-
-
-	
 	// input lock of each: left, right, buttons, trigger & bumper;
 	private bool[] ctrlLocks = new bool[4]{false, false, false, false};
 	void Start()
@@ -87,6 +83,12 @@ public class UserInputManager : MonoBehaviour {
 			{
 				Debug.Log ("Button pressed: A");
 				if(OnPressConfirm != null) OnPressConfirm();
+
+				if(eventSystem != null && eventSystem.currentSelectedGameObject != null)
+				{
+					Debug.Log(eventSystem.currentSelectedGameObject.ToString());
+					ExecuteEvents.Execute (eventSystem.currentSelectedGameObject, null, ExecuteEvents.submitHandler);
+				}
 
 				button_id = 1;
 			}
@@ -142,37 +144,21 @@ public class UserInputManager : MonoBehaviour {
 
 		if(inputDevice.LeftBumper.WasPressed)
 		{
-			if(OnPressNavUp != null) OnPressNavUp();
 			if(OnPressSwapIceFire != null) OnPressSwapIceFire();
 		}
 		
 		if(inputDevice.RightBumper.WasPressed)
 		{
-			if(OnPressNavDown != null) OnPressNavDown();
 			if(OnPressSubSkill != null) OnPressSubSkill();
 		}
 
 		if(inputDevice.RightTrigger.WasPressed)
 		{
-			if(eventSystem != null && eventSystem.currentSelectedGameObject != null)
-			{
-				Debug.Log(eventSystem.currentSelectedGameObject.ToString());
-				ExecuteEvents.Execute (eventSystem.currentSelectedGameObject, null, ExecuteEvents.submitHandler);
-			}
-
-//			if(OnPressConfirm != null) OnPressConfirm();
 			if(OnPressMainSkill != null) OnPressMainSkill();
 		}
 
 		if(inputDevice.LeftTrigger.WasPressed)
 		{
-			if(eventSystem != null && eventSystem.currentSelectedGameObject != null)
-			{
-				Debug.Log(eventSystem.currentSelectedGameObject.ToString());
-				ExecuteEvents.Execute (eventSystem.currentSelectedGameObject, null, ExecuteEvents.submitHandler);
-			}
-
-//			if(OnPressBack != null) OnPressBack();
 			if(OnPressRunning != null) OnPressRunning();
 		}
 
@@ -189,6 +175,17 @@ public class UserInputManager : MonoBehaviour {
 		leftInput = new Vector2 (inputDevice.LeftStickX, inputDevice.LeftStickY);
 
 		rightInput = new Vector2 (inputDevice.RightStickX, inputDevice.RightStickY);
+
+		if(inputDevice.DPadLeft.WasPressed)
+		{
+			if(OnPressNavUp != null) OnPressNavUp();
+		}
+
+		if(inputDevice.DPadRight.WasPressed)
+		{
+			if(OnPressNavDown != null) OnPressNavDown();
+		}
+
 
 		if(inputDevice.Name == "Keyboard/Mouse")
 		{

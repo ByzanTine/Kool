@@ -65,7 +65,7 @@ public class UserUIControl : MonoBehaviour {
 		currentUIPos = currentUIPos % 3;
 		if(currentUIPos == 0)
 		{
-			txt.text = "Please Choose Team!";
+			StartCoroutine(Blink ());
 		}
 		else if(!isChosen)
 		{
@@ -78,14 +78,23 @@ public class UserUIControl : MonoBehaviour {
 			}
 			else
 			{
-				txt.text = "Please Change Team!";
+				StartCoroutine(Blink ());
 			}
+		}
+	}
+
+	IEnumerator Blink()
+	{
+		Color originalColor = txt.color;
+		for(int i = 0; i < 5; ++i)
+		{
+			yield return new WaitForSeconds(0.2f);
+			txt.color = i % 2 == 0 ? Color.red : originalColor;
 		}
 	}
 	
 	void Back()
 	{
-		//
 	}
 
 }
