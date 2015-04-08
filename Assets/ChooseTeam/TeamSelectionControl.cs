@@ -4,11 +4,23 @@ using System.Collections;
 
 public class TeamSelectionControl : MonoBehaviour {
 
-
+	private static TeamSelectionControl _instance;
+	
+	//This is the public reference that other classes will use
+	public static TeamSelectionControl Instance
+	{
+		get
+		{
+			//If _instance hasn't been set yet, we grab it from the scene!
+			//This will only happen the first time this reference is used.
+			return _instance;
+		}
+	}
 	// the final game player number of each team
 	// -1 means 1v1, 2v2 are both OK;
-	public static int TeamSize = 2;
-
+	public int TeamSize = 1;
+	public bool CanStart = false;
+	public GameObject StartHint;
 	private const float InitPrepareTime = 9999f;
 
 	private const float MaxPrepareTime = 3f;
@@ -18,7 +30,11 @@ public class TeamSelectionControl : MonoBehaviour {
 	private static int[] teamNumCount = new int[2] {0, 0};
 	private Text txt;
 	// Use this for initialization
+	void Awake() {
+		_instance = this;
+	}
 	void Start () {
+
 		txt = GetComponent<Text> ();
 		txt.enabled = true;
 		StartCoroutine(WaitToStart ());
@@ -34,7 +50,7 @@ public class TeamSelectionControl : MonoBehaviour {
 	/// </summary>
 	/// <returns><c>true</c>, if team was not full, <c>false</c> otherwise.</returns>
 	/// <param name="teamId">Team identifier.</param>
-	public static bool checkTeam(int teamId) {
+	public bool checkTeam(int teamId) {
 		if (teamNumCount[teamId] < TeamSize) {
 			return true;
 		}
@@ -44,14 +60,38 @@ public class TeamSelectionControl : MonoBehaviour {
 	}
 	// check before you join
 	// no error check
-	public static void joinTeam(int teamId) {
+	public void joinTeam(int teamId) {
 		teamNumCount [teamId]++;
 	}
 	// no error check 
-	public static void leaveTeam(int teamId) {
+	public void leaveTeam(int teamId) {
 		teamNumCount [teamId]--;
 	}
-	public static void StartGame(){
+	// check team balancing 
+	void Update() {
+		if (teamNumCount[0] != teamNumCount[1]) {
+			// unbalanced 
+			StartHint.SetActive(false);
+			CanStart = false;
+			return;
+		}
+		if (teamNumCount [0] != TeamSize || teamNumCount [1] != TeamSize) {
+			StartHint.SetActive(false);
+			CanStart = false;
+			return;
+		}
+		StartCoroutine (SetCanStart ());
+	}
+	private IEnumerator SetCanStart() {
+		// hint
+		if (StartHint) {
+			StartHint.SetActive(true);
+		}
+		yield return new WaitForSeconds (2.0f);
+		CanStart = true;
+
+	}
+	public void StartGame(){
 		// check status of the game
 		if (teamNumCount[0] != teamNumCount[1]) {
 			// unbalanced 
@@ -60,6 +100,7 @@ public class TeamSelectionControl : MonoBehaviour {
 		}
 		if (teamNumCount [0] != TeamSize || teamNumCount [1] != TeamSize) {
 			Debug.LogError("TeamSelection failed, team not full");
+			return;
 		}
 
 		prepareTime = MaxPrepareTime;
@@ -67,33 +108,33 @@ public class TeamSelectionControl : MonoBehaviour {
 		// lock all UI and lanuch the game
 	}
 	//
-	public static bool ConfirmedAndCount(int teamId)
-	{
-		// check if some team have too much people
-		if(TeamSize != -1 && teamNumCount[teamId] > TeamSize)
-		{
-			return false;
-		}
-
-		teamNumCount [teamId]++;
-
-		// the last player, one more check to make sure team are balanced
-		if(enteredNum == 1)
-		{
-			if(teamNumCount[0] != teamNumCount[1])
-			{
-				teamNumCount [teamId]--;
-				return false;
-			}
-		}
-
-		enteredNum--;
-		if(enteredNum == 0)
-		{
-			prepareTime = MaxPrepareTime;
-		}
-		return true;
-	}
+//	public static bool ConfirmedAndCount(int teamId)
+//	{
+//		// check if some team have too much people
+//		if(TeamSize != -1 && teamNumCount[teamId] > TeamSize)
+//		{
+//			return false;
+//		}
+//
+//		teamNumCount [teamId]++;
+//
+//		// the last player, one more check to make sure team are balanced
+//		if(enteredNum == 1)
+//		{
+//			if(teamNumCount[0] != teamNumCount[1])
+//			{
+//				teamNumCount [teamId]--;
+//				return false;
+//			}
+//		}
+//
+//		enteredNum--;
+//		if(enteredNum == 0)
+//		{
+//			prepareTime = MaxPrepareTime;
+//		}
+//		return true;
+//	}
 
 	IEnumerator WaitToStart()
 	{

@@ -98,7 +98,7 @@ public class UserUIControl : MonoBehaviour {
 			Confirmed = false;
 			disableReady ();
 			// clean team count
-			TeamSelectionControl.leaveTeam(GameStatus.UserDataCollection [inputManager.playerNum].teamID);
+			TeamSelectionControl.Instance.leaveTeam(GameStatus.UserDataCollection [inputManager.playerNum].teamID);
 			// reset team id
 			GameStatus.UserDataCollection [inputManager.playerNum].teamID = -1;
 		}
@@ -107,6 +107,9 @@ public class UserUIControl : MonoBehaviour {
 	}
 	void Confirm()
 	{
+		if (TeamSelectionControl.Instance.CanStart) {
+			TeamSelectionControl.Instance.StartGame();
+		}
 		if(txt.enabled == false) 
 		{
 			TeamSelectionControl.PlayerEntered();
@@ -121,7 +124,7 @@ public class UserUIControl : MonoBehaviour {
 			// check if the team spilt is correct
 			// bool status = TeamSelectionControl.ConfirmedAndCount(teamID);
 
-			if(TeamSelectionControl.checkTeam(teamID))
+			if(TeamSelectionControl.Instance.checkTeam(teamID))
 			{
 				// confirm to join the team
 				Confirmed = true;
@@ -130,7 +133,7 @@ public class UserUIControl : MonoBehaviour {
 				IndicateReady();
 				// hash currentUIPos to 0 and 1
 				GameStatus.UserDataCollection [inputManager.playerNum].teamID = teamID;
-				TeamSelectionControl.joinTeam(teamID);
+				TeamSelectionControl.Instance.joinTeam(teamID);
 			}
 			else
 			{
