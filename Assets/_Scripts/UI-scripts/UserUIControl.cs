@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#define MIDDLE
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -15,10 +16,15 @@ public class UserUIControl : MonoBehaviour {
 
 	private Text txt;
 	private float[] txtPos = new float[3] {-200, 0, 200};
-
+	int moveLock = 0;
+#if (MIDDLE)
 	private Position position = Position.Middle;
+#else 
+	private Position position = Position.Left;
+#endif
 
 	private void MoveRight() {
+#if (MIDDLE)
 		switch (position) {
 		case Position.Left:
 			position = Position.Middle;
@@ -29,8 +35,19 @@ public class UserUIControl : MonoBehaviour {
 		default:
 			break;
 		}
+#else
+		switch (position) {
+		case Position.Left:
+			position = Position.Right;
+			break;
+		default:
+			break;
+		}
+#endif
 	}
+
 	private void MoveLeft() {
+#if (MIDDLE)
 		switch (position) {
 		case Position.Right:
 			position = Position.Middle;
@@ -41,6 +58,15 @@ public class UserUIControl : MonoBehaviour {
 		default:
 			break;
 		}
+#else
+		switch (position) {
+		case Position.Right:
+			position = Position.Left;
+			break;
+		default:
+			break;
+		}
+#endif
 	}
 	// Local variables & local status
 	private bool Confirmed = false;
@@ -66,22 +92,36 @@ public class UserUIControl : MonoBehaviour {
 
 	}
 
+	IEnumerator BlockedMoveLeft() {
+		moveLock = 1;
+		yield return new WaitForSeconds (0.2f);
+		MoveLeft ();
+		SetPosition ();
+		moveLock = 0;
+	}
+	IEnumerator BlockedMoveRight() {
+		moveLock = 1;
+		yield return new WaitForSeconds (0.2f);
+		MoveRight ();
+		SetPosition ();
+		moveLock = 0;
+	}
 	void NavLeft()
 	{
 		// if confirmed, don't move then
 		if(Confirmed) return;
+		if(moveLock > 0) return;
 		// if(currentUIPos > 0) currentUIPos--;
-		MoveLeft ();
-		SetPosition ();
+		StartCoroutine (BlockedMoveLeft());
 	}
 
 	void NavRight()
 	{
 		// if confirmed, don't move then
 		if(Confirmed) return;
+		if(moveLock > 0) return;
 		// if(currentUIPos < 2) currentUIPos++;
-		MoveRight ();
-		SetPosition ();
+		StartCoroutine (BlockedMoveRight ());
 	}
 
 	void SetPosition()
