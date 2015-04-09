@@ -108,7 +108,7 @@ public class GameStatus : MonoBehaviour {
 		}
 
 	}
-
+	// bind each user with the wizards in the current scene
 	void BindAllWizardToUser()
 	{
 		Debug.Log ("binding wizard to user");
@@ -138,12 +138,8 @@ public class GameStatus : MonoBehaviour {
 				Destroy(player);
 			}
 			userDataCollection[id].wizardMaterial = UserMaterials[userDataCollection[id].teamID + 1];
-			// TODO this a HACK, I think there should be a player factory
-			Renderer[] renders = player.GetComponentsInChildren<Renderer>();
-			foreach (Renderer r in renders) {
-				r.material = userDataCollection[id].wizardMaterial;
-			}
 
+			BindWizardMaterial(player, userDataCollection[id].wizardMaterial);
 			id++;
 		}
 
@@ -152,6 +148,7 @@ public class GameStatus : MonoBehaviour {
 	// store into hashtable as well
 	void BindAllUserData()
 	{
+		Debug.Log("[INIT]: Bind All User Data from scene setup");
 		int playerID = 0;
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 		foreach(GameObject player in playerCollection)
@@ -279,21 +276,46 @@ public class GameStatus : MonoBehaviour {
 			yield return new WaitForSeconds (1.0f);
 		}
 		userDataCollection [id].rebornTime = -1;
-		GameObject wizard = 
-			Instantiate(playerPrefab,userDataCollection [id].initPosition,Quaternion.identity) 
-				as GameObject;
+
+		GameObject wizard = InstantiateWizardInstance (playerPrefab, 
+		                           userDataCollection [id].initPosition, 
+		                           userDataCollection[id].wizardMaterial);
+		// Bind control 
 		UserInputManager userCtrl = wizard.GetComponent<UserInputManager>();
 		userCtrl.playerNum = id;
 		// add to table
+		// Bind to user
 		userDataCollection[id].wizardInstance = wizard;
 		wizard.name = userDataCollection [id].Username;
 
 		// 
+
+	}
+	/// <summary>
+	/// Instantiates the wizard instance.
+	/// can create either priest or magician 
+	/// </summary>
+	/// <returns>The wizard instance.</returns>
+	/// <param name="prefab">Prefab.</param>
+	/// <param name="Position">Position.</param>
+	/// <param name="mat">Mat.</param>
+	GameObject InstantiateWizardInstance(GameObject prefab, Vector3 Position, Material mat) {
+		GameObject wizard = 
+			Instantiate(playerPrefab, Position, Quaternion.identity) 
+				as GameObject;
+		// skinn material
+		BindWizardMaterial (wizard, mat);
+		return wizard;
+	}
+
+	void BindWizardMaterial(GameObject wizard, Material mat) {
 		Renderer[] renders = wizard.GetComponentsInChildren<Renderer>();
 		foreach (Renderer r in renders) {
-			r.material = userDataCollection[id].wizardMaterial;
+			r.material = mat;
 		}
+
 	}
+
 
 	void DestroyPlayerWithID(int playerid)
 	{
