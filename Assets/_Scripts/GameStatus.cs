@@ -312,7 +312,16 @@ public class GameStatus : MonoBehaviour {
 	}
 
 	void BindWizardMaterial(GameObject wizard, Material mat) {
-		Renderer[] renders = wizard.GetComponentsInChildren<Renderer>();
+		// first get the Model
+		// HACK
+		Transform model = wizard.transform.GetChild (0);
+		// then find model renderes
+		if (model.name != "Magician" || model.name != "Priest") {
+			Debug.Log("[Model Material] the first child is not what we want!");
+		}
+		Renderer[] renders = model.GetComponentsInChildren<Renderer> ();
+
+		// Renderer[] renders = wizard.GetComponentsInChildren<Renderer>();
 		foreach (Renderer r in renders) {
 			r.material = mat;
 		}

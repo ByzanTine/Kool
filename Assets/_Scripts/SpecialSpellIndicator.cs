@@ -2,15 +2,33 @@
 using System.Collections;
 
 public class SpecialSpellIndicator : MonoBehaviour {
-	private PlayerData PD;
-	private GameObject ring;
+	PlayerData playerdata;
+	GameObject indicator;
 	// Use this for initialization
 	void Start () {
-//		PD = GetComponent<PlayerData> ();
-//		GameObject indicatorPrefab = Resources.Load ("UIPrefab/PlayerBuffStatusView") as GameObject;
-//		ring = Instantiate (indicatorPrefab, transform.position, Quaternion.identity) as GameObject;
-//		ring.transform.parent = transform;
+		playerdata = GetComponent<PlayerData> ();
+		GameObject indicatorPrefab = Resources.Load ("Misc/LightEffect") as GameObject;
+		indicator = Instantiate (indicatorPrefab, transform.position, transform.rotation) as GameObject;
+		indicator.transform.SetParent (transform);
 
+	}
+
+	void Update() {
+		if (playerdata) {
+			switch (playerdata.SpecialSpellID)
+			{
+			case SpellDB.AttackID.iceBurst:
+				indicator.SetActive(true);
+				break;
+			case SpellDB.AttackID.meteor:
+				indicator.SetActive(true);
+				break;
+			default:
+				// Debug.Log ("Not a special Spell");
+				indicator.SetActive(false);
+				break;
+			}
+		}
 	}
 	
 
