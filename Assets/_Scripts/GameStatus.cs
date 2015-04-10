@@ -201,7 +201,7 @@ public class GameStatus : MonoBehaviour {
 			GameObject winEff = GameObject.Instantiate (winEffPrefab, 
 			                                            player.transform.position, Quaternion.identity)	as GameObject;
 			UserInputManager userInput = player.GetComponent<UserInputManager>();
-			userInput.LockLeftInput(9.0f);
+			userInput.LockControl(UserInputManager.InputSource.AllControl, 9.0f);
 		}
 
 		yield return new WaitForSeconds (8.0f);

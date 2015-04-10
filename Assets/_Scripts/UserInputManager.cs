@@ -141,22 +141,22 @@ public class UserInputManager : MonoBehaviour {
 	void GetTriggerBumperInput(InputDevice inputDevice)
 	{
 
-		if(inputDevice.LeftBumper.WasPressed && ctrlLocks[5])
+		if(inputDevice.LeftBumper.WasPressed && !ctrlLocks[5])
 		{
 			if(OnPressSwapIceFire != null) OnPressSwapIceFire();
 		}
 		
-		if(inputDevice.RightBumper.WasPressed && ctrlLocks[6])
+		if(inputDevice.RightBumper.WasPressed && !ctrlLocks[6])
 		{
 			if(OnPressSubSkill != null) OnPressSubSkill();
 		}
 
-		if(inputDevice.RightTrigger.WasPressed && ctrlLocks[4])
+		if(inputDevice.RightTrigger.WasPressed && !ctrlLocks[4])
 		{
 			if(OnPressMainSkill != null) OnPressMainSkill();
 		}
 
-		if(inputDevice.LeftTrigger.WasPressed && ctrlLocks[3])
+		if(inputDevice.LeftTrigger.WasPressed && !ctrlLocks[3])
 		{
 			if(OnPressRunning != null) OnPressRunning();
 		}
@@ -301,6 +301,7 @@ public class UserInputManager : MonoBehaviour {
 
 		case InputSource.RStick:
 			LockRightInput(period);
+			break;
 
 		case InputSource.LTrigger:
 			if(!ctrlLocks[3])
