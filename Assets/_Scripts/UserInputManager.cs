@@ -44,8 +44,8 @@ public class UserInputManager : MonoBehaviour {
 	public event OnInput OnPressButton;
 	public event OnInput OnReleaseButton;
 
-	// input lock of each: left, right, buttons, trigger & bumper;
-	private bool[] ctrlLocks = new bool[4]{false, false, false, false};
+	// input lock of each: 0left, 1right, 2buttons, 3Ltrigger, 4RTrigger, 5Lbumper, 6Rbumper;
+	private bool[] ctrlLocks = new bool[7]{false, false, false, false, false, false, false};
 	void Start()
 	{}
 	
@@ -140,24 +140,23 @@ public class UserInputManager : MonoBehaviour {
 
 	void GetTriggerBumperInput(InputDevice inputDevice)
 	{
-		if(ctrlLocks[3]) return;
 
-		if(inputDevice.LeftBumper.WasPressed)
+		if(inputDevice.LeftBumper.WasPressed && !ctrlLocks[5])
 		{
 			if(OnPressSwapIceFire != null) OnPressSwapIceFire();
 		}
 		
-		if(inputDevice.RightBumper.WasPressed)
+		if(inputDevice.RightBumper.WasPressed && !ctrlLocks[6])
 		{
 			if(OnPressSubSkill != null) OnPressSubSkill();
 		}
 
-		if(inputDevice.RightTrigger.WasPressed)
+		if(inputDevice.RightTrigger.WasPressed && !ctrlLocks[4])
 		{
 			if(OnPressMainSkill != null) OnPressMainSkill();
 		}
 
-		if(inputDevice.LeftTrigger.WasPressed)
+		if(inputDevice.LeftTrigger.WasPressed && !ctrlLocks[3])
 		{
 			if(OnPressRunning != null) OnPressRunning();
 		}
@@ -170,7 +169,7 @@ public class UserInputManager : MonoBehaviour {
 
 	}
 
-	void GetDirectionInput(InputDevice inputDevice )
+	void GetDirectionInput(InputDevice inputDevice)
 	{
 		leftInput = new Vector2 (inputDevice.LeftStickX, inputDevice.LeftStickY);
 
@@ -226,7 +225,7 @@ public class UserInputManager : MonoBehaviour {
 		ctrlLocks[lockIndex] = false;
 	}
 
-	public void LockLeftInput(float period = float.MaxValue)
+	private void LockLeftInput(float period = float.MaxValue)
 	{
 		if(!ctrlLocks[0])
 		{
@@ -234,7 +233,7 @@ public class UserInputManager : MonoBehaviour {
 		}
 	}
 
-	public void LockRightInput(float period = float.MaxValue)
+	private void LockRightInput(float period = float.MaxValue)
 	{
 		if(!ctrlLocks[1])
 		{
@@ -242,7 +241,7 @@ public class UserInputManager : MonoBehaviour {
 		}
 	}
 
-	public void LockButton(float period = float.MaxValue)
+	private void LockButton(float period = float.MaxValue)
 	{
 		if(!ctrlLocks[2])
 		{
@@ -250,20 +249,91 @@ public class UserInputManager : MonoBehaviour {
 		}
 	}
 
-	public void LockTriggerAndBumper(float period = float.MaxValue)
+
+	private void LockTriggerAndBumper(float period = float.MaxValue)
 	{
 		if(!ctrlLocks[3])
 		{
 			StartCoroutine (LockParameter (3, period));
 		}
+
+		if(!ctrlLocks[4])
+		{
+			StartCoroutine (LockParameter (3, period));
+		}
+
+		if(!ctrlLocks[5])
+		{
+			StartCoroutine (LockParameter (3, period));
+		}
+
+		if(!ctrlLocks[6])
+		{
+			StartCoroutine (LockParameter (3, period));
+		}
 	}
 
-	public void LockAllControl(float period = float.MaxValue)
+	private void LockAllControl(float period = float.MaxValue)
 	{
 		LockLeftInput (period);
 		LockRightInput (period);
 		LockButton (period);
 		LockTriggerAndBumper (period);
+	}
+
+	public enum InputSource {AllControl, LStick, RStick, Button,
+		LTrigger, RTrigger, LBumper, RBumper};
+	public void LockControl(InputSource inputSource,float period = float.MaxValue)
+	{
+		switch(inputSource)
+		{
+		case InputSource.AllControl:
+			LockAllControl(period);
+			break;
+
+		case InputSource.Button:
+			LockButton(period);
+			break;
+
+		case InputSource.LStick:
+			LockLeftInput(period);
+			break;
+
+		case InputSource.RStick:
+			LockRightInput(period);
+			break;
+
+		case InputSource.LTrigger:
+			if(!ctrlLocks[3])
+			{
+				StartCoroutine (LockParameter (3, period));
+			}
+			break;
+
+		case InputSource.RTrigger:
+			if(!ctrlLocks[4])
+			{
+				StartCoroutine (LockParameter (3, period));
+			}
+			break;
+
+		case InputSource.LBumper:
+			if(!ctrlLocks[5])
+			{
+				StartCoroutine (LockParameter (3, period));
+			}
+			break;
+		
+		case InputSource.RBumper:
+			if(!ctrlLocks[6])
+			{
+				StartCoroutine (LockParameter (3, period));
+			}
+			break;
+		
+		default:
+			break;
+		}
 	}
 
 	public void UnlockAllControl()
