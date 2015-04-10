@@ -11,8 +11,8 @@ public class ButtonView : MonoBehaviour {
 	GameObject Player;
 	
 	// now for y-axis
-	private float heightOffset = 800.0f; 
-	private float widthOffset = 125.0f;
+	private float heightOffset = 500.0f; 
+	private float widthOffset = -250.0f;
 	private Vector2 rectOrigin;
 	private Image img;
 	

@@ -18,6 +18,7 @@ public class TutorialView : MonoBehaviour {
 		public Sprite button;
 		public float timeInterval;
 		public GameObject item;
+		public UserInputManager.InputSource inputSource;
  	}
 
 	public tutorialStep[] TutorialSteps;
@@ -54,18 +55,16 @@ public class TutorialView : MonoBehaviour {
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 		foreach (GameObject player in playerCollection) {
 			UserInputManager Uinput = player.GetComponent<UserInputManager>();
-			float time = 0;
+			float timeInterval = 0;
 			foreach (tutorialStep step in TutorialSteps){
-				time += step.timeInterval;
-				StartCoroutine(Uinput.lock(2.0F));
+				Uinput.LockControl(step.inputSource,timeInterval);
+				timeInterval += step.timeInterval;
 			}
 		}
 	} 
 	
 	// Update is called once per frame
 	void Update () {
-		
-		
 		if (NumOfCurStep == TutorialSteps.Length) {
 			Debug.Log("End of tutorial and switch to main map!!");
 			Application.LoadLevel("ChooseTeam");
