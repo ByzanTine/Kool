@@ -16,10 +16,9 @@ public class DynamicCamera : MonoBehaviour {
 	
 	void LateUpdate()
 	{
-		if (!GetComponent<CameraStartAnim> ().done) {
+		if (GetComponent<CameraStartAnim> () && !GetComponent<CameraStartAnim> ().done) {
 			return;
 		}
-		print ("update");
 		targets.Clear ();
 		GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
 		foreach (GameObject obj in objs) {
