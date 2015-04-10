@@ -259,17 +259,17 @@ public class UserInputManager : MonoBehaviour {
 
 		if(!ctrlLocks[4])
 		{
-			StartCoroutine (LockParameter (3, period));
+			StartCoroutine (LockParameter (4, period));
 		}
 
 		if(!ctrlLocks[5])
 		{
-			StartCoroutine (LockParameter (3, period));
+			StartCoroutine (LockParameter (5, period));
 		}
 
 		if(!ctrlLocks[6])
 		{
-			StartCoroutine (LockParameter (3, period));
+			StartCoroutine (LockParameter (6, period));
 		}
 	}
 
@@ -313,21 +313,21 @@ public class UserInputManager : MonoBehaviour {
 		case InputSource.RTrigger:
 			if(!ctrlLocks[4])
 			{
-				StartCoroutine (LockParameter (3, period));
+				StartCoroutine (LockParameter (4, period));
 			}
 			break;
 
 		case InputSource.LBumper:
 			if(!ctrlLocks[5])
 			{
-				StartCoroutine (LockParameter (3, period));
+				StartCoroutine (LockParameter (5, period));
 			}
 			break;
 		
 		case InputSource.RBumper:
 			if(!ctrlLocks[6])
 			{
-				StartCoroutine (LockParameter (3, period));
+				StartCoroutine (LockParameter (6, period));
 			}
 			break;
 		
