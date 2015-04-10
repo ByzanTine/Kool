@@ -9,6 +9,7 @@ TagManager:
   - DamagingEffect
   - Fireball
   - Item
+  - Wall
   layers:
   - Default
   - TransparentFX
