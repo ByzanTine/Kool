@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 422992}
   - 114: {fileID: 11416986}
+  - 81: {fileID: 8110398}
   m_Layer: 0
   m_Name: GameStatus
   m_TagString: Untagged
@@ -23,11 +24,18 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!81 &8110398
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138034}
+  m_Enabled: 1
 --- !u!114 &11416986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -40,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameMode: 1
-  GameTargetRounds: 10
+  GameTargetRounds: 7
   playerPrefab: {fileID: 134422, guid: 46d7e0dc98cba0a4eb9dab7e24e457b9, type: 2}
   Usernames:
   - Alice

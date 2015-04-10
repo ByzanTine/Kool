@@ -28,4 +28,7 @@ public class Constants : MonoBehaviour {
 		Lighten,
 		Dark
 	}
+
+	public const string AudioFileDir = "Audio/";
+
 }

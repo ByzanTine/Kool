@@ -12,6 +12,7 @@ public class ColliderExplode : MonoBehaviour {
 	void Start () {
 
 		if (ExplodeEffect) {
+
 			GameObject gb = Instantiate (ExplodeEffect, transform.position, Quaternion.identity) as GameObject;
 			gb.transform.parent = transform;
 			GenerateSphereCast (transform.position);

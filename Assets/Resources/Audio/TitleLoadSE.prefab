@@ -1,47 +1,46 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &115938
+--- !u!1 &191488
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 415604}
-  - 114: {fileID: 11458000}
-  - 114: {fileID: 11454518}
-  - 82: {fileID: 8269396}
-  m_Layer: 9
-  m_Name: BigIceBallExplode
+  - 4: {fileID: 412164}
+  - 82: {fileID: 8264792}
+  - 114: {fileID: 11498640}
+  m_Layer: 0
+  m_Name: TitleLoadSE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &415604
+--- !u!4 &412164
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115938}
+  m_GameObject: {fileID: 191488}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!82 &8269396
+--- !u!82 &8264792
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115938}
+  m_GameObject: {fileID: 191488}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c439de6b89e9e4fe68773fdc017bcd3f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7f74dedcce0674709a4edd5c38ee1e9f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: .310000002
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -99,36 +98,18 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!114 &11454518
+--- !u!114 &11498640
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115938}
+  m_GameObject: {fileID: 191488}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11a1a60dbff46c349b4a937dfb317f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livingTime: 2
---- !u!114 &11458000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0badb8a189e01014da786d6c9351732a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  overlapLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  ExplodeEffect: {fileID: 132306, guid: 8d5284420f7311b4490c680eca520fb5, type: 2}
-  attackId: 6
-  ExplodeRadius: 4
-  caster: {fileID: 0}
+  livingTime: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -138,5 +119,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 115938}
+  m_RootGameObject: {fileID: 191488}
   m_IsPrefabParent: 1

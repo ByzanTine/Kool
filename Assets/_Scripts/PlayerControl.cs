@@ -152,7 +152,7 @@ public class PlayerControl : MonoBehaviour {
 		animator.SetBool("isStabbing", true);
 
 		yield return new WaitForSeconds (0.3f);
-		inputManager.LockAllControl (Constants.MIN_STAB_COOL_DOWN);
+		inputManager.LockControl (UserInputManager.InputSource.AllControl, Constants.MIN_STAB_COOL_DOWN);
 
 		explodePrefab.GetComponent<ColliderExplode> ().caster = this.gameObject;
 
@@ -161,7 +161,6 @@ public class PlayerControl : MonoBehaviour {
 		{
 			yield return new WaitForSeconds (0.2f / explodeNum);
 			Instantiate(explodePrefab, transform.position + i * transform.forward, Quaternion.identity);
-
 		}
 
 		yield return new WaitForSeconds (Constants.MIN_STAB_COOL_DOWN - 0.5f);
@@ -180,7 +179,7 @@ public class PlayerControl : MonoBehaviour {
 	// Magic ID is controlled by button
 	void CastMagic(int magicID)
 	{
-		inputManager.LockLeftInput (2.0f);
+		inputManager.LockControl (UserInputManager.InputSource.LStick, 2.0f);
 		// cast a special spell by magic ID
 		Vector3 direction = transform.forward;
 		attackMeans.AttackByDiretion (PD.SpecialSpellID, direction);
@@ -314,7 +313,7 @@ public class PlayerControl : MonoBehaviour {
 
 	private IEnumerator DieAnim() {
 		animator.SetBool ("isAlive", false);
-		inputManager.LockAllControl (2.0f);
+		inputManager.LockControl(UserInputManager.InputSource.AllControl, 2.0f);
 		Debug.Log("reset player death animation");
 		yield return new WaitForSeconds(0.2f);
 		animator.SetBool ("isAlive", true); // reset to lock animation
