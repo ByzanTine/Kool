@@ -566,6 +566,7 @@ MonoBehaviour:
   playerHealthPrefab: {fileID: 107888, guid: 4de763131efaf5e4b99d3321595dfea4, type: 2}
   namePrefab: {fileID: 155742, guid: a470735d40b644957ac438ad8bfd2d35, type: 2}
   specialSpellPrefab: {fileID: 159272, guid: 0419553b2a3fa44e0ba1a1565c989923, type: 2}
+  buffStatusPrefab: {fileID: 174582, guid: 4d3600ad464fcd143be1998abda5da15, type: 2}
 --- !u!114 &11464512
 MonoBehaviour:
   m_ObjectHideFlags: 1
