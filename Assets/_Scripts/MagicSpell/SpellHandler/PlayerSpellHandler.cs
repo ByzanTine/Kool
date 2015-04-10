@@ -36,7 +36,7 @@ public class PlayerSpellHandler : MonoBehaviour {
 			Vector3 direction = transform.position - spellPos;
 			Vector3 appliedForce = direction.normalized * Globals.FORCE_MULTIPLIER;
 //			StartCoroutine(addTimeDecayForce(GetComponent<Rigidbody>(), appliedForce, 0.5f));
-			StartCoroutine(addDistanceDecayForce(GetComponent<Rigidbody>(), appliedForce, 4f, spellPos));
+			StartCoroutine(addDistanceDecayForce(GetComponent<Rigidbody>(), appliedForce, 16f, spellPos));
 
 			playerData.DamageHP(SpellDB.GetSpellDamage(spellId));
 			Debug.Log ("[Spell] hit " + GetComponent<Collider>().name);
