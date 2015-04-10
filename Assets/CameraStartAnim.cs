@@ -21,30 +21,30 @@ public class CameraStartAnim : MonoBehaviour {
 		foreach (GameObject obj in objs) {
 			allTargets.Add(obj.transform);
 		}
-		Invoke ("zoom_in", 0.1f);
-		Invoke ("zoom_out", 2);
-		Invoke ("zoom_in", 3);
-		Invoke ("zoom_out", 5);
-		Invoke ("zoom_in", 6);
-		Invoke ("zoom_out", 8);
-		Invoke ("zoom_in", 9);
-		Invoke ("zoom_done", 11);
+		Invoke ("ZoomIn", 0.1f);
+		Invoke ("ZoomOut", 2);
+		Invoke ("ZoomIn", 3);
+		Invoke ("ZoomOut", 5);
+		Invoke ("ZoomIn", 6);
+		Invoke ("ZoomOut", 8);
+		Invoke ("ZoomIn", 9);
+		Invoke ("ZoomDone", 11);
 
 	}
 
-	void zoom_in(){
+	void ZoomIn(){
 		targets.Clear ();
 		targets.Add(allTargets[zoom_step]);
 		zoom_step++;
 	}
-	void zoom_out(){
+	void ZoomOut(){
 		targets.Clear ();
 		GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
 		foreach (GameObject obj in objs) {
 			targets.Add(obj.transform);
 		}
 	}
-	void zoom_done(){
+	void ZoomDone(){
 		done = true;
 	}
 	void LateUpdate()
