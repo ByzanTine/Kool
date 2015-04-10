@@ -1,28 +1,56 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-public class DynamicCamera : MonoBehaviour {
+
+public class CameraStartAnim : MonoBehaviour {
+	public bool done = false;
+	List<Transform> allTargets = new List<Transform>();
+	int zoom_step = 0;
 	//public Transform[] targets;
 	List<Transform> targets = new List<Transform>();
 	float boundingBoxPadding = 0.1f;
-	float minCamera = 15f;
-	float zoomSpeed = 20f;
+	float minCamera = 8f;
 	float xAngle = 1.012291f; // angle in rad
 	Camera camera;
 	
 	void Awake () 
 	{
 		camera = GetComponent<Camera>();
-	}
-	
-	void LateUpdate()
-	{
-		if (GetComponent<CameraStartAnim> () && !GetComponent<CameraStartAnim> ().done) {
-			return;
+		allTargets.Clear ();
+		GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+		foreach (GameObject obj in objs) {
+			allTargets.Add(obj.transform);
 		}
+		Invoke ("ZoomIn", 0.1f);
+		Invoke ("ZoomOut", 2);
+		Invoke ("ZoomIn", 3);
+		Invoke ("ZoomOut", 5);
+		Invoke ("ZoomIn", 6);
+		Invoke ("ZoomOut", 8);
+		Invoke ("ZoomIn", 9);
+		Invoke ("ZoomDone", 11);
+
+	}
+
+	void ZoomIn(){
+		targets.Clear ();
+		targets.Add(allTargets[zoom_step]);
+		zoom_step++;
+	}
+	void ZoomOut(){
 		targets.Clear ();
 		GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
 		foreach (GameObject obj in objs) {
 			targets.Add(obj.transform);
+		}
+	}
+	void ZoomDone(){
+		done = true;
+	}
+	void LateUpdate()
+	{
+		if (done) {
+			return;
 		}
 		Rect boundingBox = CalculateTargetsBoundingBox();
 		Vector3 camerNextPos = CalculateCameraPosition(CalculateCameraBoundingBox(boundingBox));
@@ -36,25 +64,31 @@ public class DynamicCamera : MonoBehaviour {
 	/// <returns>A Rect containing all the targets.</returns>
 	Rect CalculateTargetsBoundingBox()
 	{
-//		float minX = Mathf.Infinity;
-//		float maxX = Mathf.NegativeInfinity;
-//		float minZ = Mathf.Infinity;
-//		float maxZ = Mathf.NegativeInfinity;
-	
+		//		float minX = Mathf.Infinity;
+		//		float maxX = Mathf.NegativeInfinity;
+		//		float minZ = Mathf.Infinity;
+		//		float maxZ = Mathf.NegativeInfinity;
+		
 		float minX = 0;
 		float maxX = 0;
 		float minZ = 0;
 		float maxZ = 0;
 
-		foreach (Transform target in targets) {
-			Vector3 position = target.position;
+		if (targets.Count == 1) {
+			Vector3 position = targets[0].position;
+
+			minX = maxX = position.x;
+			minZ = maxZ = position.z;
+		} else {
+			foreach (Transform target in targets) {
+				Vector3 position = target.position;
 			
-			minX = Mathf.Min(minX, position.x);
-			minZ = Mathf.Min(minZ, position.z);
-			maxX = Mathf.Max(maxX, position.x);
-			maxZ = Mathf.Max(maxZ, position.z);
+				minX = Mathf.Min (minX, position.x);
+				minZ = Mathf.Min (minZ, position.z);
+				maxX = Mathf.Max (maxX, position.x);
+				maxZ = Mathf.Max (maxZ, position.z);
+			}
 		}
-		
 		return Rect.MinMaxRect(minX - boundingBoxPadding, maxZ + boundingBoxPadding, maxX + boundingBoxPadding, minZ - boundingBoxPadding);
 	}
 	
@@ -82,11 +116,11 @@ public class DynamicCamera : MonoBehaviour {
 		return new Vector3(boundingBoxCenter.x, Camera.main.transform.position.y,boundingBoxCenter.y);
 	}
 	
-	float SmoothDampFloat(float from, float to, float time = 0.4f){
+	float SmoothDampFloat(float from, float to, float time = 0.2f){
 		float delta = (to - from)/ time * Time.deltaTime;
 		return from + CameraMoveThreshold(delta);
 	}
-	Vector3 SmoothDampVector3(Vector3 from, Vector3 to, float time = 0.4f){
+	Vector3 SmoothDampVector3(Vector3 from, Vector3 to, float time = 0.2f){
 		Vector3 delta = (to - from) / time * Time.deltaTime;
 		//	return from + delta;
 		return from + CameraMoveThreshold (delta);
@@ -98,7 +132,7 @@ public class DynamicCamera : MonoBehaviour {
 			return delta;
 		}
 	}
-	Vector3 CameraMoveThreshold(Vector3 delta, float threshold = 1f){
+	Vector3 CameraMoveThreshold(Vector3 delta, float threshold = 1.5f){
 		if (delta.magnitude > threshold) {
 			return delta.normalized * threshold;
 		} else {
