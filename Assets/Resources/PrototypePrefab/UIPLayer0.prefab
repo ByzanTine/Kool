@@ -43,6 +43,7 @@ MonoBehaviour:
   leftInput: {x: 0, y: 0}
   rightInput: {x: 0, y: 0}
   button_id: -1
+  eventSystem: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -44,7 +44,7 @@ public class TutorialView : MonoBehaviour {
 	}
 
 	void Start () {
-		time = 0;
+		time = Time.time;
 		NumOfCurStep = 0;
 		_txt = Text.GetComponent<Text> ();
 		_txt.text = TutorialSteps[NumOfCurStep].txt;

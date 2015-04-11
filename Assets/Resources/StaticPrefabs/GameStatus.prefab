@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameMode: 1
   GameTargetRounds: 7
-  playerPrefab: {fileID: 134422, guid: 46d7e0dc98cba0a4eb9dab7e24e457b9, type: 2}
+  playerPrefab: {fileID: 134422, guid: 94894777a65c94ea88b76d2e3e3e3d60, type: 2}
   MagicanPrefab: {fileID: 173784, guid: a5df14d9dd24d214f8c5cbe1e693aa40, type: 2}
   PriestPrefab: {fileID: 179066, guid: 5da958e049fc3c6468b87e2ad06c6f63, type: 2}
   Usernames:
