@@ -67,7 +67,7 @@ public class TutorialView : MonoBehaviour {
 	void Update () {
 		if (NumOfCurStep == TutorialSteps.Length) {
 			Debug.Log("End of tutorial and switch to main map!!");
-			Application.LoadLevel("ChooseTeam");
+			Application.LoadLevel("MainMap");
 		}
 
 		if (Time.time - time > TutorialSteps [NumOfCurStep].timeInterval) {
