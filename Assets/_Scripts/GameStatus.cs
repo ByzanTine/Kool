@@ -12,6 +12,7 @@ public class GameStatus : MonoBehaviour {
 	// Target lives/scores in each mode for winning
 	public int GameTargetRounds = 1;
 	public GameObject playerPrefab;
+	public GameObject MagicanPrefab, PriestPrefab;
 
 
 	// Make this avaliable in inspector to intialize manually
@@ -280,9 +281,10 @@ public class GameStatus : MonoBehaviour {
 		}
 		userDataCollection [id].rebornTime = -1;
 
-		GameObject wizard = InstantiateWizardInstance (playerPrefab, 
+		GameObject wizard = InstantiateWizardInstance (playerPrefab,
+		                           userDataCollection [id].teamID == 0 ? MagicanPrefab : PriestPrefab,
 		                           userDataCollection [id].initPosition, 
-		                           userDataCollection[id].wizardMaterial);
+		                           userDataCollection [id].wizardMaterial);
 		// Bind control 
 		UserInputManager userCtrl = wizard.GetComponent<UserInputManager>();
 		userCtrl.playerNum = id;
@@ -302,10 +304,17 @@ public class GameStatus : MonoBehaviour {
 	/// <param name="prefab">Prefab.</param>
 	/// <param name="Position">Position.</param>
 	/// <param name="mat">Mat.</param>
-	GameObject InstantiateWizardInstance(GameObject prefab, Vector3 Position, Material mat) {
+	GameObject InstantiateWizardInstance(GameObject prefab, GameObject modelPrefab, Vector3 Position, Material mat) {
 		GameObject wizard = 
 			Instantiate(playerPrefab, Position, Quaternion.identity) 
 				as GameObject;
+
+//		Destroy (playerPrefab.transform.GetChild (0));
+
+
+		GameObject model = Instantiate(modelPrefab) as GameObject;
+		model.transform.parent = wizard.transform;
+		model.transform.localPosition = Vector3.zero;
 		// skinn material
 		BindWizardMaterial (wizard, mat);
 		return wizard;

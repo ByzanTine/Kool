@@ -282,7 +282,7 @@ public class UserInputManager : MonoBehaviour {
 	}
 
 	public enum InputSource {AllControl, LStick, RStick, Button,
-		LTrigger, RTrigger, LBumper, RBumper};
+		LTrigger, RTrigger, LBumper, RBumper, None};
 	public void LockControl(InputSource inputSource,float period = float.MaxValue)
 	{
 		switch(inputSource)

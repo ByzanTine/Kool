@@ -6,7 +6,8 @@ public class GenerateWizardUI : MonoBehaviour {
 	public GameObject playerHealthPrefab;
 	public GameObject namePrefab;
 	public GameObject specialSpellPrefab;
-	public GameObject buffStatusPrefab;
+	public GameObject ButtonIcon;
+
 	// Use this for initialization
 	void Start () {
 		StartCoroutine (LateGenerateWizardUI ());
@@ -31,21 +32,17 @@ public class GenerateWizardUI : MonoBehaviour {
 			name.transform.SetParent(this.transform);
 			GameObject specialSpell = Instantiate(specialSpellPrefab) as GameObject;
 			specialSpell.transform.SetParent(this.transform);
-
-			// Generate a circle buff indicator 
-
-			GameObject buffstatusUI = Instantiate(buffStatusPrefab, 
-			                                      player.transform.position, 
-			                                      player.transform.rotation) as GameObject;
-			buffstatusUI.transform.SetParent(player.transform);
-
-
+			if (ButtonIcon){
+				GameObject button = Instantiate(ButtonIcon) as GameObject;
+				Debug.Log ("button instantiate");
+				button.transform.SetParent(this.transform);
+				button.GetComponent<ButtonView>().playerId = playerId;
+			}
+			
 			PlayerHealthView healthUI  = health.GetComponent<PlayerHealthView>();
 			PlayerNameView nameUI = name.GetComponent<PlayerNameView>();
 			SpecialSpellView specialSpellUI = specialSpell.GetComponent<SpecialSpellView>();
-			PlayerBuffView buffUI = buffstatusUI.GetComponentInChildren<PlayerBuffView>();
-
-			buffUI.playerId = playerId;
+			
 			healthUI.playerId = playerId;
 			nameUI.playerId = playerId;
 			specialSpellUI.playerId = playerId;

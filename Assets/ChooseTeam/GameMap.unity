@@ -197,7 +197,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 407332, guid: 380e0420206e943c08efc427b796f815, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 154880, guid: 380e0420206e943c08efc427b796f815, type: 2}
       propertyPath: m_TagString
@@ -352,17 +352,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86a5aa5fb469340fda9fd00747afc019, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &299904702
-GameObject:
-  m_PrefabParentObject: {fileID: 138034, guid: 48b6e506a46334e13bc1b40456c943d2, type: 2}
-  m_PrefabInternal: {fileID: 1302037007}
---- !u!81 &299904705
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 299904702}
-  m_Enabled: 1
 --- !u!1001 &394360388
 Prefab:
   m_ObjectHideFlags: 0
@@ -710,9 +699,9 @@ Prefab:
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 11416986, guid: 48b6e506a46334e13bc1b40456c943d2, type: 2}
-      propertyPath: GameTargetRounds
-      value: 7
-      objectReference: {fileID: 0}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 134422, guid: 94894777a65c94ea88b76d2e3e3e3d60, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 48b6e506a46334e13bc1b40456c943d2, type: 2}
   m_IsPrefabParent: 0
@@ -1016,7 +1005,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22415262, guid: 95bc64f0dd9c4be4fb026a1e6800c77a, type: 2}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 22415262, guid: 95bc64f0dd9c4be4fb026a1e6800c77a, type: 2}
       propertyPath: m_AnchoredPosition.x
