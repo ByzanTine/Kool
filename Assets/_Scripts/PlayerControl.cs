@@ -37,6 +37,12 @@ public class PlayerControl : MonoBehaviour {
 	// Local variables & local status
 	private bool isPosAiming = false;
 
+	// for aim assistant system;
+	public const float current_dir_lock_zone = 0.05f;
+	public const float target_dir_lock_zone = 0.4f;
+	public const float magnitude_decay = 20f;
+	public const float joystick_min_magnitute = 0.5f;
+
 	void Start()
 	{
 
@@ -210,7 +216,7 @@ public class PlayerControl : MonoBehaviour {
 
 		if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting") &&
-			input.magnitude > 0 )
+		   input.magnitude > 0 )
 		{
 			// move target object with left stick.
 
@@ -258,7 +264,7 @@ public class PlayerControl : MonoBehaviour {
 	{
 		if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting") &&
-		   input.magnitude > 0 )
+		   input.magnitude >  joystick_min_magnitute)
 		{
 			Vector3 newForward = new Vector3 (input.x, 0.0f, input.y).normalized;
 			SmoothRotate (newForward);
@@ -266,15 +272,28 @@ public class PlayerControl : MonoBehaviour {
 		// rotate target with right stick.
 	}
 
+	bool TargetNearDirectoion(Vector3 direction){
+		GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+		foreach (GameObject obj in objs) {
+			Vector3 delta = obj.transform.position - transform.position;
+			if((delta.normalized - direction).sqrMagnitude < current_dir_lock_zone){
+				return true;
+			}
+		}
+		return false;
+	}
 	void SmoothRotate(Vector3 vec_to)
 	{
 		//	transform.LookAt (transform.position + newForward);
 		Vector3 vec_from = transform.forward;
 		float minDeltaAngle = Constants.PLAYER_ANGULAR_SPEED;
+
+		if (TargetNearDirectoion (vec_from) && (vec_to - vec_from).sqrMagnitude < target_dir_lock_zone) {
+			minDeltaAngle /= magnitude_decay;
+		}
 		if(isRunning) minDeltaAngle /= 2.0f;
 		// calculate new direction by
-		Vector3 newDir = Vector3.RotateTowards(vec_from, vec_to, minDeltaAngle, 0.0F);
-
+		Vector3 newDir = Vector3.RotateTowards(vec_from, vec_to, minDeltaAngle, 1F);
 //		Debug.DrawRay(transform.position, newDir, Color.red);
 
 		transform.rotation = Quaternion.LookRotation(newDir);
