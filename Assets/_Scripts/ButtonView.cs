@@ -14,6 +14,7 @@ public class ButtonView : MonoBehaviour {
 	private float heightOffset = 500.0f; 
 	private float widthOffset = -250.0f;
 	private Vector2 rectOrigin;
+	private Button button;
 	private Image img;
 	
 	
@@ -22,17 +23,22 @@ public class ButtonView : MonoBehaviour {
 		// adjust Position.
 		viewCamera = Camera.main;
 		rectOrigin = GetComponent<RectTransform> ().sizeDelta;
-		img = GetComponent<Image>();
+		img = GetComponent<Image> ();
+		button = GetComponent<Button> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (TV) {
-			Debug.Log("button strat");
+
+			button.enabled = true;
 			img.enabled = true;
 			img.sprite = TV.CurButton;
-			if (!img.sprite)
+			if (!img.sprite){
+				button.enabled = false;
 				img.enabled = false;
+			}
+
 			// get.sizeDelta *= 10.0f / Camera.main.fieldOfView;
 			// get the new transform position
 			Vector3 rawPos = viewCamera.WorldToScreenPoint (Player.transform.position);
@@ -47,7 +53,7 @@ public class ButtonView : MonoBehaviour {
 		}
 		else {
 			// fetch the player by id, and get the player data
-			img.enabled = false;
+			button.enabled = false;
 			Player = GameStatus.GetPlayerObjById(playerId);
 			if(Player){
 				TV = UnityEngine.Object.FindObjectOfType<TutorialView>();
