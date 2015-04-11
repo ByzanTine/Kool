@@ -638,7 +638,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 179456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ceb3147299e94bba9a6422d71262f0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e3cff3a9340f4473b99439c1d68e1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ReadyEffect: {fileID: 104030}
@@ -692,7 +692,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 163918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ceb3147299e94bba9a6422d71262f0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e3cff3a9340f4473b99439c1d68e1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ReadyEffect: {fileID: 119934}
@@ -779,7 +779,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 143172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ceb3147299e94bba9a6422d71262f0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e3cff3a9340f4473b99439c1d68e1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ReadyEffect: {fileID: 193484}
@@ -983,7 +983,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 179560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ceb3147299e94bba9a6422d71262f0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e3cff3a9340f4473b99439c1d68e1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ReadyEffect: {fileID: 180318}
@@ -995,10 +995,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 195846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6353c81e211440819f1bc25ee090475, type: 3}
+  m_Script: {fileID: 11500000, guid: b24e7bc85bb4940c9b2ec6db7862c6ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeamSize: 1
+  TeamSize: 2
   CanStart: 0
   StartHint: {fileID: 177714}
 --- !u!222 &22200396

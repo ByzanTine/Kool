@@ -44,7 +44,7 @@ public class TutorialView : MonoBehaviour {
 	}
 
 	void Start () {
-		time = 0;
+		time = Time.time;
 		NumOfCurStep = 0;
 		_txt = Text.GetComponent<Text> ();
 		_txt.text = TutorialSteps[NumOfCurStep].txt;
@@ -67,7 +67,7 @@ public class TutorialView : MonoBehaviour {
 	void Update () {
 		if (NumOfCurStep == TutorialSteps.Length) {
 			Debug.Log("End of tutorial and switch to main map!!");
-			Application.LoadLevel("ChooseTeam");
+			Application.LoadLevel("MainMap");
 		}
 
 		if (Time.time - time > TutorialSteps [NumOfCurStep].timeInterval) {

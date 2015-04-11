@@ -147,6 +147,6 @@ public class TeamSelectionControl : MonoBehaviour {
 		}
 		txt.text = "Start!";
 
-		Application.LoadLevel ("GameMap");
+		Application.LoadLevel ("TutorialMap");
 	}
 }
