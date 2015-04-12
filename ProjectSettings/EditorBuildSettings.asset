@@ -8,6 +8,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/MainMap/MapTest.unity
   - enabled: 1
+    path: Assets/_Scene/ScreenShot.unity
+  - enabled: 1
     path: Assets/_Scene/TitleScreen.unity
   - enabled: 1
     path: Assets/_Scene/MainMenu.unity
