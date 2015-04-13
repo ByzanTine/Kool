@@ -40,7 +40,7 @@ GameObject:
   - 114: {fileID: 11447538}
   - 114: {fileID: 11494670}
   m_Layer: 0
-  m_Name: PLayerZ
+  m_Name: PLayerControl
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

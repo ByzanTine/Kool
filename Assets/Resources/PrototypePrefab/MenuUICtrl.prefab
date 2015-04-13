@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 456576}
   - 114: {fileID: 11417746}
   m_Layer: 0
-  m_Name: UIPLayer0
+  m_Name: MenuUICtrl
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
