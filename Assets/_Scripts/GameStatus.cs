@@ -64,7 +64,6 @@ public class GameStatus : MonoBehaviour {
 	{
 
 		// Scene transition protection for singleton
-		// For later usage
 		if(_instance == null)
 		{
 			//If I am the first instance, make me the Singleton
@@ -84,7 +83,6 @@ public class GameStatus : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-//		playerTable = new Hashtable ();
 		teamScores = new int[2] {0, 0};
 		isGameOver = false;
 
@@ -93,15 +91,17 @@ public class GameStatus : MonoBehaviour {
 		{
 			BindAllWizardToUser();
 		}
-
 	}
 
 
 	void OnLevelWasLoaded(int level) {
 
+		// Avoid duplicated call by other instance
+		if(this != _instance) return;
+
 		teamScores = new int[2] {0, 0};
 		isGameOver = false;
-		
+
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 		if(playerCollection[0].GetComponent<PlayerControl>() != null)
 		{
@@ -124,10 +124,19 @@ public class GameStatus : MonoBehaviour {
 			userCtrl.playerNum = id;
 			player.name = userDataCollection[id].Username;
 			userDataCollection[id].initPosition = player.transform.position;
-			userDataCollection[id].wizardInstance = player;
+			if(userDataCollection[id].wizardInstance != null)
+			{
+				Debug.LogError ("Already bind to another player");
+				continue;
+			}
+
 			totalPlayerNum++;
 
+			userDataCollection[id].wizardInstance = player;
+
 			Destroy(player);
+
+			Debug.Log ("binding wizard" + id + " to user");
 
 			// seperate team for default/unassigned player:
 			// default: 0 & 1 in team 0, 2 & 3 in team 1;
@@ -141,6 +150,11 @@ public class GameStatus : MonoBehaviour {
 			{
 				totalPlayerNum--;
 			}
+			else // already got a valid team id
+			{
+				InstantiateWizardInstanceWithId(id);
+			}
+
 			userDataCollection[id].wizardMaterial = UserMaterials[userDataCollection[id].teamID + 1];
 
 			BindWizardMaterial(player, userDataCollection[id].wizardMaterial);
