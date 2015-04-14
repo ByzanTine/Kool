@@ -12,7 +12,7 @@ public class GameStatus : MonoBehaviour {
 	// Target lives/scores in each mode for winning
 	public int GameTargetRounds = 1;
 	public GameObject playerPrefab;
-	public GameObject MagicanPrefab, PriestPrefab;
+	public GameObject[] ModelPrefabs = new GameObject[2]; // MagicanPrefab, PriestPrefab;
 
 
 	// Make this avaliable in inspector to intialize manually
@@ -64,7 +64,6 @@ public class GameStatus : MonoBehaviour {
 	{
 
 		// Scene transition protection for singleton
-		// For later usage
 		if(_instance == null)
 		{
 			//If I am the first instance, make me the Singleton
@@ -84,7 +83,6 @@ public class GameStatus : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-//		playerTable = new Hashtable ();
 		teamScores = new int[2] {0, 0};
 		isGameOver = false;
 
@@ -93,15 +91,17 @@ public class GameStatus : MonoBehaviour {
 		{
 			BindAllWizardToUser();
 		}
-
 	}
 
 
 	void OnLevelWasLoaded(int level) {
 
+		// Avoid duplicated call by other instance
+		if(this != _instance) return;
+
 		teamScores = new int[2] {0, 0};
 		isGameOver = false;
-		
+
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 		if(playerCollection[0].GetComponent<PlayerControl>() != null)
 		{
@@ -124,20 +124,37 @@ public class GameStatus : MonoBehaviour {
 			userCtrl.playerNum = id;
 			player.name = userDataCollection[id].Username;
 			userDataCollection[id].initPosition = player.transform.position;
-			userDataCollection[id].wizardInstance = player;
+			if(userDataCollection[id].wizardInstance != null)
+			{
+				Debug.LogError ("Already bind to another player");
+				continue;
+			}
+
 			totalPlayerNum++;
+
+			userDataCollection[id].wizardInstance = player;
+
+			Destroy(player);
+
+			Debug.Log ("binding wizard" + id + " to user");
+
 			// seperate team for default/unassigned player:
 			// default: 0 & 1 in team 0, 2 & 3 in team 1;
 			// unassigned: destroy the corresponding player object;
 			if(userDataCollection[id].teamID >= 2)
 			{
 				userDataCollection[id].teamID = id / 2;
+				InstantiateWizardInstanceWithId(id);
 			}
 			else if(userDataCollection[id].teamID == -1)
 			{
 				totalPlayerNum--;
-				Destroy(player);
 			}
+			else // already got a valid team id
+			{
+				InstantiateWizardInstanceWithId(id);
+			}
+
 			userDataCollection[id].wizardMaterial = UserMaterials[userDataCollection[id].teamID + 1];
 
 			BindWizardMaterial(player, userDataCollection[id].wizardMaterial);
@@ -209,6 +226,7 @@ public class GameStatus : MonoBehaviour {
 		Application.LoadLevel (Application.loadedLevel);
 	}
 
+	// public method used when player dead
 	public void DecrementPlayerLife(int playerID)
 	{
 		userDataCollection [playerID].deathCount ++;
@@ -251,7 +269,7 @@ public class GameStatus : MonoBehaviour {
 			{
 				if(!isGameOver)
 				{
-					for(int i=0; i<totalPlayerNum; ++i)
+					for(int i = 0; i < totalPlayerNum; ++i)
 					{
 						if(userDataCollection[i].teamID != otherTeamID)
 						{
@@ -280,11 +298,24 @@ public class GameStatus : MonoBehaviour {
 			yield return new WaitForSeconds (1.0f);
 		}
 		userDataCollection [id].rebornTime = -1;
+		InstantiateWizardInstanceWithId(id);
 
+	}
+
+
+	/// <summary>
+	/// Instantiates the wizard instance with identifier.
+	/// Will link the new instance to the corresponding user data by id.
+	/// </summary>
+	/// <param name="id">Identifier.</param>
+	void InstantiateWizardInstanceWithId(int id)
+	{
+		GameObject modelPrefab = ModelPrefabs[userDataCollection [id].teamID];
+		
 		GameObject wizard = InstantiateWizardInstance (playerPrefab,
-		                           userDataCollection [id].teamID == 0 ? MagicanPrefab : PriestPrefab,
-		                           userDataCollection [id].initPosition, 
-		                           userDataCollection [id].wizardMaterial);
+		                                               modelPrefab,
+		                                               userDataCollection [id].initPosition, 
+		                                               userDataCollection [id].wizardMaterial);
 		// Bind control 
 		UserInputManager userCtrl = wizard.GetComponent<UserInputManager>();
 		userCtrl.playerNum = id;
@@ -292,25 +323,24 @@ public class GameStatus : MonoBehaviour {
 		// Bind to user
 		userDataCollection[id].wizardInstance = wizard;
 		wizard.name = userDataCollection [id].Username;
-
-		// 
-
 	}
+
 	/// <summary>
 	/// Instantiates the wizard instance.
 	/// can create either priest or magician 
 	/// </summary>
 	/// <returns>The wizard instance.</returns>
-	/// <param name="prefab">Prefab.</param>
-	/// <param name="Position">Position.</param>
-	/// <param name="mat">Mat.</param>
-	GameObject InstantiateWizardInstance(GameObject prefab, GameObject modelPrefab, Vector3 Position, Material mat) {
+	/// <param name="ctrlPrefab"> Control Prefab.</param>
+	/// <param name="modelPrefab"> Model Prefab.</param>
+	/// <param name="Position"> Position.</param>
+	/// <param name="mat"> Mat.</param>
+	GameObject InstantiateWizardInstance(GameObject ctrlPrefab, GameObject modelPrefab, Vector3 Position, Material mat) 
+	{
 		GameObject wizard = 
-			Instantiate(playerPrefab, Position, Quaternion.identity) 
+			Instantiate(ctrlPrefab, Position, Quaternion.identity) 
 				as GameObject;
 
 //		Destroy (playerPrefab.transform.GetChild (0));
-
 
 		GameObject model = Instantiate(modelPrefab) as GameObject;
 		model.transform.parent = wizard.transform;
@@ -344,9 +374,6 @@ public class GameStatus : MonoBehaviour {
 		if (userDataCollection[playerid].wizardInstance != null) {
 			Destroy(userDataCollection[playerid].wizardInstance);
 			userDataCollection[playerid].wizardInstance = null;
-		}
-		else {
-			Debug.LogError("[Status] Try deleting non exist player");
 		}
 
 	}

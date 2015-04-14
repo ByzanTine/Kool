@@ -35,8 +35,8 @@ public class PlayerSpellHandler : MonoBehaviour {
 			Debug.Log ("[Spell] fireball is hit on " + this.name);
 			Vector3 direction = transform.position - spellPos;
 			Vector3 appliedForce = direction.normalized * Globals.FORCE_MULTIPLIER;
-//			StartCoroutine(addTimeDecayForce(GetComponent<Rigidbody>(), appliedForce, 0.5f));
-			StartCoroutine(addDistanceDecayForce(GetComponent<Rigidbody>(), appliedForce, 16f, spellPos));
+			StartCoroutine(addTimeDecayForce(GetComponent<Rigidbody>(), appliedForce, 1f));
+//			StartCoroutine(addDistanceDecayForce(GetComponent<Rigidbody>(), appliedForce, 16f, spellPos));
 
 			playerData.DamageHP(SpellDB.GetSpellDamage(spellId));
 			Debug.Log ("[Spell] hit " + GetComponent<Collider>().name);

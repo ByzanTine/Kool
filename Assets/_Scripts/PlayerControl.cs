@@ -262,6 +262,9 @@ public class PlayerControl : MonoBehaviour {
 
 	void Rotate(Vector2 input)
 	{
+		// Ban rotate when run
+		if(isRunning) input *= 0;
+
 		if(!animator.GetBool("isCasting") && 
 		   !animator.GetCurrentAnimatorStateInfo(0).IsName("isCasting") &&
 		   input.magnitude >  joystick_min_magnitute)
@@ -282,6 +285,7 @@ public class PlayerControl : MonoBehaviour {
 		}
 		return false;
 	}
+
 	void SmoothRotate(Vector3 vec_to)
 	{
 		//	transform.LookAt (transform.position + newForward);

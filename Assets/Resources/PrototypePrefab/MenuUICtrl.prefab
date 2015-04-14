@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 456576}
   - 114: {fileID: 11417746}
   m_Layer: 0
-  m_Name: UIPLayer0
+  m_Name: MenuUICtrl
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,6 +43,7 @@ MonoBehaviour:
   leftInput: {x: 0, y: 0}
   rightInput: {x: 0, y: 0}
   button_id: -1
+  eventSystem: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
