@@ -84,6 +84,19 @@ public class PlayerData : MonoBehaviour {
 	public void ChangeIceFire(){
 		ice_fire = (ice_fire == Constants.SpellMode.Fire) ? 
 			Constants.SpellMode.Ice : Constants.SpellMode.Fire;
+
+
+		if(ice_fire == Constants.SpellMode.Fire)
+		{
+			GameObject toFireSEPrefab = Resources.Load (Constants.AudioFileDir + "Swap2FireSE") as GameObject;
+			GameObject toFireSE = GameObject.Instantiate (toFireSEPrefab)	as GameObject;
+		}
+		else
+		{
+			GameObject toIceSEPrefab = Resources.Load (Constants.AudioFileDir + "Swap2IceSE") as GameObject;
+			GameObject toIceSE = GameObject.Instantiate (toIceSEPrefab)	as GameObject;
+		}
+
 		// HACK change special attack as well
 		if (SpecialSpellID == SpellDB.AttackID.meteor && ice_fire == Constants.SpellMode.Ice)
 			SpecialSpellID = SpellDB.AttackID.iceBurst;

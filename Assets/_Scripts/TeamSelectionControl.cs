@@ -141,6 +141,11 @@ public class TeamSelectionControl : MonoBehaviour {
 		prepareTime = InitPrepareTime;
 		while(prepareTime > 0)
 		{
+			if(prepareTime < 3)
+			{
+				GameObject TimeDownSEPrefab = Resources.Load (Constants.AudioFileDir + "TimeDownSE") as GameObject;
+				GameObject TimeDownSE = GameObject.Instantiate (TimeDownSEPrefab)	as GameObject;
+			}
 			yield return new WaitForSeconds(1.0f);
 			prepareTime--;
 			txt.text = (prepareTime % 100).ToString();
