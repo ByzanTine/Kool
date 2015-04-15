@@ -11,7 +11,7 @@ GameObject:
   - 82: {fileID: 8264792}
   - 114: {fileID: 11409686}
   m_Layer: 0
-  m_Name: FBallCastSE
+  m_Name: TimeDownSE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +38,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0d084da09f1c942c0b95f9571a1ea4f9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 16e9c8d390a8549f5b8bc0240a9e2460, type: 3}
   m_PlayOnAwake: 1
   m_Volume: .289999992
   m_Pitch: 1
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a1a60dbff46c349b4a937dfb317f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livingTime: .600000024
+  livingTime: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
