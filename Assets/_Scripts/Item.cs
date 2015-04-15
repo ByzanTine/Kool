@@ -6,12 +6,14 @@ public class Item : MonoBehaviour {
 	public ItemDB.ItemType itemType;
 	// TODO more variables for specific item description
 	private bool PickedUP = false;
-
+	public ItemGenerator itemGen;
 	void Start()
 	{
 		// init with velocity for visual effect
 		GetComponent<Rigidbody> ().velocity = new Vector3 (0, 5, 0);
 		GetComponent<Rigidbody> ().angularVelocity = new Vector3 (1, 1, 5);
+		// add a simple callback
+
 	}
 
 	// Use this for initialization
@@ -21,8 +23,13 @@ public class Item : MonoBehaviour {
 			Debug.Log ("destroy item pick up by player");
 
 			other.GetComponent<PlayerBuffStatus>().UpdateBuff(itemType);
+
 			Destroy(gameObject);
 		}
+	}
+
+	void OnDestroy() {
+		itemGen.ItemDestroyHandler();
 	}
 
 
