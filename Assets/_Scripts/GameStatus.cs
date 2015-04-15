@@ -154,8 +154,9 @@ public class GameStatus : MonoBehaviour {
 			{
 				InstantiateWizardInstanceWithId(id);
 			}
+			int materialId = userDataCollection[id].teamID == 0 ? 0 : 2;
 
-			userDataCollection[id].wizardMaterial = UserMaterials[userDataCollection[id].teamID + 1];
+			userDataCollection[id].wizardMaterial = UserMaterials[materialId];
 
 			BindWizardMaterial(player, userDataCollection[id].wizardMaterial);
 			id++;
@@ -311,7 +312,9 @@ public class GameStatus : MonoBehaviour {
 	void InstantiateWizardInstanceWithId(int id)
 	{
 		GameObject modelPrefab = ModelPrefabs[userDataCollection [id].teamID];
-		
+
+		userDataCollection [id].wizardMaterial = UserMaterials [userDataCollection [id].teamID + 1];
+
 		GameObject wizard = InstantiateWizardInstance (playerPrefab,
 		                                               modelPrefab,
 		                                               userDataCollection [id].initPosition, 
@@ -353,7 +356,7 @@ public class GameStatus : MonoBehaviour {
 	void BindWizardMaterial(GameObject wizard, Material mat) {
 		// first get the Model
 		// HACK
-		Transform model = wizard.transform.GetChild (0);
+		Transform model = wizard.transform.GetChild (1);
 		// then find model renderes
 		if (model.name != "Magician" || model.name != "Priest") {
 			Debug.Log("[Model Material] the first child is not what we want!");

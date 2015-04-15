@@ -20,6 +20,7 @@ public class TeamSelectionControl : MonoBehaviour {
 	// -1 means 1v1, 2v2 are both OK;
 	public int TeamSize = 1;
 	public bool CanStart = false;
+	public bool GameStarting = false;
 	public GameObject StartHint;
 	private const float InitPrepareTime = 9999f;
 
@@ -87,7 +88,7 @@ public class TeamSelectionControl : MonoBehaviour {
 		if (StartHint) {
 			StartHint.SetActive(true);
 		}
-		yield return new WaitForSeconds (2.0f);
+		yield return null;
 		CanStart = true;
 
 	}
@@ -104,7 +105,7 @@ public class TeamSelectionControl : MonoBehaviour {
 		}
 
 		prepareTime = MaxPrepareTime;
-
+		GameStarting = true;
 		// lock all UI and lanuch the game
 	}
 	//

@@ -144,7 +144,8 @@ public class UserUIControl : MonoBehaviour {
 	}
 	void Back()
 	{
-		if (Confirmed) {
+		if (Confirmed && !TeamSelectionControl.Instance.GameStarting) 
+		{
 			Confirmed = false;
 			disableReady ();
 			// clean team count
@@ -157,7 +158,8 @@ public class UserUIControl : MonoBehaviour {
 	}
 	void Confirm()
 	{
-		if (TeamSelectionControl.Instance.CanStart) {
+		if (TeamSelectionControl.Instance.CanStart && !TeamSelectionControl.Instance.GameStarting ) {
+			Debug.Log("Starting");
 			TeamSelectionControl.Instance.StartGame();
 		}
 		if(txt.enabled == false) 
@@ -242,10 +244,12 @@ public class UserUIControl : MonoBehaviour {
 
 	void disableReady() {
 
-		GameObject rejectSEPrefab = Resources.Load (Constants.AudioFileDir + "UIRejSE") as GameObject;
-		GameObject rejectSE = GameObject.Instantiate (rejectSEPrefab) as GameObject;
 
-		ReadyEffect.SetActive (false);
+			GameObject rejectSEPrefab = Resources.Load (Constants.AudioFileDir + "UIRejSE") as GameObject;
+			GameObject rejectSE = GameObject.Instantiate (rejectSEPrefab) as GameObject;
+			
+			ReadyEffect.SetActive (false);
+
 	}
 
 
