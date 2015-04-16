@@ -346,7 +346,7 @@ public class UserInputManager : MonoBehaviour {
 			break;
 
 		case InputSource.LStick:
-			ctrlLocks[0] = false;;
+			ctrlLocks[0] = false;
 			break;
 			
 		case InputSource.RStick:
