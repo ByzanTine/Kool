@@ -84,10 +84,10 @@ public class UserUIControl : MonoBehaviour {
 		inputManager.OnPressNavDown += NavRight;
 
 		txt = GetComponent<Text> ();
-		txt.text = GameStatus.UserDataCollection [inputManager.playerNum].Username;
+		txt.text = UserInfoManager.UserDataCollection [inputManager.playerNum].Username;
 		txt.enabled = false;
 
-		GameStatus.UserDataCollection [inputManager.playerNum].teamID = -1;
+		UserInfoManager.UserDataCollection [inputManager.playerNum].teamID = -1;
 		ReadyEffect.SetActive (false);
 
 	}
@@ -136,7 +136,7 @@ public class UserUIControl : MonoBehaviour {
 		GameObject navigationSEPrefab = Resources.Load (Constants.AudioFileDir + "UINavSE") as GameObject;
 		GameObject navigationSE = GameObject.Instantiate (navigationSEPrefab)	as GameObject;
 
-		txt.text = GameStatus.UserDataCollection [inputManager.playerNum].Username;
+		txt.text = UserInfoManager.UserDataCollection [inputManager.playerNum].Username;
 		float PosXoffset = GetTextPositionOffset (position);
 		txt.rectTransform.localPosition = new Vector3 (PosXoffset, 
 		                                               txt.rectTransform.localPosition.y,
@@ -149,9 +149,9 @@ public class UserUIControl : MonoBehaviour {
 			Confirmed = false;
 			disableReady ();
 			// clean team count
-			TeamSelectionControl.Instance.leaveTeam(GameStatus.UserDataCollection [inputManager.playerNum].teamID);
+			TeamSelectionControl.Instance.leaveTeam(UserInfoManager.UserDataCollection [inputManager.playerNum].teamID);
 			// reset team id
-			GameStatus.UserDataCollection [inputManager.playerNum].teamID = -1;
+			UserInfoManager.UserDataCollection [inputManager.playerNum].teamID = -1;
 		}
 
 
@@ -186,7 +186,7 @@ public class UserUIControl : MonoBehaviour {
 				// txt.color = Color.red;
 				IndicateReady();
 				// hash currentUIPos to 0 and 1
-				GameStatus.UserDataCollection [inputManager.playerNum].teamID = teamID;
+				UserInfoManager.UserDataCollection [inputManager.playerNum].teamID = teamID;
 				TeamSelectionControl.Instance.joinTeam(teamID);
 			}
 			else

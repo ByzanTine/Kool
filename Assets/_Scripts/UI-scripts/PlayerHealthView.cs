@@ -49,7 +49,7 @@ public class PlayerHealthView : MonoBehaviour {
 		else {
 			// fetch the player by id, and get the player data
 			img.enabled = false;
-			Player = GameStatus.GetPlayerObjById(playerId);
+			Player = UserInfoManager.Instance.GetPlayerObjById(playerId);
 			if(Player)
 				pd = Player.GetComponent<PlayerData> ();
 		}

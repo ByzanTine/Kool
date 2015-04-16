@@ -37,14 +37,14 @@ public class PlayerNameView : MonoBehaviour {
 			// get the new transform position
 			UpdatePosition(Player.transform.position);
 			// Debug.Log(pd.health);
-			textUI.text = GameStatus.Instance.Usernames[playerId];
-			textUI.color = GameStatus.Instance.UserColors[playerId];
+			textUI.text = UserInfoManager.UserDataCollection[playerId].Username;
+			textUI.color = UserInfoManager.UserDataCollection[playerId].Usercolor;
 			// Debug.Log ("Printing name");
 		}
 		else {
 			textUI.enabled = false;
-			UpdatePosition( GameStatus.UserDataCollection[playerId].initPosition );
-			Player = GameStatus.GetPlayerObjById(playerId);
+			UpdatePosition( UserInfoManager.UserDataCollection[playerId].initPosition );
+			Player = UserInfoManager.Instance.GetPlayerObjById(playerId);
 			if(Player)
 				pd = Player.GetComponent<PlayerData> ();
 		}

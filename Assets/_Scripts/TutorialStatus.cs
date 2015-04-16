@@ -13,7 +13,7 @@ public class TutorialStatus : MonoBehaviour {
 	void Update () {
 		for(int i = 0; i < 4; ++i)
 		{
-			GameObject player = GameStatus.GetPlayerObjById(i);
+			GameObject player = UserInfoManager.Instance.GetPlayerObjById(i);
 			if (player){
 				PlayerData pd = player.GetComponent<PlayerData>();
 				if (pd.health < 0.45){

@@ -54,7 +54,7 @@ public class ButtonView : MonoBehaviour {
 		else {
 			// fetch the player by id, and get the player data
 			button.enabled = false;
-			Player = GameStatus.GetPlayerObjById(playerId);
+			Player = UserInfoManager.Instance.GetPlayerObjById(playerId);
 			if(Player){
 				TV = UnityEngine.Object.FindObjectOfType<TutorialView>();
 			}
