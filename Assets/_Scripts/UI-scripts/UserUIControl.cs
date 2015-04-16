@@ -108,6 +108,9 @@ public class UserUIControl : MonoBehaviour {
 	}
 	void NavLeft()
 	{
+		// if text invisible yet, don't show
+		if(txt.enabled == false) return;
+
 		// if confirmed, don't move then
 		if(Confirmed) return;
 		if(moveLock > 0) return;
@@ -117,6 +120,9 @@ public class UserUIControl : MonoBehaviour {
 
 	void NavRight()
 	{
+		// if text invisible yet, don't show
+		if(txt.enabled == false) return;
+
 		// if confirmed, don't move then
 		if(Confirmed) return;
 		if(moveLock > 0) return;
@@ -126,6 +132,10 @@ public class UserUIControl : MonoBehaviour {
 
 	void SetPosition()
 	{
+
+		GameObject navigationSEPrefab = Resources.Load (Constants.AudioFileDir + "UINavSE") as GameObject;
+		GameObject navigationSE = GameObject.Instantiate (navigationSEPrefab)	as GameObject;
+
 		txt.text = GameStatus.UserDataCollection [inputManager.playerNum].Username;
 		float PosXoffset = GetTextPositionOffset (position);
 		txt.rectTransform.localPosition = new Vector3 (PosXoffset, 
@@ -134,7 +144,8 @@ public class UserUIControl : MonoBehaviour {
 	}
 	void Back()
 	{
-		if (Confirmed) {
+		if (Confirmed && !TeamSelectionControl.Instance.GameStarting) 
+		{
 			Confirmed = false;
 			disableReady ();
 			// clean team count
@@ -147,11 +158,14 @@ public class UserUIControl : MonoBehaviour {
 	}
 	void Confirm()
 	{
-		if (TeamSelectionControl.Instance.CanStart) {
+		if (TeamSelectionControl.Instance.CanStart && !TeamSelectionControl.Instance.GameStarting ) {
+			Debug.Log("Starting");
 			TeamSelectionControl.Instance.StartGame();
 		}
 		if(txt.enabled == false) 
 		{
+			GameObject confirmSEPrefab = Resources.Load (Constants.AudioFileDir + "UIConSE") as GameObject;
+			GameObject confirmSE = GameObject.Instantiate (confirmSEPrefab)	as GameObject;
 			TeamSelectionControl.PlayerEntered();
 			txt.enabled = true;
 			return;
@@ -221,11 +235,21 @@ public class UserUIControl : MonoBehaviour {
 	}
 
 	void IndicateReady() {
+
+		GameObject confirmSEPrefab = Resources.Load (Constants.AudioFileDir + "UIConSE") as GameObject;
+		GameObject confirmSE = GameObject.Instantiate (confirmSEPrefab)	as GameObject;
+
 		ReadyEffect.SetActive (true);
 	}
 
 	void disableReady() {
-		ReadyEffect.SetActive (false);
+
+
+			GameObject rejectSEPrefab = Resources.Load (Constants.AudioFileDir + "UIRejSE") as GameObject;
+			GameObject rejectSE = GameObject.Instantiate (rejectSEPrefab) as GameObject;
+			
+			ReadyEffect.SetActive (false);
+
 	}
 
 

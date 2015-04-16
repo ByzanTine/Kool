@@ -66,8 +66,8 @@ MonoBehaviour:
   UserMaterials:
   - {fileID: 2100000, guid: e480f89a716bb2a48a9d608db064ec48, type: 2}
   - {fileID: 2100000, guid: f4bc5b4c4d9673947be314477310e662, type: 2}
-  - {fileID: 2100000, guid: 876c48bb19adde24ba80ad88779b17a1, type: 2}
-  - {fileID: 2100000, guid: 83ea3634c1a1b1547a6c85630d1ca7b1, type: 2}
+  - {fileID: 2100000, guid: a8a5d5cedba7848af93ff9410930b78e, type: 2}
+  - {fileID: 2100000, guid: 1c12842e6f28f42bcb10293ab35842a9, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

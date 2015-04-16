@@ -10,6 +10,7 @@ public class ItemGenerator : MonoBehaviour {
 
 	void Start(){
 		generationClock = Time.time;
+
 	}
 	
 	void Update () {
@@ -22,10 +23,14 @@ public class ItemGenerator : MonoBehaviour {
 			GenerateItem();
 		}
 	}
+	public void ItemDestroyHandler() {
+		generationClock = Time.time;
+	}
 
 	void GenerateItem() {
 		GameObject randomItem = ItemDB.GetRandomItemPrefab ();
 		item = Instantiate (randomItem, transform.position + 5 * Vector3.up, Quaternion.identity) as GameObject;
+		item.GetComponent<Item> ().itemGen = this;
 	}
 
 
