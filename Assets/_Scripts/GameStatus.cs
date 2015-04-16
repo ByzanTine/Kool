@@ -13,13 +13,11 @@ public class GameStatus : MonoBehaviour {
 	public int GameTargetRounds = 1;
 	public GameObject playerPrefab;
 	public GameObject[] ModelPrefabs = new GameObject[2]; // MagicanPrefab, PriestPrefab;
-
-
+	
 	// Make this avaliable in inspector to intialize manually
 	public string[] Usernames = new string[4];
 	public Color[] UserColors = new Color[4]; 
 	public Material[] UserMaterials = new Material[4];
-//	private static Hashtable playerTable;
 
 	// Game status control:
 	private bool isGameOver = false;
@@ -115,6 +113,7 @@ public class GameStatus : MonoBehaviour {
 		Debug.Log ("binding wizard to user");
 		int id = 0;
 		totalPlayerNum = 0;
+		int[] materialIdCount = new int[2] {0, 2};
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 		foreach(GameObject player in playerCollection)
 		{
@@ -143,7 +142,9 @@ public class GameStatus : MonoBehaviour {
 			// unassigned: destroy the corresponding player object;
 			if(userDataCollection[id].teamID >= 2)
 			{
+				// default: 0 & 1 in team 0, 2 & 3 in team 1;
 				userDataCollection[id].teamID = id / 2;
+
 				InstantiateWizardInstanceWithId(id);
 			}
 			else if(userDataCollection[id].teamID == -1)
@@ -154,14 +155,15 @@ public class GameStatus : MonoBehaviour {
 			{
 				InstantiateWizardInstanceWithId(id);
 			}
-			int materialId = userDataCollection[id].teamID == 0 ? 0 : 2;
 
+			// Distribute material to user and wizard instance by team id
+			int materialId = materialIdCount[userDataCollection[id].teamID];
+			materialIdCount[userDataCollection[id].teamID]++;
 			userDataCollection[id].wizardMaterial = UserMaterials[materialId];
+			BindWizardMaterial(userDataCollection[id].wizardInstance, userDataCollection[id].wizardMaterial);
 
-			BindWizardMaterial(player, userDataCollection[id].wizardMaterial);
 			id++;
 		}
-
 	}
 
 	// store into hashtable as well
@@ -199,9 +201,7 @@ public class GameStatus : MonoBehaviour {
 
 	void WinEndGame()
 	{
-
 		isGameOver = true;
-
 		StartCoroutine(WinEndGameEffect());
 	}
 
@@ -313,7 +313,7 @@ public class GameStatus : MonoBehaviour {
 	{
 		GameObject modelPrefab = ModelPrefabs[userDataCollection [id].teamID];
 
-		userDataCollection [id].wizardMaterial = UserMaterials [userDataCollection [id].teamID + 1];
+//		userDataCollection [id].wizardMaterial = UserMaterials [userDataCollection [id].teamID + 1];
 
 		GameObject wizard = InstantiateWizardInstance (playerPrefab,
 		                                               modelPrefab,

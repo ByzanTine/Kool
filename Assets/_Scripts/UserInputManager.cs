@@ -336,7 +336,49 @@ public class UserInputManager : MonoBehaviour {
 		}
 	}
 
-	public void UnlockAllControl()
+	// input lock of each: 0left, 1right, 2buttons, 3Ltrigger, 4RTrigger, 5Lbumper, 6Rbumper;
+	public void UnlockControl(InputSource inputSource)
+	{
+		switch(inputSource)
+		{
+		case InputSource.AllControl:
+			UnlockAllControl();
+			break;
+
+		case InputSource.LStick:
+			ctrlLocks[0] = false;;
+			break;
+			
+		case InputSource.RStick:
+			ctrlLocks[1] = false;
+			break;
+
+		case InputSource.Button:
+			ctrlLocks[2] = false;
+			break;
+			
+		case InputSource.LTrigger:
+			ctrlLocks[3] = false;
+			break;
+			
+		case InputSource.RTrigger:
+			ctrlLocks[4] = false;
+			break;
+			
+		case InputSource.LBumper:
+			ctrlLocks[5] = false;
+			break;
+			
+		case InputSource.RBumper:
+			ctrlLocks[6] = false;
+			break;
+			
+		default:
+			break;
+		}
+	}
+
+	private void UnlockAllControl()
 	{
 		for(int i = 0; i < ctrlLocks.Length; ++i)
 		{
