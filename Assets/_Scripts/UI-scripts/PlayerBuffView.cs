@@ -23,7 +23,7 @@ public class PlayerBuffView : MonoBehaviour {
 		}
 		else {
 			// fetch the player by id, and get the player buff status 
-			Player = GameStatus.GetPlayerObjById(playerId);
+			Player = UserInfoManager.Instance.GetPlayerObjById(playerId);
 			if(Player)
 				playerBuffStatus = Player.GetComponent<PlayerBuffStatus> ();
 		}
