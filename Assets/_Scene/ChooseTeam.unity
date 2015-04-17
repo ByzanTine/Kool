@@ -112,7 +112,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 138197580}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!124 &138197582
 Behaviour:
   m_ObjectHideFlags: 0
@@ -471,6 +471,10 @@ Prefab:
     - target: {fileID: 22400238, guid: 9e7b85a623452457a97d1db726991841, type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11499578, guid: 9e7b85a623452457a97d1db726991841, type: 2}
+      propertyPath: TeamSize
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e7b85a623452457a97d1db726991841, type: 2}
