@@ -14,7 +14,7 @@ public class ScenePrompt : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		txt.text = "";
-		foreach(UserData user in GameStatus.UserDataCollection)
+		foreach(UserData user in UserInfoManager.UserDataCollection)
 		{
 			if(user.teamID == 0)
 				txt.text += user.Username + " ";
@@ -22,7 +22,7 @@ public class ScenePrompt : MonoBehaviour {
 
 		txt.text += " VS ";
 
-		foreach(UserData user in GameStatus.UserDataCollection)
+		foreach(UserData user in UserInfoManager.UserDataCollection)
 		{
 			if(user.teamID == 1)
 				txt.text += user.Username + " ";
