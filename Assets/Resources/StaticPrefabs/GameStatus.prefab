@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 422992}
   - 114: {fileID: 11416986}
   - 81: {fileID: 8164860}
+  - 114: {fileID: 11414962}
   m_Layer: 0
   m_Name: GameStatus
   m_TagString: Untagged
@@ -24,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 84.6000061, y: 333.600006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -36,6 +37,36 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138034}
   m_Enabled: 1
+--- !u!114 &11414962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9985a96b0c34498d87064a3abd24f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerRootPrefab: {fileID: 134422, guid: 94894777a65c94ea88b76d2e3e3e3d60, type: 2}
+  ModelPrefabs:
+  - {fileID: 173784, guid: a5df14d9dd24d214f8c5cbe1e693aa40, type: 2}
+  - {fileID: 179066, guid: 5da958e049fc3c6468b87e2ad06c6f63, type: 2}
+  Usernames:
+  - Alice
+  - Bob
+  - Cathy
+  - David
+  UserColors:
+  - {r: .878431439, g: 1, b: .454901993, a: 1}
+  - {r: 1, g: .831372619, b: .384313762, a: 1}
+  - {r: .384313762, g: 1, b: .94901967, a: 1}
+  - {r: .290196091, g: .992156923, b: .788235366, a: 1}
+  UserMaterials:
+  - {fileID: 2100000, guid: e480f89a716bb2a48a9d608db064ec48, type: 2}
+  - {fileID: 2100000, guid: f4bc5b4c4d9673947be314477310e662, type: 2}
+  - {fileID: 2100000, guid: a8a5d5cedba7848af93ff9410930b78e, type: 2}
+  - {fileID: 2100000, guid: 1c12842e6f28f42bcb10293ab35842a9, type: 2}
 --- !u!114 &11416986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -49,25 +80,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameMode: 1
   GameTargetRounds: 7
-  playerPrefab: {fileID: 134422, guid: 94894777a65c94ea88b76d2e3e3e3d60, type: 2}
-  ModelPrefabs:
-  - {fileID: 173784, guid: a5df14d9dd24d214f8c5cbe1e693aa40, type: 2}
-  - {fileID: 179066, guid: 5da958e049fc3c6468b87e2ad06c6f63, type: 2}
-  Usernames:
-  - Alice
-  - Bob
-  - Cathy
-  - David
-  UserColors:
-  - {r: .878654122, g: 1, b: .454152256, a: 1}
-  - {r: 1, g: .82961458, b: .382352948, a: 1}
-  - {r: .382352948, g: 1, b: .948884368, a: 1}
-  - {r: .291954994, g: .992647052, b: .789687932, a: 1}
-  UserMaterials:
-  - {fileID: 2100000, guid: e480f89a716bb2a48a9d608db064ec48, type: 2}
-  - {fileID: 2100000, guid: f4bc5b4c4d9673947be314477310e662, type: 2}
-  - {fileID: 2100000, guid: 876c48bb19adde24ba80ad88779b17a1, type: 2}
-  - {fileID: 2100000, guid: 83ea3634c1a1b1547a6c85630d1ca7b1, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -21,13 +21,13 @@ public class RebornTime : MonoBehaviour {
 	void RebornTimeCount()
 	{
 		textUI.text = "";
-		for(int i = 0; i < GameStatus.TotalPlayerNum; ++i)
+		for(int i = 0; i < UserInfoManager.TotalPlayerNum; ++i)
 		{
-			if(GameStatus.UserDataCollection[i].rebornTime >= 0)
+			if(UserInfoManager.UserDataCollection[i].rebornTime >= 0)
 			{
 				textUI.enabled = true;
-				textUI.text += GameStatus.UserDataCollection[i].Username;
-				textUI.text += ": " + GameStatus.UserDataCollection[i].rebornTime.ToString("D1");
+				textUI.text += UserInfoManager.UserDataCollection[i].Username;
+				textUI.text += ": " + UserInfoManager.UserDataCollection[i].rebornTime.ToString("D1");
 				textUI.text += "\t\n";
 			}
 		}

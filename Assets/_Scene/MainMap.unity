@@ -747,6 +747,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 10850044, guid: df69491a8c77246b59cd661ec77673f9, type: 2}
+      propertyPath: m_Shadows.m_Type
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df69491a8c77246b59cd661ec77673f9, type: 2}
   m_IsPrefabParent: 0
@@ -838,10 +842,6 @@ Prefab:
     - target: {fileID: 422992, guid: 48b6e506a46334e13bc1b40456c943d2, type: 2}
       propertyPath: m_RootOrder
       value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 11416986, guid: 48b6e506a46334e13bc1b40456c943d2, type: 2}
-      propertyPath: GameTargetRounds
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 48b6e506a46334e13bc1b40456c943d2, type: 2}

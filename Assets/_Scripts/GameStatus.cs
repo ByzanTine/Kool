@@ -11,39 +11,10 @@ public class GameStatus : MonoBehaviour {
 
 	// Target lives/scores in each mode for winning
 	public int GameTargetRounds = 1;
-	public GameObject playerPrefab;
-	public GameObject[] ModelPrefabs = new GameObject[2]; // MagicanPrefab, PriestPrefab;
-
-
-	// Make this avaliable in inspector to intialize manually
-	public string[] Usernames = new string[4];
-	public Color[] UserColors = new Color[4]; 
-	public Material[] UserMaterials = new Material[4];
-//	private static Hashtable playerTable;
 
 	// Game status control:
 	private bool isGameOver = false;
 	private int[] teamScores;
-
-	// total player number in the game. READ ONLY
-	private static int totalPlayerNum = 0;
-	public static int TotalPlayerNum
-	{
-		get
-		{
-			return totalPlayerNum;
-		}
-	}
-
-	private static UserData[] userDataCollection = new UserData[4];
-
-	public static UserData[] UserDataCollection
-	{
-		get
-		{
-			return userDataCollection;
-		}
-	}
 
 	private static GameStatus _instance;
 	
@@ -62,14 +33,12 @@ public class GameStatus : MonoBehaviour {
 
 	void Awake() 
 	{
-
 		// Scene transition protection for singleton
 		if(_instance == null)
 		{
 			//If I am the first instance, make me the Singleton
 			_instance = this;
 			DontDestroyOnLoad(this);
-			BindAllUserData ();
 		}
 		else
 		{
@@ -85,14 +54,7 @@ public class GameStatus : MonoBehaviour {
 	void Start () {
 		teamScores = new int[2] {0, 0};
 		isGameOver = false;
-
-		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
-		if(playerCollection[0].GetComponent<PlayerControl>() != null)
-		{
-			BindAllWizardToUser();
-		}
 	}
-
 
 	void OnLevelWasLoaded(int level) {
 
@@ -101,106 +63,16 @@ public class GameStatus : MonoBehaviour {
 
 		teamScores = new int[2] {0, 0};
 		isGameOver = false;
-
-		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
-		if(playerCollection[0].GetComponent<PlayerControl>() != null)
-		{
-			BindAllWizardToUser();
-		}
-
-	}
-	// bind each user with the wizards in the current scene
-	void BindAllWizardToUser()
-	{
-		Debug.Log ("binding wizard to user");
-		int id = 0;
-		totalPlayerNum = 0;
-		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
-		foreach(GameObject player in playerCollection)
-		{
-			// bind input manager
-			UserInputManager userCtrl = player.GetComponent<UserInputManager>();
-			// assign player ID
-			userCtrl.playerNum = id;
-			player.name = userDataCollection[id].Username;
-			userDataCollection[id].initPosition = player.transform.position;
-			if(userDataCollection[id].wizardInstance != null)
-			{
-				Debug.LogError ("Already bind to another player");
-				continue;
-			}
-
-			totalPlayerNum++;
-
-			userDataCollection[id].wizardInstance = player;
-
-			Destroy(player);
-
-			Debug.Log ("binding wizard" + id + " to user");
-
-			// seperate team for default/unassigned player:
-			// default: 0 & 1 in team 0, 2 & 3 in team 1;
-			// unassigned: destroy the corresponding player object;
-			if(userDataCollection[id].teamID >= 2)
-			{
-				userDataCollection[id].teamID = id / 2;
-				InstantiateWizardInstanceWithId(id);
-			}
-			else if(userDataCollection[id].teamID == -1)
-			{
-				totalPlayerNum--;
-			}
-			else // already got a valid team id
-			{
-				InstantiateWizardInstanceWithId(id);
-			}
-
-			userDataCollection[id].wizardMaterial = UserMaterials[userDataCollection[id].teamID + 1];
-
-			BindWizardMaterial(player, userDataCollection[id].wizardMaterial);
-			id++;
-		}
-
-	}
-
-	// store into hashtable as well
-	void BindAllUserData()
-	{
-		Debug.Log("[INIT]: Bind All User Data from scene setup");
-		int playerID = 0;
-		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
-		foreach(GameObject player in playerCollection)
-		{
-			// bind input manager
-			UserInputManager userCtrl = player.GetComponent<UserInputManager>();
-			// assign player ID
-			userCtrl.playerNum = playerID;
-			userDataCollection[playerID] = new UserData();
-			userDataCollection[playerID].userID = playerID;
-
-			// bind the provided player info into User data.
-			userDataCollection[playerID].Username = Usernames[playerID];
-			userDataCollection[playerID].Usercolor = UserColors[playerID];
-			userDataCollection[playerID].wizardMaterial = UserMaterials[playerID];
-			playerID++;
-		}
 	}
 
 	public int GetTeamScore(int teamId)
 	{
 		return teamScores[teamId];
 	}
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
 
 	void WinEndGame()
 	{
-
 		isGameOver = true;
-
 		StartCoroutine(WinEndGameEffect());
 	}
 
@@ -229,11 +101,10 @@ public class GameStatus : MonoBehaviour {
 	// public method used when player dead
 	public void DecrementPlayerLife(int playerID)
 	{
-		userDataCollection [playerID].deathCount ++;
-		DestroyPlayerWithID(playerID);
+		UserInfoManager.UserDataCollection [playerID].deathCount ++;
+		UserInfoManager.Instance.DestroyPlayerWithId(playerID);
 
 		UpdateScoreStatusWithDeath (playerID);
-
 	}
 
 	// update the game status when a player died
@@ -242,7 +113,7 @@ public class GameStatus : MonoBehaviour {
 		switch(gameMode)
 		{
 		case GameMode.LoseLife:
-			if(userDataCollection [playerID].deathCount >= GameTargetRounds)
+			if(UserInfoManager.UserDataCollection [playerID].deathCount >= GameTargetRounds)
 			{
 				
 				GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
@@ -254,13 +125,13 @@ public class GameStatus : MonoBehaviour {
 			}
 			else
 			{
-				StartCoroutine(RebornPlayerWithID(playerID));
+				StartCoroutine(UserInfoManager.Instance.RebornPlayerWithId(playerID));
 			}
 			break;
 			
 		case GameMode.GainScore:
 
-			int otherTeamID = (1 + userDataCollection[playerID].teamID) % 2;
+			int otherTeamID = (1 + UserInfoManager.UserDataCollection[playerID].teamID) % 2;
 
 			// add score to the other team:
 			teamScores[otherTeamID]++;
@@ -269,11 +140,11 @@ public class GameStatus : MonoBehaviour {
 			{
 				if(!isGameOver)
 				{
-					for(int i = 0; i < totalPlayerNum; ++i)
+					for(int i = 0; i < UserInfoManager.TotalPlayerNum; ++i)
 					{
-						if(userDataCollection[i].teamID != otherTeamID)
+						if(UserInfoManager.UserDataCollection[i].teamID != otherTeamID)
 						{
-							DestroyPlayerWithID(i);
+							UserInfoManager.Instance.DestroyPlayerWithId(i);
 						}
 					}
 					WinEndGame();
@@ -281,109 +152,12 @@ public class GameStatus : MonoBehaviour {
 			}
 			else
 			{
-				StartCoroutine(RebornPlayerWithID(playerID));
+				StartCoroutine(UserInfoManager.Instance.RebornPlayerWithId(playerID));
 			}
 			break;
 		default:
 			break;
 		}
-	}
-
-	
-	IEnumerator RebornPlayerWithID(int id)
-	{
-		for(int i = 4; i >= 0 ; --i)
-		{
-			userDataCollection[id].rebornTime = i;
-			yield return new WaitForSeconds (1.0f);
-		}
-		userDataCollection [id].rebornTime = -1;
-		InstantiateWizardInstanceWithId(id);
-
-	}
-
-
-	/// <summary>
-	/// Instantiates the wizard instance with identifier.
-	/// Will link the new instance to the corresponding user data by id.
-	/// </summary>
-	/// <param name="id">Identifier.</param>
-	void InstantiateWizardInstanceWithId(int id)
-	{
-		GameObject modelPrefab = ModelPrefabs[userDataCollection [id].teamID];
-		
-		GameObject wizard = InstantiateWizardInstance (playerPrefab,
-		                                               modelPrefab,
-		                                               userDataCollection [id].initPosition, 
-		                                               userDataCollection [id].wizardMaterial);
-		// Bind control 
-		UserInputManager userCtrl = wizard.GetComponent<UserInputManager>();
-		userCtrl.playerNum = id;
-		// add to table
-		// Bind to user
-		userDataCollection[id].wizardInstance = wizard;
-		wizard.name = userDataCollection [id].Username;
-	}
-
-	/// <summary>
-	/// Instantiates the wizard instance.
-	/// can create either priest or magician 
-	/// </summary>
-	/// <returns>The wizard instance.</returns>
-	/// <param name="ctrlPrefab"> Control Prefab.</param>
-	/// <param name="modelPrefab"> Model Prefab.</param>
-	/// <param name="Position"> Position.</param>
-	/// <param name="mat"> Mat.</param>
-	GameObject InstantiateWizardInstance(GameObject ctrlPrefab, GameObject modelPrefab, Vector3 Position, Material mat) 
-	{
-		GameObject wizard = 
-			Instantiate(ctrlPrefab, Position, Quaternion.identity) 
-				as GameObject;
-
-//		Destroy (playerPrefab.transform.GetChild (0));
-
-		GameObject model = Instantiate(modelPrefab) as GameObject;
-		model.transform.parent = wizard.transform;
-		model.transform.localPosition = Vector3.zero;
-		// skinn material
-		BindWizardMaterial (wizard, mat);
-		return wizard;
-	}
-
-	void BindWizardMaterial(GameObject wizard, Material mat) {
-		// first get the Model
-		// HACK
-		Transform model = wizard.transform.GetChild (0);
-		// then find model renderes
-		if (model.name != "Magician" || model.name != "Priest") {
-			Debug.Log("[Model Material] the first child is not what we want!");
-		}
-		Renderer[] renders = model.GetComponentsInChildren<Renderer> ();
-
-		// Renderer[] renders = wizard.GetComponentsInChildren<Renderer>();
-		foreach (Renderer r in renders) {
-			r.material = mat;
-		}
-
-	}
-
-
-	void DestroyPlayerWithID(int playerid)
-	{
-
-		if (userDataCollection[playerid].wizardInstance != null) {
-			Destroy(userDataCollection[playerid].wizardInstance);
-			userDataCollection[playerid].wizardInstance = null;
-		}
-
-	}
-
-	public static GameObject GetPlayerObjById(int playerId_in)
-	{
-		if (userDataCollection[playerId_in].wizardInstance != null)
-			return userDataCollection[playerId_in].wizardInstance as GameObject;
-		else 
-			return null;
 	}
 
 }
