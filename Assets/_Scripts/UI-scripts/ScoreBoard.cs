@@ -14,6 +14,10 @@ public class ScoreBoard : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		txt.text = " " + GameStatus.Instance.GetTeamScore(0) + " vs " + GameStatus.Instance.GetTeamScore(1) + " ";
+		txt.text = " " + GetScore(1) + " : " + GetScore(0) + " ";
+	}
+
+	private int GetScore(int teamNum){
+		return GameStatus.Instance.GameTargetRounds - GameStatus.Instance.GetTeamScore (teamNum);
 	}
 }
