@@ -233,8 +233,8 @@ public class UserInfoManager : MonoBehaviour {
 		// HACK
 		Transform model = wizard.transform.GetChild (1);
 		// then find model renderes
-		if (model.name != "Magician" || model.name != "Priest") {
-			Debug.Log("[Model Material] the first child is not what we want!");
+		if (model.GetComponent<Animator>() == null) {
+			Debug.Log("[Model Material] the first child is not what we want: " + model.name);
 		}
 		Renderer[] renders = model.GetComponentsInChildren<Renderer> ();
 		

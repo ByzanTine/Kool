@@ -14,7 +14,7 @@ public class ScoreBoard : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		txt.text = " " + GetScore(1) + " : " + GetScore(0) + " ";
+		txt.text = GetScore(1) + " : " + GetScore(0);
 	}
 
 	private int GetScore(int teamNum){
