@@ -11,6 +11,8 @@ public class GameStatus : MonoBehaviour {
 
 	// Target lives/scores in each mode for winning
 	public int GameTargetRounds = 1;
+	public const int GameMaxTime = 200;
+
 
 	// Game status control:
 	private bool isGameOver = false;
