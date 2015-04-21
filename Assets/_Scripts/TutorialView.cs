@@ -6,12 +6,14 @@ using InControl;
 
 public class TutorialView : MonoBehaviour {
 	public Text Text;
+	public Text Text2;
 	private int NumOfCurStep;
 	private Text _txt;
+	private Text _txt2;
 	public GameObject[] itemGenerators;
 	public int roundToRemoveWalls;
 	public Sprite CurButton;
-	static public bool[] StopBlinking = {false, false, false, false};
+	static public bool[] StopBlinking = {false, true, true, true};
 	public bool tempBool = false;
 	float time;
 
@@ -54,6 +56,8 @@ public class TutorialView : MonoBehaviour {
 		NumOfCurStep = 0;
 		_txt = Text.GetComponent<Text> ();
 		_txt.text = TutorialSteps[NumOfCurStep].txt;
+		_txt2 = Text2.GetComponent<Text> ();
+		_txt2.text = TutorialSteps[NumOfCurStep].txt;
 		curInstructionInput = TutorialSteps [NumOfCurStep].inputSource;
 		for (int i = 0; i < itemGenerators.Length; i++) {
 			itemGenerators[i].SetActive(false);
@@ -82,6 +86,7 @@ public class TutorialView : MonoBehaviour {
 
 			CurButton = TutorialSteps [NumOfCurStep].button;
 			_txt.text = TutorialSteps[NumOfCurStep].txt;
+			_txt2.text = TutorialSteps[NumOfCurStep].txt;
 			curInstructionInput = TutorialSteps [NumOfCurStep].inputSource;
 			unlockCtrl(curInstructionInput);
 			if (TutorialSteps[NumOfCurStep].item){
@@ -122,9 +127,9 @@ public class TutorialView : MonoBehaviour {
 
 
 	void SetStopBlinkingFalse(){
-		for (int i = 0; i < 4; i ++)
-			StopBlinking[i] = false;
-//		StopBlinking[0] = false; // for debug
+//		for (int i = 0; i < 4; i ++)
+//			StopBlinking[i] = false;
+		StopBlinking[0] = false; // for debug
 	}
 
 	void unlockCtrl(UserInputManager.InputSource ctrl){
