@@ -13,7 +13,7 @@ public class TutorialView : MonoBehaviour {
 	public GameObject[] itemGenerators;
 	public int roundToRemoveWalls;
 	public Sprite CurButton;
-	static public bool[] StopBlinking = {false, true, true, true};
+	static public bool[] StopBlinking = {false, false, false, false};
 	public bool tempBool = false;
 	float time;
 
@@ -127,9 +127,9 @@ public class TutorialView : MonoBehaviour {
 
 
 	void SetStopBlinkingFalse(){
-//		for (int i = 0; i < 4; i ++)
-//			StopBlinking[i] = false;
-		StopBlinking[0] = false; // for debug
+		for (int i = 0; i < 4; i ++)
+			StopBlinking[i] = false;
+//		StopBlinking[0] = false; // for debug
 	}
 
 	void unlockCtrl(UserInputManager.InputSource ctrl){
