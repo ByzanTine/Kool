@@ -43,6 +43,7 @@ public class UserInputManager : MonoBehaviour {
 	// Buttons: X, Y, A, B
 	public event OnInput OnPressButton;
 	public event OnInput OnReleaseButton;
+	private InputDevice inputDevice;
 
 	// input lock of each: 0left, 1right, 2buttons, 3Ltrigger, 4RTrigger, 5Lbumper, 6Rbumper;
 	private bool[] ctrlLocks = new bool[7]{false, false, false, false, false, false, false};
@@ -51,7 +52,7 @@ public class UserInputManager : MonoBehaviour {
 	
 	void Update()
 	{
-		var inputDevice = (InputManager.Devices.Count > playerNum) ? InputManager.Devices[playerNum] : null;
+		inputDevice = (InputManager.Devices.Count > playerNum) ? InputManager.Devices[playerNum] : null;
 		if (inputDevice == null)
 		{
 //			Debug.Log ("No devide detected for player:" + playerNum);
@@ -282,7 +283,7 @@ public class UserInputManager : MonoBehaviour {
 	}
 
 	public enum InputSource {AllControl, LStick, RStick, Button,
-		LTrigger, RTrigger, LBumper, RBumper, None};
+		LTrigger, RTrigger, LBumper, RBumper, LtriggerAndRTrigger, None};
 	public void LockControl(InputSource inputSource,float period = float.MaxValue)
 	{
 		switch(inputSource)
@@ -334,6 +335,49 @@ public class UserInputManager : MonoBehaviour {
 		default:
 			break;
 		}
+	}
+
+	public bool CheckInputControl (UserInputManager.InputSource input){
+		bool returnV = false;
+		if (inputDevice == null)
+			return false;
+		switch(input)
+		{
+			case InputSource.LStick:
+				if (inputDevice.LeftStickX != 0 && inputDevice.LeftStickY != 0)
+				returnV = true;
+				break;
+
+			case InputSource.RStick:
+				if (inputDevice.RightStickX != 0 && inputDevice.RightStickY != 0)
+				returnV = true;
+				break;
+
+			case InputSource.LTrigger:
+				returnV = inputDevice.LeftTrigger.WasPressed;
+			break;
+
+			case InputSource.RTrigger:
+				returnV = inputDevice.RightTrigger.WasPressed;
+			break;
+
+			case InputSource.LBumper:
+				returnV = inputDevice.LeftBumper.WasPressed;
+			break;
+
+			case InputSource.RBumper:
+				returnV = inputDevice.RightBumper.WasPressed;
+			break;
+
+			case InputSource.LtriggerAndRTrigger:
+				returnV = inputDevice.RightTrigger.WasPressed & inputDevice.LeftTrigger.IsPressed;
+			break;
+
+			default:
+				returnV = false;
+			break;
+		}
+		return returnV;
 	}
 
 	// input lock of each: 0left, 1right, 2buttons, 3Ltrigger, 4RTrigger, 5Lbumper, 6Rbumper;

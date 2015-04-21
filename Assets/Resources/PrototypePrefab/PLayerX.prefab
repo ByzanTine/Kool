@@ -817,8 +817,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134422}
-  m_LocalRotation: {x: 0, y: -.778073609, z: 0, w: .628173113}
-  m_LocalPosition: {x: -14.8999996, y: 1, z: -15.3999996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.8999996, y: 1, z: 14.6000004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 434496}
@@ -1616,7 +1616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 1, z: 0}
-  fire: {fileID: 2100000, guid: c45b6956bbe6a4b90ba0a78e04a7fd5c, type: 2}
+  fire: {fileID: 2100000, guid: d35bbb48a62c94ad68459af611ffc81b, type: 2}
   ice: {fileID: 2100000, guid: b968a6a0697ad574cae1a07543d11963, type: 2}
   moreBall: 0
 --- !u!114 &11416410
@@ -1655,7 +1655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2af2e4bc4503b40a9b739cc8e595e2ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 1
+  playerNum: 0
   leftInput: {x: 0, y: 0}
   rightInput: {x: 0, y: 0}
   button_id: -1
@@ -1688,7 +1688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 1, z: 0}
-  fire: {fileID: 2100000, guid: c45b6956bbe6a4b90ba0a78e04a7fd5c, type: 2}
+  fire: {fileID: 2100000, guid: d35bbb48a62c94ad68459af611ffc81b, type: 2}
   ice: {fileID: 2100000, guid: b968a6a0697ad574cae1a07543d11963, type: 2}
   moreBall: 1
 --- !u!114 &11447538
@@ -1715,7 +1715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 1, z: 0}
-  fire: {fileID: 2100000, guid: c45b6956bbe6a4b90ba0a78e04a7fd5c, type: 2}
+  fire: {fileID: 2100000, guid: d35bbb48a62c94ad68459af611ffc81b, type: 2}
   ice: {fileID: 2100000, guid: b968a6a0697ad574cae1a07543d11963, type: 2}
   moreBall: 1
 --- !u!114 &11454686
@@ -1730,7 +1730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 1, z: 0}
-  fire: {fileID: 2100000, guid: c45b6956bbe6a4b90ba0a78e04a7fd5c, type: 2}
+  fire: {fileID: 2100000, guid: d35bbb48a62c94ad68459af611ffc81b, type: 2}
   ice: {fileID: 2100000, guid: b968a6a0697ad574cae1a07543d11963, type: 2}
   moreBall: 0
 --- !u!114 &11456452

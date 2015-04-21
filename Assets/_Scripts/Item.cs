@@ -29,7 +29,8 @@ public class Item : MonoBehaviour {
 	}
 
 	void OnDestroy() {
-		itemGen.ItemDestroyHandler();
+		if (itemGen)
+			itemGen.ItemDestroyHandler();
 	}
 
 

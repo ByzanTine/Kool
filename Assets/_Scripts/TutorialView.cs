@@ -2,28 +2,34 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using InControl;
 
 public class TutorialView : MonoBehaviour {
 	public Text Text;
-	private float time;
 	private int NumOfCurStep;
 	private Text _txt;
 	public GameObject[] itemGenerators;
 	public int roundToRemoveWalls;
 	public Sprite CurButton;
+	static public bool[] StopBlinking = {false, false, false, false};
+	public bool tempBool = false;
+	float time;
 
 	[System.Serializable]
 	public class tutorialStep{
 		public string txt;
 		public Sprite button;
-		public float timeInterval;
 		public GameObject item;
+		public float LeastTimeInterval = 5;
 		public UserInputManager.InputSource inputSource;
  	}
 
 	public tutorialStep[] TutorialSteps;
 	public GameObject[] itemPos;
 	public GameObject[] walls;
+	GameObject[] playerCollection;
+	private UserInputManager.InputSource curInstructionInput;
+
 	// Use this for initialization
 	void Awake(){
 		TutorialSteps [0].txt = "Shooting";
@@ -48,33 +54,36 @@ public class TutorialView : MonoBehaviour {
 		NumOfCurStep = 0;
 		_txt = Text.GetComponent<Text> ();
 		_txt.text = TutorialSteps[NumOfCurStep].txt;
+		curInstructionInput = TutorialSteps [NumOfCurStep].inputSource;
 		for (int i = 0; i < itemGenerators.Length; i++) {
 			itemGenerators[i].SetActive(false);
 		}
 		CurButton = TutorialSteps [NumOfCurStep].button;
-		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
-		foreach (GameObject player in playerCollection) {
+		playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
+		foreach (GameObject player in playerCollection){
 			UserInputManager Uinput = player.GetComponent<UserInputManager>();
-			float timeInterval = 0;
-			foreach (tutorialStep step in TutorialSteps){
-				Uinput.LockControl(step.inputSource,timeInterval);
-				timeInterval += step.timeInterval;
-			}
+			Uinput.LockControl(UserInputManager.InputSource.AllControl);
+			Uinput.UnlockControl(curInstructionInput);
 		}
 	} 
 	
 	// Update is called once per frame
 	void Update () {
-		if (NumOfCurStep == TutorialSteps.Length) {
-			Debug.Log("End of tutorial and switch to main map!!");
-			Application.LoadLevel("MainMap");
-		}
-
-		if (Time.time - time > TutorialSteps [NumOfCurStep].timeInterval) {
+		if (checkUserFollowInstruction()  &&  time + TutorialSteps[NumOfCurStep].LeastTimeInterval < Time.time) {
+			time = Time.time;
+			SetStopBlinkingFalse();
 			NumOfCurStep = NumOfCurStep + 1;
+
+			if (NumOfCurStep == TutorialSteps.Length) {
+				Debug.Log("End of tutorial and switch to main map!!");
+				Application.LoadLevel("MainMap");
+				return;
+			}
+
 			CurButton = TutorialSteps [NumOfCurStep].button;
 			_txt.text = TutorialSteps[NumOfCurStep].txt;
-			time = Time.time;
+			curInstructionInput = TutorialSteps [NumOfCurStep].inputSource;
+			unlockCtrl(curInstructionInput);
 			if (TutorialSteps[NumOfCurStep].item){
 				for (int j = 0; j < itemPos.Length; j ++){
 					Instantiate(TutorialSteps[NumOfCurStep].item, itemPos[j].transform.position, Quaternion.identity);
@@ -93,7 +102,37 @@ public class TutorialView : MonoBehaviour {
 				}
 			}
 		}
-
-
 	}
+
+	bool checkUserFollowInstruction(){
+		playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
+		if (curInstructionInput == UserInputManager.InputSource.None)
+			return true;
+		bool returnV = true;
+		for (int i = 0; i < 4; i ++) {
+			if (!StopBlinking[i]){
+				UserInputManager Uinput = playerCollection[i].GetComponent<UserInputManager>();
+				StopBlinking[i] = Uinput.CheckInputControl(curInstructionInput);
+			}
+			returnV = returnV & StopBlinking[i];
+		}
+		return returnV;
+	}
+
+
+
+	void SetStopBlinkingFalse(){
+		for (int i = 0; i < 4; i ++)
+			StopBlinking[i] = false;
+//		StopBlinking[0] = false; // for debug
+	}
+
+	void unlockCtrl(UserInputManager.InputSource ctrl){
+		foreach (GameObject player in playerCollection){
+			UserInputManager Uinput = player.GetComponent<UserInputManager>();
+			Uinput.UnlockControl(ctrl);
+		}
+	}
+
+
 }
