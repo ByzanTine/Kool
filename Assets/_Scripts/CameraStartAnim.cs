@@ -12,9 +12,38 @@ public class CameraStartAnim : MonoBehaviour {
 	float minCamera = 8f;
 	float xAngle = 1.012291f; // angle in rad
 	Camera camera;
+
+	private static CameraStartAnim _instance;
 	
+	//This is the public reference that other classes will use
+	public static CameraStartAnim Instance
+	{
+		get
+		{
+			//If _instance hasn't been set yet, we grab it from the scene!
+			//This will only happen the first time this reference is used.
+			if(_instance == null)
+				_instance = GameObject.FindObjectOfType<CameraStartAnim>();
+			return _instance;
+		}
+	}
+
 	void Awake () 
 	{
+		// Scene transition protection for singleton
+		if(_instance == null)
+		{
+			//If I am the first instance, make me the Singleton
+			_instance = this;
+			DontDestroyOnLoad(this);
+		}
+		else
+		{
+			//If a Singleton already exists and you find
+			//another reference in scene, destroy it!
+			if(this != _instance)
+				Destroy(this.gameObject);
+		}
 		camera = GetComponent<Camera>();
 		allTargets.Clear ();
 		GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
@@ -31,6 +60,14 @@ public class CameraStartAnim : MonoBehaviour {
 		Invoke ("ZoomDone", 11);
 
 	}
+	public void UpdateAllTarget(){
+		allTargets.Clear ();
+		UserData[] udatas = UserInfoManager.UserDataCollection;
+		foreach (UserData ud in udatas) {
+			allTargets.Add(ud.wizardInstance.transform);
+		}	
+	}
+
 
 	void ZoomIn(){
 		targets.Clear ();

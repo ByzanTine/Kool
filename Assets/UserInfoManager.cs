@@ -82,6 +82,10 @@ public class UserInfoManager : MonoBehaviour {
 		{
 			BindAllWizardToUser();
 		}
+		if (CameraStartAnim.Instance) {
+			CameraStartAnim.Instance.UpdateAllTarget();
+		}
+
 	}
 	
 	void OnLevelWasLoaded(int level) {
