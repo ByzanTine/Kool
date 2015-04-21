@@ -10,7 +10,7 @@ public class TimeBoard : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		txt = GetComponent<Text> ();
-		time = GameStatus.GameMaxTime;
+		time = GameStatus.Instance.GameMaxTime;
 		StartCoroutine (TimeCountDown ());
 	}
 
@@ -22,6 +22,8 @@ public class TimeBoard : MonoBehaviour {
 			txt.text = time.ToString("d3");
 			yield return new WaitForSeconds(1.0f);
 		}
+
+		int status = GameStatus.Instance.EndGameByTimeLimit ();
 	}
 		
 //	// Update is called once per frame
