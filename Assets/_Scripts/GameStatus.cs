@@ -11,6 +11,8 @@ public class GameStatus : MonoBehaviour {
 
 	// Target lives/scores in each mode for winning
 	public int GameTargetRounds = 1;
+	public int GameMaxTime = 200;
+
 
 	// Game status control:
 	private bool isGameOver = false;
@@ -98,15 +100,6 @@ public class GameStatus : MonoBehaviour {
 		Application.LoadLevel (Application.loadedLevel);
 	}
 
-	// public method used when player dead
-	public void DecrementPlayerLife(int playerID)
-	{
-		UserInfoManager.UserDataCollection [playerID].deathCount ++;
-		UserInfoManager.Instance.DestroyPlayerWithId(playerID);
-
-		UpdateScoreStatusWithDeath (playerID);
-	}
-
 	// update the game status when a player died
 	void UpdateScoreStatusWithDeath(int playerID)
 	{
@@ -158,6 +151,56 @@ public class GameStatus : MonoBehaviour {
 		default:
 			break;
 		}
+	}
+
+	// public method used when player dead
+	public void DecrementPlayerLife(int playerID)
+	{
+		UserInfoManager.UserDataCollection [playerID].deathCount ++;
+		UserInfoManager.Instance.DestroyPlayerWithId(playerID);
+		
+		UpdateScoreStatusWithDeath (playerID);
+	}
+
+	/// <summary>
+	/// Ends the game by time limit.
+	/// </summary>
+	public int EndGameByTimeLimit()
+	{
+		isGameOver = true;
+
+		int winTeam = -1;
+
+		if(teamScores[0] == teamScores[1])
+		{
+			winTeam = 2;
+		}
+		else
+		{
+			if(teamScores[0] > teamScores[1])
+			{
+				winTeam = 0;
+			}
+			else
+			{
+				winTeam = 1;
+			}
+
+			for(int i = 0; i < UserInfoManager.TotalPlayerNum; ++i)
+			{
+				if(UserInfoManager.UserDataCollection[i].teamID != winTeam)
+				{
+					UserInfoManager.Instance.DestroyPlayerWithId(i);
+				}
+			}
+
+		}
+
+
+
+		WinEndGame();
+
+		return winTeam;
 	}
 
 }

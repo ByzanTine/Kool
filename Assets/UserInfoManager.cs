@@ -12,6 +12,7 @@ public class UserInfoManager : MonoBehaviour {
 	public Material[] UserMaterials = new Material[4];
 
 	// Static user data, contains all the information of each user.
+	// Such as Name, Death times in one game, current Wizard instance, etc.
 	// Read Only Access
 	private static UserData[] userDataCollection = new UserData[4];	
 	public static UserData[] UserDataCollection
@@ -236,8 +237,8 @@ public class UserInfoManager : MonoBehaviour {
 		// HACK
 		Transform model = wizard.transform.GetChild (1);
 		// then find model renderes
-		if (model.name != "Magician" || model.name != "Priest") {
-			Debug.Log("[Model Material] the first child is not what we want!");
+		if (model.GetComponent<Animator>() == null) {
+			Debug.Log("[Model Material] the first child is not what we want: " + model.name);
 		}
 		Renderer[] renders = model.GetComponentsInChildren<Renderer> ();
 		
@@ -273,6 +274,44 @@ public class UserInfoManager : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Gets the team mate object by identifier.
+	/// </summary>
+	/// <returns>The team mate object by identifier.</returns>
+	/// <param name="playerId">Player identifier.</param>
+	public GameObject GetTeamMateObjById(int playerId)
+	{
+		for(int i = 0; i < totalPlayerNum; ++i)
+		{
+			if(i == playerId) continue;
+
+			if(userDataCollection[i].teamID == userDataCollection[playerId].teamID)
+			{
+				return userDataCollection[i].wizardInstance;
+			}
+		}
+		return null;
+	}
+
+	/// <summary>
+	/// Gets the team mate identifier by identifier.
+	/// </summary>
+	/// <returns>The team mate identifier by identifier.</returns>
+	/// <param name="playerId">Player identifier.</param>
+	public int GetTeamMateIdById(int playerId)
+	{
+		for(int i = 0; i < totalPlayerNum; ++i)
+		{
+			if(i == playerId) continue;
+
+			if(userDataCollection[i].teamID == userDataCollection[playerId].teamID)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/// <summary>
 	/// Reborns the player with identifier.
 	/// </summary>
 	/// <param name="id">Identifier.</param>
@@ -285,7 +324,8 @@ public class UserInfoManager : MonoBehaviour {
 		}
 		userDataCollection [id].rebornTime = -1;
 		InstantiateWizardInstanceWithId(id);
-		
 	}
+
+
 	
 }
