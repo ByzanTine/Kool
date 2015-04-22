@@ -37,6 +37,7 @@ public class GenerateWizardUI : MonoBehaviour {
 				Debug.Log ("button instantiate");
 				button.transform.SetParent(this.transform);
 				button.GetComponent<ButtonView>().playerId = playerId;
+				button.GetComponent<ButtonBlink>().playerId = playerId;
 			}
 			
 			PlayerHealthView healthUI  = health.GetComponent<PlayerHealthView>();
