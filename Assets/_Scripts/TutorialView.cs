@@ -14,6 +14,7 @@ public class TutorialView : MonoBehaviour {
 	public int roundToRemoveWalls;
 	public Sprite CurButton;
 	static public bool[] StopBlinking = {false, false, false, false};
+//	static public bool[] StopBlinking = {false, true, true, true};
 	public bool tempBool = false;
 	float time;
 
@@ -40,7 +41,7 @@ public class TutorialView : MonoBehaviour {
 
 		TutorialSteps [2].txt = "Moving";
 		
-		TutorialSteps [3].txt = "Running";
+		TutorialSteps [3].txt = "Holding left trigger to run";
 		
 		TutorialSteps [4].txt = "While running, press right trigger, you gonna cast a melee attack.";
 		
@@ -117,7 +118,13 @@ public class TutorialView : MonoBehaviour {
 		for (int i = 0; i < 4; i ++) {
 			if (!StopBlinking[i]){
 				UserInputManager Uinput = playerCollection[i].GetComponent<UserInputManager>();
-				StopBlinking[i] = Uinput.CheckInputControl(curInstructionInput);
+				if(curInstructionInput == UserInputManager.InputSource.RBumper) {
+					if (playerCollection[i].GetComponent<PlayerData>().SpecialSpellID != SpellDB.AttackID.None){
+						StopBlinking[i] = Uinput.CheckInputControl(curInstructionInput);
+					} 
+				} else {
+					StopBlinking[i] = Uinput.CheckInputControl(curInstructionInput);
+				}
 			}
 			returnV = returnV & StopBlinking[i];
 		}
