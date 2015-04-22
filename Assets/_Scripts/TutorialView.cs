@@ -12,11 +12,13 @@ public class TutorialView : MonoBehaviour {
 	private Text _txt2;
 	public GameObject[] itemGenerators;
 	public int roundToRemoveWalls;
+	public int roundToAddSecondButton;
 	public Sprite CurButton;
 	static public bool[] StopBlinking = {false, false, false, false};
 //	static public bool[] StopBlinking = {false, true, true, true};
-	public bool tempBool = false;
 	float time;
+	public bool holdButton = false;
+	public bool addSecondButton = false;
 
 	[System.Serializable]
 	public class tutorialStep{
@@ -25,6 +27,7 @@ public class TutorialView : MonoBehaviour {
 		public GameObject item;
 		public float LeastTimeInterval = 5;
 		public UserInputManager.InputSource inputSource;
+		public bool hold;
  	}
 
 	public tutorialStep[] TutorialSteps;
@@ -41,9 +44,9 @@ public class TutorialView : MonoBehaviour {
 
 		TutorialSteps [2].txt = "Moving";
 		
-		TutorialSteps [3].txt = "Holding left trigger to run";
+		TutorialSteps [3].txt = "Running";
 		
-		TutorialSteps [4].txt = "While running, press right trigger, you gonna cast a melee attack.";
+		TutorialSteps [4].txt = "Melee attack while running";
 		
 		TutorialSteps [5].txt = "Switching between Ice and fire.";
 		
@@ -53,29 +56,23 @@ public class TutorialView : MonoBehaviour {
 	}
 
 	void Start () {
-		time = Time.time;
 		NumOfCurStep = 0;
 		_txt = Text.GetComponent<Text> ();
-		_txt.text = TutorialSteps[NumOfCurStep].txt;
 		_txt2 = Text2.GetComponent<Text> ();
-		_txt2.text = TutorialSteps[NumOfCurStep].txt;
-		curInstructionInput = TutorialSteps [NumOfCurStep].inputSource;
 		for (int i = 0; i < itemGenerators.Length; i++) {
 			itemGenerators[i].SetActive(false);
 		}
-		CurButton = TutorialSteps [NumOfCurStep].button;
 		playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
 		foreach (GameObject player in playerCollection){
 			UserInputManager Uinput = player.GetComponent<UserInputManager>();
 			Uinput.LockControl(UserInputManager.InputSource.AllControl);
-			Uinput.UnlockControl(curInstructionInput);
 		}
+		updateHelper ();
 	} 
 	
 	// Update is called once per frame
 	void Update () {
 		if (checkUserFollowInstruction()  &&  time + TutorialSteps[NumOfCurStep].LeastTimeInterval < Time.time) {
-			time = Time.time;
 			SetStopBlinkingFalse();
 			NumOfCurStep = NumOfCurStep + 1;
 
@@ -85,11 +82,7 @@ public class TutorialView : MonoBehaviour {
 				return;
 			}
 
-			CurButton = TutorialSteps [NumOfCurStep].button;
-			_txt.text = TutorialSteps[NumOfCurStep].txt;
-			_txt2.text = TutorialSteps[NumOfCurStep].txt;
-			curInstructionInput = TutorialSteps [NumOfCurStep].inputSource;
-			unlockCtrl(curInstructionInput);
+			updateHelper();
 			if (TutorialSteps[NumOfCurStep].item){
 				for (int j = 0; j < itemPos.Length; j ++){
 					Instantiate(TutorialSteps[NumOfCurStep].item, itemPos[j].transform.position, Quaternion.identity);
@@ -107,7 +100,24 @@ public class TutorialView : MonoBehaviour {
 					walls[i].SetActive(false);
 				}
 			}
+
+			if (NumOfCurStep == roundToAddSecondButton) {
+				addSecondButton = true;
+			}
+			if (NumOfCurStep == roundToAddSecondButton + 1) {
+				addSecondButton = false;
+			}
 		}
+	}
+
+	void updateHelper(){
+		time = Time.time;
+		CurButton = TutorialSteps [NumOfCurStep].button;
+		_txt.text = TutorialSteps[NumOfCurStep].txt;
+		_txt2.text = TutorialSteps[NumOfCurStep].txt;
+		holdButton = TutorialSteps[NumOfCurStep].hold;
+		curInstructionInput = TutorialSteps [NumOfCurStep].inputSource;
+		unlockCtrl(curInstructionInput);
 	}
 
 	bool checkUserFollowInstruction(){
