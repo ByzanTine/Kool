@@ -354,7 +354,8 @@ public class UserInputManager : MonoBehaviour {
 				break;
 
 			case InputSource.LTrigger:
-				returnV = inputDevice.LeftTrigger.WasPressed;
+				if ((inputDevice.LeftStickX != 0 || inputDevice.LeftStickY != 0) && inputDevice.LeftTrigger.IsPressed)
+					returnV = true;
 			break;
 
 			case InputSource.RTrigger:
@@ -370,7 +371,8 @@ public class UserInputManager : MonoBehaviour {
 			break;
 
 			case InputSource.LtriggerAndRTrigger:
-				returnV = inputDevice.RightTrigger.WasPressed & inputDevice.LeftTrigger.IsPressed;
+			if ((inputDevice.LeftStickX != 0 || inputDevice.LeftStickY != 0) && inputDevice.LeftTrigger.IsPressed)
+				returnV = inputDevice.RightTrigger.WasPressed;
 			break;
 
 			default:
