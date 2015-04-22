@@ -11,9 +11,9 @@ public class ButtonView : MonoBehaviour {
 	GameObject Player;
 	
 	// now for y-axis
-	private float heightOffset = 500.0f; 
-	private float widthOffset = -250.0f;
-	private Vector2 rectOrigin;
+	public float heightOffset = 500.0f; 
+	public float widthOffset = -250.0f;
+	public Vector2 rectOrigin;
 	private Button button;
 	private Image img;
 	
@@ -60,10 +60,9 @@ public class ButtonView : MonoBehaviour {
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	
+
+	public void changeOriginSize(Vector2 newSize){
+		rectOrigin = newSize;
+
+	}
 }
