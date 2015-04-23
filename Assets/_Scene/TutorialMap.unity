@@ -266,7 +266,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 474590, guid: dc1b2199dcc43c94ebc0804cd1d1f98d, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc1b2199dcc43c94ebc0804cd1d1f98d, type: 2}
@@ -308,7 +308,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 422992, guid: 48b6e506a46334e13bc1b40456c943d2, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11416986, guid: 48b6e506a46334e13bc1b40456c943d2, type: 2}
       propertyPath: m_Enabled
@@ -579,7 +579,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 483904, guid: 60b5c6576ae314a7f897266ca0c6be4c, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 60b5c6576ae314a7f897266ca0c6be4c, type: 2}
@@ -2044,7 +2044,8 @@ MonoBehaviour:
   playerHealthPrefab: {fileID: 107888, guid: 4de763131efaf5e4b99d3321595dfea4, type: 2}
   namePrefab: {fileID: 155742, guid: a470735d40b644957ac438ad8bfd2d35, type: 2}
   specialSpellPrefab: {fileID: 159272, guid: 0419553b2a3fa44e0ba1a1565c989923, type: 2}
-  ButtonIcon: {fileID: 108976, guid: 1258f39d02cd84cb9ba09cd6321bb756, type: 2}
+  ButtonIcon: {fileID: 170896, guid: 1258f39d02cd84cb9ba09cd6321bb756, type: 2}
+  ButtonIcon2: {fileID: 156366, guid: 5d4b374b234d94bb6908497fcf417d62, type: 2}
 --- !u!1 &2057618995
 GameObject:
   m_ObjectHideFlags: 0
@@ -2092,49 +2093,59 @@ MonoBehaviour:
   - {fileID: 2125777987}
   - {fileID: 2146310618}
   roundToRemoveWalls: 7
+  roundToAddSecondButton: 4
   CurButton: {fileID: 0}
-  tempBool: 0
+  holdButton: 0
+  addSecondButton: 0
   TutorialSteps:
   - txt: Shoot
     button: {fileID: 21300000, guid: 6f7265be16f7e432ab7e62a995a32ee0, type: 3}
     item: {fileID: 0}
     LeastTimeInterval: 3
     inputSource: 5
+    hold: 0
   - txt: Aiming
     button: {fileID: 21300000, guid: ba6bb1587aa6043d49bbc789902683da, type: 3}
     item: {fileID: 0}
     LeastTimeInterval: 3
     inputSource: 2
+    hold: 0
   - txt: Moving
     button: {fileID: 21300000, guid: 57ace86fad1ef43e1b4318ef1e51cf15, type: 3}
     item: {fileID: 112066, guid: 8db018d2981f59346bfbb27368d89623, type: 2}
     LeastTimeInterval: 3
     inputSource: 1
+    hold: 0
   - txt: Runing
     button: {fileID: 21300000, guid: 92e88d4f9be0e4471acd569bada854ed, type: 3}
     item: {fileID: 0}
     LeastTimeInterval: 5
     inputSource: 4
+    hold: 1
   - txt: Run and Hit
-    button: {fileID: 0}
+    button: {fileID: 21300000, guid: 92e88d4f9be0e4471acd569bada854ed, type: 3}
     item: {fileID: 0}
     LeastTimeInterval: 5
     inputSource: 8
+    hold: 1
   - txt: Switch
     button: {fileID: 21300000, guid: 78c785cf234a54248b7f180352fc3496, type: 3}
     item: {fileID: 110700, guid: 615ace83d5bfcb44498d5853d81c6539, type: 2}
     LeastTimeInterval: 5
     inputSource: 6
+    hold: 0
   - txt: Special spell
     button: {fileID: 21300000, guid: debfdeb02244741d09d3c25f0e18e0b8, type: 3}
-    item: {fileID: 129264, guid: d9a81daac02c2465dad7d6874d083184, type: 2}
+    item: {fileID: 155916, guid: 5d07a7e980f564a958b2e011f8559acf, type: 2}
     LeastTimeInterval: 5
     inputSource: 7
+    hold: 0
   - txt: ready
     button: {fileID: 0}
     item: {fileID: 0}
     LeastTimeInterval: 5
     inputSource: 9
+    hold: 0
   itemPos:
   - {fileID: 84179495}
   - {fileID: 427473624}
