@@ -75,6 +75,7 @@ public class GameStatus : MonoBehaviour {
 	void WinEndGame()
 	{
 		isGameOver = true;
+		TimeBoard.EndGame ();
 		StartCoroutine(WinEndGameEffect());
 	}
 
@@ -164,10 +165,10 @@ public class GameStatus : MonoBehaviour {
 
 	/// <summary>
 	/// Ends the game by time limit.
+	/// will return winner team id, while default (tie) gives 2.
 	/// </summary>
 	public int EndGameByTimeLimit()
 	{
-		isGameOver = true;
 
 		int winTeam = -1;
 
@@ -185,7 +186,6 @@ public class GameStatus : MonoBehaviour {
 			{
 				winTeam = 1;
 			}
-
 			for(int i = 0; i < UserInfoManager.TotalPlayerNum; ++i)
 			{
 				if(UserInfoManager.UserDataCollection[i].teamID != winTeam)
@@ -193,12 +193,12 @@ public class GameStatus : MonoBehaviour {
 					UserInfoManager.Instance.DestroyPlayerWithId(i);
 				}
 			}
-
 		}
 
+		if(!isGameOver)
+			WinEndGame();
 
-
-		WinEndGame();
+		isGameOver = true;
 
 		return winTeam;
 	}
