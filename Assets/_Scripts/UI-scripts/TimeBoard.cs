@@ -5,7 +5,7 @@ using System.Collections;
 public class TimeBoard : MonoBehaviour {
 
 	Text txt;
-	int time;
+	static int time;
 
 	// Use this for initialization
 	void Start () {
@@ -24,8 +24,27 @@ public class TimeBoard : MonoBehaviour {
 		}
 
 		int status = GameStatus.Instance.EndGameByTimeLimit ();
+
+		txt.fontSize = 50;
+
+		switch(status)
+		{
+		case 0:
+			txt.text = "Win!";
+			break;
+		case 1:
+			txt.text = "Win!";
+			break;
+		default:
+			txt.text = "Tie!";
+			break;
+		}
 	}
 		
+	public static void EndGame()
+	{
+		time = 0;
+	}
 //	// Update is called once per frame
 //	void Update () {
 //

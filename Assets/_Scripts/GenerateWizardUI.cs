@@ -7,6 +7,7 @@ public class GenerateWizardUI : MonoBehaviour {
 	public GameObject namePrefab;
 	public GameObject specialSpellPrefab;
 	public GameObject ButtonIcon;
+	public GameObject ButtonIcon2;
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +39,14 @@ public class GenerateWizardUI : MonoBehaviour {
 				button.transform.SetParent(this.transform);
 				button.GetComponent<ButtonView>().playerId = playerId;
 				button.GetComponent<ButtonBlink>().playerId = playerId;
+			}
+
+			if (ButtonIcon2){
+				GameObject button2 = Instantiate(ButtonIcon2) as GameObject;
+				Debug.Log ("button instantiate");
+				button2.transform.SetParent(this.transform);
+				button2.GetComponent<ButtonView>().playerId = playerId;
+				button2.GetComponent<AlwaysBlink>().playerId = playerId;
 			}
 			
 			PlayerHealthView healthUI  = health.GetComponent<PlayerHealthView>();

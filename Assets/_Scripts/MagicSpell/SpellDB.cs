@@ -63,12 +63,12 @@ public class SpellDB : MonoBehaviour {
 	{
 		Debug.Log("INIT: Create Reference to Spells");
 		spellDamage = new Hashtable () {
-			{AttackID.fireball, 	0.10f},
-			{AttackID.iceball,  	0.02f},
-			{AttackID.iceBurst, 	0.20f},
-			{AttackID.bigfireball, 	0.15f},
-			{AttackID.bigiceball, 	0.07f},
-			{AttackID.meteor, 		0.45f}
+			{AttackID.fireball, 	0.07f},
+			{AttackID.iceball,  	0.017f},
+			{AttackID.iceBurst, 	0.14f},
+			{AttackID.bigfireball, 	0.105f},
+			{AttackID.bigiceball, 	0.04f},
+			{AttackID.meteor, 		0.32f}
 		};
 
 		InitSpells ();

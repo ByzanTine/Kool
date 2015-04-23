@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 1, z: 0}
-  fire: {fileID: 2100000, guid: b1ca011c5f92d4fd4b5aeac44fd607c6, type: 2}
+  fire: {fileID: 2100000, guid: c45b6956bbe6a4b90ba0a78e04a7fd5c, type: 2}
   ice: {fileID: 2100000, guid: b968a6a0697ad574cae1a07543d11963, type: 2}
   moreBall: 0
 --- !u!114 &11416410
@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 1, z: 0}
-  fire: {fileID: 2100000, guid: b1ca011c5f92d4fd4b5aeac44fd607c6, type: 2}
+  fire: {fileID: 2100000, guid: c45b6956bbe6a4b90ba0a78e04a7fd5c, type: 2}
   ice: {fileID: 2100000, guid: b968a6a0697ad574cae1a07543d11963, type: 2}
   moreBall: 1
 --- !u!114 &11447538
@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 1, z: 0}
-  fire: {fileID: 2100000, guid: b1ca011c5f92d4fd4b5aeac44fd607c6, type: 2}
+  fire: {fileID: 2100000, guid: c45b6956bbe6a4b90ba0a78e04a7fd5c, type: 2}
   ice: {fileID: 2100000, guid: b968a6a0697ad574cae1a07543d11963, type: 2}
   moreBall: 1
 --- !u!114 &11454686
@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 1, z: 0}
-  fire: {fileID: 2100000, guid: b1ca011c5f92d4fd4b5aeac44fd607c6, type: 2}
+  fire: {fileID: 2100000, guid: c45b6956bbe6a4b90ba0a78e04a7fd5c, type: 2}
   ice: {fileID: 2100000, guid: b968a6a0697ad574cae1a07543d11963, type: 2}
   moreBall: 0
 --- !u!114 &11456452

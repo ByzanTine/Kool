@@ -48,6 +48,8 @@ public class UserInfoManager : MonoBehaviour {
 		}
 	}
 
+	private bool isBindSucceed = false;
+
 	// Singleton instance control
 	void Awake() 
 	{
@@ -79,7 +81,7 @@ public class UserInfoManager : MonoBehaviour {
 	void Start () {
 		
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
-		if(playerCollection[0].GetComponent<PlayerControl>() != null)
+		if(playerCollection.Length > 0 && playerCollection[0].GetComponent<PlayerControl>() != null)
 		{
 			BindAllWizardToUser();
 		}
@@ -93,12 +95,16 @@ public class UserInfoManager : MonoBehaviour {
 		
 		// Avoid duplicated call by other instance
 		if(this != instance) return;
-		
+
+		if(!isBindSucceed)
+			BindAllUserData();
+
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
-		if(playerCollection[0].GetComponent<PlayerControl>() != null)
+		if(playerCollection.Length > 0 && playerCollection[0].GetComponent<PlayerControl>() != null)
 		{
 			BindAllWizardToUser();
 		}
+
 	}
 
 	// bind each user with the wizards in the current scene
@@ -166,6 +172,15 @@ public class UserInfoManager : MonoBehaviour {
 		Debug.Log("[INIT]: Bind All User Data from scene setup");
 		int playerID = 0;
 		GameObject[] playerCollection = GameObject.FindGameObjectsWithTag (TagList.Player);
+
+		if(playerCollection.Length == 0)
+		{
+			isBindSucceed = false;
+			Debug.LogWarning ("Bind fail, no controller found");
+			return;
+		}
+		isBindSucceed = true;
+
 		foreach(GameObject player in playerCollection)
 		{
 			// bind input manager

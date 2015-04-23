@@ -150,6 +150,7 @@ public class PlayerControl : MonoBehaviour {
 
 	void Stab()
 	{
+		GameStatistic.Instance.Attacks [UserInfoManager.UserDataCollection [inputManager.playerNum].teamID]++;
 		StartCoroutine (CombatAttack ());
 	}
 
@@ -180,6 +181,9 @@ public class PlayerControl : MonoBehaviour {
 		// cast one fireball
 		Vector3 direction = transform.forward;
 		attackMeans.AttackByDiretion (PD.spellID, direction);
+
+		GameStatistic.Instance.Attacks [UserInfoManager.UserDataCollection [inputManager.playerNum].teamID]++;
+
 	}
 
 	// Magic ID is controlled by button
@@ -191,6 +195,9 @@ public class PlayerControl : MonoBehaviour {
 		attackMeans.AttackByDiretion (PD.SpecialSpellID, direction);
 		// HACK Cost the magic point
 		PD.SpecialSpellID = SpellDB.AttackID.None;
+
+		GameStatistic.Instance.Ults [UserInfoManager.UserDataCollection [inputManager.playerNum].teamID]++;
+
 	}
 
 	// -------------------------------------------------------------------------
