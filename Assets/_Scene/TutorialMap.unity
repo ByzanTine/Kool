@@ -2143,7 +2143,7 @@ MonoBehaviour:
   - txt: ready
     button: {fileID: 0}
     item: {fileID: 0}
-    LeastTimeInterval: 5
+    LeastTimeInterval: 15
     inputSource: 9
     hold: 0
   itemPos:
