@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 412164}
   - 82: {fileID: 8264792}
   - 114: {fileID: 11426416}
+  - 114: {fileID: 11421242}
   m_Layer: 0
   m_Name: WinningSE
   m_TagString: Untagged
@@ -98,6 +99,17 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &11421242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fcf34f25691d464fa9ca7c1a0019d19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11426416
 MonoBehaviour:
   m_ObjectHideFlags: 1

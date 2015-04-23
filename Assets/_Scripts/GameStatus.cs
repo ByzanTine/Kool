@@ -65,8 +65,13 @@ public class GameStatus : MonoBehaviour {
 
 		teamScores = new int[2] {0, 0};
 		isGameOver = false;
-	}
 
+		for(int i = 0; i < UserInfoManager.TotalPlayerNum; ++i)
+		{
+			UserInfoManager.UserDataCollection[i].deathCount = 0;
+		}
+	}
+	
 	public int GetTeamScore(int teamId)
 	{
 		return teamScores[teamId];
@@ -81,6 +86,9 @@ public class GameStatus : MonoBehaviour {
 
 	IEnumerator WinEndGameEffect()
 	{
+		for(int i = 0; i < 2; ++i)
+			GameStatistic.Instance.Scores [i] = teamScores [i];
+
 		yield return new WaitForSeconds (0.1f);
 		GameObject winSEPrefab = Resources.Load (Constants.AudioFileDir + "WinningSE") as GameObject;
 		GameObject winSE = GameObject.Instantiate (winSEPrefab)	as GameObject;
@@ -97,8 +105,8 @@ public class GameStatus : MonoBehaviour {
 			userInput.LockControl(UserInputManager.InputSource.AllControl, 9.0f);
 		}
 
-		yield return new WaitForSeconds (8.0f);
-		Application.LoadLevel (Application.loadedLevel);
+		yield return new WaitForSeconds (3.0f);
+		Application.LoadLevel ("EndStat");
 	}
 
 	// update the game status when a player died
